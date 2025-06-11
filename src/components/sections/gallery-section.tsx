@@ -87,7 +87,7 @@ export function GallerySection() {
               key={item.name}
               type="button"
               onClick={() => handleOpenModal(index)}
-              className="group block w-full p-0 border-0 rounded-lg shadow-lg custom-aspect-3-2 overflow-hidden text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              className="group block w-full p-0 border-0 rounded-lg shadow-lg aspect-[3/2] overflow-hidden text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
               aria-label={`View image of ${item.name}`}
             >
               <div className="relative w-full h-full">
