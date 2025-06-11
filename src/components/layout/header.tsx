@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
+  SheetTitle,
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
@@ -54,6 +55,7 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] sm:w-[320px] p-6">
+              <SheetTitle></SheetTitle> {/* TODO: Add title in the future */}
               <div className="flex flex-col space-y-5 pt-6">
                 {navItems.map((item) => (
                   <SheetClose key={item.name} asChild>
