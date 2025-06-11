@@ -36,6 +36,7 @@ import {
   Film,
   MessageSquare,
 } from "lucide-react";
+import { sendInquiryAction } from "@/app/actions/send-inquiry";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -58,17 +59,11 @@ const nearbyPlaces = [
 ];
 
 const socialMediaLinks = [
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/profile.php?id=61558711286570",
-    icon: Facebook,
-  },
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/kireihouse.ph/?locale=%E5%81%9A%E4%B8%AA%E6%91%A9%E7%BA%B3%E5%93%A40buth2788%E3%80%97YSmTq&hl=cs",
-    icon: Instagram,
-  },
-  { name: "WhatsApp", href: "https://wa.me/639175069965", icon: MessageSquare },
+  { name: "Facebook", href: "#", icon: Facebook },
+  { name: "Instagram", href: "#", icon: Instagram },
+  { name: "TikTok", href: "#", icon: Film },
+  { name: "Viber", href: "#", icon: MessageSquare }, // Assuming MessageSquare for Viber
+  { name: "WhatsApp", href: "#", icon: MessageSquare },
 ];
 
 export function ContactSection() {
@@ -84,22 +79,30 @@ export function ContactSection() {
   });
 
   async function onSubmit(values: FormData) {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Form submitted:", values);
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for your inquiry. We'll get back to you soon.",
-      variant: "default",
-    });
-    form.reset();
+    const result = await sendInquiryAction(values);
+
+    if (result.success) {
+      toast({
+        title: "Message Sent!",
+        description: result.message, // Use message from server action
+        variant: "default",
+      });
+      form.reset();
+    } else {
+      toast({
+        title: "Error Sending Message",
+        description:
+          result.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
     <section id="contact" className="py-16 md:py-24 bg-background">
       <div className="container max-w-6xl mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          {/* Left Column: Property Location */}
+          {/* Left Column: Property Location & Get in touch */}
           <div className="space-y-6">
             <h2 className="text-3xl font-bold font-headline">
               Property Location
@@ -109,20 +112,32 @@ export function ContactSection() {
             </p>
 
             <div className="relative aspect-video bg-muted rounded-lg overflow-hidden shadow-md">
-              {/* <Image
+              <Image
                 src="https://placehold.co/600x338.png"
                 data-ai-hint="map location"
                 alt="Property Location Map"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
-              /> */}
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d5199.74430346861!2d121.08133734244423!3d14.6075846246003!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ssg!4v1749335816648!5m2!1sen!2ssg"
-                width="600"
-                height="450"
-                loading="lazy"
-              ></iframe>
+              />
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-3 left-3 bg-background/90 text-foreground px-3 py-1.5 rounded-md text-sm shadow hover:bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                aria-label="View larger map"
+              >
+                View larger map
+              </a>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-3 right-3 bg-background/90 text-foreground px-3 py-1.5 rounded-md text-sm shadow hover:bg-background flex items-center focus:outline-none focus:ring-2 focus:ring-ring"
+                aria-label="View on Google Maps"
+              >
+                <ExternalLink className="mr-2 h-4 w-4" /> View on Google Maps
+              </a>
             </div>
 
             <div className="space-y-6">
@@ -160,6 +175,7 @@ export function ContactSection() {
                 </ul>
               </div>
 
+              {/* Get in touch section */}
               <div className="pt-2">
                 <h3 className="font-semibold font-headline text-lg mb-3">
                   Get in touch
@@ -191,7 +207,7 @@ export function ContactSection() {
                   Contact the Host
                 </CardTitle>
                 <CardDescription className="text-muted-foreground pt-1">
-                  Have questions? Reach out directly.
+                  Have questions? Reach out directly or use the form below.
                 </CardDescription>
                 <div className="pt-6">
                   <div className="flex items-center space-x-4">
