@@ -59,11 +59,17 @@ const nearbyPlaces = [
 ];
 
 const socialMediaLinks = [
-  { name: "Facebook", href: "#", icon: Facebook },
-  { name: "Instagram", href: "#", icon: Instagram },
-  { name: "TikTok", href: "#", icon: Film },
-  { name: "Viber", href: "#", icon: MessageSquare }, // Assuming MessageSquare for Viber
-  { name: "WhatsApp", href: "#", icon: MessageSquare },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61558711286570",
+    icon: Facebook,
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/kireihouse.ph",
+    icon: Instagram,
+  },
+  { name: "WhatsApp", href: "https://wa.me/639175069965", icon: MessageSquare },
 ];
 
 export function ContactSection() {
@@ -112,32 +118,12 @@ export function ContactSection() {
             </p>
 
             <div className="relative aspect-video bg-muted rounded-lg overflow-hidden shadow-md">
-              <Image
-                src="https://placehold.co/600x338.png"
-                data-ai-hint="map location"
-                alt="Property Location Map"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute top-3 left-3 bg-background/90 text-foreground px-3 py-1.5 rounded-md text-sm shadow hover:bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-                aria-label="View larger map"
-              >
-                View larger map
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute bottom-3 right-3 bg-background/90 text-foreground px-3 py-1.5 rounded-md text-sm shadow hover:bg-background flex items-center focus:outline-none focus:ring-2 focus:ring-ring"
-                aria-label="View on Google Maps"
-              >
-                <ExternalLink className="mr-2 h-4 w-4" /> View on Google Maps
-              </a>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d5199.74430346861!2d121.08133734244423!3d14.6075846246003!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ssg!4v1749335816648!5m2!1sen!2ssg"
+                width="600"
+                height="450"
+                loading="lazy"
+              ></iframe>
             </div>
 
             <div className="space-y-6">
@@ -182,7 +168,16 @@ export function ContactSection() {
                 </h3>
                 <div className="flex items-center space-x-3">
                   {socialMediaLinks.map((link) => (
-                    <Link key={link.name} href={link.href}>
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      target={link.name === "Facebook" ? "_blank" : undefined}
+                      rel={
+                        link.name === "Facebook"
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                    >
                       <Button
                         asChild
                         variant="ghost"
