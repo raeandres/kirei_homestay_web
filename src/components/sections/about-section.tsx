@@ -8,7 +8,7 @@ export function AboutSection() {
           Welcome to Kirei
         </h2>
         <Image
-          src="https://placehold.co/800x400.png"
+          src="/images/hero/dining_1.jpg"
           alt="Peaceful Kirei interior detail"
           data-ai-hint="zen decor"
           width={800}

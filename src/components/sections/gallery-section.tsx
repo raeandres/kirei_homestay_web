@@ -14,37 +14,37 @@ import { cn } from "../../lib/utils";
 
 const galleryItems = [
   {
-    src: "https://placehold.co/600x400.png",
+    src: "/images/gallery/living_2.jpg",
     alt: "Living Room",
     name: "Living Room",
     hint: "cozy living room",
   },
   {
-    src: "https://placehold.co/600x400.png",
+    src: "/images/gallery/bedroom_right_angle_1.jpg",
     alt: "Bedroom",
     name: "Bedroom",
     hint: "minimalist bedroom",
   },
   {
-    src: "https://placehold.co/600x400.png",
+    src: "/images/hero/living_kitchen_1.jpg",
     alt: "Dining Area",
     name: "Dining Area",
     hint: "dining area",
   },
   {
-    src: "https://placehold.co/600x400.png",
+    src: "/images/hero/kitchen_left_1.jpg",
     alt: "Kitchen",
     name: "Kitchen",
     hint: "sleek kitchen",
   },
   {
-    src: "https://placehold.co/600x400.png",
+    src: "/images/gallery/toilet_and_bath_cp.jpg",
     alt: "Toilet and Bathroom",
     name: "Toilet & Bathroom",
     hint: "modern bathroom",
   },
   {
-    src: "https://placehold.co/600x400.png",
+    src: "/images/gallery/laundry_1.jpg",
     alt: "Laundry Area",
     name: "Laundry Area",
     hint: "laundry space",

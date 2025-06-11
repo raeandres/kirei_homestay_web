@@ -26,9 +26,9 @@ const images = [
     hint: "bedroom aesthetic",
   },
   {
-    src: "/images/showcase/ramen_2.jpg",
-    alt: "Pet Friendly",
-    hint: "dining space",
+    src: "/images/showcase/living_angle_1.jpg",
+    alt: "Zen inspired living",
+    hint: "Living space",
   },
   {
     src: "/images/gallery/bedroom_front_1.jpg",
@@ -53,9 +53,21 @@ const images = [
 ];
 
 const platformLinks = [
-  { name: "Airbnb", href: "https://www.airbnb.com", icon: Home },
-  { name: "Booking.com", href: "https://www.booking.com", icon: Briefcase },
-  { name: "Agoda", href: "https://www.agoda.com", icon: HotelIcon },
+  {
+    name: "Airbnb",
+    href: "https://www.airbnb.com.sg/rooms/1364997919482714933?guests=1&adults=4&pets=2&s=67&unique_share_id=0d245e15-131c-48e4-bd7a-200c585b4fcc",
+    icon: Home,
+  },
+  {
+    name: "Booking.com",
+    href: "https://www.booking.com/Share-7GiBEL",
+    icon: Briefcase,
+  },
+  {
+    name: "Agoda",
+    href: "https://www.agoda.com/king-suite-eastwood-global-plaza-high-floor/hotel/all/santolan-ph.html?countryId=70&finalPriceView=2&isShowMobileAppPrice=false&cid=1922894&numberOfBedrooms=&familyMode=false&adults=2&children=1&rooms=1&maxRooms=0&checkIn=2025-06-24&isCalendarCallout=false&childAges=11&numberOfGuest=0&missingChildAges=false&travellerType=2&showReviewSubmissionEntry=false&currencyCode=PHP&isFreeOccSearch=false&tag=9865a9f0-a530-470a-95d4-d1e55cbec036&los=2&searchrequestid=12e24a4f-9739-4ef1-8335-258fe2fae56d&ds=c9pjFkO4TJQb2I9Q",
+    icon: HotelIcon,
+  },
 ];
 
 export function HeroSection() {
