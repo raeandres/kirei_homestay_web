@@ -56,17 +56,17 @@ const platformLinks = [
   {
     name: "Airbnb",
     href: "https://www.airbnb.com.sg/rooms/1364997919482714933?guests=1&adults=4&pets=2&s=67&unique_share_id=0d245e15-131c-48e4-bd7a-200c585b4fcc",
-    icon: Home,
+    icon: "/airbnb.svg",
   },
   {
     name: "Booking.com",
     href: "https://www.booking.com/Share-7GiBEL",
-    icon: Briefcase,
+    icon: "/bdc.svg",
   },
   {
     name: "Agoda",
     href: "https://www.agoda.com/king-suite-eastwood-global-plaza-high-floor/hotel/all/santolan-ph.html?countryId=70&finalPriceView=2&isShowMobileAppPrice=false&cid=1922894&numberOfBedrooms=&familyMode=false&adults=2&children=1&rooms=1&maxRooms=0&checkIn=2025-06-24&isCalendarCallout=false&childAges=11&numberOfGuest=0&missingChildAges=false&travellerType=2&showReviewSubmissionEntry=false&currencyCode=PHP&isFreeOccSearch=false&tag=9865a9f0-a530-470a-95d4-d1e55cbec036&los=2&searchrequestid=12e24a4f-9739-4ef1-8335-258fe2fae56d&ds=c9pjFkO4TJQb2I9Q",
-    icon: HotelIcon,
+    icon: "/agoda.svg",
   },
 ];
 
@@ -135,7 +135,14 @@ export function HeroSection() {
                 aria-label={`Visit Kirei Homestay on ${platform.name}`}
                 className="text-white hover:bg-white/20 transition-colors duration-300 p-3 rounded-lg w-14 h-14"
               >
-                <platform.icon className="h-7 w-7" />
+                {/* <platform.icon className="h-7 w-7" /> */}
+                <Image
+                  src={platform.icon}
+                  alt={`${platform.name} icon`}
+                  width={28}
+                  height={28}
+                  className="h-7 w-7"
+                />
               </Button>
             </Link>
           ))}
