@@ -2,6 +2,7 @@
 'use server';
 
 import * as z from "zod";
+import nodemailer from "nodemailer";
 
 // Define the schema for input validation on the server side
 const inquiryFormSchema = z.object({
@@ -26,7 +27,18 @@ export async function sendInquiryAction(values: InquiryFormData): Promise<{ succ
 
   const { name, email, phone, message } = validatedFields.data;
 
-  const hostEmail = 'business.siriandres@gmail.com'; // Host's email
+  const hostEmail = 'business.siriandres@gmail.com'; // Host's email - recipient
+  const gmailUser = process.env.GMAIL_USER; // Your Gmail address (sender)
+  const gmailAppPassword = process.env.GMAIL_APP_PASSWORD; // Your Gmail App Password
+
+  if (!gmailUser || !gmailAppPassword) {
+    console.error('Gmail credentials not configured in environment variables.');
+    return {
+      success: false,
+      message: 'Email sending is not configured on the server. Please contact support.',
+    };
+  }
+
   const subject = `New Inquiry from ${name} via Kirei Homestay Website`;
   
   const emailHtmlBody = `
@@ -56,36 +68,30 @@ export async function sendInquiryAction(values: InquiryFormData): Promise<{ succ
     This is an automated message from the Kirei Homestay contact form.
   `;
   
-  console.log('--- Attempting to send email (simulation) ---');
-  console.log('To:', hostEmail);
-  console.log('Subject:', subject);
-  console.log('HTML Body:', emailHtmlBody);
-  console.log('Text Body:', emailTextBody);
-  console.log('--- End of email simulation ---');
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: gmailUser,
+      pass: gmailAppPassword,
+    },
+  });
 
-  // **IMPORTANT**: Actual email sending logic needs to be implemented here.
-  // This could involve using a third-party email service like SendGrid, Resend, AWS SES, etc.
-  // For example:
-  //
-  // try {
-  //   // const sendEmailResponse = await emailService.send({
-  //   //   to: hostEmail,
-  //   //   from: 'noreply@yourdomain.com', // Configure a sending email address
-  //   //   subject: subject,
-  //   //   html: emailHtmlBody,
-  //   //   text: emailTextBody,
-  //   // });
-  //   // if (sendEmailResponse.success) {
-  //   //   return { success: true, message: 'Inquiry sent successfully!' };
-  //   // } else {
-  //   //   return { success: false, message: 'Failed to send email via service.' };
-  //   // }
-  // } catch (error) {
-  //   console.error('Email sending failed:', error);
-  //   return { success: false, message: 'An error occurred while sending the inquiry. Please try again later.' };
-  // }
+  const mailOptions = {
+    from: `"${name} (Kirei Homestay Inquiry)" <${gmailUser}>`, // Display name for the sender
+    replyTo: email, // Set the Reply-To header to the user's email
+    to: hostEmail,
+    subject: subject,
+    text: emailTextBody,
+    html: emailHtmlBody,
+  };
 
-  // For now, we'll simulate success:
-  await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
-  return { success: true, message: 'Inquiry sent successfully! (Simulation)' };
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log('Inquiry email sent successfully to:', hostEmail);
+    return { success: true, message: 'Inquiry sent successfully!' };
+  } catch (error) {
+    console.error('Email sending failed:', error);
+    // It's good practice to avoid exposing too much detail about the error to the client.
+    return { success: false, message: 'An error occurred while sending the inquiry. Please try again later.' };
+  }
 }
