@@ -103,32 +103,20 @@ export function ContactSection() {
             </p>
 
             <div className="relative aspect-video bg-muted rounded-lg overflow-hidden shadow-md">
-              <Image
+              {/* <Image
                 src="https://placehold.co/600x338.png"
                 data-ai-hint="map location"
                 alt="Property Location Map"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute top-3 left-3 bg-background/90 text-foreground px-3 py-1.5 rounded-md text-sm shadow hover:bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-                aria-label="View larger map"
-              >
-                View larger map
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute bottom-3 right-3 bg-background/90 text-foreground px-3 py-1.5 rounded-md text-sm shadow hover:bg-background flex items-center focus:outline-none focus:ring-2 focus:ring-ring"
-                aria-label="View on Google Maps"
-              >
-                <ExternalLink className="mr-2 h-4 w-4" /> View on Google Maps
-              </a>
+              /> */}
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d5199.74430346861!2d121.08133734244423!3d14.6075846246003!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ssg!4v1749335816648!5m2!1sen!2ssg"
+                width="600"
+                height="450"
+                loading="lazy"
+              ></iframe>
             </div>
 
             <div className="space-y-6">
