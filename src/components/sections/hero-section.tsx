@@ -16,39 +16,39 @@ import { cn } from "../../lib/utils";
 
 const images = [
   {
-    src: "/images/hero/living_1.jpg",
+    src: "/images/hero/living_1.webp",
     alt: "Zen living room",
     hint: "modern interior",
   },
   {
-    src: "/images/showcase/ceiling.jpg",
+    src: "/images/showcase/ceiling.webp",
     alt: "Striking details",
     hint: "bedroom aesthetic",
   },
   {
-    src: "/images/showcase/living_angle_1.jpg",
+    src: "/images/showcase/living_angle_1.webp",
     alt: "Zen inspired living",
     hint: "Living space",
   },
   {
-    src: "/images/gallery/bedroom_front_1.jpg",
+    src: "/images/gallery/bedroom_left_1.webp",
     alt: "Comfortable bedroom with stunning city view",
     hint: "living room city",
   },
   {
-    src: "/images/showcase/oven_angle.jpg",
-    alt: "Modern kitchen with coffee machine and oven",
-    hint: "modern kitchen",
-  },
-  {
-    src: "/images/hero/bedroom_right_1.jpg",
+    src: "/images/hero/bedroom_right_1.webp",
     alt: "Bright modern bedroom with city view and desk",
     hint: "bedroom city view",
   },
   {
-    src: "/images/gallery/dining_angle_1.jpg",
+    src: "/images/gallery/dining_angle_1.webp",
     alt: "Bright dining area with wooden furniture and cherry blossom centerpiece",
     hint: "dining area",
+  },
+  {
+    src: "/images/gallery/kitchen_1.webp",
+    alt: "Modern kitchen with coffee machine and oven",
+    hint: "modern kitchen",
   },
 ];
 
@@ -60,12 +60,12 @@ const platformLinks = [
   },
   {
     name: "Booking.com",
-    href: "https://www.booking.com/Share-7GiBEL",
+    href: "https://www.booking.com/Share-tzHN6oM",
     icon: "/bdc.svg",
   },
   {
     name: "Agoda",
-    href: "https://www.agoda.com/king-suite-eastwood-global-plaza-high-floor/hotel/all/santolan-ph.html?countryId=70&finalPriceView=2&isShowMobileAppPrice=false&cid=1922894&numberOfBedrooms=&familyMode=false&adults=2&children=1&rooms=1&maxRooms=0&checkIn=2025-06-24&isCalendarCallout=false&childAges=11&numberOfGuest=0&missingChildAges=false&travellerType=2&showReviewSubmissionEntry=false&currencyCode=PHP&isFreeOccSearch=false&tag=9865a9f0-a530-470a-95d4-d1e55cbec036&los=2&searchrequestid=12e24a4f-9739-4ef1-8335-258fe2fae56d&ds=c9pjFkO4TJQb2I9Q",
+    href: "https://www.agoda.com/king-suite-eastwood-global-plaza-high-floor/hotel/all/santolan-ph.html?ds=c9pjFkO4TJQb2I9Q",
     icon: "/agoda_blk.svg",
   },
 ];

@@ -8,7 +8,7 @@ export function AboutSection() {
           Welcome to Kirei
         </h2>
         <Image
-          src="/images/hero/dining_1.jpg"
+          src="/images/showcase/bed_right_angle.webp"
           alt="Peaceful Kirei interior detail"
           data-ai-hint="zen decor"
           width={800}

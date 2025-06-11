@@ -11,31 +11,40 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const reviews = [
   {
-    name: "Aiko S.",
-    avatar: "https://placehold.co/100x100.png?text=AS",
+    name: "Angel",
+    avatar: "https://placehold.co/100x100.png?text=A",
     avatarHint: "person avatar",
     rating: 5,
     review:
-      "Absolutely loved my stay at Kirei! The minimalist design was so calming, and everything was spotless. A true gem for anyone seeking a peaceful retreat.",
-    date: "October 2023",
+      "We held my bridal shower here and had a wonderful time! The place was clean, and the interior had such a relaxing vibe. It had everything we needed from utensils and toiletries to laundry essentials. If we ever have errands in QC again, we’d definitely book this place. As a bonus, the host was very responsive and accommodating to our requests!",
+    date: "May 2025",
   },
   {
-    name: "Ben M.",
-    avatar: "https://placehold.co/100x101.png?text=BM", // unique URL
+    name: "Miguel",
+    avatar: "https://placehold.co/100x101.png?text=M", // unique URL
     avatarHint: "person avatar",
     rating: 5,
     review:
-      "Kirei Homestay is fantastic. The attention to detail in the decor and amenities is impressive. Felt like a home away from home. Highly recommend!",
-    date: "November 2023",
+      "Siri’s place is hands-down the nicest Airbnb I’ve stayed in. It’s spotless, tastefully designed, and stocked with everything you’d need. Siri was super responsive and made the whole stay effortless.",
+    date: "June 2025",
   },
   {
-    name: "Chloe L.",
-    avatar: "https://placehold.co/100x102.png?text=CL", // unique URL
+    name: "Marie",
+    avatar: "https://placehold.co/100x102.png?text=M", // unique URL
     avatarHint: "person avatar",
-    rating: 4,
+    rating: 5,
     review:
-      "A beautiful and serene apartment. Perfect for a quiet weekend. The concept of slow living really shines through. Only wish there was a bit more natural light in the afternoon.",
-    date: "December 2023",
+      "Really enjoyed our stay here! The host was very responsive and helpful, and the place was super clean. The location was extremely convenient—just a short trip to all our appointments. Would totally book again!",
+    date: "June 2025",
+  },
+  {
+    name: "Jannice",
+    avatar: "https://placehold.co/100x102.png?text=J", // unique URL
+    avatarHint: "person avatar",
+    rating: 5,
+    review:
+      "Beautiful home with stunning view. It has everything we need and more. We will definitely come back. Thank you Siri ❤️",
+    date: "May 2025",
   },
 ];
 
