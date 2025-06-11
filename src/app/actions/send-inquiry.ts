@@ -25,7 +25,7 @@ export async function sendInquiryAction(values: InquiryFormData): Promise<{ succ
     };
   }
 
-  const { name, email, phone, message } = validatedFields.data;
+  const { name, email, phone, message } = validatedFields.data; 
 
   const hostEmail = 'business.siriandres@gmail.com'; // Host's email - recipient
   const gmailUser = process.env.GMAIL_USER; // Your Gmail address (sender)
