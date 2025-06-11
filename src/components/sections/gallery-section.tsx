@@ -14,37 +14,37 @@ import { cn } from "../../lib/utils";
 
 const galleryItems = [
   {
-    src: "/images/gallery/living_2.jpg",
+    src: "/images/gallery/living_2.webp",
     alt: "Living Room",
     name: "Living Room",
     hint: "cozy living room",
   },
   {
-    src: "/images/gallery/bedroom_right_angle_1.jpg",
+    src: "/images/gallery/bedroom_front_1.webp",
     alt: "Bedroom",
     name: "Bedroom",
     hint: "minimalist bedroom",
   },
   {
-    src: "/images/hero/living_kitchen_1.jpg",
+    src: "/images/hero/dining_1.webp",
     alt: "Dining Area",
     name: "Dining Area",
     hint: "dining area",
   },
   {
-    src: "/images/hero/kitchen_left_1.jpg",
+    src: "/images/hero/kitchen_left_1.webp",
     alt: "Kitchen",
     name: "Kitchen",
     hint: "sleek kitchen",
   },
   {
-    src: "/images/gallery/toilet_and_bath_cp.jpg",
+    src: "/images/gallery/toilet_and_bath_cp.webp",
     alt: "Toilet and Bathroom",
     name: "Toilet & Bathroom",
     hint: "modern bathroom",
   },
   {
-    src: "/images/gallery/laundry_1.jpg",
+    src: "/images/gallery/laundry_1.webp",
     alt: "Laundry Area",
     name: "Laundry Area",
     hint: "laundry space",
