@@ -9,11 +9,22 @@ import {
 import { Button } from "@/components/ui/button";
 
 const socialLinks = [
-  { name: "Airbnb", href: "#", icon: HomeIcon },
-  { name: "Instagram", href: "#", icon: Instagram },
-  { name: "Facebook", href: "#", icon: Facebook },
-  { name: "WhatsApp", href: "#", icon: MessageSquare },
-  { name: "TikTok", href: "#", icon: Film },
+  {
+    name: "Airbnb",
+    href: "https://www.airbnb.com.sg/rooms/1364997919482714933?guests=1&adults=4&pets=2&s=67&unique_share_id=0d245e15-131c-48e4-bd7a-200c585b4fcc",
+    icon: HomeIcon,
+  },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61558711286570",
+    icon: Facebook,
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/kireihouse.ph",
+    icon: Instagram,
+  },
+  { name: "WhatsApp", href: "https://wa.me/639175069965", icon: MessageSquare },
 ];
 
 export function Footer() {
@@ -28,7 +39,12 @@ export function Footer() {
         </div>
         <div className="flex items-center space-x-4">
           {socialLinks.map((link) => (
-            <Link key={link.name} href={link.href}>
+            <Link
+              key={link.name}
+              href={link.href}
+              target={link.name === "Facebook" ? "_blank" : undefined}
+              rel={link.name === "Facebook" ? "noopener noreferrer" : undefined}
+            >
               <Button
                 asChild
                 variant="ghost"
