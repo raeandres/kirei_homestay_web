@@ -58,11 +58,17 @@ const nearbyPlaces = [
 ];
 
 const socialMediaLinks = [
-  { name: "Facebook", href: "#", icon: Facebook },
-  { name: "Instagram", href: "#", icon: Instagram },
-  { name: "TikTok", href: "#", icon: Film },
-  { name: "Viber", href: "#", icon: MessageSquare },
-  { name: "WhatsApp", href: "#", icon: MessageSquare },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61558711286570",
+    icon: Facebook,
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/kireihouse.ph/?locale=%E5%81%9A%E4%B8%AA%E6%91%A9%E7%BA%B3%E5%93%A40buth2788%E3%80%97YSmTq&hl=cs",
+    icon: Instagram,
+  },
+  { name: "WhatsApp", href: "https://wa.me/639175069965", icon: MessageSquare },
 ];
 
 export function ContactSection() {
