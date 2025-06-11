@@ -16,37 +16,37 @@ import { cn } from "../../lib/utils";
 
 const images = [
   {
-    src: "https://placehold.co/1920x1080.png",
-    alt: "Modern living room",
+    src: "/images/hero/living_1.jpg",
+    alt: "Zen living room",
     hint: "modern interior",
   },
   {
-    src: "https://placehold.co/1920x1081.png",
-    alt: "Cozy bedroom",
+    src: "/images/showcase/ceiling.jpg",
+    alt: "Striking details",
     hint: "bedroom aesthetic",
   },
   {
-    src: "https://placehold.co/1920x1082.png",
-    alt: "Bright dining area",
+    src: "/images/showcase/ramen_2.jpg",
+    alt: "Pet Friendly",
     hint: "dining space",
   },
   {
-    src: "https://firebasestudio.googleapis.com/v0/b/studioproj-496600982053.appspot.com/o/image_uploads%2Fc5d96698-d203-425d-89f1-043eb17c5188.jpeg?alt=media&token=f6ff0ae0-60b0-4b2a-b54b-25f920e153a1",
-    alt: "Comfortable modern living area with city view",
+    src: "/images/gallery/bedroom_front_1.jpg",
+    alt: "Comfortable bedroom with stunning city view",
     hint: "living room city",
   },
   {
-    src: "https://placehold.co/1920x1083.png",
+    src: "/images/showcase/oven_angle.jpg",
     alt: "Modern kitchen with coffee machine and oven",
     hint: "modern kitchen",
   },
   {
-    src: "https://firebasestudio.googleapis.com/v0/b/studioproj-496600982053.appspot.com/o/image_uploads%2Fe174cf94-42f2-4f32-af24-f3e6a2e2a9b7.jpeg?alt=media&token=9e90c0c2-6c1c-4f3f-9f48-7b9214813c9e",
+    src: "/images/hero/bedroom_right_1.jpg",
     alt: "Bright modern bedroom with city view and desk",
     hint: "bedroom city view",
   },
   {
-    src: "https://firebasestudio.googleapis.com/v0/b/studioproj-496600982053.appspot.com/o/image_uploads%2F02a628a5-754a-42ba-a601-270a109d18f3.png?alt=media&token=cd6f5645-917a-4a28-9b7d-2f1f92820b07",
+    src: "/images/gallery/dining_angle_1.jpg",
     alt: "Bright dining area with wooden furniture and cherry blossom centerpiece",
     hint: "dining area",
   },
