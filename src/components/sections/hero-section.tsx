@@ -12,7 +12,7 @@ import {
   Briefcase,
   Hotel as HotelIcon,
 } from "lucide-react";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 const images = [
   {
@@ -108,7 +108,7 @@ export function HeroSection() {
       <div className="relative z-[3] flex flex-col items-center justify-center h-full text-center text-white p-4">
         {" "}
         {/* Content on top of overlay */}
-        <h1 className="text-6xl font-thin tracking-widest mb-6 font-headline animate-fade-in">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-thin tracking-widest mb-6 font-headline animate-fade-in">
           SLOW INTENTIONAL LIVING
         </h1>
         <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 mb-8 text-xl text-white animate-fade-in animation-delay-[300ms]">
