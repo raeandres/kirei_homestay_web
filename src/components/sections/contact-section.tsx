@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -106,7 +105,7 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-16 md:py-24 bg-background">
-      <div className="container max-w-6xl mx-auto px-4">
+      <div className="container max-w-6xl mx-auto px-4 overflow-x-hidden">
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {/* Left Column: Property Location & Get in touch */}
           <div className="space-y-6">
@@ -120,9 +119,9 @@ export function ContactSection() {
             <div className="relative aspect-video bg-muted rounded-lg overflow-hidden shadow-md">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d5199.74430346861!2d121.08133734244423!3d14.6075846246003!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ssg!4v1749335816648!5m2!1sen!2ssg"
-                width="600"
-                height="450"
                 loading="lazy"
+                className="absolute inset-0 w-full h-full border-0"
+                aria-label="Property Location Map"
               ></iframe>
             </div>
 
@@ -202,39 +201,9 @@ export function ContactSection() {
                   Contact the Host
                 </CardTitle>
                 <CardDescription className="text-muted-foreground pt-1">
-                  Have questions? Reach out directly or use the form below.
+                  Interested to know more? Tell us what you think.
                 </CardDescription>
-                <div className="pt-6">
-                  <div className="flex items-center space-x-4">
-                    <Avatar className="h-16 w-16">
-                      <AvatarFallback className="text-2xl bg-muted">
-                        SA
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-semibold font-headline text-xl">
-                        Siri Andres
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        Property Host
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-6 space-y-3">
-                    <div className="flex items-center">
-                      <Phone className="mr-3 h-5 w-5 text-accent" />
-                      <span className="text-sm text-foreground/90">
-                        (63) 917-506 9965
-                      </span>
-                    </div>
-                    <div className="flex items-center">
-                      <Mail className="mr-3 h-5 w-5 text-accent" />
-                      <span className="text-sm text-foreground/90">
-                        business.siriandres@gmail.com
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                {/* {" Removed User card info "} */}
               </CardHeader>
               <CardContent className="pt-2">
                 <Form {...form}>
