@@ -63,11 +63,11 @@ const platformLinks = [
     href: "https://www.booking.com/Share-tzHN6oM",
     icon: "/bdc.svg",
   },
-  {
-    name: "Agoda",
-    href: "https://www.agoda.com/king-suite-eastwood-global-plaza-high-floor/hotel/all/santolan-ph.html?ds=c9pjFkO4TJQb2I9Q",
-    icon: "/agoda_blk.svg",
-  },
+  // {
+  //   name: "Agoda",
+  //   href: "https://www.agoda.com/king-suite-eastwood-global-plaza-high-floor/hotel/all/santolan-ph.html?ds=c9pjFkO4TJQb2I9Q",
+  //   icon: "/agoda_blk.svg",
+  // },
 ];
 
 export function HeroSection() {
