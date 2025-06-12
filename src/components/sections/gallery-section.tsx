@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 const galleryItems = [
   {
@@ -113,14 +113,14 @@ export function GallerySection() {
 
       {isModalOpen && currentImage && (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogContent className="sm:max-w-3xl md:max-w-4xl lg:max-w-5xl w-[90vw] p-4 md:p-6">
+          <DialogContent className="flex flex-col sm:max-w-3xl md:max-w-4xl lg:max-w-5xl w-[90vw] max-h-[90vh] p-4 md:p-6">
             <DialogHeader>
               <DialogTitle className="sr-only">
                 {currentImage.name} - Image {currentImageIndexInModal + 1} of{" "}
                 {galleryItems.length}
               </DialogTitle>
             </DialogHeader>
-            <div className="relative w-full aspect-[3/2] max-h-[75vh] bg-muted rounded-md overflow-hidden mx-auto">
+            <div className="relative w-full aspect-[3/2] flex-1 min-h-0 bg-muted rounded-md overflow-hidden mx-auto">
               <Image
                 src={currentImage.src}
                 alt={currentImage.alt}
@@ -130,7 +130,7 @@ export function GallerySection() {
                 sizes="(max-width: 640px) 90vw, (max-width: 1024px) 80vw, 1280px"
               />
             </div>
-            <div className="mt-4 flex items-center justify-between gap-4">
+            <div className="mt-4 flex items-center justify-between gap-4 flex-shrink-0">
               <Button
                 variant="outline"
                 onClick={showPrevImage}
