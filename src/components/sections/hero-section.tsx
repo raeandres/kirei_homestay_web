@@ -21,39 +21,9 @@ const images = [
     hint: "modern interior",
   },
   {
-    src: "/kirei_2/showcase/ceiling.webp",
-    alt: "Striking details",
-    hint: "bedroom aesthetic",
-  },
-  {
-    src: "/kirei_2/showcase/living_angle_1.webp",
-    alt: "Zen inspired living",
-    hint: "Living space",
-  },
-  {
-    src: "/kirei_2/hero/coffee_dining.jpeg",
-    alt: "Modern kitchen with coffee machine and oven",
-    hint: "modern kitchen",
-  },
-  {
-    src: "/kirei_2/gallery/bedroom_left_1.webp",
-    alt: "Comfortable bedroom with stunning city view",
-    hint: "living room city",
-  },
-  {
-    src: "/kirei_2/hero/bedroom_right_1.webp",
-    alt: "Bright modern bedroom with city view and desk",
-    hint: "bedroom city view",
-  },
-  {
-    src: "/kirei_2/gallery/dining_angle_1.webp",
-    alt: "Bright dining area with wooden furniture and cherry blossom centerpiece",
-    hint: "dining area",
-  },
-  {
-    src: "/kirei_2/gallery/kitchen_1.webp",
-    alt: "Modern kitchen with coffee machine and oven",
-    hint: "modern kitchen",
+    src: "/kirei_2/hero/converted_0008.webp",
+    alt: "Minimalist daybed 1 bedroom",
+    hint: "Efficient minimalist daybed",
   },
   {
     src: "/kirei_1/hero/converted_0000.webp",
@@ -61,14 +31,39 @@ const images = [
     hint: "center lamp dining",
   },
   {
-    src: "/kirei_1/gallery/livingroom/converted_0021.webp",
-    alt: "Comfortable livingroom",
-    hint: "Pet-friendly livingroom",
+    src: "/kirei_2/hero/converted_0003.webp",
+    alt: "Minimalist workstation 1 bedroom",
+    hint: "Efficient minimalist workstation",
   },
   {
-    src: "/kirei_1/hero/converted_0005.webp",
-    alt: "Minimalist bedroom studio",
-    hint: "Japanese inspired bedroom",
+    src: "/kirei_2/hero/ceiling.webp",
+    alt: "Striking details",
+    hint: "ceiling aesthetic",
+  },
+  {
+    src: "/kirei_2/hero/ramen_2.webp",
+    alt: "Pet friendly",
+    hint: "Pet friendly",
+  },
+  {
+    src: "/kirei_2/hero/dining_1.webp",
+    alt: "Modern kitchen",
+    hint: "modern kitchen",
+  },
+  {
+    src: "/kirei_1/gallery/bedroom/bed_right_angle.webp",
+    alt: "Plates set",
+    hint: "Complete dining materials",
+  },
+  {
+    src: "/kirei_2/hero/bedroom_right_1.webp",
+    alt: "Bright modern bedroom with city view and desk",
+    hint: "bedroom city view",
+  },
+  {
+    src: "/kirei_2/hero/converted_0007.webp",
+    alt: "Bright modern bedroom with city view and desk",
+    hint: "bedroom city view",
   },
   {
     src: "/kirei_1/hero/converted_0001.webp",
@@ -80,29 +75,6 @@ const images = [
     alt: "Minimalist bedroom studio",
     hint: "Japanese inspired bedroom 3",
   },
-  {
-    src: "/kirei_1/gallery/workstation/converted_0001.webp",
-    alt: "Minimalist workstation studio",
-    hint: "Efficient minimalist workstation",
-  },
-];
-
-const platformLinks = [
-  {
-    name: "Airbnb",
-    href: "https://www.airbnb.com.sg/rooms/1364997919482714933?guests=1&adults=4&pets=2&s=67&unique_share_id=0d245e15-131c-48e4-bd7a-200c585b4fcc",
-    icon: "/airbnb_blk.svg",
-  },
-  {
-    name: "Booking.com",
-    href: "https://www.booking.com/Share-tzHN6oM",
-    icon: "/bdc.svg",
-  },
-  // {
-  //   name: "Agoda",
-  //   href: "https://www.agoda.com/king-suite-eastwood-global-plaza-high-floor/hotel/all/santolan-ph.html?ds=c9pjFkO4TJQb2I9Q",
-  //   icon: "/agoda_blk.svg",
-  // },
 ];
 
 export function HeroSection() {
@@ -121,7 +93,7 @@ export function HeroSection() {
         <div
           key={image.src}
           className={cn(
-            "absolute inset-0 w-full h-full", // Removed: transition-opacity duration-1000 ease-in-out
+            "absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out",
             index === currentIndex
               ? "opacity-100 z-[1]"
               : "opacity-0 z-0 pointer-events-none"
@@ -144,50 +116,18 @@ export function HeroSection() {
         {" "}
         {/* Content on top of overlay */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-thin tracking-widest mb-6 font-headline animate-fade-in">
-          SLOW INTENTIONAL LIVING
+          SLOW
+          <br />
+          INTENTIONAL
+          <br />
+          LIVING
         </h1>
-        <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 mb-8 text-xl text-white animate-fade-in animation-delay-[300ms]">
-          <span className="flex items-center">
-            <Users className="mr-2 h-5 w-5" />
-            Up to 9 guests
-          </span>
-          <span className="flex items-center">
-            <Star className="mr-2 h-5 w-5 fill-yellow-400 text-yellow-400" />
-            4.96 (53 reviews)
-          </span>
-        </div>
-        <div className="mb-8 flex justify-center space-x-4 animate-fade-in animation-delay-[600ms]">
-          {platformLinks.map((platform) => (
-            <Link
-              key={platform.name}
-              href={platform.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label={`Visit Kirei Homestay on ${platform.name}`}
-                className="text-white bg-white hover:bg-white/20 transition-colors duration-300 p-3 rounded-lg w-14 h-14"
-              >
-                {/* <platform.icon className="h-7 w-7" /> */}
-                <Image
-                  src={platform.icon}
-                  alt={`${platform.name} icon`}
-                  width={28}
-                  height={28}
-                  className="h-7 w-7"
-                />
-              </Button>
-            </Link>
-          ))}
-        </div>
         <Link href="#about">
           <Button
             asChild
             size="lg"
             variant="outline"
-            className="bg-transparent border-primary-foreground text-white hover:bg-primary-foreground hover:text-primary animate-fade-in animation-delay-[900ms]"
+            className="bg-transparent border-transparent text-white hover:bg-transparent hover:text-white animate-fade-in animation-delay-[1800ms]"
           >
             <span>
               Explore More <ChevronDown className="ml-2 h-5 w-5" />

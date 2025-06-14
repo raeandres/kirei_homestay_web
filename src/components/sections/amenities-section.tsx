@@ -117,8 +117,8 @@ export function AmenitiesSection() {
   return (
     <section id="amenities" className="py-16 md:py-24 bg-background px-4">
       <div className="container max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-headline">
-          What We Offer
+        <h2 className="text-4xl md:text-5xl text-center font-light mb-8 font-zen-old-mincho">
+          a m e n i t i e s
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {amenityCategories.map((category) => {

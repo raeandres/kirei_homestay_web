@@ -52,8 +52,8 @@ export function ReviewsSection() {
   return (
     <section id="reviews" className="py-16 md:py-24 bg-secondary/30">
       <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-headline">
-          Guest Experiences
+        <h2 className="text-4xl md:text-5xl text-center font-light mb-8 font-zen-old-mincho">
+          e x p e r i e n c e s
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reviews.map((review, index) => (

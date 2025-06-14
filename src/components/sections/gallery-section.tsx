@@ -26,17 +26,22 @@ interface GalleryCategory {
 
 const galleryItems: GalleryCategory[] = [
   {
-    name: "Living Room",
+    name: "1 B e d r o o m",
     coverImage: {
       src: "/kirei_2/gallery/living_2.webp",
-      alt: "Living Room",
-      hint: "cozy living room",
+      alt: "Kirei-ito",
+      hint: "Minimalist 1 bedroom suite",
     },
     images: [
       {
         src: "/kirei_2/gallery/livingroom/living_sofa_cp.webp",
         alt: "Living Room - Kirei 2",
         hint: "Kirei 2 - living 1",
+      },
+      {
+        src: "/kirei_2/gallery/bedroom_front_1.webp",
+        alt: "Bedroom",
+        hint: "minimalist bedroom",
       },
       {
         src: "/kirei_2/gallery/livingroom/living_angle_1.webp",
@@ -53,6 +58,16 @@ const galleryItems: GalleryCategory[] = [
         alt: "Living Room - View 3",
         hint: "Kirei 2 - living 4",
       },
+    ],
+  },
+  {
+    name: "S t u d i o",
+    coverImage: {
+      src: "/kirei_1/gallery/livingroom/converted_0013.webp",
+      alt: "Kirei",
+      hint: "Minimalist studio bedroom suite",
+    },
+    images: [
       {
         src: "/kirei_1/gallery/livingroom/converted_0002.webp",
         alt: "Living Room - View 1",
@@ -82,101 +97,6 @@ const galleryItems: GalleryCategory[] = [
         src: "/kirei_1/gallery/livingroom/converted_0002.webp",
         alt: "Living Room - View 6",
         hint: "Kirei 1 - living 6",
-      },
-    ],
-  },
-  {
-    name: "Bedroom",
-    coverImage: {
-      src: "/kirei_2/gallery/bedroom_front_1.webp",
-      alt: "Bedroom",
-      hint: "minimalist bedroom",
-    },
-    images: [
-      {
-        src: "/kirei_2/gallery/bedroom_front_1.webp",
-        alt: "Bedroom",
-        hint: "minimalist bedroom",
-      },
-      {
-        src: "https://placehold.co/800x605.png",
-        alt: "Bedroom - Details",
-        hint: "bedroom design",
-      },
-    ],
-  },
-  {
-    name: "Dining Area",
-    coverImage: {
-      src: "/kirei_2/hero/dining_1.webp",
-      alt: "Dining Area",
-      hint: "dining area",
-    },
-    images: [
-      {
-        src: "/kirei_2/hero/dining_1.webp",
-        alt: "Dining Area",
-        hint: "dining area",
-      },
-      {
-        src: "https://placehold.co/800x607.png",
-        alt: "Dining Ambiance",
-        hint: "cozy meals",
-      },
-    ],
-  },
-  {
-    name: "Kitchen",
-    coverImage: {
-      src: "/kirei_2/hero/kitchen_left_1.webp",
-      alt: "Kitchen",
-      hint: "sleek kitchen",
-    },
-    images: [
-      {
-        src: "/kirei_2/hero/kitchen_left_1.webp",
-        alt: "Kitchen",
-        hint: "Modern kitchen",
-      },
-      {
-        src: "https://placehold.co/800x609.png",
-        alt: "Kitchen Counter",
-        hint: "kitchen setup",
-      },
-    ],
-  },
-  {
-    name: "Toilet & Bathroom",
-    coverImage: {
-      src: "/kirei_2/gallery/toilet_and_bath_cp.webp",
-      alt: "Toilet and Bathroom",
-      hint: "modern bathroom",
-    },
-    images: [
-      {
-        src: "/kirei_2/gallery/toilet_and_bath_cp.webp",
-        alt: "Toilet and Bathroom",
-        hint: "modern bathroom",
-      },
-      {
-        src: "https://placehold.co/800x611.png",
-        alt: "Shower Area",
-        hint: "bathroom features",
-      },
-    ],
-  },
-  {
-    name: "Laundry Area",
-    coverImage: {
-      src: "/kirei_2/gallery/laundry_1.webp",
-      alt: "Laundry Area",
-      hint: "laundry space",
-    },
-    images: [
-      {
-        src: "/kirei_2/gallery/laundry_1.webp",
-        alt: "Laundry Area",
-        hint: "laundry space",
       },
     ],
   },
@@ -226,10 +146,10 @@ export function GallerySection() {
   return (
     <section id="gallery" className="py-16 md:py-24 bg-secondary/30">
       <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-headline">
-          Explore Kirei
+        <h2 className="text-4xl md:text-5xl text-center font-light mb-8 font-zen-old-mincho">
+          e x p l o r e
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 gap-6 md:gap-8">
           {galleryItems.map((item, index) => (
             <button
               key={item.name}
@@ -249,7 +169,7 @@ export function GallerySection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-sm" />
                 <div className="absolute bottom-0 left-0 p-3 md:p-4">
-                  <h3 className="text-lg md:text-xl font-semibold text-white font-headline">
+                  <h3 className="text-lg md:text-xl font-normal text-white font-zen-old-mincho">
                     {item.name}
                   </h3>
                 </div>
