@@ -34,19 +34,54 @@ const galleryItems: GalleryCategory[] = [
     },
     images: [
       {
-        src: "/kirei_2/gallery/living_2.webp",
-        alt: "Living Room",
-        hint: "cozy living room",
+        src: "/kirei_2/gallery/livingroom/living_sofa_cp.webp",
+        alt: "Living Room - Kirei 2",
+        hint: "Kirei 2 - living 1",
       },
       {
-        src: "https://placehold.co/800x602.png",
+        src: "/kirei_2/gallery/livingroom/living_angle_1.webp",
         alt: "Living Room - View 2",
-        hint: "modern decor",
+        hint: "Kirei 2 - living 2",
       },
       {
-        src: "https://placehold.co/800x603.png",
+        src: "/kirei_2/gallery/livingroom/living_dining_cp.webp",
         alt: "Living Room - View 3",
-        hint: "comfortable furniture",
+        hint: "Kirei 2 - living 3",
+      },
+      {
+        src: "/kirei_2/gallery/livingroom/living_kitchen_1.webp",
+        alt: "Living Room - View 3",
+        hint: "Kirei 2 - living 4",
+      },
+      {
+        src: "/kirei_1/gallery/livingroom/converted_0002.webp",
+        alt: "Living Room - View 1",
+        hint: "Kirei 1 - living 1",
+      },
+      {
+        src: "/kirei_1/gallery/livingroom/converted_0022.webp",
+        alt: "Living Room - View 2",
+        hint: "Kirei 1 - living 2",
+      },
+      {
+        src: "/kirei_1/gallery/livingroom/converted_0005.webp",
+        alt: "Living Room - View 3",
+        hint: "Kirei 1 - living 3",
+      },
+      {
+        src: "/kirei_1/gallery/livingroom/converted_0013.webp",
+        alt: "Living Room - View 4",
+        hint: "Kirei 1 - living 4",
+      },
+      {
+        src: "/kirei_1/gallery/livingroom/converted_0015.webp",
+        alt: "Living Room - View 5",
+        hint: "Kirei 1 - living 5",
+      },
+      {
+        src: "/kirei_1/gallery/livingroom/converted_0002.webp",
+        alt: "Living Room - View 6",
+        hint: "Kirei 1 - living 6",
       },
     ],
   },

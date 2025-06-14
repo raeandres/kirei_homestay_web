@@ -61,6 +61,11 @@ const images = [
     hint: "center lamp dining",
   },
   {
+    src: "/kirei_1/gallery/livingroom/converted_0021.webp",
+    alt: "Comfortable livingroom",
+    hint: "Pet-friendly livingroom",
+  },
+  {
     src: "/kirei_1/hero/converted_0005.webp",
     alt: "Minimalist bedroom studio",
     hint: "Japanese inspired bedroom",
