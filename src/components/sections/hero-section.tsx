@@ -31,6 +31,11 @@ const images = [
     hint: "Living space",
   },
   {
+    src: "/kirei_2/hero/coffee_dining.jpeg",
+    alt: "Modern kitchen with coffee machine and oven",
+    hint: "modern kitchen",
+  },
+  {
     src: "/kirei_2/gallery/bedroom_left_1.webp",
     alt: "Comfortable bedroom with stunning city view",
     hint: "living room city",
@@ -49,6 +54,31 @@ const images = [
     src: "/kirei_2/gallery/kitchen_1.webp",
     alt: "Modern kitchen with coffee machine and oven",
     hint: "modern kitchen",
+  },
+  {
+    src: "/kirei_1/hero/converted_0000.webp",
+    alt: "Focus dining lamp for intimate conversations",
+    hint: "center lamp dining",
+  },
+  {
+    src: "/kirei_1/hero/converted_0005.webp",
+    alt: "Minimalist bedroom studio",
+    hint: "Japanese inspired bedroom",
+  },
+  {
+    src: "/kirei_1/hero/converted_0001.webp",
+    alt: "Minimalist bedroom studio",
+    hint: "Japanese inspired bedroom 2",
+  },
+  {
+    src: "/kirei_1/gallery/bedroom/converted_0006.webp",
+    alt: "Minimalist bedroom studio",
+    hint: "Japanese inspired bedroom 3",
+  },
+  {
+    src: "/kirei_1/gallery/workstation/converted_0001.webp",
+    alt: "Minimalist workstation studio",
+    hint: "Efficient minimalist workstation",
   },
 ];
 
