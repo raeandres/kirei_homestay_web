@@ -69,34 +69,101 @@ const galleryItems: GalleryCategory[] = [
     },
     images: [
       {
+        src: "/kirei_1/hero/converted_0002.webp",
+        alt: "Living Room - View 1",
+        hint: "Kirei 1 - living 1",
+      },
+      {
         src: "/kirei_1/gallery/livingroom/converted_0002.webp",
         alt: "Living Room - View 1",
         hint: "Kirei 1 - living 1",
       },
+
       {
         src: "/kirei_1/gallery/livingroom/converted_0022.webp",
         alt: "Living Room - View 2",
         hint: "Kirei 1 - living 2",
       },
       {
-        src: "/kirei_1/gallery/livingroom/converted_0005.webp",
-        alt: "Living Room - View 3",
-        hint: "Kirei 1 - living 3",
+        src: "/kirei_1/gallery/bedroom/converted_0002.webp",
+        alt: "Living Room - View 2",
+        hint: "Kirei 1 - living 2",
       },
       {
-        src: "/kirei_1/gallery/livingroom/converted_0013.webp",
-        alt: "Living Room - View 4",
-        hint: "Kirei 1 - living 4",
-      },
-      {
-        src: "/kirei_1/gallery/livingroom/converted_0015.webp",
-        alt: "Living Room - View 5",
-        hint: "Kirei 1 - living 5",
-      },
-      {
-        src: "/kirei_1/gallery/livingroom/converted_0002.webp",
+        src: "/kirei_1/gallery/workstation/converted_0000.webp",
         alt: "Living Room - View 6",
         hint: "Kirei 1 - living 6",
+      },
+
+      // Kitchen
+      {
+        src: "/kirei_1/gallery/kitchen/converted_0002.webp",
+        alt: "Kitchen 1 - View 1",
+        hint: "Kirei 1 - kitchen 5",
+      },
+      {
+        src: "/kirei_1/gallery/kitchen/converted_0014.webp",
+        alt: "Kitchen Room - View 4",
+        hint: "Kirei 1 - Kitchen view 4",
+      },
+      {
+        src: "/kirei_1/gallery/kitchen/converted_0004.webp",
+        alt: "Kitchen Room - View 4",
+        hint: "Kirei 1 - Kitchen view 4",
+      },
+
+      // Bathroom
+      {
+        src: "/kirei_1/gallery/bathroom/converted_0001.webp",
+        alt: "Gym Room 2 - View 2",
+        hint: "Kirei 1 - Amenities 2",
+      },
+      {
+        src: "/kirei_1/gallery/bathroom/converted_0002.webp",
+        alt: "Gym Room 3 - View 3",
+        hint: "Kirei 1 - Amenities 3",
+      },
+
+      // Amenities
+      {
+        src: "/kirei_1/amenities/converted_0007.webp",
+        alt: "ELG3 View - View 1",
+        hint: "Kirei 1 - Amenities 1",
+      },
+      {
+        src: "/kirei_1/amenities/converted_0000.webp",
+        alt: "Gym Room - View 1",
+        hint: "Kirei 1 - Amenities 1",
+      },
+      {
+        src: "/kirei_1/amenities/converted_0001.webp",
+        alt: "Gym Room 3 - View 3",
+        hint: "Kirei 1 - Amenities 3",
+      },
+      {
+        src: "/kirei_1/amenities/converted_0002.webp",
+        alt: "Kids Room 1 - View 1",
+        hint: "Kirei 1 - Amenities 3",
+      },
+      {
+        src: "/kirei_1/amenities/converted_0003.webp",
+        alt: "Kids Room 1 - View 1",
+        hint: "Kirei 1 - Amenities 3",
+      },
+      {
+        src: "/kirei_1/amenities/converted_0004.webp",
+        alt: "Kids Room 1 - View 1",
+        hint: "Kirei 1 - Amenities 3",
+      },
+      {
+        src: "/kirei_1/amenities/converted_0005.webp",
+        alt: "Kids Room 1 - View 1",
+        hint: "Kirei 1 - Amenities 3",
+      },
+      {
+        src: "/kirei_1/amenities/converted_0006.webp",
+        alt: "Kids Room 1 - View 1",
+        hint: "Kirei 1 - Amenities 3",
       },
     ],
   },
