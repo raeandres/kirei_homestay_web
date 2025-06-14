@@ -28,7 +28,7 @@ const galleryItems: GalleryCategory[] = [
   {
     name: "1 B e d r o o m",
     coverImage: {
-      src: "/kirei_2/gallery/living_2.webp",
+      src: "/kirei_2/gallery/livingroom/living_kitchen_1.webp",
       alt: "Kirei-ito",
       hint: "Minimalist 1 bedroom suite",
     },
