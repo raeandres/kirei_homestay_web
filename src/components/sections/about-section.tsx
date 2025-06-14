@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-16 md:py-24 bg-background">
+    <section id="about" className="py-16 md:py-24 bg-background px-4">
       <div className="container max-w-4xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-8 font-headline">
           Welcome to Kirei
@@ -13,7 +13,7 @@ export function AboutSection() {
           data-ai-hint="zen decor"
           width={800}
           height={400}
-          className="rounded-lg shadow-lg mx-auto mb-8 object-cover"
+          className="shadow-lg mx-auto mb-8 object-cover"
         />
         <p className="text-lg md:text-xl text-foreground/80 mb-6 leading-relaxed">
           Kirei (綺麗), meaning beautiful and clean in Japanese, is more than

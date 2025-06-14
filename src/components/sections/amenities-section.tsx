@@ -115,7 +115,7 @@ const amenityCategories: AmenityCategory[] = [
 
 export function AmenitiesSection() {
   return (
-    <section id="amenities" className="py-16 md:py-24 bg-background">
+    <section id="amenities" className="py-16 md:py-24 bg-background px-4">
       <div className="container max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-headline">
           What We Offer

@@ -77,7 +77,7 @@ export function GallerySection() {
 
   return (
     <section id="gallery" className="py-16 md:py-24 bg-secondary/30">
-      <div className="container max-w-6xl mx-auto">
+      <div className="container max-w-6xl mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-headline">
           Explore Kirei
         </h2>
@@ -87,7 +87,7 @@ export function GallerySection() {
               key={item.name}
               type="button"
               onClick={() => handleOpenModal(index)}
-              className="group block w-full p-0 border-0 rounded-lg shadow-lg aspect-[3/2] overflow-hidden text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              className="group block w-full p-0 border-0 shadow-lg aspect-[3/2] overflow-hidden text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
               aria-label={`View image of ${item.name}`}
             >
               <div className="relative w-full h-full">
