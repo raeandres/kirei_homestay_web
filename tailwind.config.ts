@@ -14,7 +14,8 @@ export default {
         body: ['Montserrat', 'sans-serif'],
         headline: ['Montserrat', 'sans-serif'],
         code: ['monospace'],
-        hina: ['Hina Mincho', 'serif'],
+        hina: ['"Hina Mincho"', 'serif'],
+        'zen-old-mincho': ['"Zen Old Mincho"', 'serif'],
       },
       fontSize: {
         '5xl': ['3rem', { lineHeight: '1.2' }],
