@@ -51,9 +51,9 @@ const images = [
     hint: "modern kitchen",
   },
   {
-    src: "/kirei_1/gallery/bedroom/bed_right_angle.webp",
-    alt: "Plates set",
-    hint: "Complete dining materials",
+    src: "/kirei_2/hero/bed_right_angle.webp",
+    alt: "Vessel at bed",
+    hint: "Vessel at bed",
   },
   {
     src: "/kirei_2/hero/bedroom_right_1.webp",
