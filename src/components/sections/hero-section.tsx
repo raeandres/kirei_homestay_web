@@ -16,37 +16,37 @@ import { cn } from "@/lib/utils";
 
 const images = [
   {
-    src: "/images/hero/living_1.webp",
+    src: "/kirei_2/hero/living_1.webp",
     alt: "Zen living room",
     hint: "modern interior",
   },
   {
-    src: "/images/showcase/ceiling.webp",
+    src: "/kirei_2/showcase/ceiling.webp",
     alt: "Striking details",
     hint: "bedroom aesthetic",
   },
   {
-    src: "/images/showcase/living_angle_1.webp",
+    src: "/kirei_2/showcase/living_angle_1.webp",
     alt: "Zen inspired living",
     hint: "Living space",
   },
   {
-    src: "/images/gallery/bedroom_left_1.webp",
+    src: "/kirei_2/gallery/bedroom_left_1.webp",
     alt: "Comfortable bedroom with stunning city view",
     hint: "living room city",
   },
   {
-    src: "/images/hero/bedroom_right_1.webp",
+    src: "/kirei_2/hero/bedroom_right_1.webp",
     alt: "Bright modern bedroom with city view and desk",
     hint: "bedroom city view",
   },
   {
-    src: "/images/gallery/dining_angle_1.webp",
+    src: "/kirei_2/gallery/dining_angle_1.webp",
     alt: "Bright dining area with wooden furniture and cherry blossom centerpiece",
     hint: "dining area",
   },
   {
-    src: "/images/gallery/kitchen_1.webp",
+    src: "/kirei_2/gallery/kitchen_1.webp",
     alt: "Modern kitchen with coffee machine and oven",
     hint: "modern kitchen",
   },

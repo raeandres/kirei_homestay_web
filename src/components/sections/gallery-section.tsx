@@ -28,13 +28,13 @@ const galleryItems: GalleryCategory[] = [
   {
     name: "Living Room",
     coverImage: {
-      src: "/images/gallery/living_2.webp",
+      src: "/kirei_2/gallery/living_2.webp",
       alt: "Living Room",
       hint: "cozy living room",
     },
     images: [
       {
-        src: "/images/gallery/living_2.webp",
+        src: "/kirei_2/gallery/living_2.webp",
         alt: "Living Room",
         hint: "cozy living room",
       },
@@ -53,13 +53,13 @@ const galleryItems: GalleryCategory[] = [
   {
     name: "Bedroom",
     coverImage: {
-      src: "/images/gallery/bedroom_front_1.webp",
+      src: "/kirei_2/gallery/bedroom_front_1.webp",
       alt: "Bedroom",
       hint: "minimalist bedroom",
     },
     images: [
       {
-        src: "/images/gallery/bedroom_front_1.webp",
+        src: "/kirei_2/gallery/bedroom_front_1.webp",
         alt: "Bedroom",
         hint: "minimalist bedroom",
       },
@@ -73,13 +73,13 @@ const galleryItems: GalleryCategory[] = [
   {
     name: "Dining Area",
     coverImage: {
-      src: "/images/hero/dining_1.webp",
+      src: "/kirei_2/hero/dining_1.webp",
       alt: "Dining Area",
       hint: "dining area",
     },
     images: [
       {
-        src: "/images/hero/dining_1.webp",
+        src: "/kirei_2/hero/dining_1.webp",
         alt: "Dining Area",
         hint: "dining area",
       },
@@ -93,13 +93,13 @@ const galleryItems: GalleryCategory[] = [
   {
     name: "Kitchen",
     coverImage: {
-      src: "/images/hero/kitchen_left_1.webp",
+      src: "/kirei_2/hero/kitchen_left_1.webp",
       alt: "Kitchen",
       hint: "sleek kitchen",
     },
     images: [
       {
-        src: "/images/hero/kitchen_left_1.webp",
+        src: "/kirei_2/hero/kitchen_left_1.webp",
         alt: "Kitchen",
         hint: "Modern kitchen",
       },
@@ -113,13 +113,13 @@ const galleryItems: GalleryCategory[] = [
   {
     name: "Toilet & Bathroom",
     coverImage: {
-      src: "/images/gallery/toilet_and_bath_cp.webp",
+      src: "/kirei_2/gallery/toilet_and_bath_cp.webp",
       alt: "Toilet and Bathroom",
       hint: "modern bathroom",
     },
     images: [
       {
-        src: "/images/gallery/toilet_and_bath_cp.webp",
+        src: "/kirei_2/gallery/toilet_and_bath_cp.webp",
         alt: "Toilet and Bathroom",
         hint: "modern bathroom",
       },
@@ -133,13 +133,13 @@ const galleryItems: GalleryCategory[] = [
   {
     name: "Laundry Area",
     coverImage: {
-      src: "/images/gallery/laundry_1.webp",
+      src: "/kirei_2/gallery/laundry_1.webp",
       alt: "Laundry Area",
       hint: "laundry space",
     },
     images: [
       {
-        src: "/images/gallery/laundry_1.webp",
+        src: "/kirei_2/gallery/laundry_1.webp",
         alt: "Laundry Area",
         hint: "laundry space",
       },
