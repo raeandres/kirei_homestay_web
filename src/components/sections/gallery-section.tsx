@@ -111,6 +111,31 @@ const galleryItems: GalleryCategory[] = [
         alt: "Kitchen Room - View 4",
         hint: "Kirei 1 - Kitchen view 4",
       },
+      {
+        src: "/kirei_1/gallery/kitchen/food/converted_0000.webp",
+        alt: "Kitchen Room - View 1",
+        hint: "Kirei 1 - Food view 1",
+      },
+      {
+        src: "/kirei_1/gallery/kitchen/food/converted_0001.webp",
+        alt: "Kitchen Room - View 2",
+        hint: "Kirei 1 - Food view 1",
+      },
+      {
+        src: "/kirei_1/gallery/kitchen/food/converted_0002.webp",
+        alt: "Kitchen Room - View 3",
+        hint: "Kirei 1 - Food view 1",
+      },
+      {
+        src: "/kirei_1/gallery/kitchen/food/converted_0003.webp",
+        alt: "Kitchen Room - View 4",
+        hint: "Kirei 1 - Food view 1",
+      },
+      {
+        src: "/kirei_1/gallery/kitchen/food/converted_0005.webp",
+        alt: "Kitchen Room - View 5",
+        hint: "Kirei 1 - Food view 1",
+      },
 
       // Bathroom
       {
