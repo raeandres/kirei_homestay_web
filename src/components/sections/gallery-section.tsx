@@ -40,7 +40,7 @@ const galleryItems: GalleryCategory[] = [
         hint: "Kirei 2 - living 1",
       },
       {
-        src: "/kirei_2/gallery/bedroom_front_1.webp",
+        src: "/kirei_2/gallery/bedroom/bedroom_front_1.webp",
         alt: "Bedroom",
         hint: "minimalist bedroom",
       },
