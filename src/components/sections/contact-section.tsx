@@ -193,9 +193,7 @@ export function ContactSection() {
           <div className="space-y-6">
             <Card className="shadow-xl h-full">
               <CardHeader>
-                <CardTitle className="text-3xl font-normal">
-                  Contact the Host
-                </CardTitle>
+                <CardTitle className="text-3xl font-normal">Contact</CardTitle>
                 <CardDescription className="text-muted-foreground pt-1">
                   Interested to know more? Tell us what you think.
                 </CardDescription>
