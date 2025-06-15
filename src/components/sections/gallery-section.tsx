@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { DialogTitle } from "@/components/ui/dialog"; // Ensure DialogTitle is imported if used, or remove if not
+// Removed unused DialogTitle import
 
 interface GalleryImage {
   src: string;
@@ -408,12 +408,17 @@ export function GallerySection() {
         activeGalleryCategoryName &&
         activeGalleryImages &&
         currentImageInFullScreen && (
-          <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 p-2 sm:p-4 backdrop-blur-sm">
-            <DialogTitle className="sr-only">
-              Fullscreen image viewer: {activeGalleryCategoryName} - Image{" "}
+          <div
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 p-2 sm:p-4 backdrop-blur-sm"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="fullscreen-gallery-title"
+          >
+            <h2 className="sr-only" id="fullscreen-gallery-title">
+              Image gallery: {activeGalleryCategoryName} - Image{" "}
               {currentImageIndex + 1} of {activeGalleryImages.length} -{" "}
               {currentImageInFullScreen.alt}
-            </DialogTitle>
+            </h2>
 
             <Button
               variant="ghost"
