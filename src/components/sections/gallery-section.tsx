@@ -100,58 +100,63 @@ const galleryItems: GalleryCategory[] = [
     },
     images: [
       {
-        src: "/gallery/kirei_1/converted_0000.web",
+        src: "/gallery/kirei_1/converted_0000.webp",
         alt: "Living Room - View 1",
         hint: "Kirei 1 - living 1",
       },
       {
-        src: "/gallery/kirei_1/converted_0002.web",
+        src: "/gallery/kirei_1/converted_0001.webp",
         alt: "Living Room - View 1",
         hint: "Kirei 1 - living 1",
       },
 
       {
-        src: "/gallery/kirei_1/converted_0003.web",
+        src: "/gallery/kirei_1/converted_0002.webp",
         alt: "Living Room - View 2",
         hint: "Kirei 1 - living 2",
       },
       {
-        src: "/gallery/kirei_1/converted_0004.web",
+        src: "/gallery/kirei_1/converted_0003.webp",
         alt: "Living Room - View 2",
         hint: "Kirei 1 - living 2",
       },
       {
-        src: "/gallery/kirei_1/converted_0005.web",
+        src: "/gallery/kirei_1/converted_0004.webp",
         alt: "Living Room - View 6",
         hint: "Kirei 1 - living 6",
       },
       {
-        src: "/gallery/kirei_1/converted_0006.web",
+        src: "/gallery/kirei_1/converted_0005.webp",
         alt: "Kitchen 1 - View 1",
         hint: "Kirei 1 - kitchen 5",
       },
       {
-        src: "/gallery/kirei_1/converted_0007.web",
+        src: "/gallery/kirei_1/converted_0006.webp",
         alt: "Kitchen Room - View 4",
         hint: "Kirei 1 - Kitchen view 4",
       },
       {
-        src: "/gallery/kirei_1/converted_0008.web",
+        src: "/gallery/kirei_1/converted_0007.webp",
         alt: "Kitchen Room - View 4",
         hint: "Kirei 1 - Kitchen view 4",
       },
       {
-        src: "/gallery/kirei_1/converted_0009.web",
+        src: "/gallery/kirei_1/converted_0008.webp",
         alt: "Kitchen Room - View 1",
         hint: "Kirei 1 - Food view 1",
       },
       {
-        src: "/gallery/kirei_1/converted_0010.web",
+        src: "/gallery/kirei_1/converted_0009.webp",
         alt: "Kitchen Room - View 2",
         hint: "Kirei 1 - Food view 1",
       },
       {
-        src: "/gallery/kirei_1/converted_0011.web",
+        src: "/gallery/kirei_1/converted_0010.webp",
+        alt: "Kitchen Room - View 3",
+        hint: "Kirei 1 - Food view 1",
+      },
+      {
+        src: "/gallery/kirei_1/converted_0011.webp",
         alt: "Kitchen Room - View 3",
         hint: "Kirei 1 - Food view 1",
       },
