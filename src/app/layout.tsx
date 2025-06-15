@@ -3,8 +3,8 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"; // Added for contact form feedback
 
 export const metadata: Metadata = {
-  title: "Kirei Homestay",
-  description: "Experience slow, intentional living at Kirei Homestay.",
+  title: "Kirei House PH",
+  description: "Experience slow, intentional living at Kirei House PH.",
 };
 
 export default function RootLayout({

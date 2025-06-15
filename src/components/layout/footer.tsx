@@ -33,7 +33,7 @@ export function Footer() {
       <div className="container px-10 max-w-screen-2xl flex flex-col md:flex-row items-center justify-between">
         <div className="mb-4 md:mb-0">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Kirei Homestay. All rights
+            &copy; {new Date().getFullYear()} Kirei House PH. All rights
             reserved.
           </p>
         </div>
