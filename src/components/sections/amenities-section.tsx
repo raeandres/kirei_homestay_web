@@ -1,23 +1,33 @@
 import type { LucideIcon } from "lucide-react";
 import {
   Bath,
+  BatteryCharging,
   BedDouble,
+  BedDoubleIcon,
   BookOpen,
+  Brush,
+  Building,
+  Building2,
   Coffee,
+  LucideBrush,
   Microwave,
   ParkingCircle,
   Refrigerator,
   ShieldCheck,
   Shirt,
+  ShowerHeadIcon,
   Speaker,
   Sun,
   Thermometer,
+  Toilet,
   Trees,
   Tv,
   Users,
   Utensils,
+  WashingMachine,
   Wifi,
   Wind,
+  WindArrowDownIcon,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -33,43 +43,17 @@ interface AmenityCategory {
 
 const amenityCategories: AmenityCategory[] = [
   {
-    title: "Bathroom",
+    title: "Bedroom",
     amenities: [
-      { name: "Hot Water", icon: Bath },
-      { name: "Shampoo & Conditioner", icon: Bath },
-      { name: "Hair Dryer", icon: Wind },
-      { name: "Towels", icon: Shirt },
-    ],
-  },
-  {
-    title: "Bedroom and Laundry",
-    amenities: [
-      { name: "Queen Bed", icon: BedDouble },
-      { name: "Linens Provided", icon: BedDouble },
-      { name: "Iron & Board", icon: Shirt },
-      { name: "Hangers", icon: Shirt },
-    ],
-  },
-  {
-    title: "Entertainment",
-    amenities: [
-      { name: "Smart TV", icon: Tv },
-      { name: "Books and Reading Material", icon: BookOpen },
-      { name: "Bluetooth Speaker", icon: Speaker },
+      { name: "King Bed", icon: BedDoubleIcon },
+      { name: "Air Conditioning", icon: Thermometer },
     ],
   },
   {
     title: "Family",
     amenities: [
       { name: "Board Games", icon: Users },
-      { name: "Travel Crib (upon request)", icon: BedDouble },
-    ],
-  },
-  {
-    title: "Heating and Cooling",
-    amenities: [
-      { name: "Air Conditioning", icon: Thermometer },
-      { name: "Heating", icon: Thermometer },
+      { name: "Futon Bed (upon request)", icon: BedDouble },
     ],
   },
   {
@@ -81,10 +65,11 @@ const amenityCategories: AmenityCategory[] = [
     ],
   },
   {
-    title: "Internet and Office",
+    title: "Entertainment",
     amenities: [
-      { name: "High-speed Wi-Fi", icon: Wifi },
-      { name: "Dedicated Workspace", icon: BookOpen },
+      { name: "Smart TV", icon: Tv },
+      { name: "Books and Reading Material", icon: BookOpen },
+      { name: "City View", icon: Building2 },
     ],
   },
   {
@@ -98,16 +83,34 @@ const amenityCategories: AmenityCategory[] = [
     ],
   },
   {
-    title: "Outdoor",
+    title: "Bathroom",
     amenities: [
-      { name: "Balcony", icon: Sun },
-      { name: "Patio Furniture", icon: Trees },
+      { name: "Hot Water", icon: ShowerHeadIcon },
+      { name: "Bidet", icon: Toilet },
+      { name: "Hair Dryer", icon: Wind },
+      { name: "Towels", icon: Shirt },
+    ],
+  },
+  {
+    title: "Internet and Office",
+    amenities: [
+      { name: "High-speed Wi-Fi", icon: Wifi },
+      { name: "Dedicated Workspace", icon: BookOpen },
+    ],
+  },
+  {
+    title: "Utilities",
+    amenities: [
+      { name: "Washing Machine", icon: WashingMachine },
+      { name: "Charging wall socket", icon: BatteryCharging },
+      { name: "Iron & Board", icon: Shirt },
+      { name: "Hangers", icon: Shirt },
     ],
   },
   {
     title: "Parking and Facilities",
     amenities: [
-      { name: "Free Parking on Premises", icon: ParkingCircle },
+      { name: "Available Parking", icon: ParkingCircle },
       { name: "Elevator", icon: Users },
     ],
   },
@@ -132,7 +135,7 @@ export function AmenitiesSection() {
                 className="shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <CardHeader>
-                  <CardTitle className="font-headline text-xl flex items-center">
+                  <CardTitle className="font-normal text-xl flex items-center">
                     <CategoryIcon className="mr-3 h-6 w-6 text-accent" />
                     {category.title}
                   </CardTitle>

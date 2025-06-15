@@ -3,14 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight, X } from "lucide-react"; // Added X icon
 
 interface GalleryImage {
   src: string;
@@ -115,11 +108,6 @@ const galleryItems: GalleryCategory[] = [
         src: "/kirei_2/gallery/kitchen/kitchen_1.webp",
         alt: "Kitchen  - View 4",
         hint: "Kirei 2 - Kitchen 4",
-      },
-      {
-        src: "/kirei_2/gallery/kitchen/kitchen_dining_cp.webp",
-        alt: "Kitchen  - View 5",
-        hint: "Kirei 2 - Kitchen 5",
       },
       {
         src: "/kirei_2/gallery/kitchen/kitchen_plates.webp",
@@ -321,44 +309,63 @@ const galleryItems: GalleryCategory[] = [
 ];
 
 export function GallerySection() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCategoryImages, setSelectedCategoryImages] = useState<
+  const [isFullScreenViewOpen, setIsFullScreenViewOpen] = useState(false);
+  const [activeGalleryImages, setActiveGalleryImages] = useState<
     GalleryImage[] | null
   >(null);
-  const [selectedCategoryName, setSelectedCategoryName] = useState<
+  const [activeGalleryCategoryName, setActiveGalleryCategoryName] = useState<
     string | null
   >(null);
-  const [currentImageIndexInModal, setCurrentImageIndexInModal] =
-    useState<number>(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
-  const handleOpenModal = (categoryIndex: number) => {
+  const openFullScreenView = (categoryIndex: number) => {
     const category = galleryItems[categoryIndex];
-    setSelectedCategoryImages(category.images);
-    setSelectedCategoryName(category.name);
-    setCurrentImageIndexInModal(0);
-    setIsModalOpen(true);
+    setActiveGalleryImages(category.images);
+    setActiveGalleryCategoryName(category.name);
+    setCurrentImageIndex(0);
+    setIsFullScreenViewOpen(true);
+  };
+
+  const closeFullScreenView = () => {
+    setIsFullScreenViewOpen(false);
+    // Optionally reset images and name after a delay to allow fade-out if implemented
+    setActiveGalleryImages(null);
+    setActiveGalleryCategoryName(null);
   };
 
   const showNextImage = () => {
-    if (selectedCategoryImages) {
-      setCurrentImageIndexInModal(
-        (prevIndex) => (prevIndex + 1) % selectedCategoryImages.length
+    if (activeGalleryImages) {
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex + 1) % activeGalleryImages.length
       );
     }
   };
 
   const showPrevImage = () => {
-    if (selectedCategoryImages) {
-      setCurrentImageIndexInModal(
+    if (activeGalleryImages) {
+      setCurrentImageIndex(
         (prevIndex) =>
-          (prevIndex - 1 + selectedCategoryImages.length) %
-          selectedCategoryImages.length
+          (prevIndex - 1 + activeGalleryImages.length) %
+          activeGalleryImages.length
       );
     }
   };
 
-  const currentImageInCollection = selectedCategoryImages
-    ? selectedCategoryImages[currentImageIndexInModal]
+  // Effect to handle Escape key for closing fullscreen
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isFullScreenViewOpen) {
+        closeFullScreenView();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isFullScreenViewOpen]);
+
+  const currentImageInFullScreen = activeGalleryImages
+    ? activeGalleryImages[currentImageIndex]
     : null;
 
   return (
@@ -372,7 +379,8 @@ export function GallerySection() {
             <button
               key={item.name}
               type="button"
-              onClick={() => handleOpenModal(index)}
+              onClick={() => openFullScreenView(index)}
+              // className="group block w-full rounded-lg shadow-lg custom-aspect-3-2 overflow-hidden text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 p-0" // p-2 removed, image will fill
               className="group block w-full p-0 border-0 shadow-lg aspect-[3/2] overflow-hidden text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
               aria-label={`View images of ${item.name}`}
             >
@@ -382,7 +390,7 @@ export function GallerySection() {
                   alt={item.coverImage.alt}
                   data-ai-hint={item.coverImage.hint}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  sizes="(max-width: 768px) 50vw, 33vw" // Should be 50vw for 2 columns
                   className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105 rounded-sm"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-sm" />
@@ -397,60 +405,75 @@ export function GallerySection() {
         </div>
       </div>
 
-      {isModalOpen &&
-        currentImageInCollection &&
-        selectedCategoryName &&
-        selectedCategoryImages && (
-          <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-            <DialogContent className="flex flex-col w-[95vw] max-w-[95vw] h-[90vh] max-h-[90vh] p-3">
-              <DialogHeader>
-                <DialogTitle className="sr-only">
-                  {selectedCategoryName} - Image {currentImageIndexInModal + 1}{" "}
-                  of {selectedCategoryImages.length}
-                </DialogTitle>
-              </DialogHeader>
-              <div className="relative w-full flex-1 min-h-0 bg-muted rounded-md overflow-hidden">
-                <Image
-                  src={currentImageInCollection.src}
-                  alt={currentImageInCollection.alt}
-                  data-ai-hint={currentImageInCollection.hint}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 640px) 90vw, 95vw"
-                />
-              </div>
-              <div className="mt-4 flex items-center justify-between gap-4 flex-shrink-0">
-                <Button
-                  variant="outline"
-                  onClick={showPrevImage}
-                  aria-label="Previous image"
-                  className="shrink-0"
-                >
-                  <ChevronLeft className="mr-2 h-4 w-4" /> Previous
-                </Button>
-                <div className="text-center overflow-hidden">
-                  <h3
-                    className="text-base md:text-lg font-semibold font-headline truncate"
-                    title={selectedCategoryName}
-                  >
-                    {selectedCategoryName}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    ({currentImageIndexInModal + 1} /{" "}
-                    {selectedCategoryImages.length})
-                  </p>
-                </div>
-                <Button
-                  variant="outline"
-                  onClick={showNextImage}
-                  aria-label="Next image"
-                  className="shrink-0"
-                >
-                  Next <ChevronRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </DialogContent>
-          </Dialog>
+      {isFullScreenViewOpen &&
+        activeGalleryCategoryName &&
+        activeGalleryImages &&
+        currentImageInFullScreen && (
+          <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 p-2 sm:p-4 backdrop-blur-sm">
+            {/* Screen reader accessible title (visually hidden) */}
+            <h2 className="sr-only">
+              Fullscreen image viewer: {activeGalleryCategoryName} - Image{" "}
+              {currentImageIndex + 1} of {activeGalleryImages.length} -{" "}
+              {currentImageInFullScreen.alt}
+            </h2>
+
+            {/* Close Button */}
+            <Button
+              variant="ghost"
+              onClick={closeFullScreenView}
+              aria-label="Close fullscreen view"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-[52] p-1.5 sm:p-2 rounded-full bg-black/50 text-white hover:bg-black/75 focus-visible:ring-0 focus-visible:ring-offset-0"
+            >
+              <X className="h-5 w-5 sm:h-6 sm:w-6" />
+            </Button>
+
+            {/* Image Container */}
+            <div className="relative flex-grow w-full h-full flex items-center justify-center max-w-full max-h-full">
+              <Image
+                key={currentImageInFullScreen.src} // Key for re-rendering if src changes
+                src={currentImageInFullScreen.src}
+                alt={currentImageInFullScreen.alt}
+                data-ai-hint={currentImageInFullScreen.hint}
+                fill
+                className="object-contain" // Use 'contain' to see the whole image
+                sizes="100vw"
+                priority // Prioritize loading the visible image
+              />
+            </div>
+
+            {/* Info Overlay (Category Name and Count) */}
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 sm:top-4 z-[51] bg-black/70 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
+              <h3
+                className="text-sm sm:text-base font-semibold font-headline"
+                title={activeGalleryCategoryName}
+              >
+                {activeGalleryCategoryName}
+              </h3>
+              <p className="text-xs sm:text-sm">
+                ({currentImageIndex + 1} / {activeGalleryImages.length})
+              </p>
+            </div>
+
+            {/* Previous Button */}
+            <Button
+              variant="ghost"
+              onClick={showPrevImage}
+              aria-label="Previous image"
+              className="absolute left-1 top-1/2 -translate-y-1/2 sm:left-2 md:left-4 z-[51] p-1.5 sm:p-2 rounded-full bg-black/50 text-white hover:bg-black/75 focus-visible:ring-0 focus-visible:ring-offset-0"
+            >
+              <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
+            </Button>
+
+            {/* Next Button */}
+            <Button
+              variant="ghost"
+              onClick={showNextImage}
+              aria-label="Next image"
+              className="absolute right-1 top-1/2 -translate-y-1/2 sm:right-2 md:right-4 z-[51] p-1.5 sm:p-2 rounded-full bg-black/50 text-white hover:bg-black/75 focus-visible:ring-0 focus-visible:ring-offset-0"
+            >
+              <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
+            </Button>
+          </div>
         )}
     </section>
   );

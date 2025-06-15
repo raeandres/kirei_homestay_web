@@ -11,6 +11,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const reviews = [
   {
+    name: "Jannice",
+    avatar: "https://placehold.co/100x102.png?text=J", // unique URL
+    avatarHint: "person avatar",
+    rating: 5,
+    review:
+      "Beautiful home with stunning view. It has everything we need and more. We will definitely come back. Thank you Siri ❤️",
+    date: "May 2025",
+  },
+  {
     name: "Angel",
     avatar: "https://placehold.co/100x100.png?text=A",
     avatarHint: "person avatar",
@@ -28,24 +37,15 @@ const reviews = [
       "Siri’s place is hands-down the nicest Airbnb I’ve stayed in. It’s spotless, tastefully designed, and stocked with everything you’d need. Siri was super responsive and made the whole stay effortless.",
     date: "June 2025",
   },
-  {
-    name: "Marie",
-    avatar: "https://placehold.co/100x102.png?text=M", // unique URL
-    avatarHint: "person avatar",
-    rating: 5,
-    review:
-      "Really enjoyed our stay here! The host was very responsive and helpful, and the place was super clean. The location was extremely convenient—just a short trip to all our appointments. Would totally book again!",
-    date: "June 2025",
-  },
-  {
-    name: "Jannice",
-    avatar: "https://placehold.co/100x102.png?text=J", // unique URL
-    avatarHint: "person avatar",
-    rating: 5,
-    review:
-      "Beautiful home with stunning view. It has everything we need and more. We will definitely come back. Thank you Siri ❤️",
-    date: "May 2025",
-  },
+  // {
+  //   name: "Marie",
+  //   avatar: "https://placehold.co/100x102.png?text=M", // unique URL
+  //   avatarHint: "person avatar",
+  //   rating: 5,
+  //   review:
+  //     "Really enjoyed our stay here! The host was very responsive and helpful, and the place was super clean. The location was extremely convenient—just a short trip to all our appointments. Would totally book again!",
+  //   date: "June 2025",
+  // },
 ];
 
 export function ReviewsSection() {
