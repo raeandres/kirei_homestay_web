@@ -166,12 +166,12 @@ const galleryItems: GalleryCategory[] = [
         hint: "Kirei 1 - Food view 1",
       },
       {
-        src: "public/gallery/kirei_1/converted_amenities_0001.webp",
+        src: "/gallery/kirei_1/converted_amenities_0001.webp",
         alt: "Kitchen Room - View 5",
         hint: "Kirei 1 - Food view 1",
       },
       {
-        src: "public/gallery/kirei_1/converted_amenities_0002.webp",
+        src: "/gallery/kirei_1/converted_amenities_0002.webp",
         alt: "Gym Room 2 - View 2",
         hint: "Kirei 1 - Amenities 2",
       },
