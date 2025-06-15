@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, X } from "lucide-react"; // Added X icon
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { DialogTitle } from "@/components/ui/dialog"; // Ensure DialogTitle is imported if used, or remove if not
 
 interface GalleryImage {
   src: string;
@@ -328,7 +329,6 @@ export function GallerySection() {
 
   const closeFullScreenView = () => {
     setIsFullScreenViewOpen(false);
-    // Optionally reset images and name after a delay to allow fade-out if implemented
     setActiveGalleryImages(null);
     setActiveGalleryCategoryName(null);
   };
@@ -351,7 +351,6 @@ export function GallerySection() {
     }
   };
 
-  // Effect to handle Escape key for closing fullscreen
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape" && isFullScreenViewOpen) {
@@ -374,7 +373,7 @@ export function GallerySection() {
         <h2 className="text-4xl md:text-5xl text-center font-light mb-8 font-zen-old-mincho">
           e x p l o r e
         </h2>
-        <div className="grid grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {galleryItems.map((item, index) => (
             <button
               key={item.name}
@@ -390,7 +389,7 @@ export function GallerySection() {
                   alt={item.coverImage.alt}
                   data-ai-hint={item.coverImage.hint}
                   fill
-                  sizes="(max-width: 768px) 50vw, 33vw" // Should be 50vw for 2 columns
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105 rounded-sm"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-sm" />
@@ -410,14 +409,12 @@ export function GallerySection() {
         activeGalleryImages &&
         currentImageInFullScreen && (
           <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 p-2 sm:p-4 backdrop-blur-sm">
-            {/* Screen reader accessible title (visually hidden) */}
-            <h2 className="sr-only">
+            <DialogTitle className="sr-only">
               Fullscreen image viewer: {activeGalleryCategoryName} - Image{" "}
               {currentImageIndex + 1} of {activeGalleryImages.length} -{" "}
               {currentImageInFullScreen.alt}
-            </h2>
+            </DialogTitle>
 
-            {/* Close Button */}
             <Button
               variant="ghost"
               onClick={closeFullScreenView}
@@ -427,21 +424,19 @@ export function GallerySection() {
               <X className="h-5 w-5 sm:h-6 sm:w-6" />
             </Button>
 
-            {/* Image Container */}
             <div className="relative flex-grow w-full h-full flex items-center justify-center max-w-full max-h-full">
               <Image
-                key={currentImageInFullScreen.src} // Key for re-rendering if src changes
+                key={currentImageInFullScreen.src}
                 src={currentImageInFullScreen.src}
                 alt={currentImageInFullScreen.alt}
                 data-ai-hint={currentImageInFullScreen.hint}
                 fill
-                className="object-contain" // Use 'contain' to see the whole image
+                className="object-contain"
                 sizes="100vw"
-                priority // Prioritize loading the visible image
+                priority
               />
             </div>
 
-            {/* Info Overlay (Category Name and Count) */}
             <div className="absolute top-3 left-1/2 -translate-x-1/2 sm:top-4 z-[51] bg-black/70 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
               <h3
                 className="text-sm sm:text-base font-semibold font-headline"
@@ -454,7 +449,6 @@ export function GallerySection() {
               </p>
             </div>
 
-            {/* Previous Button */}
             <Button
               variant="ghost"
               onClick={showPrevImage}
@@ -464,7 +458,6 @@ export function GallerySection() {
               <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
             </Button>
 
-            {/* Next Button */}
             <Button
               variant="ghost"
               onClick={showNextImage}
