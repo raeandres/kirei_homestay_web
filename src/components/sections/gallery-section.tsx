@@ -22,288 +22,153 @@ const galleryItems: GalleryCategory[] = [
   {
     name: "1 B e d r o o m",
     coverImage: {
-      src: "/kirei_2/gallery/livingroom/living_kitchen_1.webp",
+      src: "/gallery/kirei_2/converted_0002.webp",
       alt: "Kirei-ito",
       hint: "Minimalist 1 bedroom suite",
     },
     images: [
       // Living Room
       {
-        src: "/kirei_2/gallery/livingroom/living_sofa_cp.webp",
+        src: "/gallery/kirei_2/converted_0000.webp",
         alt: "Living Room - Kirei 2",
         hint: "Kirei 2 - living 1",
       },
       {
-        src: "/kirei_2/gallery/bedroom/bedroom_front_1.webp",
+        src: "/gallery/kirei_2/converted_0001.webp",
         alt: "Bedroom",
         hint: "minimalist bedroom",
       },
       {
-        src: "/kirei_2/gallery/livingroom/living_angle_1.webp",
+        src: "/gallery/kirei_2/converted_0002.webp",
         alt: "Living Room - View 2",
         hint: "Kirei 2 - living 2",
       },
       {
-        src: "/kirei_2/gallery/livingroom/living_dining_cp.webp",
+        src: "/gallery/kirei_2/converted_0003.webp",
         alt: "Living Room - View 3",
         hint: "Kirei 2 - living 3",
       },
       {
-        src: "/kirei_2/gallery/livingroom/living_kitchen_1.webp",
+        src: "/gallery/kirei_2/converted_0004.webp",
         alt: "Living Room - View 3",
         hint: "Kirei 2 - living 4",
       },
       // Bedroom
       {
-        src: "/kirei_2/gallery/bedroom/bed_window_angle_2_cp.webp",
+        src: "/gallery/kirei_2/converted_0005.webp",
         alt: "Bed Room - View 1",
         hint: "Kirei 2 - Bed 1",
       },
       {
-        src: "/kirei_2/gallery/bedroom/bed_window_cp.webp",
+        src: "/gallery/kirei_2/converted_0006.webp",
         alt: "Bed Room - View 2",
         hint: "Kirei 2 - Bed 2",
       },
       {
-        src: "/kirei_2/gallery/bedroom/bed_window_left_cp.webp",
+        src: "/gallery/kirei_2/converted_0007.webp",
         alt: "Bed Room - View 3",
         hint: "Kirei 2 - Bed 3",
       },
       {
-        src: "/kirei_2/gallery/bedroom/bed_window_right_cp.webp",
+        src: "/gallery/kirei_2/converted_0008.webp",
         alt: "Bed Room - View 4",
         hint: "Kirei 2 - Bed 4",
       },
       {
-        src: "/kirei_2/gallery/bedroom/bedroom_front_1.webp",
+        src: "/gallery/kirei_2/converted_0009.webp",
         alt: "Bed Room - View 5",
         hint: "Kirei 2 - Bed 5",
       },
       {
-        src: "/kirei_2/gallery/bedroom/bedroom_front_2.webp",
+        src: "/gallery/kirei_2/converted_0010.webp",
         alt: "Bed Room - View 6",
         hint: "Kirei 2 - Bed 6",
       },
       {
-        src: "/kirei_2/gallery/bedroom/bedroom_right_angle_1.webp",
+        src: "/gallery/kirei_2/converted_0011.webp",
         alt: "Bed Room - View 7",
         hint: "Kirei 2 - Bed 7",
-      },
-      // Kitchen
-      {
-        src: "/kirei_2/gallery/kitchen/dining_angle_1.webp",
-        alt: "Kitchen  - View 1",
-        hint: "Kirei 2 - Kitchen 1",
-      },
-      {
-        src: "/kirei_2/gallery/kitchen/dining_plates_chair_cp.webp",
-        alt: "Kitchen  - View 2",
-        hint: "Kirei 2 - Kitchen 2",
-      },
-      {
-        src: "/kirei_2/gallery/kitchen/dining_plates_cp.webp",
-        alt: "Kitchen  - View 3",
-        hint: "Kirei 2 - Kitchen 3",
-      },
-      {
-        src: "/kirei_2/gallery/kitchen/kitchen_1.webp",
-        alt: "Kitchen  - View 4",
-        hint: "Kirei 2 - Kitchen 4",
-      },
-      {
-        src: "/kirei_2/gallery/kitchen/kitchen_plates.webp",
-        alt: "Kitchen  - View 6",
-        hint: "Kirei 2 - Kitchen 6",
-      },
-      {
-        src: "/kirei_2/gallery/kitchen/oven_angle.webp",
-        alt: "Kitchen  - View 7",
-        hint: "Kirei 2 - Kitchen 7",
-      },
-      {
-        src: "/kirei_2/gallery/kitchen/rice_cooker.webp",
-        alt: "Kitchen  - View 8",
-        hint: "Kirei 2 - Kitchen 8",
-      },
-      {
-        src: "/kirei_2/gallery/kitchen/stove_angle.webp",
-        alt: "Kitchen  - View 9",
-        hint: "Kirei 2 - Kitchen 9",
-      },
-      // Bathroom
-      {
-        src: "/kirei_2/gallery/bathroom/toilet_and_bath_cp.webp",
-        alt: "Bath  - View 1",
-        hint: "Kirei 2 - Laundry 1",
-      },
-      // Laundry
-      {
-        src: "/kirei_2/gallery/laundry/laundry_1.webp",
-        alt: "Laundry  - View 1",
-        hint: "Kirei 2 - Laundry 1",
-      },
-      {
-        src: "/kirei_2/gallery/laundry/laundry_2jpg.webp",
-        alt: "Laundry  - View 2",
-        hint: "Kirei 2 - Laundry 2",
-      },
-      {
-        src: "/kirei_2/gallery/laundry/laundry_angle_cp.webp",
-        alt: "Laundry  - View 3",
-        hint: "Kirei 2 - Laundry 3",
-      },
-      {
-        src: "/kirei_2/gallery/laundry/laundry_front.webp",
-        alt: "Laundry  - View 4",
-        hint: "Kirei 2 - Laundry 4",
-      },
-      // Amenities
-      {
-        src: "/kirei_2/amenities/converted_0005.webp",
-        alt: "Amenities  - View 1",
-        hint: "Kirei 2 - Amenities 1",
-      },
-      {
-        src: "/kirei_2/amenities/converted_0003.webp",
-        alt: "Amenities  - View 2",
-        hint: "Kirei 2 - Amenities 2",
-      },
-      {
-        src: "/kirei_2/amenities/converted_0002.webp",
-        alt: "Amenities  - View 3",
-        hint: "Kirei 2 - Amenities 3",
       },
     ],
   },
   {
     name: "S t u d i o",
     coverImage: {
-      src: "/kirei_1/gallery/livingroom/converted_0013.webp",
+      src: "/gallery/kirei_1/converted_0008.webp",
       alt: "Kirei",
       hint: "Minimalist studio bedroom suite",
     },
     images: [
       {
-        src: "/kirei_1/hero/converted_0002.webp",
+        src: "/gallery/kirei_1/converted_0000.web",
         alt: "Living Room - View 1",
         hint: "Kirei 1 - living 1",
       },
       {
-        src: "/kirei_1/gallery/livingroom/converted_0002.webp",
+        src: "/gallery/kirei_1/converted_0002.web",
         alt: "Living Room - View 1",
         hint: "Kirei 1 - living 1",
       },
 
       {
-        src: "/kirei_1/gallery/livingroom/converted_0022.webp",
+        src: "/gallery/kirei_1/converted_0003.web",
         alt: "Living Room - View 2",
         hint: "Kirei 1 - living 2",
       },
       {
-        src: "/kirei_1/gallery/bedroom/converted_0002.webp",
+        src: "/gallery/kirei_1/converted_0004.web",
         alt: "Living Room - View 2",
         hint: "Kirei 1 - living 2",
       },
       {
-        src: "/kirei_1/gallery/workstation/converted_0000.webp",
+        src: "/gallery/kirei_1/converted_0005.web",
         alt: "Living Room - View 6",
         hint: "Kirei 1 - living 6",
       },
-
-      // Kitchen
       {
-        src: "/kirei_1/gallery/kitchen/converted_0002.webp",
+        src: "/gallery/kirei_1/converted_0006.web",
         alt: "Kitchen 1 - View 1",
         hint: "Kirei 1 - kitchen 5",
       },
       {
-        src: "/kirei_1/gallery/kitchen/converted_0014.webp",
+        src: "/gallery/kirei_1/converted_0007.web",
         alt: "Kitchen Room - View 4",
         hint: "Kirei 1 - Kitchen view 4",
       },
       {
-        src: "/kirei_1/gallery/kitchen/converted_0004.webp",
+        src: "/gallery/kirei_1/converted_0008.web",
         alt: "Kitchen Room - View 4",
         hint: "Kirei 1 - Kitchen view 4",
       },
       {
-        src: "/kirei_1/gallery/kitchen/food/converted_0000.webp",
+        src: "/gallery/kirei_1/converted_0009.web",
         alt: "Kitchen Room - View 1",
         hint: "Kirei 1 - Food view 1",
       },
       {
-        src: "/kirei_1/gallery/kitchen/food/converted_0001.webp",
+        src: "/gallery/kirei_1/converted_0010.web",
         alt: "Kitchen Room - View 2",
         hint: "Kirei 1 - Food view 1",
       },
       {
-        src: "/kirei_1/gallery/kitchen/food/converted_0002.webp",
+        src: "/gallery/kirei_1/converted_0011.web",
         alt: "Kitchen Room - View 3",
         hint: "Kirei 1 - Food view 1",
       },
       {
-        src: "/kirei_1/gallery/kitchen/food/converted_0003.webp",
+        src: "/gallery/kirei_1/converted_amenities_0000.webp",
         alt: "Kitchen Room - View 4",
         hint: "Kirei 1 - Food view 1",
       },
       {
-        src: "/kirei_1/gallery/kitchen/food/converted_0005.webp",
+        src: "public/gallery/kirei_1/converted_amenities_0001.webp",
         alt: "Kitchen Room - View 5",
         hint: "Kirei 1 - Food view 1",
       },
-
-      // Bathroom
       {
-        src: "/kirei_1/gallery/bathroom/converted_0001.webp",
+        src: "public/gallery/kirei_1/converted_amenities_0002.webp",
         alt: "Gym Room 2 - View 2",
         hint: "Kirei 1 - Amenities 2",
-      },
-      {
-        src: "/kirei_1/gallery/bathroom/converted_0002.webp",
-        alt: "Gym Room 3 - View 3",
-        hint: "Kirei 1 - Amenities 3",
-      },
-
-      // Amenities
-      {
-        src: "/kirei_1/amenities/converted_0007.webp",
-        alt: "ELG3 View - View 1",
-        hint: "Kirei 1 - Amenities 1",
-      },
-      {
-        src: "/kirei_1/amenities/converted_0000.webp",
-        alt: "Gym Room - View 1",
-        hint: "Kirei 1 - Amenities 1",
-      },
-      {
-        src: "/kirei_1/amenities/converted_0001.webp",
-        alt: "Gym Room 3 - View 3",
-        hint: "Kirei 1 - Amenities 3",
-      },
-      {
-        src: "/kirei_1/amenities/converted_0002.webp",
-        alt: "Kids Room 1 - View 1",
-        hint: "Kirei 1 - Amenities 3",
-      },
-      {
-        src: "/kirei_1/amenities/converted_0003.webp",
-        alt: "Kids Room 1 - View 1",
-        hint: "Kirei 1 - Amenities 3",
-      },
-      {
-        src: "/kirei_1/amenities/converted_0004.webp",
-        alt: "Kids Room 1 - View 1",
-        hint: "Kirei 1 - Amenities 3",
-      },
-      {
-        src: "/kirei_1/amenities/converted_0005.webp",
-        alt: "Kids Room 1 - View 1",
-        hint: "Kirei 1 - Amenities 3",
-      },
-      {
-        src: "/kirei_1/amenities/converted_0006.webp",
-        alt: "Kids Room 1 - View 1",
-        hint: "Kirei 1 - Amenities 3",
       },
     ],
   },

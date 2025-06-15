@@ -15,63 +15,55 @@ import {
 import { cn } from "@/lib/utils";
 
 const images = [
+  // Kirei 2 - 5 images
   {
-    src: "/kirei_2/hero/living_1.webp",
-    alt: "Zen living room",
+    src: "/hero/kirei_2/converted_0000.webp",
+    alt: "Cup in bed",
     hint: "modern interior",
   },
   {
-    src: "/kirei_2/hero/converted_0008.webp",
-    alt: "Minimalist daybed 1 bedroom",
-    hint: "Efficient minimalist daybed",
+    src: "/hero/kirei_2/converted_0001.webp",
+    alt: "Reading",
+    hint: "Reading",
   },
   {
-    src: "/kirei_1/hero/converted_0000.webp",
-    alt: "Focus dining lamp for intimate conversations",
-    hint: "center lamp dining",
+    src: "/hero/kirei_2/converted_0002.webp",
+    alt: "Ceiling",
+    hint: "Ceiling",
   },
   {
-    src: "/kirei_2/hero/converted_0003.webp",
-    alt: "Minimalist workstation 1 bedroom",
-    hint: "Efficient minimalist workstation",
+    src: "/hero/kirei_2/converted_0003.webp",
+    alt: "Workstation",
+    hint: "workstation",
   },
   {
-    src: "/kirei_2/hero/ceiling.webp",
-    alt: "Striking details",
-    hint: "ceiling aesthetic",
+    src: "/hero/kirei_2/converted_0004.webp",
+    alt: "Bed edge",
+    hint: "Bedroom",
   },
+  // Kirei 1 - 5 images
   {
-    src: "/kirei_2/hero/ramen_2.webp",
-    alt: "Pet friendly",
-    hint: "Pet friendly",
-  },
-  {
-    src: "/kirei_2/hero/dining_1.webp",
-    alt: "Modern kitchen",
-    hint: "modern kitchen",
-  },
-  {
-    src: "/kirei_2/hero/bed_right_angle.webp",
-    alt: "Vessel at bed",
-    hint: "Vessel at bed",
-  },
-  {
-    src: "/kirei_2/hero/bedroom_right_1.webp",
-    alt: "Bright modern bedroom with city view and desk",
-    hint: "bedroom city view",
-  },
-  {
-    src: "/kirei_2/hero/converted_0007.webp",
-    alt: "Bright modern bedroom with city view and desk",
-    hint: "bedroom city view",
-  },
-  {
-    src: "/kirei_1/hero/converted_0001.webp",
-    alt: "Minimalist bedroom studio",
+    src: "/hero/kirei_1/converted_0000.webp",
+    alt: "Lamp",
     hint: "Japanese inspired bedroom 2",
   },
   {
-    src: "/kirei_1/gallery/bedroom/converted_0006.webp",
+    src: "/hero/kirei_1/converted_0001.webp",
+    alt: "Minimalist bedroom studio",
+    hint: "Japanese inspired bedroom 3",
+  },
+  {
+    src: "/hero/kirei_1/converted_0002.webp",
+    alt: "Minimalist bedroom studio",
+    hint: "Japanese inspired bedroom 3",
+  },
+  {
+    src: "/hero/kirei_1/converted_0003.webp",
+    alt: "Minimalist bedroom studio",
+    hint: "Japanese inspired bedroom 3",
+  },
+  {
+    src: "/hero/kirei_1/converted_0004.webp",
     alt: "Minimalist bedroom studio",
     hint: "Japanese inspired bedroom 3",
   },

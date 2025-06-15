@@ -14,7 +14,7 @@ export function AboutSection() {
             data-ai-hint="zen decor"
             className="w-full h-full object-cover"
           >
-            <source src="kirei_2/hero/IMG_2727.mp4" type="video/mp4" />
+            <source src="/about/IMG_2727.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
