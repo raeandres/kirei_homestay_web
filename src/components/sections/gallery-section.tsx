@@ -94,7 +94,7 @@ const galleryItems: GalleryCategory[] = [
   {
     name: "S t u d i o",
     coverImage: {
-      src: "/gallery/kirei_1/converted_0008.webp",
+      src: "/gallery/kirei_1/converted_0007.webp",
       alt: "Kirei",
       hint: "Minimalist studio bedroom suite",
     },
