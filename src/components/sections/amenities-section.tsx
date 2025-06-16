@@ -6,14 +6,17 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import {
   Bath,
+  BathIcon,
   BatteryCharging,
   BedDouble,
   BedDoubleIcon,
+  Blocks,
   BookOpen,
   Brush,
   Building,
   Building2,
   Coffee,
+  Dumbbell,
   LucideBrush,
   Microwave,
   ParkingCircle,
@@ -30,6 +33,7 @@ import {
   Users,
   Utensils,
   WashingMachine,
+  WavesLadder,
   Wifi,
   Wind,
   WindArrowDownIcon,
@@ -56,6 +60,16 @@ interface AmenityCategory {
 
 const amenityCategories: AmenityCategory[] = [
   {
+    title: "Amenities",
+    amenities: [
+      { name: "Gym", icon: Dumbbell },
+      { name: "Swimming Pool", icon: WavesLadder },
+      { name: "Kids Playground", icon: Blocks },
+      { name: "Sauna", icon: BathIcon },
+      { name: "City View", icon: Building2 },
+    ],
+  },
+  {
     title: "Bedroom",
     amenities: [
       { name: "King Bed", icon: BedDoubleIcon },
@@ -74,7 +88,6 @@ const amenityCategories: AmenityCategory[] = [
     amenities: [
       { name: "Smart TV", icon: Tv },
       { name: "Books and Reading Material", icon: BookOpen },
-      { name: "City View", icon: Building2 },
     ],
   },
   {
@@ -158,7 +171,7 @@ export function AmenitiesSection() {
         <Card className="shadow-lg">
           <CardHeader className="pb-4"></CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-4">
               {amenitiesToDisplayOnPage.map((amenity) => {
                 const AmenityIconComponent = amenity.icon;
                 return (
