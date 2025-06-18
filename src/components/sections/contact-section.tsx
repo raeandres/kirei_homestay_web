@@ -286,7 +286,7 @@ export function ContactSection() {
                   </form>
                 </Form>
                 <p className="mt-6 text-xs text-muted-foreground text-center">
-                  We typically respond to inquiries within the immediately.
+                  We typically respond to inquiries within an hour.
                 </p>
               </CardContent>
             </Card>

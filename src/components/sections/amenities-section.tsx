@@ -142,7 +142,7 @@ const amenityCategories: AmenityCategory[] = [
   },
 ];
 
-const ITEMS_PREVIEW_COUNT_MOBILE = 6;
+const ITEMS_PREVIEW_COUNT_MOBILE = 5;
 
 export function AmenitiesSection() {
   const [isMobileView, setIsMobileView] = useState(false);
