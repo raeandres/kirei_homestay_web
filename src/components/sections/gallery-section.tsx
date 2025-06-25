@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
-// Removed unused DialogTitle import
+import { Calendar } from "@/components/ui/calendar";
+import { ChevronLeft, ChevronRight, X, Home, Briefcase } from "lucide-react";
 
 interface GalleryImage {
   src: string;
@@ -188,6 +189,7 @@ export function GallerySection() {
     string | null
   >(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [date, setDate] = useState<Date | undefined>(new Date());
 
   const openFullScreenView = (categoryIndex: number) => {
     const category = galleryItems[categoryIndex];
@@ -223,15 +225,22 @@ export function GallerySection() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && isFullScreenViewOpen) {
+      if (!isFullScreenViewOpen) return;
+      if (event.key === "Escape") {
         closeFullScreenView();
+      }
+      if (event.key === "ArrowRight") {
+        showNextImage();
+      }
+      if (event.key === "ArrowLeft") {
+        showPrevImage();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isFullScreenViewOpen]);
+  }, [isFullScreenViewOpen, activeGalleryImages]);
 
   const currentImageInFullScreen = activeGalleryImages
     ? activeGalleryImages[currentImageIndex]
@@ -279,67 +288,118 @@ export function GallerySection() {
         activeGalleryImages &&
         currentImageInFullScreen && (
           <div
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 p-2 sm:p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-50 overflow-y-auto bg-black/90 p-2 sm:p-4 backdrop-blur-sm"
             role="dialog"
             aria-modal="true"
             aria-labelledby="fullscreen-gallery-title"
+            onClick={closeFullScreenView}
           >
-            <h2 className="sr-only" id="fullscreen-gallery-title">
-              Image gallery: {activeGalleryCategoryName} - Image{" "}
-              {currentImageIndex + 1} of {activeGalleryImages.length} -{" "}
-              {currentImageInFullScreen.alt}
-            </h2>
+            <div
+              className="relative mx-auto mt-12 mb-8 max-w-4xl w-full bg-background rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative h-[65vh] w-full">
+                <h2 className="sr-only" id="fullscreen-gallery-title">
+                  Image gallery: {activeGalleryCategoryName} - Image{" "}
+                  {currentImageIndex + 1} of {activeGalleryImages.length} -{" "}
+                  {currentImageInFullScreen.alt}
+                </h2>
+
+                <Image
+                  key={currentImageInFullScreen.src}
+                  src={currentImageInFullScreen.src}
+                  alt={currentImageInFullScreen.alt}
+                  data-ai-hint={currentImageInFullScreen.hint}
+                  fill
+                  className="object-contain rounded-t-lg bg-black/10"
+                  sizes="100vw"
+                  priority
+                />
+
+                <div className="absolute top-3 left-1/2 -translate-x-1/2 z-[1] bg-black/70 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
+                  <h3
+                    className="text-lg md:text-xl font-normal font-zen-old-mincho"
+                    title={activeGalleryCategoryName}
+                  >
+                    {activeGalleryCategoryName}
+                  </h3>
+                  <p className="text-xs sm:text-sm">
+                    ({currentImageIndex + 1} / {activeGalleryImages.length})
+                  </p>
+                </div>
+
+                <Button
+                  variant="ghost"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    showPrevImage();
+                  }}
+                  aria-label="Previous image"
+                  className="absolute left-1 top-1/2 -translate-y-1/2 sm:left-2 md:left-4 z-[1] p-1.5 sm:p-2 rounded-full bg-black/50 text-white hover:bg-black/75 focus-visible:ring-0 focus-visible:ring-offset-0"
+                >
+                  <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
+                </Button>
+
+                <Button
+                  variant="ghost"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    showNextImage();
+                  }}
+                  aria-label="Next image"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 sm:right-2 md:right-4 z-[1] p-1.5 sm:p-2 rounded-full bg-black/50 text-white hover:bg-black/75 focus-visible:ring-0 focus-visible:ring-offset-0"
+                >
+                  <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
+                </Button>
+              </div>
+
+              <div className="p-6 md:p-8">
+                <h3 className="text-3xl md:text-3xl font-normal text-center font-zen-old-mincho">
+                  A v a i l a b i l i t y & B o o k i n g
+                </h3>
+                <div className="grid md:grid-cols-2 gap-8 items-start md:p-10">
+                  <div className="flex justify-center">
+                    <Calendar
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                      className="rounded-md border"
+                    />
+                  </div>
+                  <div className="flex flex-col justify-center space-y-4 pt-4 md:pt-0">
+                    <p className="text-muted-foreground text-center md:text-left pb-2 font-zen-old-mincho">
+                      Check our availability and book your stay on your favorite
+                      platform.
+                    </p>
+                    <Button asChild className="w-full" size="lg">
+                      <Link href="https://www.airbnb.com.sg/rooms/1030897971821606234?adults=1&photo_id=1947822098&source_impression_id=p3_1750871757_P3KluvNSDo3JXk5m&previous_page_section_name=1000&guests=1">
+                        <Home className="mr-2 h-5 w-5" />
+                        Book on Airbnb
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
+                      className="w-full"
+                      size="lg"
+                      variant="secondary"
+                    >
+                      <Link href="https://www.booking.com/hotel/ph/cozy-home-in-eastwood-pet-friendly-fast-wifi.html?aid=304142&label=gen173nr-1FCAEoggI46AdIM1gEaMkBiAEBmAExuAEYyAEM2AEB6AEB-AECiAIBqAIEuAKI3vDCBsACAdICJGNjMGMyZjgxLTFkZjMtNDE3MC1hYWZkLTVmODBjYjYzZmUxYdgCBeACAQ&ucfs=1&arphpl=1&checkin=2025-08-23&checkout=2025-08-26">
+                        <Briefcase className="mr-2 h-5 w-5" />
+                        Book on Booking.com
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <Button
               variant="ghost"
               onClick={closeFullScreenView}
               aria-label="Close fullscreen view"
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-[52] p-1.5 sm:p-2 rounded-full bg-black/50 text-white hover:bg-black/75 focus-visible:ring-0 focus-visible:ring-offset-0"
+              className="absolute top-3 right-3 z-[52] p-1.5 sm:p-2 rounded-full bg-white/30 text-black hover:bg-white/50 focus-visible:ring-0 focus-visible:ring-offset-0"
             >
               <X className="h-5 w-5 sm:h-6 sm:w-6" />
-            </Button>
-
-            <div className="relative flex-grow w-full h-full flex items-center justify-center max-w-full max-h-full">
-              <Image
-                key={currentImageInFullScreen.src}
-                src={currentImageInFullScreen.src}
-                alt={currentImageInFullScreen.alt}
-                data-ai-hint={currentImageInFullScreen.hint}
-                fill
-                className="object-contain"
-                sizes="100vw"
-                priority
-              />
-            </div>
-
-            <div className="absolute top-3 left-1/2 -translate-x-1/2 sm:top-4 z-[51] bg-black/70 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
-              <h3
-                className="text-sm sm:text-base font-semibold font-headline"
-                title={activeGalleryCategoryName}
-              >
-                {activeGalleryCategoryName}
-              </h3>
-              <p className="text-xs sm:text-sm">
-                ({currentImageIndex + 1} / {activeGalleryImages.length})
-              </p>
-            </div>
-
-            <Button
-              variant="ghost"
-              onClick={showPrevImage}
-              aria-label="Previous image"
-              className="absolute left-1 top-1/2 -translate-y-1/2 sm:left-2 md:left-4 z-[51] p-1.5 sm:p-2 rounded-full bg-black/50 text-white hover:bg-black/75 focus-visible:ring-0 focus-visible:ring-offset-0"
-            >
-              <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
-            </Button>
-
-            <Button
-              variant="ghost"
-              onClick={showNextImage}
-              aria-label="Next image"
-              className="absolute right-1 top-1/2 -translate-y-1/2 sm:right-2 md:right-4 z-[51] p-1.5 sm:p-2 rounded-full bg-black/50 text-white hover:bg-black/75 focus-visible:ring-0 focus-visible:ring-offset-0"
-            >
-              <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
             </Button>
           </div>
         )}
