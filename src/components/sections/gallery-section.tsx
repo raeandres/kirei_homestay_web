@@ -96,8 +96,9 @@ const galleryItems: GalleryCategory[] = [
       },
     ],
     bookingLinks: {
-      airbnb: "#living-room-airbnb-link",
-      booking: "#living-room-booking-link",
+      airbnb: "https://www.airbnb.com/rooms/1364997919482714933",
+      booking:
+        "https://www.booking.com/hotel/ph/king-suite-eastwood-global-plaza-high-floor-quezon-city.html",
     },
   },
   {
@@ -186,10 +187,9 @@ const galleryItems: GalleryCategory[] = [
       },
     ],
     bookingLinks: {
-      airbnb:
-        "https://www.airbnb.com.sg/rooms/1030897971821606234?adults=1&photo_id=1947822098&source_impression_id=p3_1750871757_P3KluvNSDo3JXk5m&previous_page_section_name=1000&guests=1",
+      airbnb: "https://www.airbnb.com/rooms/1030897971821606234",
       booking:
-        "https://www.booking.com/hotel/ph/cozy-home-in-eastwood-pet-friendly-fast-wifi.html?aid=304142&label=gen173nr-1FCAEoggI46AdIM1gEaMkBiAEBmAExuAEYyAEM2AEB6AEB-AECiAIBqAIEuAKI3vDCBsACAdICJGNjMGMyZjgxLTFkZjMtNDE3MC1hYWZkLTVmODBjYjYzZmUxYdgCBeACAQ&ucfs=1&arphpl=1&checkin=2025-08-23&checkout=2025-08-26",
+        "https://www.booking.com/hotel/ph/cozy-home-in-eastwood-pet-friendly-fast-wifi.html",
     },
   },
 ];
