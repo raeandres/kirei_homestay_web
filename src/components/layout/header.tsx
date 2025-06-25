@@ -8,7 +8,8 @@ import {
   SheetContent,
   SheetTrigger,
   SheetClose,
-} from "@/components/ui/sheet";
+  SheetTitle,
+} from "@/components/ui/sheet"; // Added SheetTitle
 import { Menu } from "lucide-react";
 
 const navItems = [
@@ -54,6 +55,7 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] sm:w-[320px] p-6">
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col space-y-5 pt-6">
                 {navItems.map((item) => (
                   <SheetClose key={item.name} asChild>

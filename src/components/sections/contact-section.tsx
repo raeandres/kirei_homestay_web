@@ -109,9 +109,7 @@ export function ContactSection() {
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {/* Left Column: Property Location & Get in touch */}
           <div className="space-y-6">
-            <h2 className="text-3xl font-bold font-headline">
-              Property Location
-            </h2>
+            <h2 className="text-3xl font-normal">Property Location</h2>
             <p className="text-muted-foreground">
               Find us and explore the neighborhood
             </p>
@@ -133,8 +131,6 @@ export function ContactSection() {
                     Address
                   </h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
-                    39D Eastwood Global Plaza Luxury Residence
-                    <br />
                     Palm Tree Avenue, Eastwood City, Libis, Quezon City 1800
                   </p>
                 </div>
@@ -197,9 +193,7 @@ export function ContactSection() {
           <div className="space-y-6">
             <Card className="shadow-xl h-full">
               <CardHeader>
-                <CardTitle className="text-3xl font-bold font-headline">
-                  Contact the Host
-                </CardTitle>
+                <CardTitle className="text-3xl font-normal">Contact</CardTitle>
                 <CardDescription className="text-muted-foreground pt-1">
                   Interested to know more? Tell us what you think.
                 </CardDescription>
@@ -292,7 +286,7 @@ export function ContactSection() {
                   </form>
                 </Form>
                 <p className="mt-6 text-xs text-muted-foreground text-center">
-                  We typically respond to inquiries within 24 hours.
+                  We typically respond to inquiries within an hour.
                 </p>
               </CardContent>
             </Card>
