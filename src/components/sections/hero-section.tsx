@@ -13,80 +13,171 @@ import {
   Hotel as HotelIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
-const images = [
+const landscapeImages = [
+  // Kirei 1
   {
-    src: "/images/hero/living_1.webp",
-    alt: "Zen living room",
+    src: "/hero/kirei_1/landscape/converted_0000.webp",
+    alt: "Modern living room",
     hint: "modern interior",
   },
   {
-    src: "/images/showcase/ceiling.webp",
-    alt: "Striking details",
+    src: "/hero/kirei_1/landscape/converted_0001.webp",
+    alt: "Cozy bedroom",
     hint: "bedroom aesthetic",
   },
   {
-    src: "/images/showcase/living_angle_1.webp",
-    alt: "Zen inspired living",
-    hint: "Living space",
+    src: "/hero/kirei_1/landscape/converted_0002.webp",
+    alt: "Bright dining area",
+    hint: "dining space",
   },
   {
-    src: "/images/gallery/bedroom_left_1.webp",
-    alt: "Comfortable bedroom with stunning city view",
+    src: "/hero/kirei_1/landscape/converted_0003.webp",
+    alt: "Bright dining area",
+    hint: "dining space",
+  },
+  {
+    src: "/hero/kirei_1/landscape/converted_0004.webp",
+    alt: "Comfortable modern living area with city view",
     hint: "living room city",
   },
+
+  // Kirei 2
   {
-    src: "/images/hero/bedroom_right_1.webp",
+    src: "/hero/kirei_2/landscape/converted_0000.webp",
+    alt: "Modern kitchen with coffee machine and oven",
+    hint: "modern kitchen",
+  },
+  {
+    src: "/hero/kirei_2/landscape/converted_0001.webp",
     alt: "Bright modern bedroom with city view and desk",
     hint: "bedroom city view",
   },
   {
-    src: "/images/gallery/dining_angle_1.webp",
+    src: "/hero/kirei_2/landscape/converted_0002.webp",
     alt: "Bright dining area with wooden furniture and cherry blossom centerpiece",
     hint: "dining area",
   },
   {
-    src: "/images/gallery/kitchen_1.webp",
-    alt: "Modern kitchen with coffee machine and oven",
-    hint: "modern kitchen",
+    src: "/hero/kirei_2/landscape/converted_0003.webp",
+    alt: "Bright dining area with wooden furniture and cherry blossom centerpiece",
+    hint: "dining area",
+  },
+  {
+    src: "/hero/kirei_2/landscape/converted_0004.webp",
+    alt: "Bright dining area with wooden furniture and cherry blossom centerpiece",
+    hint: "dining area",
+  },
+];
+
+const portraitImages = [
+  // Kirei 1
+  {
+    src: "/hero/kirei_1/portrait/converted_0000.webp",
+    alt: "Kirei Homestay entryway (portrait)",
+    hint: "entryway portrait",
+  },
+  {
+    src: "/hero/kirei_1/portrait/converted_0001.webp",
+    alt: "Bedroom detail (portrait)",
+    hint: "bedroom detail portrait",
+  },
+  {
+    src: "/hero/kirei_1/portrait/converted_0002.webp",
+    alt: "Living area accent (portrait)",
+    hint: "living accent portrait",
+  },
+  {
+    src: "/hero/kirei_1/portrait/converted_0003.webp",
+    alt: "Kitchenette view (portrait)",
+    hint: "kitchenette portrait",
+  },
+  {
+    src: "/hero/kirei_1/portrait/converted_0004.webp",
+    alt: "Kitchenette view (portrait)",
+    hint: "kitchenette portrait",
+  },
+  // Kirei 2
+  {
+    src: "/hero/kirei_2/portrait/converted_0000.webp",
+    alt: "Kitchenette view (portrait)",
+    hint: "kitchenette portrait",
+  },
+  {
+    src: "/hero/kirei_2/portrait/converted_0001.webp",
+    alt: "Kitchenette view (portrait)",
+    hint: "kitchenette portrait",
+  },
+  {
+    src: "/hero/kirei_2/portrait/converted_0002.webp",
+    alt: "Kitchenette view (portrait)",
+    hint: "kitchenette portrait",
+  },
+  {
+    src: "/hero/kirei_2/portrait/converted_0003.webp",
+    alt: "Kitchenette view (portrait)",
+    hint: "kitchenette portrait",
+  },
+  {
+    src: "/hero/kirei_2/portrait/converted_0004.webp",
+    alt: "Kitchenette view (portrait)",
+    hint: "kitchenette portrait",
   },
 ];
 
 const platformLinks = [
-  {
-    name: "Airbnb",
-    href: "https://www.airbnb.com.sg/rooms/1364997919482714933?guests=1&adults=4&pets=2&s=67&unique_share_id=0d245e15-131c-48e4-bd7a-200c585b4fcc",
-    icon: "/airbnb_blk.svg",
-  },
-  {
-    name: "Booking.com",
-    href: "https://www.booking.com/Share-tzHN6oM",
-    icon: "/bdc.svg",
-  },
-  // {
-  //   name: "Agoda",
-  //   href: "https://www.agoda.com/king-suite-eastwood-global-plaza-high-floor/hotel/all/santolan-ph.html?ds=c9pjFkO4TJQb2I9Q",
-  //   icon: "/agoda_blk.svg",
-  // },
+  { name: "Airbnb", href: "https://www.airbnb.com", icon: Home },
+  { name: "Booking.com", href: "https://www.booking.com", icon: Briefcase },
+  { name: "Agoda", href: "https://www.agoda.com", icon: HotelIcon },
 ];
 
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [imagesToDisplay, setImagesToDisplay] = useState(landscapeImages); // Default to landscape
+
+  const isMobileResult = useIsMobile(); // This is the raw result from the hook
 
   useEffect(() => {
+    // This effect runs after mount and when isMobileResult changes.
+    // isMobileResult will be undefined on server and then boolean on client.
+    if (typeof isMobileResult === "boolean") {
+      if (isMobileResult) {
+        setImagesToDisplay(portraitImages);
+      } else {
+        setImagesToDisplay(landscapeImages);
+      }
+    }
+  }, [isMobileResult]);
+
+  useEffect(() => {
+    if (imagesToDisplay.length === 0) return; // Prevent errors if imagesToDisplay is empty
+
     const timer = setTimeout(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % imagesToDisplay.length);
     }, 5000);
     return () => clearTimeout(timer);
-  }, [currentIndex]);
+  }, [currentIndex, imagesToDisplay]); // Re-run if currentIndex or imagesToDisplay changes
+
+  // Fallback for initial render or if images are not ready
+  if (imagesToDisplay.length === 0) {
+    return (
+      <section
+        id="hero"
+        className="relative h-screen w-full overflow-hidden bg-muted"
+      >
+        {/* Optional: Add a loading spinner or placeholder content here */}
+      </section>
+    );
+  }
 
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden">
-      {images.map((image, index) => (
+      {imagesToDisplay.map((image, index) => (
         <div
-          key={image.src}
+          key={image.src} // Use image.src as key since it should be unique
           className={cn(
-            "absolute inset-0 w-full h-full", // Removed: transition-opacity duration-1000 ease-in-out
+            "absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out",
             index === currentIndex
               ? "opacity-100 z-[1]"
               : "opacity-0 z-0 pointer-events-none"
@@ -99,7 +190,7 @@ export function HeroSection() {
             fill
             sizes="100vw"
             className="object-cover"
-            priority={index === 0}
+            priority={index === 0} // Prioritize the first image of the current list
           />
         </div>
       ))}
@@ -109,50 +200,18 @@ export function HeroSection() {
         {" "}
         {/* Content on top of overlay */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-thin tracking-widest mb-6 font-headline animate-fade-in">
-          SLOW INTENTIONAL LIVING
+          SLOW
+          <br />
+          INTENTIONAL
+          <br />
+          LIVING
         </h1>
-        <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 mb-8 text-xl text-white animate-fade-in animation-delay-[300ms]">
-          <span className="flex items-center">
-            <Users className="mr-2 h-5 w-5" />
-            Up to 9 guests
-          </span>
-          <span className="flex items-center">
-            <Star className="mr-2 h-5 w-5 fill-yellow-400 text-yellow-400" />
-            4.96 (53 reviews)
-          </span>
-        </div>
-        <div className="mb-8 flex justify-center space-x-4 animate-fade-in animation-delay-[600ms]">
-          {platformLinks.map((platform) => (
-            <Link
-              key={platform.name}
-              href={platform.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label={`Visit Kirei Homestay on ${platform.name}`}
-                className="text-white bg-white hover:bg-white/20 transition-colors duration-300 p-3 rounded-lg w-14 h-14"
-              >
-                {/* <platform.icon className="h-7 w-7" /> */}
-                <Image
-                  src={platform.icon}
-                  alt={`${platform.name} icon`}
-                  width={28}
-                  height={28}
-                  className="h-7 w-7"
-                />
-              </Button>
-            </Link>
-          ))}
-        </div>
         <Link href="#about">
           <Button
             asChild
             size="lg"
             variant="outline"
-            className="bg-transparent border-primary-foreground text-white hover:bg-primary-foreground hover:text-primary animate-fade-in animation-delay-[900ms]"
+            className="bg-transparent border-transparent text-white hover:bg-transparent hover:text-white animate-fade-in animation-delay-[1800ms]"
           >
             <span>
               Explore More <ChevronDown className="ml-2 h-5 w-5" />

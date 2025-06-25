@@ -39,10 +39,10 @@ export async function sendInquiryAction(values: InquiryFormData): Promise<{ succ
     };
   }
 
-  const subject = `New Inquiry from ${name} via Kirei Homestay Website`;
+  const subject = `New Inquiry from ${name} via Kirei House PH Website`;
   
   const emailHtmlBody = `
-    <p>You have received a new inquiry from your Kirei Homestay website:</p>
+    <p>You have received a new inquiry from your Kirei House PH website:</p>
     <ul>
       <li><strong>Name:</strong> ${name}</li>
       <li><strong>Email:</strong> ${email}</li>
@@ -51,11 +51,11 @@ export async function sendInquiryAction(values: InquiryFormData): Promise<{ succ
     <p><strong>Message:</strong></p>
     <p>${message.replace(/\n/g, '<br>')}</p>
     <hr>
-    <p><em>This is an automated message from the Kirei Homestay contact form.</em></p>
+    <p><em>This is an automated message from the Kirei House PH contact form.</em></p>
   `;
 
   const emailTextBody = `
-    You have received a new inquiry from your Kirei Homestay website:
+    You have received a new inquiry from your Kirei House PH website:
 
     Name: ${name}
     Email: ${email}
@@ -65,7 +65,7 @@ export async function sendInquiryAction(values: InquiryFormData): Promise<{ succ
     ${message}
 
     ---
-    This is an automated message from the Kirei Homestay contact form.
+    This is an automated message from the Kirei House PH contact form.
   `;
   
   const transporter = nodemailer.createTransport({
@@ -77,7 +77,7 @@ export async function sendInquiryAction(values: InquiryFormData): Promise<{ succ
   });
 
   const mailOptions = {
-    from: `"${name} (Kirei Homestay Inquiry)" <${gmailUser}>`, // Display name for the sender
+    from: `"${name} (Kirei House PH Inquiry)" <${gmailUser}>`, // Display name for the sender
     replyTo: email, // Set the Reply-To header to the user's email
     to: hostEmail,
     subject: subject,

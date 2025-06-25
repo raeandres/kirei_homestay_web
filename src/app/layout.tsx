@@ -3,8 +3,8 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"; // Added for contact form feedback
 
 export const metadata: Metadata = {
-  title: "Kirei Homestay",
-  description: "Experience slow, intentional living at Kirei Homestay.",
+  title: "Kirei House PH",
+  description: "Experience slow, intentional living at Kirei House PH.",
 };
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Montserrat:wght@100;400;500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Montserrat:wght@100;400;500;700&family=Zen+Old+Mincho:wght@400;700&display=swap"
           rel="stylesheet"
         />
       </head>

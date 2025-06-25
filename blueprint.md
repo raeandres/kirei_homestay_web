@@ -1,4 +1,4 @@
-# **App Name**: Kirei Homestay
+# **App Name**: Kirei House PH
 
 ## Core Features:
 
