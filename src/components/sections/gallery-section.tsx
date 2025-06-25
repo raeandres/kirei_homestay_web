@@ -355,7 +355,7 @@ export function GallerySection() {
 
               <div className="p-6 md:p-8">
                 <h3 className="text-3xl md:text-3xl font-normal text-center font-zen-old-mincho">
-                  A v a i l a b i l i t y & B o o k i n g
+                  Availability & Booking
                 </h3>
                 <div className="grid md:grid-cols-2 gap-8 items-start md:p-10">
                   <div className="flex justify-center">
