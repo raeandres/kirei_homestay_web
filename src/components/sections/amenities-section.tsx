@@ -20,6 +20,7 @@ import {
   LucideBrush,
   Microwave,
   ParkingCircle,
+  PawPrintIcon,
   Refrigerator,
   ShieldCheck,
   Shirt,
@@ -62,6 +63,7 @@ const amenityCategories: AmenityCategory[] = [
   {
     title: "Amenities",
     amenities: [
+      { name: "Pet-Friendly", icon: PawPrintIcon },
       { name: "Gym", icon: Dumbbell },
       { name: "Swimming Pool", icon: WavesLadder },
       { name: "Kids Playground", icon: Blocks },
