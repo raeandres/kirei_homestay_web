@@ -17,6 +17,10 @@ interface GalleryCategory {
   name: string;
   coverImage: GalleryImage;
   images: GalleryImage[];
+  bookingLinks: {
+    airbnb: string;
+    booking: string;
+  };
 }
 
 const galleryItems: GalleryCategory[] = [
@@ -91,6 +95,11 @@ const galleryItems: GalleryCategory[] = [
         hint: "Kirei 2 - Bed 7",
       },
     ],
+    bookingLinks: {
+      airbnb: "https://www.airbnb.com/rooms/1364997919482714933",
+      booking:
+        "https://www.booking.com/hotel/ph/king-suite-eastwood-global-plaza-high-floor-quezon-city.html",
+    },
   },
   {
     name: "S t u d i o",
@@ -177,6 +186,11 @@ const galleryItems: GalleryCategory[] = [
         hint: "Kirei 1 - Amenities 2",
       },
     ],
+    bookingLinks: {
+      airbnb: "https://www.airbnb.com/rooms/1030897971821606234",
+      booking:
+        "https://www.booking.com/hotel/ph/cozy-home-in-eastwood-pet-friendly-fast-wifi.html",
+    },
   },
 ];
 
@@ -188,6 +202,10 @@ export function GallerySection() {
   const [activeGalleryCategoryName, setActiveGalleryCategoryName] = useState<
     string | null
   >(null);
+  const [activeBookingLinks, setActiveBookingLinks] = useState<{
+    airbnb: string;
+    booking: string;
+  } | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [date, setDate] = useState<Date | undefined>(new Date());
 
@@ -195,6 +213,7 @@ export function GallerySection() {
     const category = galleryItems[categoryIndex];
     setActiveGalleryImages(category.images);
     setActiveGalleryCategoryName(category.name);
+    setActiveBookingLinks(category.bookingLinks);
     setCurrentImageIndex(0);
     setIsFullScreenViewOpen(true);
   };
@@ -286,7 +305,8 @@ export function GallerySection() {
       {isFullScreenViewOpen &&
         activeGalleryCategoryName &&
         activeGalleryImages &&
-        currentImageInFullScreen && (
+        currentImageInFullScreen &&
+        activeBookingLinks && (
           <div
             className="fixed inset-0 z-50 overflow-y-auto bg-black/90 p-2 sm:p-4 backdrop-blur-sm"
             role="dialog"
@@ -372,7 +392,11 @@ export function GallerySection() {
                       platform.
                     </p>
                     <Button asChild className="w-full" size="lg">
-                      <Link href="https://www.airbnb.com.sg/rooms/1030897971821606234?adults=1&photo_id=1947822098&source_impression_id=p3_1750871757_P3KluvNSDo3JXk5m&previous_page_section_name=1000&guests=1">
+                      <Link
+                        href={activeBookingLinks.airbnb}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Home className="mr-2 h-5 w-5" />
                         Book on Airbnb
                       </Link>
@@ -383,7 +407,11 @@ export function GallerySection() {
                       size="lg"
                       variant="secondary"
                     >
-                      <Link href="https://www.booking.com/hotel/ph/cozy-home-in-eastwood-pet-friendly-fast-wifi.html?aid=304142&label=gen173nr-1FCAEoggI46AdIM1gEaMkBiAEBmAExuAEYyAEM2AEB6AEB-AECiAIBqAIEuAKI3vDCBsACAdICJGNjMGMyZjgxLTFkZjMtNDE3MC1hYWZkLTVmODBjYjYzZmUxYdgCBeACAQ&ucfs=1&arphpl=1&checkin=2025-08-23&checkout=2025-08-26">
+                      <Link
+                        href={activeBookingLinks.booking}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Briefcase className="mr-2 h-5 w-5" />
                         Book on Booking.com
                       </Link>
