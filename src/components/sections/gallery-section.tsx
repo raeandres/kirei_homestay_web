@@ -3,9 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { type DayPickerProps } from "react-day-picker";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { ChevronLeft, ChevronRight, X, Home, Briefcase } from "lucide-react";
+import { getBookedDates } from "../../app/actions/get-booked-dates";
 
 interface GalleryImage {
   src: string;
@@ -21,6 +23,7 @@ interface GalleryCategory {
     airbnb: string;
     booking: string;
   };
+  icsUrl: string;
 }
 
 const galleryItems: GalleryCategory[] = [
@@ -100,6 +103,8 @@ const galleryItems: GalleryCategory[] = [
       booking:
         "https://www.booking.com/hotel/ph/king-suite-eastwood-global-plaza-high-floor-quezon-city.html",
     },
+    icsUrl:
+      "https://www.airbnb.com.sg/calendar/ical/1364997919482714933.ics?s=663892ccaa5dabea43e13966feabc6e1",
   },
   {
     name: "S t u d i o",
@@ -191,6 +196,8 @@ const galleryItems: GalleryCategory[] = [
       booking:
         "https://www.booking.com/hotel/ph/cozy-home-in-eastwood-pet-friendly-fast-wifi.html",
     },
+    icsUrl:
+      "https://www.airbnb.com.sg/calendar/ical/1030897971821606234.ics?s=1b728ed92d212d0e42783ed473c0bb0f",
   },
 ];
 
@@ -206,14 +213,22 @@ export function GallerySection() {
     airbnb: string;
     booking: string;
   } | null>(null);
+  const [activeIcsUrl, setActiveIcsUrl] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+
+  // State for the calendar
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const [disabledDates, setDisabledDates] = useState<
+    DayPickerProps["disabled"]
+  >([]);
+  const [isLoadingCalendar, setIsLoadingCalendar] = useState(true);
 
   const openFullScreenView = (categoryIndex: number) => {
     const category = galleryItems[categoryIndex];
     setActiveGalleryImages(category.images);
     setActiveGalleryCategoryName(category.name);
     setActiveBookingLinks(category.bookingLinks);
+    setActiveIcsUrl(category.icsUrl);
     setCurrentImageIndex(0);
     setIsFullScreenViewOpen(true);
   };
@@ -222,6 +237,8 @@ export function GallerySection() {
     setIsFullScreenViewOpen(false);
     setActiveGalleryImages(null);
     setActiveGalleryCategoryName(null);
+    setActiveBookingLinks(null);
+    setActiveIcsUrl(null);
   };
 
   const showNextImage = () => {
@@ -241,6 +258,33 @@ export function GallerySection() {
       );
     }
   };
+
+  // Effect to fetch and process ICS data when the modal is opened
+  useEffect(() => {
+    if (!activeIcsUrl) {
+      return;
+    }
+
+    const fetchBookedDates = async () => {
+      setIsLoadingCalendar(true);
+
+      const bookedDateStrings = await getBookedDates(activeIcsUrl);
+
+      const dateRanges = bookedDateStrings.map((range) => ({
+        from: new Date(range.from),
+        to: new Date(range.to),
+      }));
+
+      // Also disable past dates for a better user experience
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      setDisabledDates([{ before: today }, ...dateRanges]);
+      setIsLoadingCalendar(false);
+    };
+
+    fetchBookedDates();
+  }, [activeIcsUrl]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -384,6 +428,18 @@ export function GallerySection() {
                       selected={date}
                       onSelect={setDate}
                       className="rounded-md border"
+                      disabled={isLoadingCalendar ? true : disabledDates}
+                      footer={
+                        isLoadingCalendar ? (
+                          <p className="text-center text-sm text-muted-foreground p-2">
+                            Loading calendar...
+                          </p>
+                        ) : (
+                          <p className="text-center text-sm text-muted-foreground p-2">
+                            Booked dates are disabled.
+                          </p>
+                        )
+                      }
                     />
                   </div>
                   <div className="flex flex-col justify-center space-y-4 pt-4 md:pt-0">
