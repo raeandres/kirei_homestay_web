@@ -167,8 +167,8 @@ export function AmenitiesSection() {
   return (
     <section id="amenities" className="py-16 md:py-24 bg-background">
       <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl text-center font-light mb-8 font-zen-old-mincho">
-          a m e n i t i e s
+        <h2 className="text-3xl md:text-4xl text-center font-headline mb-8">
+          Amenities
         </h2>
         <Card className="shadow-lg">
           <CardHeader className="pb-4"></CardHeader>
