@@ -452,12 +452,12 @@ export function GallerySection() {
                   alt={currentImageInFullScreen.alt}
                   data-ai-hint={currentImageInFullScreen.hint}
                   fill
-                  className="object-contain rounded-t-lg bg-black/10"
+                  className="object-cover rounded-t-lg bg-black/10"
                   sizes="100vw"
                   priority
                 />
 
-                <div className="absolute top-3 left-1/2 -translate-x-1/2 z-[1] bg-black/70 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
+                <div className="absolute top-3 left-1/2 -translate-x-1/2 z-[1] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
                   <h3
                     className="text-lg md:text-xl font-normal font-zen-old-mincho"
                     title={activeGalleryCategoryName}
@@ -476,7 +476,7 @@ export function GallerySection() {
                     showPrevImage();
                   }}
                   aria-label="Previous image"
-                  className="absolute left-1 top-1/2 -translate-y-1/2 sm:left-2 md:left-4 z-[1] p-1.5 sm:p-2 rounded-full bg-black/50 text-white hover:bg-black/75 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  className="absolute left-1 top-1/2 -translate-y-1/2 sm:left-2 md:left-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
                 >
                   <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
                 </Button>
@@ -488,7 +488,7 @@ export function GallerySection() {
                     showNextImage();
                   }}
                   aria-label="Next image"
-                  className="absolute right-1 top-1/2 -translate-y-1/2 sm:right-2 md:right-4 z-[1] p-1.5 sm:p-2 rounded-full bg-black/50 text-white hover:bg-black/75 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 sm:right-2 md:right-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
                 >
                   <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
                 </Button>
