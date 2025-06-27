@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { type DayPickerProps } from "react-day-picker";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { ChevronLeft, ChevronRight, X, Home, Briefcase } from "lucide-react";
-import { getBookedDates } from "../../app/actions/get-booked-dates";
+import { getBookedDates } from "@/app/actions/get-booked-dates";
 
 interface GalleryImage {
   src: string;
@@ -216,6 +216,14 @@ export function GallerySection() {
   const [activeIcsUrl, setActiveIcsUrl] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
+  // State for swipe gestures (touch)
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchEndX, setTouchEndX] = useState<number | null>(null);
+
+  // State for drag gestures (mouse)
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartXRef = useRef<number | null>(null);
+
   // State for the calendar
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [disabledDates, setDisabledDates] = useState<
@@ -256,6 +264,66 @@ export function GallerySection() {
           (prevIndex - 1 + activeGalleryImages.length) %
           activeGalleryImages.length
       );
+    }
+  };
+
+  // Handlers for swipe gestures (touch)
+  const minSwipeDistance = 50;
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEndX(null); // Reset end coordinate on new touch
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX || !touchEndX) return;
+    const distance = touchStartX - touchEndX;
+
+    if (distance > minSwipeDistance) {
+      showNextImage();
+    } else if (distance < -minSwipeDistance) {
+      showPrevImage();
+    }
+
+    setTouchStartX(null);
+    setTouchEndX(null);
+  };
+
+  // Handlers for drag gestures (mouse)
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+    dragStartXRef.current = e.clientX;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) {
+      e.preventDefault();
+    }
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (!isDragging || dragStartXRef.current === null) return;
+
+    const dragEnd = e.clientX;
+    const distance = dragStartXRef.current - dragEnd;
+
+    if (distance > minSwipeDistance) {
+      showNextImage();
+    } else if (distance < -minSwipeDistance) {
+      showPrevImage();
+    }
+
+    setIsDragging(false);
+    dragStartXRef.current = null;
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent) => {
+    if (isDragging) {
+      handleMouseUp(e);
     }
   };
 
@@ -362,7 +430,16 @@ export function GallerySection() {
               className="relative mx-auto mt-12 mb-8 max-w-4xl w-full bg-background rounded-lg shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative h-[65vh] w-full">
+              <div
+                className="relative h-[65vh] w-full cursor-grab active:cursor-grabbing"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseLeave}
+              >
                 <h2 className="sr-only" id="fullscreen-gallery-title">
                   Image gallery: {activeGalleryCategoryName} - Image{" "}
                   {currentImageIndex + 1} of {activeGalleryImages.length} -{" "}
