@@ -5,7 +5,7 @@ export function AboutSection() {
         <h2 className="text-4xl md:text-5xl text-center font-light mb-8 font-zen-old-mincho">
           w e l c o m e
         </h2>
-        <div className="aspect-video w-full max-w-[1290px] mx-auto shadow-lg mb-8 overflow-hidden">
+        <div className="aspect-video w-full max-w-[1290px] mx-auto shadow-lg mb-40 overflow-hidden">
           <video
             autoPlay
             muted
@@ -18,21 +18,21 @@ export function AboutSection() {
             Your browser does not support the video tag.
           </video>
         </div>
-        <div className="px-10 font-zen-old-mincho">
-          <p className="text-lg text-right md:text-xl text-foreground/80 mb-2 leading-relaxed px-4 sm:px-0">
+        <div className="px-5 font-zen-old-mincho mb-32">
+          <p className="text-lg text-right md:text-xl text-foreground/80 leading-6 md:leading-6 px-4 sm:px-0">
             kirei (綺麗), meaning beautiful and clean in Japanese, is more than
             just a place to stay.
           </p>
-          <p className="text-lg text-right md:text-xl text-foreground/80 mb-2 leading-relaxed px-4 sm:px-0">
+          <p className="text-lg text-right md:text-xl text-foreground/80 leading-6 md:leading-6 px-4 sm:px-0">
             It's an invitation to embrace slow, intentional living. Our space is
             thoughtfully designed to be a sanctuary of calm, where minimalist
             aesthetics meet cozy comfort.
           </p>
-          <p className="text-lg text-right md:text-xl text-foreground/80 mb-2 leading-relaxed px-4 sm:px-0">
+          <p className="text-lg text-right md:text-xl text-foreground/80 leading-6 md:leading-6 px-4 sm:px-0">
             We believe in the beauty of simplicity and the importance of mindful
             moments.
           </p>
-          <p className="text-lg text-right md:text-xl text-foreground/80 mb-2 leading-relaxed px-4 sm:px-0">
+          <p className="text-lg text-right md:text-xl text-foreground/80 leading-6 md:leading-6 px-4 sm:px-0">
             Every detail at Kirei House is curated to help you unwind,
             reconnect, and find joy in the present.
           </p>
