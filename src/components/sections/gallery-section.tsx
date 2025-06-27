@@ -28,7 +28,7 @@ interface GalleryCategory {
 
 const galleryItems: GalleryCategory[] = [
   {
-    name: "1 B e d r o o m",
+    name: "1 Bedroom",
     coverImage: {
       src: "/gallery/kirei_2/converted_0002.webp",
       alt: "Kirei-ito",
@@ -107,7 +107,7 @@ const galleryItems: GalleryCategory[] = [
       "https://www.airbnb.com.sg/calendar/ical/1364997919482714933.ics?s=663892ccaa5dabea43e13966feabc6e1",
   },
   {
-    name: "S t u d i o",
+    name: "Studio",
     coverImage: {
       src: "/gallery/kirei_1/converted_0007.webp",
       alt: "Kirei",
@@ -380,8 +380,8 @@ export function GallerySection() {
   return (
     <section id="gallery" className="py-16 md:py-24 bg-secondary/30">
       <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl text-center font-light mb-8 font-zen-old-mincho">
-          e x p l o r e
+        <h2 className="text-3xl md:text-4xl text-center font-headline mb-8">
+          Explore
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {galleryItems.map((item, index) => (
@@ -399,12 +399,12 @@ export function GallerySection() {
                   alt={item.coverImage.alt}
                   data-ai-hint={item.coverImage.hint}
                   fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105 rounded-sm"
+                  sizes="(max-width: 908px) 100vw, 50vw"
+                  className="object-coverx transition-transform duration-300 ease-in-out group-hover:scale-200 rounded-sm"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-sm" />
                 <div className="absolute bottom-0 left-0 p-3 md:p-4">
-                  <h3 className="text-lg md:text-xl font-normal text-white font-zen-old-mincho">
+                  <h3 className="text-lg md:text-xl font-normal text-white">
                     {item.name}
                   </h3>
                 </div>
@@ -452,14 +452,14 @@ export function GallerySection() {
                   alt={currentImageInFullScreen.alt}
                   data-ai-hint={currentImageInFullScreen.hint}
                   fill
-                  className="object-cover rounded-t-lg bg-black/10"
+                  className="object-contain rounded-t-lg bg-black/10"
                   sizes="100vw"
                   priority
                 />
 
                 <div className="absolute top-3 left-1/2 -translate-x-1/2 z-[1] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
                   <h3
-                    className="text-lg md:text-xl font-normal font-zen-old-mincho"
+                    className="text-lg md:text-xl font-normal"
                     title={activeGalleryCategoryName}
                   >
                     {activeGalleryCategoryName}
@@ -495,7 +495,7 @@ export function GallerySection() {
               </div>
 
               <div className="p-6 md:p-8">
-                <h3 className="text-3xl md:text-3xl font-normal text-center font-zen-old-mincho">
+                <h3 className="text-3xl md:text-3xl text-center font-headline">
                   Availability & Booking
                 </h3>
                 <div className="grid md:grid-cols-2 gap-8 items-start md:p-10">
@@ -512,15 +512,13 @@ export function GallerySection() {
                             Loading calendar...
                           </p>
                         ) : (
-                          <p className="text-center text-sm text-muted-foreground p-2">
-                            Booked dates are disabled.
-                          </p>
+                          ""
                         )
                       }
                     />
                   </div>
                   <div className="flex flex-col justify-center space-y-4 pt-4 md:pt-0">
-                    <p className="text-muted-foreground text-center md:text-left pb-2 font-zen-old-mincho">
+                    <p className="text-muted-foreground text-center md:text-left pb-2 font-headline">
                       Check our availability and book your stay on your favorite
                       platform.
                     </p>
