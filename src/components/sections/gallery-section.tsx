@@ -503,7 +503,7 @@ export function GallerySection() {
                     <Calendar
                       mode="single"
                       selected={date}
-                      onSelect={setDate}
+                      // onSelect={setDate}
                       className="rounded-md border"
                       disabled={isLoadingCalendar ? true : disabledDates}
                       footer={
