@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { type DayPickerProps } from "react-day-picker";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -260,15 +260,15 @@ export function GallerySection() {
     setActiveIcsUrl(null);
   };
 
-  const showNextImage = () => {
+  const showNextImage = useCallback(() => {
     if (activeGalleryImages) {
       setCurrentImageIndex(
         (prevIndex) => (prevIndex + 1) % activeGalleryImages.length
       );
     }
-  };
+  }, [activeGalleryImages]);
 
-  const showPrevImage = () => {
+  const showPrevImage = useCallback(() => {
     if (activeGalleryImages) {
       setCurrentImageIndex(
         (prevIndex) =>
@@ -276,7 +276,7 @@ export function GallerySection() {
           activeGalleryImages.length
       );
     }
-  };
+  }, [activeGalleryImages]);
 
   // Handlers for swipe gestures (touch)
   const minSwipeDistance = 50;
@@ -365,6 +365,28 @@ export function GallerySection() {
     fetchBookedDates();
   }, [activeIcsUrl]);
 
+  // Effect for slide show timer
+  useEffect(() => {
+    if (
+      !isFullScreenViewOpen ||
+      !activeGalleryImages ||
+      activeGalleryImages.length <= 1
+    ) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      showNextImage();
+    }, 5000); // 5-second delay
+
+    return () => clearTimeout(timer);
+  }, [
+    isFullScreenViewOpen,
+    currentImageIndex,
+    activeGalleryImages,
+    showNextImage,
+  ]);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!isFullScreenViewOpen) return;
@@ -382,7 +404,7 @@ export function GallerySection() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isFullScreenViewOpen, activeGalleryImages]);
+  }, [isFullScreenViewOpen, showNextImage, showPrevImage]);
 
   const currentImageInFullScreen = activeGalleryImages
     ? activeGalleryImages[currentImageIndex]
