@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { ChevronLeft, ChevronRight, X, Home, Briefcase } from "lucide-react";
 import { getBookedDates } from "@/app/actions/get-booked-dates";
+import { cn } from "@/lib/utils";
 
 interface GalleryImage {
   src: string;
@@ -456,29 +457,27 @@ export function GallerySection() {
                   {currentImageInFullScreen.alt}
                 </h2>
 
-                <div
-                  className="flex h-full transition-transform duration-300 ease-in-out"
-                  style={{
-                    transform: `translateX(-${currentImageIndex * 100}%)`,
-                  }}
-                >
-                  {activeGalleryImages.map((image, index) => (
-                    <div
-                      key={image.src}
-                      className="relative h-full w-full flex-shrink-0"
-                    >
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        data-ai-hint={image.hint}
-                        fill
-                        className="object-contain bg-background"
-                        sizes="100vw"
-                        priority={index === 0}
-                      />
-                    </div>
-                  ))}
-                </div>
+                {activeGalleryImages.map((image, index) => (
+                  <div
+                    key={image.src}
+                    className={cn(
+                      "absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out",
+                      index === currentImageIndex
+                        ? "opacity-100 z-[1]"
+                        : "opacity-0 z-0 pointer-events-none"
+                    )}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      data-ai-hint={image.hint}
+                      fill
+                      className="object-contain" // object-cover = fit the image to screen; object-contain = preservers the image ratio
+                      sizes="100vw"
+                      priority={index === 0}
+                    />
+                  </div>
+                ))}
 
                 <div className="absolute top-3 left-1/2 -translate-x-1/2 z-[1] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
                   <h3
