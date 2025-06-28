@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { type DayPickerProps } from "react-day-picker";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { ChevronLeft, ChevronRight, X, Home, Briefcase } from "lucide-react";
 import { getBookedDates } from "@/app/actions/get-booked-dates";
+import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface GalleryImage {
   src: string;
@@ -241,6 +243,8 @@ export function GallerySection() {
   >([]);
   const [isLoadingCalendar, setIsLoadingCalendar] = useState(true);
 
+  const isMobile = useIsMobile();
+
   const openFullScreenView = (categoryIndex: number) => {
     const category = galleryItems[categoryIndex];
     setActiveGalleryImages(category.images);
@@ -259,15 +263,15 @@ export function GallerySection() {
     setActiveIcsUrl(null);
   };
 
-  const showNextImage = () => {
+  const showNextImage = useCallback(() => {
     if (activeGalleryImages) {
       setCurrentImageIndex(
         (prevIndex) => (prevIndex + 1) % activeGalleryImages.length
       );
     }
-  };
+  }, [activeGalleryImages]);
 
-  const showPrevImage = () => {
+  const showPrevImage = useCallback(() => {
     if (activeGalleryImages) {
       setCurrentImageIndex(
         (prevIndex) =>
@@ -275,7 +279,7 @@ export function GallerySection() {
           activeGalleryImages.length
       );
     }
-  };
+  }, [activeGalleryImages]);
 
   // Handlers for swipe gestures (touch)
   const minSwipeDistance = 50;
@@ -364,6 +368,28 @@ export function GallerySection() {
     fetchBookedDates();
   }, [activeIcsUrl]);
 
+  // Effect for slide show timer
+  useEffect(() => {
+    if (
+      !isFullScreenViewOpen ||
+      !activeGalleryImages ||
+      activeGalleryImages.length <= 1
+    ) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      showNextImage();
+    }, 5000); // 5-second delay
+
+    return () => clearTimeout(timer);
+  }, [
+    isFullScreenViewOpen,
+    currentImageIndex,
+    activeGalleryImages,
+    showNextImage,
+  ]);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!isFullScreenViewOpen) return;
@@ -381,7 +407,7 @@ export function GallerySection() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isFullScreenViewOpen, activeGalleryImages]);
+  }, [isFullScreenViewOpen, showNextImage, showPrevImage]);
 
   const currentImageInFullScreen = activeGalleryImages
     ? activeGalleryImages[currentImageIndex]
@@ -456,29 +482,27 @@ export function GallerySection() {
                   {currentImageInFullScreen.alt}
                 </h2>
 
-                <div
-                  className="flex h-full transition-transform duration-300 ease-in-out"
-                  style={{
-                    transform: `translateX(-${currentImageIndex * 100}%)`,
-                  }}
-                >
-                  {activeGalleryImages.map((image, index) => (
-                    <div
-                      key={image.src}
-                      className="relative h-full w-full flex-shrink-0"
-                    >
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        data-ai-hint={image.hint}
-                        fill
-                        className="object-contain bg-background"
-                        sizes="100vw"
-                        priority={index === 0}
-                      />
-                    </div>
-                  ))}
-                </div>
+                {activeGalleryImages.map((image, index) => (
+                  <div
+                    key={image.src}
+                    className={cn(
+                      "absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out",
+                      index === currentImageIndex
+                        ? "opacity-100 z-[1]"
+                        : "opacity-0 z-0 pointer-events-none"
+                    )}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      data-ai-hint={image.hint}
+                      fill
+                      className={isMobile ? "object-contain" : "object-cover"} // object-cover = fit the image to screen; object-contain = preservers the image ratio
+                      sizes="100vw"
+                      priority={index === 0}
+                    />
+                  </div>
+                ))}
 
                 <div className="absolute top-3 left-1/2 -translate-x-1/2 z-[1] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
                   <h3
