@@ -25,6 +25,16 @@ interface GalleryCategory {
   };
   icsUrl: string;
 }
+interface GalleryCategory {
+  name: string;
+  coverImage: GalleryImage;
+  images: GalleryImage[];
+  bookingLinks: {
+    airbnb: string;
+    booking: string;
+  };
+  icsUrl: string;
+}
 
 const galleryItems: GalleryCategory[] = [
   {
@@ -400,7 +410,7 @@ export function GallerySection() {
                   data-ai-hint={item.coverImage.hint}
                   fill
                   sizes="(max-width: 908px) 100vw, 50vw"
-                  className="object-coverx transition-transform duration-300 ease-in-out group-hover:scale-200 rounded-sm"
+                  className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-200 rounded-sm"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-sm" />
                 <div className="absolute bottom-0 left-0 p-3 md:p-4">
@@ -431,7 +441,7 @@ export function GallerySection() {
               onClick={(e) => e.stopPropagation()}
             >
               <div
-                className="relative h-[65vh] w-full cursor-grab active:cursor-grabbing"
+                className="relative h-[65vh] w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg"
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
@@ -446,16 +456,29 @@ export function GallerySection() {
                   {currentImageInFullScreen.alt}
                 </h2>
 
-                <Image
-                  key={currentImageInFullScreen.src}
-                  src={currentImageInFullScreen.src}
-                  alt={currentImageInFullScreen.alt}
-                  data-ai-hint={currentImageInFullScreen.hint}
-                  fill
-                  className="object-contain rounded-t-lg bg-black/10"
-                  sizes="100vw"
-                  priority
-                />
+                <div
+                  className="flex h-full transition-transform duration-300 ease-in-out"
+                  style={{
+                    transform: `translateX(-${currentImageIndex * 100}%)`,
+                  }}
+                >
+                  {activeGalleryImages.map((image, index) => (
+                    <div
+                      key={image.src}
+                      className="relative h-full w-full flex-shrink-0"
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        data-ai-hint={image.hint}
+                        fill
+                        className="object-contain bg-background"
+                        sizes="100vw"
+                        priority={index === 0}
+                      />
+                    </div>
+                  ))}
+                </div>
 
                 <div className="absolute top-3 left-1/2 -translate-x-1/2 z-[1] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
                   <h3
@@ -495,7 +518,7 @@ export function GallerySection() {
               </div>
 
               <div className="p-6 md:p-8">
-                <h3 className="text-3xl md:text-3xl text-center font-headline">
+                <h3 className="text-2xl md:text-3xl text-center font-headline">
                   Availability & Booking
                 </h3>
                 <div className="grid md:grid-cols-2 gap-8 items-start md:p-10">
