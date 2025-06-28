@@ -9,6 +9,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { ChevronLeft, ChevronRight, X, Home, Briefcase } from "lucide-react";
 import { getBookedDates } from "@/app/actions/get-booked-dates";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface GalleryImage {
   src: string;
@@ -241,6 +242,8 @@ export function GallerySection() {
     DayPickerProps["disabled"]
   >([]);
   const [isLoadingCalendar, setIsLoadingCalendar] = useState(true);
+
+  const isMobile = useIsMobile();
 
   const openFullScreenView = (categoryIndex: number) => {
     const category = galleryItems[categoryIndex];
@@ -494,7 +497,7 @@ export function GallerySection() {
                       alt={image.alt}
                       data-ai-hint={image.hint}
                       fill
-                      className="object-contain" // object-cover = fit the image to screen; object-contain = preservers the image ratio
+                      className={isMobile ? "object-contain" : "object-cover"} // object-cover = fit the image to screen; object-contain = preservers the image ratio
                       sizes="100vw"
                       priority={index === 0}
                     />
