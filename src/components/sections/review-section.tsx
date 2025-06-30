@@ -50,9 +50,9 @@ const reviews = [
 
 export function ReviewsSection() {
   return (
-    <section id="reviews" className="py-16 md:py-24 bg-secondary/30">
+    <section id="reviews" className="py-8 md:py-24 bg-secondary/30">
       <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl text-center font-headline mb-8 ">
+        <h2 className="text-xl md:text-2xl text-left px-4 font-headline mb-8">
           Experiences
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -73,14 +73,16 @@ export function ReviewsSection() {
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <CardTitle className="text-lg font-headline">
+                  <CardTitle className="text-sm font-headline">
                     {review.name}
                   </CardTitle>
                   <RatingStars rating={review.rating} />
                 </div>
               </CardHeader>
               <CardContent className="flex-grow">
-                <p className="text-foreground/80 italic">"{review.review}"</p>
+                <p className="text-foreground/80 italic text-sm">
+                  "{review.review}"
+                </p>
               </CardContent>
               <CardFooter>
                 <p className="text-sm text-muted-foreground">{review.date}</p>
