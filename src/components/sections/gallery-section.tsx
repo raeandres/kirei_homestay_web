@@ -414,9 +414,9 @@ export function GallerySection() {
     : null;
 
   return (
-    <section id="gallery" className="py-16 md:py-24 bg-secondary/30">
+    <section id="gallery" className="py-0 md:py-24 bg-secondary/30">
       <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl text-center font-headline mb-8">
+        <h2 className="text-xl md:text-2xl text-left px-4 font-headline mb-8">
           Explore
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -467,7 +467,11 @@ export function GallerySection() {
               onClick={(e) => e.stopPropagation()}
             >
               <div
-                className="relative h-[65vh] w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg"
+                className={
+                  isMobile
+                    ? "relative h-[50vh] w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg"
+                    : "relative h-[65vh] w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg"
+                } // add conditional rendering
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
@@ -542,8 +546,14 @@ export function GallerySection() {
               </div>
 
               <div className="p-6 md:p-8">
-                <h3 className="text-2xl md:text-3xl text-center font-headline">
-                  Availability & Booking
+                <h3
+                  className={
+                    isMobile
+                      ? "text-xl md:text-xl text-justify-left px-10 font-norlmal mb-2"
+                      : "text-xl md:text-2xl text-center font-headline"
+                  }
+                >
+                  Availability
                 </h3>
                 <div className="grid md:grid-cols-2 gap-8 items-start md:p-10">
                   <div className="flex justify-center">
@@ -564,8 +574,8 @@ export function GallerySection() {
                       }
                     />
                   </div>
-                  <div className="flex flex-col justify-center space-y-4 pt-4 md:pt-0">
-                    <p className="text-muted-foreground text-center md:text-left pb-2 font-headline">
+                  <div className="flex flex-col justify-center space-y-4 pt-0 md:pt-0">
+                    <p className="text-sm text-left px-10 md:text-left pb-2 font-normal">
                       Check our availability and book your stay on your favorite
                       platform.
                     </p>
