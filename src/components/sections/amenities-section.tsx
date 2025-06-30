@@ -165,15 +165,15 @@ export function AmenitiesSection() {
       : allAmenities;
 
   return (
-    <section id="amenities" className="py-16 md:py-24 bg-background">
+    <section id="amenities" className="py-8 md:py-24 bg-background">
       <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl text-center font-headline mb-8">
+        <h2 className="text-xl md:text-2xl text-left px-4 font-headline mb-8">
           Amenities
         </h2>
         <Card className="shadow-lg">
           <CardHeader className="pb-4"></CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-0">
               {amenitiesToDisplayOnPage.map((amenity) => {
                 const AmenityIconComponent = amenity.icon;
                 return (
