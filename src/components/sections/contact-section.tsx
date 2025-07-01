@@ -106,8 +106,8 @@ export function ContactSection() {
   return (
     <section id="contact" className="py-8 md:py-24 bg-background">
       <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-xl md:text-2xl text-left px-4 font-headline mb-2">
-          Locate us
+        <h2 className="text-lg md:text-xl text-left px-4 font-headline mb-2">
+          LOCATE US
         </h2>
         <p className="text-sm px-4 text-left mb-4">
           Find us and explore the neighborhood
