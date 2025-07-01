@@ -58,24 +58,35 @@ export function ReviewsSection() {
   const isMobile = useIsMobile();
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const itemsPerView = isMobile ? 1 : 2;
+  // Calculate the last possible index for the carousel to start from.
+  // This ensures the carousel doesn't show empty space at the end.
+  const lastIndex =
+    reviews.length > itemsPerView ? reviews.length - itemsPerView : 0;
+
   const showNext = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % reviews.length);
-  }, []);
-
-  const showPrev = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + reviews.length) % reviews.length
+    setCurrentIndex((prevIndex) =>
+      prevIndex >= lastIndex ? 0 : prevIndex + 1
     );
-  };
+  }, [lastIndex]);
 
-  const goToReview = (index: number) => {
+  const showPrev = useCallback(() => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex <= 0 ? lastIndex : prevIndex - 1
+    );
+  }, [lastIndex]);
+
+  const goToReview = useCallback((index: number) => {
     setCurrentIndex(index);
-  };
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(showNext, 5000); // Autoplay every 5 seconds
     return () => clearTimeout(timer);
   }, [currentIndex, showNext]);
+
+  // On desktop, each item is 50% width, so we slide by 50%. On mobile, 100%.
+  const slidePercentage = 100 / itemsPerView;
 
   return (
     <section id="reviews" className="py-0 md:py-0 bg-secondary/30">
@@ -93,10 +104,15 @@ export function ReviewsSection() {
           <div className="overflow-hidden">
             <div
               className="flex transition-transform duration-700 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              style={{
+                transform: `translateX(-${currentIndex * slidePercentage}%)`,
+              }}
             >
               {reviews.map((review) => (
-                <div key={review.name} className="w-full flex-shrink-0 p-1">
+                <div
+                  key={review.name}
+                  className="w-full md:w-1/2 flex-shrink-0 p-2"
+                >
                   <Card className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 min-h-[22rem] md:min-h-[18rem]">
                     <CardHeader className="flex flex-row items-center space-x-4 pb-4">
                       <Avatar>
