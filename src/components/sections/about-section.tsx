@@ -30,7 +30,7 @@ export function AboutSection() {
             )}
             Your browser does not support the video tag.
           </video>
-          <div className="absolute inset-0 bg-black/40 flex items-end justify-center p-8">
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-8">
             <div className="text-center text-white">
               <h2 className="text-lg md:text-2xl text-left px-4 font-headline mb-8">
                 WELCOME
