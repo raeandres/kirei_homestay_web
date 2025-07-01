@@ -105,13 +105,13 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-8 md:py-24 bg-background">
+      <h2 className="text-xl md:text-2xl text-left px-4 font-headline mb-2">
+        Locate us
+      </h2>
+      <p className="text-sm px-4 text-left mb-4">
+        Find us and explore the neighborhood
+      </p>
       <div className="container max-w-6xl mx-auto px-4 overflow-x-hidden">
-        <h2 className="text-xl md:text-2xl text-left px-4 font-headline mb-2">
-          Locate us
-        </h2>
-        <p className="text-sm px-4 text-left mb-4">
-          Find us and explore the neighborhood
-        </p>
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {/* Left Column: Property Location & Get in touch */}
           <div className="space-y-0">
