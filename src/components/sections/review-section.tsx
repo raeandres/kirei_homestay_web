@@ -78,11 +78,6 @@ export function ReviewsSection() {
   }, [currentIndex, showNext]);
 
   return (
-<<<<<<< Updated upstream
-    <section id="reviews" className="py-16 md:py-24 bg-secondary/30">
-      <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl text-center font-headline mb-8 ">
-=======
     <section
       id="reviews"
       className={
@@ -108,34 +103,6 @@ export function ReviewsSection() {
               className="flex transition-transform duration-700 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
-<<<<<<< Updated upstream
-              <CardHeader className="flex flex-row items-center space-x-4 pb-4">
-                <Avatar>
-                  <AvatarImage
-                    src={review.avatar}
-                    alt={review.name}
-                    data-ai-hint={review.avatarHint}
-                  />
-                  <AvatarFallback>
-                    {review.name.substring(0, 2).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                <div>
-                  <CardTitle className="text-lg font-headline">
-                    {review.name}
-                  </CardTitle>
-                  <RatingStars rating={review.rating} />
-                </div>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-foreground/80 italic">"{review.review}"</p>
-              </CardContent>
-              <CardFooter>
-                <p className="text-sm text-muted-foreground">{review.date}</p>
-              </CardFooter>
-            </Card>
-          ))}
-=======
               {reviews.map((review) => (
                 <div key={review.name} className="w-full flex-shrink-0 p-1">
                   <Card className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 min-h-[22rem] md:min-h-[18rem]">
@@ -206,7 +173,6 @@ export function ReviewsSection() {
               />
             ))}
           </div>
->>>>>>> Stashed changes
         </div>
       </div>
     </section>
