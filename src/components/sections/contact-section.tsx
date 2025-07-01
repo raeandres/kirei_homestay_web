@@ -104,7 +104,7 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-16 md:py-24 bg-background">
+    <section id="contact" className="py-8 md:py-24 bg-background">
       <div className="container max-w-6xl mx-auto px-4 overflow-x-hidden">
 <<<<<<< Updated upstream
 =======
@@ -117,12 +117,7 @@ export function ContactSection() {
 >>>>>>> Stashed changes
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {/* Left Column: Property Location & Get in touch */}
-          <div className="space-y-6">
-            <h2 className="text-3xl font-normal">Property Location</h2>
-            <p className="text-muted-foreground">
-              Find us and explore the neighborhood
-            </p>
-
+          <div className="space-y-0">
             <div className="relative aspect-video bg-muted rounded-lg overflow-hidden shadow-md">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d5199.74430346861!2d121.08133734244423!3d14.6075846246003!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ssg!4v1749335816648!5m2!1sen!2ssg"
@@ -132,13 +127,11 @@ export function ContactSection() {
               ></iframe>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 pt-4">
               <div className="flex">
                 <MapPin className="mr-4 h-5 w-5 text-accent mt-1 shrink-0" />
                 <div>
-                  <h3 className="font-semibold font-headline text-lg">
-                    Address
-                  </h3>
+                  <h2 className="font-semibold text-sm">Address</h2>
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     Palm Tree Avenue, Eastwood City, Libis, Quezon City 1800
                   </p>
@@ -146,11 +139,11 @@ export function ContactSection() {
               </div>
 
               <div>
-                <h3 className="font-semibold font-headline text-lg flex items-center mb-3">
-                  <Clock className="mr-3 h-5 w-5 text-accent" />
+                <h2 className="font-semibold text-sm flex items-center">
+                  <Clock className="mr-4 h-5 w-5 text-accent mt-1 shrink-0" />
                   Nearby Places
-                </h3>
-                <ul className="space-y-1.5 text-sm">
+                </h2>
+                <ul className="space-y-1 text-sm px-9">
                   {nearbyPlaces.map((place) => (
                     <li
                       key={place.name}
@@ -167,9 +160,7 @@ export function ContactSection() {
 
               {/* Get in touch section */}
               <div className="pt-2">
-                <h3 className="font-semibold font-headline text-lg mb-3">
-                  Get in touch
-                </h3>
+                <h3 className="font-semibold font-headline text-lg mb-3"></h3>
                 <div className="flex items-center space-x-3">
                   {socialMediaLinks.map((link) => (
                     <Link
@@ -202,17 +193,19 @@ export function ContactSection() {
           <div className="space-y-6">
             <Card className="shadow-xl h-full">
               <CardHeader>
-                <CardTitle className="text-3xl font-normal">Contact</CardTitle>
-                <CardDescription className="text-muted-foreground pt-1">
-                  Interested to know more? Tell us what you think.
-                </CardDescription>
+                <CardTitle className="text-lg font-normal">
+                  Interested to know more?
+                  <p className="text-sm font-normal pt-1">
+                    Let us know what you think.
+                  </p>
+                </CardTitle>
                 {/* {" Removed User card info "} */}
               </CardHeader>
-              <CardContent className="pt-2">
+              <CardContent className="pt-0">
                 <Form {...form}>
                   <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-6"
+                    className="space-y-2"
                   >
                     <FormField
                       control={form.control}
