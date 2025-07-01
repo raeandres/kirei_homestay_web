@@ -82,7 +82,7 @@ export function ReviewsSection() {
       <div
         className={
           isMobile
-            ? "container max-w-6xl mx-auto"
+            ? "container max-w-6xl mx-auto px-4"
             : "container max-w-6xl mx-auto"
         }
       >
