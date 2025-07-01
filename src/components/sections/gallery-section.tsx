@@ -416,8 +416,8 @@ export function GallerySection() {
   return (
     <section id="gallery" className="py-0 md:py-24 bg-secondary/30">
       <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-xl md:text-2xl text-left px-4 font-headline mb-8">
-          Explore
+        <h2 className="text-lg md:text-xl text-left  font-headline mb-8">
+          EXPLORE
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {galleryItems.map((item, index) => (

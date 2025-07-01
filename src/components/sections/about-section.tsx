@@ -1,14 +1,21 @@
 "use client";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 export function AboutSection() {
   const isMobile = useIsMobile();
 
   return (
-    <section id="about" className="py-8 md:py-24 bg-background">
+    <section id="about" className="py-24 md:py-24 bg-background">
       <div className="container max-w-6xl mx-auto">
-        <div className="relative h-[80vh] aspect-video w-full max-w-[1920px] mx-auto mb-8 shadow-lg overflow-hidden">
+        <div
+          className={cn(
+            "relative w-full max-w-[1080px] mx-auto mb-8 shadow-lg overflow-hidden",
+            isMobile ? "aspect-[9/16]" : "aspect-video"
+          )}
+        >
           <video
+            key={isMobile ? "mobile" : "desktop"}
             autoPlay
             muted
             loop
@@ -16,9 +23,8 @@ export function AboutSection() {
             data-ai-hint="zen decor"
             className="w-full h-full object-cover"
           >
-            <source src="/about/kirei_slide.webm" type="video/webm" />
             {isMobile ? (
-              <source src="/about/IMG_2727.mp4" type="video/mp4" />
+              <source src="/about/kirei_slide.webm" type="video/webm" />
             ) : (
               <source src="/about/IMG_2727.mp4" type="video/mp4" />
             )}

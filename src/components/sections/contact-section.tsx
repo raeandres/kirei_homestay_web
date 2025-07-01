@@ -105,190 +105,192 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-8 md:py-24 bg-background">
-      <h2 className="text-xl md:text-2xl text-left px-4 font-headline mb-2">
-        Locate us
-      </h2>
-      <p className="text-sm px-4 text-left mb-4">
-        Find us and explore the neighborhood
-      </p>
-      <div className="container max-w-6xl mx-auto px-4 overflow-x-hidden">
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          {/* Left Column: Property Location & Get in touch */}
-          <div className="space-y-0">
-            <div className="relative aspect-video bg-muted rounded-lg overflow-hidden shadow-md">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d5199.74430346861!2d121.08133734244423!3d14.6075846246003!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ssg!4v1749335816648!5m2!1sen!2ssg"
-                loading="lazy"
-                className="absolute inset-0 w-full h-full border-0"
-                aria-label="Property Location Map"
-              ></iframe>
-            </div>
+      <div className="container max-w-6xl mx-auto px-4">
+        <h2 className="text-xl md:text-2xl text-left px-4 font-headline mb-2">
+          Locate us
+        </h2>
+        <p className="text-sm px-4 text-left mb-4">
+          Find us and explore the neighborhood
+        </p>
+        <div className="container max-w-6xl mx-auto px-4 overflow-x-hidden">
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            {/* Left Column: Property Location & Get in touch */}
+            <div className="space-y-0">
+              <div className="relative aspect-video bg-muted rounded-lg overflow-hidden shadow-md">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d5199.74430346861!2d121.08133734244423!3d14.6075846246003!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ssg!4v1749335816648!5m2!1sen!2ssg"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full border-0"
+                  aria-label="Property Location Map"
+                ></iframe>
+              </div>
 
-            <div className="space-y-6 pt-4">
-              <div className="flex">
-                <MapPin className="mr-4 h-5 w-5 text-accent mt-1 shrink-0" />
+              <div className="space-y-6 pt-4">
+                <div className="flex">
+                  <MapPin className="mr-4 h-5 w-5 text-accent mt-1 shrink-0" />
+                  <div>
+                    <h2 className="font-semibold text-sm">Address</h2>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      Palm Tree Avenue, Eastwood City, Libis, Quezon City 1800
+                    </p>
+                  </div>
+                </div>
+
                 <div>
-                  <h2 className="font-semibold text-sm">Address</h2>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    Palm Tree Avenue, Eastwood City, Libis, Quezon City 1800
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <h2 className="font-semibold text-sm flex items-center">
-                  <Clock className="mr-4 h-5 w-5 text-accent mt-1 shrink-0" />
-                  Nearby Places
-                </h2>
-                <ul className="space-y-1 text-sm px-9">
-                  {nearbyPlaces.map((place) => (
-                    <li
-                      key={place.name}
-                      className="flex justify-between text-muted-foreground"
-                    >
-                      <span>{place.name}</span>
-                      <span className="font-medium text-foreground/90">
-                        {place.distance}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Get in touch section */}
-              <div className="pt-2">
-                <h3 className="font-semibold font-headline text-lg mb-3"></h3>
-                <div className="flex items-center space-x-3">
-                  {socialMediaLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      target={link.name === "Facebook" ? "_blank" : undefined}
-                      rel={
-                        link.name === "Facebook"
-                          ? "noopener noreferrer"
-                          : undefined
-                      }
-                    >
-                      <Button
-                        asChild
-                        variant="ghost"
-                        size="icon"
-                        aria-label={link.name}
-                        className="text-accent hover:text-accent-foreground hover:bg-accent"
+                  <h2 className="font-semibold text-sm flex items-center">
+                    <Clock className="mr-4 h-5 w-5 text-accent mt-1 shrink-0" />
+                    Nearby Places
+                  </h2>
+                  <ul className="space-y-1 text-sm px-9">
+                    {nearbyPlaces.map((place) => (
+                      <li
+                        key={place.name}
+                        className="flex justify-between text-muted-foreground"
                       >
-                        <link.icon className="h-6 w-6" />
-                      </Button>
-                    </Link>
-                  ))}
+                        <span>{place.name}</span>
+                        <span className="font-medium text-foreground/90">
+                          {place.distance}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Get in touch section */}
+                <div className="pt-2">
+                  <h3 className="font-semibold font-headline text-lg mb-3"></h3>
+                  <div className="flex items-center space-x-3">
+                    {socialMediaLinks.map((link) => (
+                      <Link
+                        key={link.name}
+                        href={link.href}
+                        target={link.name === "Facebook" ? "_blank" : undefined}
+                        rel={
+                          link.name === "Facebook"
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
+                      >
+                        <Button
+                          asChild
+                          variant="ghost"
+                          size="icon"
+                          aria-label={link.name}
+                          className="text-accent hover:text-accent-foreground hover:bg-accent"
+                        >
+                          <link.icon className="h-6 w-6" />
+                        </Button>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Right Column: Contact the Host */}
-          <div className="space-y-6">
-            <Card className="shadow-xl h-full">
-              <CardHeader>
-                <CardTitle className="text-lg font-normal">
-                  Interested to know more?
-                  <p className="text-sm font-normal pt-1">
-                    Let us know what you think.
-                  </p>
-                </CardTitle>
-                {/* {" Removed User card info "} */}
-              </CardHeader>
-              <CardContent className="pt-0">
-                <Form {...form}>
-                  <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-2"
-                  >
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Your Name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Your Name" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email Address</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="email"
-                              placeholder="your.email@example.com"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>
-                            Phone Number{" "}
-                            <span className="text-xs text-muted-foreground">
-                              (Optional)
-                            </span>
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              type="tel"
-                              placeholder="(555) 123-4567"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="message"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Your Message</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="I'm interested in booking your property and have a few questions..."
-                              className="min-h-[100px]"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button
-                      type="submit"
-                      className="w-full"
-                      disabled={form.formState.isSubmitting}
+            {/* Right Column: Contact the Host */}
+            <div className="space-y-6">
+              <Card className="shadow-xl h-full">
+                <CardHeader>
+                  <CardTitle className="text-sm font-normal">
+                    Interested to know more?
+                    <p className="text-sm font-normal pt-1">
+                      Let us know what you think.
+                    </p>
+                  </CardTitle>
+                  {/* {" Removed User card info "} */}
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <Form {...form}>
+                    <form
+                      onSubmit={form.handleSubmit(onSubmit)}
+                      className="space-y-2"
                     >
-                      {form.formState.isSubmitting
-                        ? "Sending..."
-                        : "Send Inquiry"}
-                    </Button>
-                  </form>
-                </Form>
-                <p className="mt-6 text-xs text-muted-foreground text-center">
-                  We typically respond to inquiries within an hour.
-                </p>
-              </CardContent>
-            </Card>
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Your Name</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Your Name" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Email Address</FormLabel>
+                            <FormControl>
+                              <Input
+                                type="email"
+                                placeholder="your.email@example.com"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="phone"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>
+                              Phone Number{" "}
+                              <span className="text-xs text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                type="tel"
+                                placeholder="(555) 123-4567"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="message"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Your Message</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder="I'm interested in booking your property and have a few questions..."
+                                className="min-h-[100px]"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <Button
+                        type="submit"
+                        className="w-full"
+                        disabled={form.formState.isSubmitting}
+                      >
+                        {form.formState.isSubmitting
+                          ? "Sending..."
+                          : "Send Inquiry"}
+                      </Button>
+                    </form>
+                  </Form>
+                  <p className="mt-6 text-xs text-muted-foreground text-center">
+                    We typically respond to inquiries within an hour.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>

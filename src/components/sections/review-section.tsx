@@ -78,24 +78,16 @@ export function ReviewsSection() {
   }, [currentIndex, showNext]);
 
   return (
-    <section
-      id="reviews"
-      className={
-        isMobile
-          ? "py-16 md:py-24 bg-secondary/30"
-          : "py-8 md:py-24 bg-secondary/30"
-      }
-    >
+    <section id="reviews" className="py-0 md:py-0 bg-secondary/30">
       <div
         className={
           isMobile
-            ? "container max-w-6xl mx-auto px-4"
+            ? "container max-w-6xl mx-auto"
             : "container max-w-6xl mx-auto"
         }
       >
-        <h2 className="text-xl md:text-2xl text-left px-4 font-headline mb-8">
->>>>>>> Stashed changes
-          Experiences
+        <h2 className="text-lg md:text-xl text-justify-left font-headline mb-8">
+          EXPERIENCES
         </h2>
         <div className="relative w-full max-w-3xl mx-auto">
           <div className="overflow-hidden">
