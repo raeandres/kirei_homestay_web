@@ -14,9 +14,9 @@ export default function HomePage() {
       <main className="flex-grow pt-16">
         <HeroSection />
         <AboutSection />
+        <ReviewsSection />
         <GallerySection />
         <AmenitiesSection />
-        <ReviewsSection />
         <ContactSection />
       </main>
       <Footer />
