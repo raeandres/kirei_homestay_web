@@ -167,7 +167,13 @@ export function AmenitiesSection() {
   return (
     <section id="amenities" className="py-8 md:py-24 bg-background">
       <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-lg md:text-xl text-left font-headline mb-8">
+        <h2
+          className={
+            isMobileHookResult
+              ? "text-lg md:text-xl text-left font-headline mb-8"
+              : "text-lg md:text-xl text-center text-justify-center font-headline mb-8"
+          }
+        >
           AMENITIES
         </h2>
         <Card className="shadow-lg">
