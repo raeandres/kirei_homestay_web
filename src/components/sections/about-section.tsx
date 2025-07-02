@@ -24,9 +24,15 @@ export function AboutSection() {
             className="w-full h-full object-cover"
           >
             {isMobile ? (
-              <source src="/about/kirei_slide.webm" type="video/webm" />
+              <source
+                src="/about/kirei_about_portrait.webm"
+                type="video/webm"
+              />
             ) : (
-              <source src="/about/IMG_2727.mp4" type="video/mp4" />
+              <source
+                src="/about/kirei_about_landscape.webm"
+                type="video/webm"
+              />
             )}
             Your browser does not support the video tag.
           </video>
