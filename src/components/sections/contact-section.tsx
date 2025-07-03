@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -35,19 +34,11 @@ import {
   Film,
   MessageSquare,
 } from "lucide-react";
-import { sendInquiryAction } from "@/app/actions/send-inquiry";
-
-const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  phone: z.string().optional(),
-  message: z
-    .string()
-    .min(10, { message: "Message must be at least 10 characters." })
-    .max(500, { message: "Message cannot exceed 500 characters." }),
-});
-
-type FormData = z.infer<typeof formSchema>;
+import {
+  contactFormSchema,
+  ContactFormData,
+  createContactFormHandler,
+} from "@/lib/contact-form";
 
 const nearbyPlaces = [
   { name: "Eastwood City", distance: "0.1 km" },
@@ -73,8 +64,8 @@ const socialMediaLinks = [
 
 export function ContactSection() {
   const { toast } = useToast();
-  const form = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -83,25 +74,8 @@ export function ContactSection() {
     },
   });
 
-  async function onSubmit(values: FormData) {
-    const result = await sendInquiryAction(values);
-
-    if (result.success) {
-      toast({
-        title: "Message Sent!",
-        description: result.message, // Use message from server action
-        variant: "default",
-      });
-      form.reset();
-    } else {
-      toast({
-        title: "Error Sending Message",
-        description:
-          result.message || "Something went wrong. Please try again.",
-        variant: "destructive",
-      });
-    }
-  }
+  // Use the externalized contact form handler
+  const onSubmit = createContactFormHandler(toast, () => form.reset());
 
   return (
     <section id="contact" className="py-8 md:py-24 bg-background">

@@ -6,7 +6,6 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { type DayPickerProps } from "react-day-picker";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
@@ -47,6 +46,12 @@ import { getBookedDates } from "@/app/actions/get-booked-dates";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCurrency } from "@/lib/currency";
+import {
+  contactFormSchema,
+  ContactFormData,
+  handleContactFormSubmit,
+} from "@/lib/contact-form";
+import { useToast } from "@/hooks/use-toast";
 
 interface CardContent {
   location: string;
@@ -86,19 +91,6 @@ interface GalleryCategory {
   };
   icsUrl: string;
 }
-
-// Contact form schema
-const contactFormSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  phone: z.string().optional(),
-  message: z
-    .string()
-    .min(10, { message: "Message must be at least 10 characters." })
-    .max(500, { message: "Message cannot exceed 500 characters." }),
-});
-
-type ContactFormData = z.infer<typeof contactFormSchema>;
 
 const galleryItems: GalleryCategory[] = [
   {
@@ -327,6 +319,7 @@ export function GallerySection() {
   } = useCurrency();
 
   // Contact form setup
+  const { toast } = useToast();
   const contactForm = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -337,18 +330,12 @@ export function GallerySection() {
     },
   });
 
-  // Contact form submit handler
+  // Contact form submit handler using the externalized function
   const onContactSubmit = async (data: ContactFormData) => {
-    try {
-      // Here you would typically send the data to your backend
-      console.log("Contact form submitted:", data);
-      // Reset form and close modal
+    await handleContactFormSubmit(data, toast, () => {
       contactForm.reset();
       setIsContactModalOpen(false);
-      // You could add a toast notification here
-    } catch (error) {
-      console.error("Error submitting contact form:", error);
-    }
+    });
   };
 
   // State for swipe gestures (touch)
@@ -1132,7 +1119,10 @@ export function GallerySection() {
         open={isDescriptionExpanded}
         onOpenChange={setIsDescriptionExpanded}
       >
-        <SheetContent side="bottom" className="h-[80vh] overflow-y-auto">
+        <SheetContent
+          side="bottom"
+          className="h-[80vh] overflow-y-auto p-6 md:p-20"
+        >
           <SheetHeader>
             <SheetTitle className="text-lg md:text-xl">
               Property Details - {activeGalleryCategoryName}
