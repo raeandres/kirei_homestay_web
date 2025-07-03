@@ -4,6 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { type DayPickerProps } from "react-day-picker";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
@@ -14,6 +17,22 @@ import {
   SheetTitle,
   SheetClose,
 } from "@/components/ui/sheet";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { RatingStars } from "@/components/ui/rating-stars";
 import {
   ChevronLeft,
@@ -22,6 +41,7 @@ import {
   Home,
   Briefcase,
   Grid3X3,
+  MessageSquare,
 } from "lucide-react";
 import { getBookedDates } from "@/app/actions/get-booked-dates";
 import { cn } from "@/lib/utils";
@@ -66,6 +86,19 @@ interface GalleryCategory {
   };
   icsUrl: string;
 }
+
+// Contact form schema
+const contactFormSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  phone: z.string().optional(),
+  message: z
+    .string()
+    .min(10, { message: "Message must be at least 10 characters." })
+    .max(500, { message: "Message cannot exceed 500 characters." }),
+});
+
+type ContactFormData = z.infer<typeof contactFormSchema>;
 
 const galleryItems: GalleryCategory[] = [
   {
@@ -279,6 +312,12 @@ export function GallerySection() {
   const [activeIcsUrl, setActiveIcsUrl] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
+  // Property description state
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+
+  // Contact modal state
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
   // Currency hook
   const {
     userCurrency,
@@ -286,6 +325,31 @@ export function GallerySection() {
     initializeCurrency,
     formatPriceWithCurrency,
   } = useCurrency();
+
+  // Contact form setup
+  const contactForm = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+  });
+
+  // Contact form submit handler
+  const onContactSubmit = async (data: ContactFormData) => {
+    try {
+      // Here you would typically send the data to your backend
+      console.log("Contact form submitted:", data);
+      // Reset form and close modal
+      contactForm.reset();
+      setIsContactModalOpen(false);
+      // You could add a toast notification here
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+    }
+  };
 
   // State for swipe gestures (touch)
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
@@ -703,140 +767,212 @@ export function GallerySection() {
                   </Button>
                 </div>
 
-                {/* Property Details Section */}
-                <div className="px-6 md:px-8 pb-4">
-                  <div className="space-y-3">
-                    <CardDescription className="text-sm text-muted-foreground">
-                      {
-                        galleryItems.find(
-                          (item) => item.name === activeGalleryCategoryName
-                        )?.cardContent.location
-                      }
-                    </CardDescription>
-
-                    <div className="text-sm text-muted-foreground">
-                      {
-                        galleryItems.find(
-                          (item) => item.name === activeGalleryCategoryName
-                        )?.cardContent.guests
-                      }{" "}
-                      •{" "}
-                      {
-                        galleryItems.find(
-                          (item) => item.name === activeGalleryCategoryName
-                        )?.cardContent.bedrooms
-                      }{" "}
-                      •{" "}
-                      {
-                        galleryItems.find(
-                          (item) => item.name === activeGalleryCategoryName
-                        )?.cardContent.beds
-                      }{" "}
-                      •{" "}
-                      {
-                        galleryItems.find(
-                          (item) => item.name === activeGalleryCategoryName
-                        )?.cardContent.bathrooms
-                      }
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <RatingStars
-                        rating={
-                          galleryItems.find(
-                            (item) => item.name === activeGalleryCategoryName
-                          )?.cardContent.stars || 5
-                        }
-                        className="scale-75"
-                      />
-                      <span className="text-sm text-muted-foreground">
-                        {
-                          galleryItems.find(
-                            (item) => item.name === activeGalleryCategoryName
-                          )?.cardContent.reviews
-                        }
-                      </span>
-                    </div>
-
-                    <div className="text-lg font-semibold text-foreground">
-                      {isLoadingCurrency ? (
-                        <span className="animate-pulse">Loading...</span>
-                      ) : (
-                        <>
-                          {formatPriceWithCurrency(
+                {/* Two Section Layout */}
+                <div className="gallery-details" />
+                <div className="p-6 md:p-28">
+                  <div className="grid md:grid-cols-2 gap-8 items-start">
+                    {/* Left Section - Property Details */}
+                    <div className="space-y-4">
+                      <div className="space-y-3">
+                        <CardDescription className="text-sm text-muted-foreground">
+                          <h3 className="text-xl md:text-2xl font-semibold mb-4">
+                            {
+                              galleryItems.find(
+                                (item) =>
+                                  item.name === activeGalleryCategoryName
+                              )?.name
+                            }
+                          </h3>
+                          {
                             galleryItems.find(
                               (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.basePriceSGD || 228
-                          )}{" "}
-                          {userCurrency.code}{" "}
-                          <span className="text-sm font-normal text-muted-foreground">
-                            for 1 night
-                          </span>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                            )?.cardContent.location
+                          }
+                        </CardDescription>
 
-                <div className="p-6 md:p-8">
-                  <h3
-                    className={
-                      isMobile
-                        ? "text-xl md:text-xl text-justify-left px-10 font-norlmal mb-2"
-                        : "text-xl md:text-2xl text-center font-headline"
-                    }
-                  >
-                    Availability
-                  </h3>
-                  <div className="grid md:grid-cols-2 gap-8 items-start md:p-10">
-                    <div className="flex justify-center">
-                      <Calendar
-                        mode="single"
-                        selected={date}
-                        // onSelect={setDate}
-                        className="rounded-md border"
-                        disabled={isLoadingCalendar ? true : disabledDates}
-                        footer={
-                          isLoadingCalendar ? (
-                            <p className="text-center text-sm text-muted-foreground p-2">
-                              Loading calendar...
-                            </p>
-                          ) : (
-                            ""
-                          )
-                        }
-                      />
+                        <div className="text-sm text-muted-foreground">
+                          {
+                            galleryItems.find(
+                              (item) => item.name === activeGalleryCategoryName
+                            )?.cardContent.guests
+                          }{" "}
+                          •{" "}
+                          {
+                            galleryItems.find(
+                              (item) => item.name === activeGalleryCategoryName
+                            )?.cardContent.bedrooms
+                          }{" "}
+                          •{" "}
+                          {
+                            galleryItems.find(
+                              (item) => item.name === activeGalleryCategoryName
+                            )?.cardContent.beds
+                          }{" "}
+                          •{" "}
+                          {
+                            galleryItems.find(
+                              (item) => item.name === activeGalleryCategoryName
+                            )?.cardContent.bathrooms
+                          }
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <RatingStars
+                            rating={
+                              galleryItems.find(
+                                (item) =>
+                                  item.name === activeGalleryCategoryName
+                              )?.cardContent.stars || 5
+                            }
+                            className="scale-75"
+                          />
+                          <span className="text-sm text-muted-foreground">
+                            {
+                              galleryItems.find(
+                                (item) =>
+                                  item.name === activeGalleryCategoryName
+                              )?.cardContent.reviews
+                            }
+                          </span>
+                        </div>
+
+                        {/* {  TODO: fix the price
+                        <div className="text-lg font-semibold text-foreground">
+                            {isLoadingCurrency ? (
+                              <span className="animate-pulse">Loading...</span>
+                            ) : (
+                              <>
+                                {formatPriceWithCurrency(
+                                  galleryItems.find(
+                                    (item) =>
+                                      item.name === activeGalleryCategoryName
+                                  )?.cardContent.basePriceSGD || 228
+                                )}{" "}
+                                {userCurrency.code}{" "}
+                                <span className="text-sm font-normal text-muted-foreground">
+                                  for 1 night
+                                </span>
+                              </>
+                            )}
+                          </div>
+                         */}
+
+                        {/* Divider */}
+                        <div className="border-t border-gray-200 my-6"></div>
+
+                        {/* Property Description - Truncated */}
+                        <div className="space-y-4 text-sm text-muted-foreground">
+                          <p className="leading-relaxed">
+                            Right in the heart of Eastwood City is Kirei House -
+                            Ito, a serene Muji-inspired space high above the
+                            city. Relax in the elevated lounge, work by the
+                            window, or unwind in the cozy bedroom with sweeping
+                            skyline views. Every detail is curated for calm and
+                            comfort. A perfect retreat for mindful travelers
+                            seeking beauty in simplicity.
+                          </p>
+
+                          <p className="leading-relaxed">
+                            Our Muji-inspired home in Eastwood Global Plaza
+                            Luxury Residence is thoughtfully designed for
+                            comfort, calm, and quiet luxury. Guests enjoy full
+                            access to premium building amenities like the
+                            infinity pool, fitness pool and jacuzzi, gym, sauna
+                            and spa.
+                          </p>
+                          <p className="leading-relaxed">
+                            Features include smart entry system, 55" TCL Google
+                            TV with streaming services, 300 Mbps WiFi, and
+                            centralized AC. Fully equipped kitchen with modern
+                            appliances, comfortable workspace, and complete
+                            bathroom essentials.
+                          </p>
+                          <p className="leading-relaxed">
+                            Clean, quiet, and well-maintained space ideal for
+                            travelers, families, couples, and business trips.
+                          </p>
+
+                          {/* Show More Button */}
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setIsDescriptionExpanded(true)}
+                            className="mt-4"
+                          >
+                            Show more
+                          </Button>
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex flex-col justify-center space-y-4 pt-0 md:pt-0">
-                      <p className="text-sm text-left px-10 md:text-left pb-2 font-normal">
-                        Check our availability and book your stay on your
-                        favorite platform.
-                      </p>
-                      <Button asChild className="w-full" size="lg">
-                        <Link
-                          href={activeBookingLinks.airbnb}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Home className="mr-2 h-5 w-5" />
-                          Book on Airbnb
-                        </Link>
-                      </Button>
-                      <Button
-                        asChild
-                        className="w-full"
-                        size="lg"
-                        variant="secondary"
-                      >
-                        <Link
-                          href={activeBookingLinks.booking}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Briefcase className="mr-2 h-5 w-5" />
-                          Book on Booking.com
-                        </Link>
-                      </Button>
+
+                    {/* Right Section - Availability & Booking */}
+                    <div className="space-y-4">
+                      <h3 className="text-xl md:text-2xl flex justify-center font-headline mb-4">
+                        Availability
+                      </h3>
+
+                      <div className="space-y-6">
+                        <div className="flex justify-center">
+                          <Calendar
+                            mode="single"
+                            selected={date}
+                            // onSelect={setDate}
+                            className="rounded-md border"
+                            disabled={isLoadingCalendar ? true : disabledDates}
+                            footer={
+                              isLoadingCalendar ? (
+                                <p className="text-center text-sm text-muted-foreground p-2">
+                                  Loading calendar...
+                                </p>
+                              ) : (
+                                ""
+                              )
+                            }
+                          />
+                        </div>
+                        <div className="flex flex-col justify-center space-y-4 pt-0 md:pt-0">
+                          <p className="text-sm text-left px-10 md:text-left pb-2 font-normal">
+                            Check our availability and book your stay on your
+                            favorite platform.
+                          </p>
+                          <Button asChild className="w-full" size="lg">
+                            <Link
+                              href={activeBookingLinks.airbnb}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <Home className="mr-2 h-5 w-5" />
+                              Book on Airbnb
+                            </Link>
+                          </Button>
+                          <Button
+                            asChild
+                            className="w-full"
+                            size="lg"
+                            variant="secondary"
+                          >
+                            <Link
+                              href={activeBookingLinks.booking}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <Briefcase className="mr-2 h-5 w-5" />
+                              Book on Booking.com
+                            </Link>
+                          </Button>
+
+                          {/* Contact Host Button */}
+                          <Button
+                            onClick={() => setIsContactModalOpen(true)}
+                            className="w-full"
+                            size="lg"
+                            variant="outline"
+                          >
+                            <MessageSquare className="mr-2 h-5 w-5" />
+                            Contact Host
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -990,6 +1126,294 @@ export function GallerySection() {
           )}
         </SheetContent>
       </Sheet>
+
+      {/* Property Description Sheet */}
+      <Sheet
+        open={isDescriptionExpanded}
+        onOpenChange={setIsDescriptionExpanded}
+      >
+        <SheetContent side="bottom" className="h-[80vh] overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle className="text-lg md:text-xl">
+              Property Details - {activeGalleryCategoryName}
+            </SheetTitle>
+          </SheetHeader>
+          <div className="mt-6 space-y-6 text-sm text-muted-foreground">
+            <p className="leading-relaxed">
+              Right in the heart of Eastwood City is Kirei House - Ito, a serene
+              Muji-inspired space high above the city. Relax in the elevated
+              lounge, work by the window, or unwind in the cozy bedroom with
+              sweeping skyline views. Every detail is curated for calm and
+              comfort. A perfect retreat for mindful travelers seeking beauty in
+              simplicity.
+            </p>
+
+            <div>
+              <h4 className="font-semibold text-foreground mb-3">The space</h4>
+              <p className="leading-relaxed mb-4">
+                Our Muji-inspired home in Eastwood Global Plaza Luxury Residence
+                is thoughtfully designed for comfort, calm, and quiet luxury.
+                Guests enjoy full access to premium building amenities like the
+                infinity pool (best enjoyed from 7PM - 10PM for city lights),
+                fitness pool and jacuzzi, gym, sauna and spa, day care center
+                and outdoor playground for kids, sun deck lounge, and hammock
+                garden.
+              </p>
+
+              <h5 className="font-medium text-foreground mb-2">
+                In-Unit Features & Amenities
+              </h5>
+              <div className="space-y-2 leading-relaxed">
+                <p>
+                  <strong>Smart Entry:</strong> MGS ELITE PRO Smart Lock for
+                  seamless check-in
+                </p>
+                <p>
+                  <strong>Entertainment:</strong> 55" TCL Google TV with
+                  Netflix, HBO Max, Disney+, Amazon Prime, and cable
+                </p>
+                <p>
+                  <strong>Internet:</strong> 300 Mbps Fiber WiFi, ideal for
+                  remote work and streaming
+                </p>
+                <p>
+                  <strong>Comfort:</strong> Centralized AC with ceiling fan,
+                  spacious king bed, full-size futon bed, ultra-comfy sofa, and
+                  a daybed for reading or relaxing
+                </p>
+                <p>
+                  <strong>Workspace:</strong> Dedicated desk for working
+                </p>
+                <p>
+                  <strong>Fun & Cozy Touches:</strong> Board games, card games,
+                  and plushies for pets
+                </p>
+                <p>
+                  <strong>Kitchen:</strong> Fully equipped with cookware,
+                  tableware, teaware, Condura Inverter Fridge, SAMSUNG 4-in-1
+                  Smart Oven (air fryer, microwave, oven, toaster), B Coffee Neo
+                  machine (with 4 complimentary pods), KYOWA rice cooker, and
+                  electric kettle
+                </p>
+                <p>
+                  <strong>Bathroom Essentials:</strong> Shower heater,
+                  hairdryer, towels, dental kit, and complete toiletries
+                </p>
+                <p>
+                  <strong>Laundry:</strong> TCL front-load washer and dryer with
+                  complimentary laundry capsules
+                </p>
+                <p>
+                  <strong>Closet:</strong> Includes hangers, steamer/iron and
+                  ironing bed.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <h5 className="font-medium text-foreground mb-2">
+                Why Guests Love Kirei House
+              </h5>
+              <div className="space-y-1">
+                <p>✔️ Clean, quiet, and well-maintained</p>
+                <p>✔️ Seamless check-in with responsive host</p>
+                <p>
+                  ✔️ Ideal for travelers, families, couples, business trips and
+                  WFH stays
+                </p>
+                <p>
+                  ✔️ Tastefully designed. We got everything you need and nothing
+                  you don't.
+                </p>
+              </div>
+              <p className="mt-3 leading-relaxed">
+                Book your stay and see why Kirei House - Ito is one of
+                Eastwood's most-loved homes.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-foreground mb-3">
+                Guest access
+              </h4>
+              <p className="leading-relaxed mb-3">
+                Kirei House - Ito offers access to premium amenities designed
+                for relaxation, wellness, and leisure:
+              </p>
+              <ul className="space-y-1 mb-4">
+                <li>- Infinity Pool</li>
+                <li>- Fitness Pool & Jacuzzi</li>
+                <li>- Fully Equipped Gym</li>
+                <li>- Indoor Sauna & Spa</li>
+                <li>- Day Care Center & Outdoor Playground</li>
+                <li>- Hammock Garden & Sun Deck Lounge</li>
+              </ul>
+
+              <h5 className="font-medium text-foreground mb-2">AMENITY FEES</h5>
+              <p className="leading-relaxed mb-2">
+                Please note that some facilities require a usage fee per person,
+                per day to be paid at the Admin Office.
+              </p>
+              <ul className="space-y-1 mb-4">
+                <li>- Swimming Pools & Gym P500</li>
+                <li>- Swimming Pools & Day Care Center P500</li>
+                <li>- Sauna P500</li>
+              </ul>
+
+              <h5 className="font-medium text-foreground mb-2">
+                IMPORTANT NOTES
+              </h5>
+              <ul className="space-y-1 leading-relaxed">
+                <li>
+                  - Registered guests need to pay P250 registration fee as
+                  mandated by PMO.
+                </li>
+                <li>- Unregistered guests are not allowed.</li>
+                <li>- CLAYGO (Clean As You Go) is strictly observed.</li>
+                <li>
+                  - Check-in is from 3PM to 10PM; check-out is at 12:00 PM.
+                </li>
+                <li>- Quiet hours are from 10:00 PM to 8:00 AM.</li>
+                <li>
+                  - Smoking and illegal substances are strictly prohibited.
+                </li>
+                <li>- No additional guests beyond your booking are allowed.</li>
+                <li>
+                  - No loud or unruly parties. This is a peaceful space meant
+                  for rest and relaxation.
+                </li>
+              </ul>
+              <p className="mt-3 leading-relaxed">
+                Please refer to the House Rules for the complete guidelines.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-foreground mb-3">
+                Other things to note
+              </h4>
+              <p className="leading-relaxed">
+                Eastwood City is within walking distance to shopping malls,
+                convenience stores, groceries, restaurants, and entertainment
+                such as bowling alley, billiards, dog parks, fitness gyms, food
+                bazaars, movie theater, nightlife, and many more.
+              </p>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      {/* Contact Host Modal */}
+      <Dialog open={isContactModalOpen} onOpenChange={setIsContactModalOpen}>
+        <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
+          <div
+            className="p-6 pt-8 pb-8"
+            style={{
+              paddingTop: "max(2rem, env(safe-area-inset-top))",
+              paddingBottom: "max(2rem, env(safe-area-inset-bottom))",
+              paddingLeft: "max(1.5rem, env(safe-area-inset-left))",
+              paddingRight: "max(1.5rem, env(safe-area-inset-right))",
+            }}
+          >
+            <DialogHeader>
+              <DialogTitle>Contact the Host</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Interested to know more? Let us know what you think.
+              </p>
+              <Form {...contactForm}>
+                <form
+                  onSubmit={contactForm.handleSubmit(onContactSubmit)}
+                  className="space-y-4"
+                >
+                  <FormField
+                    control={contactForm.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Your Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your Name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={contactForm.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email Address</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            placeholder="your.email@example.com"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={contactForm.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          Phone Number{" "}
+                          <span className="text-xs text-muted-foreground">
+                            (Optional)
+                          </span>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            type="tel"
+                            placeholder="(555) 123-4567"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={contactForm.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Your Message</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="I'm interested in booking your property and have a few questions..."
+                            className="min-h-[100px]"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={contactForm.formState.isSubmitting}
+                  >
+                    {contactForm.formState.isSubmitting
+                      ? "Sending..."
+                      : "Send Inquiry"}
+                  </Button>
+                </form>
+              </Form>
+              <p className="text-xs text-muted-foreground text-center">
+                We typically respond to inquiries within an hour.
+              </p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
