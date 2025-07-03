@@ -11,10 +11,12 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
+  SheetClose,
 } from "@/components/ui/sheet";
 import {
   ChevronLeft,
   ChevronRight,
+  X,
   Home,
   Briefcase,
   Grid3X3,
@@ -228,6 +230,7 @@ const galleryItems: GalleryCategory[] = [
 export function GallerySection() {
   const [isFullScreenViewOpen, setIsFullScreenViewOpen] = useState(false);
   const [isGridViewOpen, setIsGridViewOpen] = useState(false);
+  const [isFullScreenImageOpen, setIsFullScreenImageOpen] = useState(false);
   const [activeGalleryImages, setActiveGalleryImages] = useState<
     GalleryImage[] | null
   >(null);
@@ -284,6 +287,7 @@ export function GallerySection() {
   const selectImageFromGrid = (imageIndex: number) => {
     setCurrentImageIndex(imageIndex);
     setIsGridViewOpen(false);
+    setIsFullScreenImageOpen(true);
   };
 
   const showNextImage = useCallback(() => {
@@ -480,10 +484,25 @@ export function GallerySection() {
       </div>
 
       {/* Main Gallery Sheet */}
-      <Sheet open={isFullScreenViewOpen} onOpenChange={setIsFullScreenViewOpen}>
+      <Sheet
+        open={isFullScreenViewOpen}
+        onOpenChange={(open) => {
+          if (!open) {
+            closeFullScreenView();
+          }
+        }}
+      >
         <SheetContent
           side="bottom"
-          className="h-[95vh] overflow-y-auto p-0"
+          className={cn(
+            "overflow-y-auto p-0",
+            isMobile ? "h-[95dvh] pb-safe pt-safe-top" : "h-[95vh]",
+            // Style the default close button
+            "[&>button]:absolute [&>button]:z-[60]  [&>button]:bg-transparent [&>button]:border [&>button]:border-transparent [&>button]:shadow-lg",
+            isMobile
+              ? "[&>button]:top-4 [&>button]:right-4 [&>button]:mt-safe-top [&>button]:h-5 [&>button]:w-5"
+              : "[&>button]:top-6 [&>button]:right-6 [&>button]:h-5 [&>button]:w-5"
+          )}
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
           <SheetHeader className="sr-only">
@@ -499,11 +518,10 @@ export function GallerySection() {
             activeBookingLinks && (
               <div className="relative w-full h-full bg-background">
                 <div
-                  className={
-                    isMobile
-                      ? "relative h-[50vh] w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg"
-                      : "relative h-[65vh] w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg"
-                  } // add conditional rendering
+                  className={cn(
+                    "relative w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg",
+                    isMobile ? "h-[50vh]" : "h-[65vh]"
+                  )}
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
                   onTouchEnd={handleTouchEnd}
@@ -540,7 +558,12 @@ export function GallerySection() {
                     </div>
                   ))}
 
-                  <div className="absolute top-3 left-1/2 -translate-x-1/2 z-[1] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
+                  <div
+                    className={cn(
+                      "absolute left-1/2 -translate-x-1/2 z-[1] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center",
+                      isMobile ? "top-3 mt-safe-top" : "top-3"
+                    )}
+                  >
                     <h3
                       className="text-lg md:text-xl font-normal"
                       title={activeGalleryCategoryName}
@@ -698,6 +721,105 @@ export function GallerySection() {
               </div>
             )}
           </div>
+        </SheetContent>
+      </Sheet>
+
+      {/* Full Screen Image Sheet */}
+      <Sheet
+        open={isFullScreenImageOpen}
+        onOpenChange={setIsFullScreenImageOpen}
+      >
+        <SheetContent
+          side="bottom"
+          className={cn(
+            "overflow-hidden p-0 [&>button]:hidden",
+            isMobile ? "h-[100dvh] pb-safe pt-safe-top" : "h-[100vh]"
+          )}
+          onOpenAutoFocus={(e) => e.preventDefault()}
+        >
+          <SheetHeader className="sr-only">
+            <SheetTitle>
+              {activeGalleryCategoryName &&
+              activeGalleryImages &&
+              activeGalleryImages[currentImageIndex]
+                ? `${activeGalleryCategoryName} - ${activeGalleryImages[currentImageIndex].alt}`
+                : "Full Screen Image"}
+            </SheetTitle>
+          </SheetHeader>
+          {activeGalleryImages && activeGalleryImages[currentImageIndex] && (
+            <div className="relative w-full h-full bg-black">
+              <Image
+                src={activeGalleryImages[currentImageIndex].src}
+                alt={activeGalleryImages[currentImageIndex].alt}
+                data-ai-hint={activeGalleryImages[currentImageIndex].hint}
+                fill
+                className="object-contain"
+                sizes="100vw"
+                priority
+              />
+
+              {/* Custom Close Button */}
+              <SheetClose asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={cn(
+                    "absolute z-20 rounded-full bg-black/60 text-white hover:bg-black/80 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-0 border border-white/20",
+                    isMobile
+                      ? "top-4 right-4 h-12 w-12 mt-safe-top"
+                      : "top-6 right-6 h-10 w-10"
+                  )}
+                  aria-label="Close full screen view"
+                >
+                  <X className={isMobile ? "h-6 w-6" : "h-5 w-5"} />
+                </Button>
+              </SheetClose>
+
+              {/* Image info overlay */}
+              <div
+                className={cn(
+                  "absolute left-1/2 -translate-x-1/2 z-10 px-4 py-2 rounded-lg bg-black/50 text-white text-center",
+                  isMobile ? "top-20 mt-safe-top" : "top-4"
+                )}
+              >
+                <h3 className="text-lg font-medium">
+                  {activeGalleryCategoryName}
+                </h3>
+                <p className="text-sm opacity-90">
+                  {currentImageIndex + 1} of {activeGalleryImages.length}
+                </p>
+              </div>
+
+              {/* Navigation buttons */}
+              {activeGalleryImages.length > 1 && (
+                <>
+                  <Button
+                    variant="ghost"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      showPrevImage();
+                    }}
+                    aria-label="Previous image"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  >
+                    <ChevronLeft className="h-6 w-6" />
+                  </Button>
+
+                  <Button
+                    variant="ghost"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      showNextImage();
+                    }}
+                    aria-label="Next image"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  >
+                    <ChevronRight className="h-6 w-6" />
+                  </Button>
+                </>
+              )}
+            </div>
+          )}
         </SheetContent>
       </Sheet>
     </section>
