@@ -26,6 +26,7 @@ import {
 import { getBookedDates } from "@/app/actions/get-booked-dates";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useCurrency } from "@/lib/currency";
 
 interface CardContent {
   location: string;
@@ -169,7 +170,7 @@ const galleryItems: GalleryCategory[] = [
       bedrooms: "1 bedroom",
       beds: "2 beds",
       bathrooms: "1 bathroom",
-      price: "$122",
+      basePriceSGD: 122,
       reviews: "5 reviews",
       stars: 5,
     },
@@ -261,30 +262,6 @@ const galleryItems: GalleryCategory[] = [
   },
 ];
 
-// Currency configuration
-interface CurrencyInfo {
-  code: string;
-  symbol: string;
-  rate: number; // Rate from SGD base
-}
-
-const currencyMap: Record<string, CurrencyInfo> = {
-  SG: { code: "SGD", symbol: "$", rate: 1 },
-  US: { code: "USD", symbol: "$", rate: 0.74 },
-  GB: { code: "GBP", symbol: "£", rate: 0.58 },
-  EU: { code: "EUR", symbol: "€", rate: 0.68 },
-  JP: { code: "JPY", symbol: "¥", rate: 110 },
-  AU: { code: "AUD", symbol: "A$", rate: 1.12 },
-  CA: { code: "CAD", symbol: "C$", rate: 1.01 },
-  PH: { code: "PHP", symbol: "₱", rate: 42 },
-  MY: { code: "MYR", symbol: "RM", rate: 3.15 },
-  TH: { code: "THB", symbol: "฿", rate: 26 },
-  ID: { code: "IDR", symbol: "Rp", rate: 11200 },
-  VN: { code: "VND", symbol: "₫", rate: 18500 },
-  // Default fallback
-  DEFAULT: { code: "SGD", symbol: "$", rate: 1 },
-};
-
 export function GallerySection() {
   const [isFullScreenViewOpen, setIsFullScreenViewOpen] = useState(false);
   const [isGridViewOpen, setIsGridViewOpen] = useState(false);
@@ -302,11 +279,13 @@ export function GallerySection() {
   const [activeIcsUrl, setActiveIcsUrl] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
-  // Currency and location state
-  const [userCurrency, setUserCurrency] = useState<CurrencyInfo>(
-    currencyMap.DEFAULT
-  );
-  const [isLoadingCurrency, setIsLoadingCurrency] = useState(true);
+  // Currency hook
+  const {
+    userCurrency,
+    isLoadingCurrency,
+    initializeCurrency,
+    formatPriceWithCurrency,
+  } = useCurrency();
 
   // State for swipe gestures (touch)
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
@@ -325,54 +304,10 @@ export function GallerySection() {
 
   const isMobile = useIsMobile();
 
-  // Function to detect user's country and set currency
-  const detectUserCurrency = async () => {
-    try {
-      setIsLoadingCurrency(true);
-
-      // Try to get user's country from IP geolocation
-      const response = await fetch("https://ipapi.co/json/");
-      const data = await response.json();
-
-      if (data.country_code) {
-        const countryCode = data.country_code.toUpperCase();
-        const currency = currencyMap[countryCode] || currencyMap.DEFAULT;
-        setUserCurrency(currency);
-      } else {
-        setUserCurrency(currencyMap.DEFAULT);
-      }
-    } catch (error) {
-      console.log("Could not detect location, using default currency");
-      setUserCurrency(currencyMap.DEFAULT);
-    } finally {
-      setIsLoadingCurrency(false);
-    }
-  };
-
-  // Function to format price with user's currency
-  const formatPrice = (basePriceSGD: number): string => {
-    const convertedPrice = basePriceSGD * userCurrency.rate;
-
-    // Format based on currency
-    if (
-      userCurrency.code === "JPY" ||
-      userCurrency.code === "IDR" ||
-      userCurrency.code === "VND"
-    ) {
-      // No decimal places for these currencies
-      return `${userCurrency.symbol}${Math.round(
-        convertedPrice
-      ).toLocaleString()}`;
-    } else {
-      // Two decimal places for other currencies
-      return `${userCurrency.symbol}${convertedPrice.toFixed(2)}`;
-    }
-  };
-
-  // Effect to detect user currency on component mount
+  // Effect to initialize currency on component mount
   useEffect(() => {
-    detectUserCurrency();
-  }, []);
+    initializeCurrency();
+  }, [initializeCurrency]);
 
   const openFullScreenView = (categoryIndex: number) => {
     const category = galleryItems[categoryIndex];
@@ -617,10 +552,17 @@ export function GallerySection() {
                   </div>
 
                   <div className="text-lg font-semibold text-foreground">
-                    {item.cardContent.price}{" "}
-                    <span className="text-sm font-normal text-muted-foreground">
-                      for 1 night
-                    </span>
+                    {isLoadingCurrency ? (
+                      <span className="animate-pulse">Loading...</span>
+                    ) : (
+                      <>
+                        {formatPriceWithCurrency(item.cardContent.basePriceSGD)}{" "}
+                        {userCurrency.code}{" "}
+                        <span className="text-sm font-normal text-muted-foreground">
+                          for 1 night
+                        </span>
+                      </>
+                    )}
                   </div>
                 </div>
               </CardContent>
