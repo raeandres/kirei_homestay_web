@@ -703,6 +703,81 @@ export function GallerySection() {
                   </Button>
                 </div>
 
+                {/* Property Details Section */}
+                <div className="px-6 md:px-8 pb-4">
+                  <div className="space-y-3">
+                    <CardDescription className="text-sm text-muted-foreground">
+                      {
+                        galleryItems.find(
+                          (item) => item.name === activeGalleryCategoryName
+                        )?.cardContent.location
+                      }
+                    </CardDescription>
+
+                    <div className="text-sm text-muted-foreground">
+                      {
+                        galleryItems.find(
+                          (item) => item.name === activeGalleryCategoryName
+                        )?.cardContent.guests
+                      }{" "}
+                      •{" "}
+                      {
+                        galleryItems.find(
+                          (item) => item.name === activeGalleryCategoryName
+                        )?.cardContent.bedrooms
+                      }{" "}
+                      •{" "}
+                      {
+                        galleryItems.find(
+                          (item) => item.name === activeGalleryCategoryName
+                        )?.cardContent.beds
+                      }{" "}
+                      •{" "}
+                      {
+                        galleryItems.find(
+                          (item) => item.name === activeGalleryCategoryName
+                        )?.cardContent.bathrooms
+                      }
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <RatingStars
+                        rating={
+                          galleryItems.find(
+                            (item) => item.name === activeGalleryCategoryName
+                          )?.cardContent.stars || 5
+                        }
+                        className="scale-75"
+                      />
+                      <span className="text-sm text-muted-foreground">
+                        {
+                          galleryItems.find(
+                            (item) => item.name === activeGalleryCategoryName
+                          )?.cardContent.reviews
+                        }
+                      </span>
+                    </div>
+
+                    <div className="text-lg font-semibold text-foreground">
+                      {isLoadingCurrency ? (
+                        <span className="animate-pulse">Loading...</span>
+                      ) : (
+                        <>
+                          {formatPriceWithCurrency(
+                            galleryItems.find(
+                              (item) => item.name === activeGalleryCategoryName
+                            )?.cardContent.basePriceSGD || 228
+                          )}{" "}
+                          {userCurrency.code}{" "}
+                          <span className="text-sm font-normal text-muted-foreground">
+                            for 1 night
+                          </span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
                 <div className="p-6 md:p-8">
                   <h3
                     className={
