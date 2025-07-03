@@ -1305,16 +1305,8 @@ export function GallerySection() {
 
       {/* Contact Host Modal */}
       <Dialog open={isContactModalOpen} onOpenChange={setIsContactModalOpen}>
-        <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
-          <div
-            className="p-6 pt-8 pb-8"
-            style={{
-              paddingTop: "max(2rem, env(safe-area-inset-top))",
-              paddingBottom: "max(2rem, env(safe-area-inset-bottom))",
-              paddingLeft: "max(1.5rem, env(safe-area-inset-left))",
-              paddingRight: "max(1.5rem, env(safe-area-inset-right))",
-            }}
-          >
+        <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto safe-area-modal">
+          <div className="p-6 pt-8 pb-8">
             <DialogHeader>
               <DialogTitle>Contact the Host</DialogTitle>
             </DialogHeader>
