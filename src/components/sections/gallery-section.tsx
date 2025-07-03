@@ -6,6 +6,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { type DayPickerProps } from "react-day-picker";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import {
   Sheet,
   SheetContent,
@@ -13,6 +14,7 @@ import {
   SheetTitle,
   SheetClose,
 } from "@/components/ui/sheet";
+import { RatingStars } from "@/components/ui/rating-stars";
 import {
   ChevronLeft,
   ChevronRight,
@@ -24,6 +26,17 @@ import {
 import { getBookedDates } from "@/app/actions/get-booked-dates";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+
+interface CardContent {
+  location: string;
+  guests: string;
+  bedrooms: string;
+  beds: string;
+  bathrooms: string;
+  basePriceSGD: number; // Base price in SGD for conversion
+  reviews: string;
+  stars: number;
+}
 
 interface GalleryImage {
   src: string;
@@ -44,6 +57,7 @@ interface GalleryCategory {
 interface GalleryCategory {
   name: string;
   coverImage: GalleryImage;
+  cardContent: CardContent;
   images: GalleryImage[];
   bookingLinks: {
     airbnb: string;
@@ -59,6 +73,16 @@ const galleryItems: GalleryCategory[] = [
       src: "/gallery/kirei_2/converted_0002.webp",
       alt: "Kirei-ito",
       hint: "Minimalist 1 bedroom suite",
+    },
+    cardContent: {
+      location: "Eastwood Global Plaza, Quezon City",
+      guests: "5 guests",
+      bedrooms: "1 bedroom",
+      beds: "2 beds",
+      bathrooms: "1 bathroom",
+      basePriceSGD: 228,
+      reviews: "5 reviews",
+      stars: 5,
     },
     images: [
       // Living Room
@@ -138,6 +162,16 @@ const galleryItems: GalleryCategory[] = [
       src: "/gallery/kirei_1/converted_0007.webp",
       alt: "Kirei",
       hint: "Minimalist studio bedroom suite",
+    },
+    cardContent: {
+      location: "Eastwood LeGrand 3, Quezon City",
+      guests: "5 guests",
+      bedrooms: "1 bedroom",
+      beds: "2 beds",
+      bathrooms: "1 bathroom",
+      price: "$122",
+      reviews: "5 reviews",
+      stars: 5,
     },
     images: [
       {
@@ -227,6 +261,30 @@ const galleryItems: GalleryCategory[] = [
   },
 ];
 
+// Currency configuration
+interface CurrencyInfo {
+  code: string;
+  symbol: string;
+  rate: number; // Rate from SGD base
+}
+
+const currencyMap: Record<string, CurrencyInfo> = {
+  SG: { code: "SGD", symbol: "$", rate: 1 },
+  US: { code: "USD", symbol: "$", rate: 0.74 },
+  GB: { code: "GBP", symbol: "£", rate: 0.58 },
+  EU: { code: "EUR", symbol: "€", rate: 0.68 },
+  JP: { code: "JPY", symbol: "¥", rate: 110 },
+  AU: { code: "AUD", symbol: "A$", rate: 1.12 },
+  CA: { code: "CAD", symbol: "C$", rate: 1.01 },
+  PH: { code: "PHP", symbol: "₱", rate: 42 },
+  MY: { code: "MYR", symbol: "RM", rate: 3.15 },
+  TH: { code: "THB", symbol: "฿", rate: 26 },
+  ID: { code: "IDR", symbol: "Rp", rate: 11200 },
+  VN: { code: "VND", symbol: "₫", rate: 18500 },
+  // Default fallback
+  DEFAULT: { code: "SGD", symbol: "$", rate: 1 },
+};
+
 export function GallerySection() {
   const [isFullScreenViewOpen, setIsFullScreenViewOpen] = useState(false);
   const [isGridViewOpen, setIsGridViewOpen] = useState(false);
@@ -244,6 +302,12 @@ export function GallerySection() {
   const [activeIcsUrl, setActiveIcsUrl] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
+  // Currency and location state
+  const [userCurrency, setUserCurrency] = useState<CurrencyInfo>(
+    currencyMap.DEFAULT
+  );
+  const [isLoadingCurrency, setIsLoadingCurrency] = useState(true);
+
   // State for swipe gestures (touch)
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
@@ -260,6 +324,55 @@ export function GallerySection() {
   const [isLoadingCalendar, setIsLoadingCalendar] = useState(true);
 
   const isMobile = useIsMobile();
+
+  // Function to detect user's country and set currency
+  const detectUserCurrency = async () => {
+    try {
+      setIsLoadingCurrency(true);
+
+      // Try to get user's country from IP geolocation
+      const response = await fetch("https://ipapi.co/json/");
+      const data = await response.json();
+
+      if (data.country_code) {
+        const countryCode = data.country_code.toUpperCase();
+        const currency = currencyMap[countryCode] || currencyMap.DEFAULT;
+        setUserCurrency(currency);
+      } else {
+        setUserCurrency(currencyMap.DEFAULT);
+      }
+    } catch (error) {
+      console.log("Could not detect location, using default currency");
+      setUserCurrency(currencyMap.DEFAULT);
+    } finally {
+      setIsLoadingCurrency(false);
+    }
+  };
+
+  // Function to format price with user's currency
+  const formatPrice = (basePriceSGD: number): string => {
+    const convertedPrice = basePriceSGD * userCurrency.rate;
+
+    // Format based on currency
+    if (
+      userCurrency.code === "JPY" ||
+      userCurrency.code === "IDR" ||
+      userCurrency.code === "VND"
+    ) {
+      // No decimal places for these currencies
+      return `${userCurrency.symbol}${Math.round(
+        convertedPrice
+      ).toLocaleString()}`;
+    } else {
+      // Two decimal places for other currencies
+      return `${userCurrency.symbol}${convertedPrice.toFixed(2)}`;
+    }
+  };
+
+  // Effect to detect user currency on component mount
+  useEffect(() => {
+    detectUserCurrency();
+  }, []);
 
   const openFullScreenView = (categoryIndex: number) => {
     const category = galleryItems[categoryIndex];
@@ -454,31 +567,64 @@ export function GallerySection() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {galleryItems.map((item, index) => (
-            <button
+            <Card
               key={item.name}
-              type="button"
-              onClick={() => openFullScreenView(index)}
-              // className="group block w-full rounded-lg shadow-lg custom-aspect-3-2 overflow-hidden text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 p-0" // p-2 removed, image will fill
-              className="group block w-full p-0 border-0 shadow-lg aspect-[3/2] overflow-hidden text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-              aria-label={`View images of ${item.name}`}
+              className="group overflow-hidden hover:shadow-xl transition-shadow duration-300"
             >
-              <div className="relative w-full h-full">
-                <Image
-                  src={item.coverImage.src}
-                  alt={item.coverImage.alt}
-                  data-ai-hint={item.coverImage.hint}
-                  fill
-                  sizes="(max-width: 908px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-200 rounded-sm"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-sm" />
-                <div className="absolute bottom-0 left-0 p-3 md:p-4">
-                  <h3 className="text-lg md:text-xl font-normal text-white">
-                    {item.name}
-                  </h3>
+              <button
+                type="button"
+                onClick={() => openFullScreenView(index)}
+                className="block w-full p-0 border-0 text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                aria-label={`View images of ${item.name}`}
+              >
+                <div className="relative w-full aspect-[3/2] overflow-hidden">
+                  <Image
+                    src={item.coverImage.src}
+                    alt={item.coverImage.alt}
+                    data-ai-hint={item.coverImage.hint}
+                    fill
+                    sizes="(max-width: 908px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 p-3 md:p-4">
+                    <h3 className="text-lg md:text-xl font-normal text-white">
+                      {item.name}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-            </button>
+              </button>
+
+              <CardContent className="p-4">
+                <div className="space-y-2">
+                  <CardDescription className="text-sm text-muted-foreground">
+                    {item.cardContent.location}
+                  </CardDescription>
+
+                  <div className="text-sm text-muted-foreground">
+                    {item.cardContent.guests} • {item.cardContent.bedrooms} •{" "}
+                    {item.cardContent.beds} • {item.cardContent.bathrooms}{" "}
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <RatingStars
+                      rating={item.cardContent.stars}
+                      className="scale-75"
+                    />
+                    <span className="text-sm text-muted-foreground">
+                      {item.cardContent.reviews}
+                    </span>
+                  </div>
+
+                  <div className="text-lg font-semibold text-foreground">
+                    {item.cardContent.price}{" "}
+                    <span className="text-sm font-normal text-muted-foreground">
+                      for 1 night
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
