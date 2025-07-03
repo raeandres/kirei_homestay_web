@@ -54,7 +54,7 @@ interface GalleryCategory {
 
 const galleryItems: GalleryCategory[] = [
   {
-    name: "1 Bedroom",
+    name: "Kirei-ito",
     coverImage: {
       src: "/gallery/kirei_2/converted_0002.webp",
       alt: "Kirei-ito",
@@ -133,7 +133,7 @@ const galleryItems: GalleryCategory[] = [
       "https://www.airbnb.com.sg/calendar/ical/1364997919482714933.ics?s=663892ccaa5dabea43e13966feabc6e1",
   },
   {
-    name: "Studio",
+    name: "Kirei",
     coverImage: {
       src: "/gallery/kirei_1/converted_0007.webp",
       alt: "Kirei",
