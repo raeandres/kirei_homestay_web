@@ -606,9 +606,12 @@ export function GallerySection() {
                       openGridView();
                     }}
                     aria-label="View all images in grid"
-                    className="absolute bottom-3 right-3 z-[1] p-1.5 sm:p-2 rounded-full bg-white/30 text-black hover:bg-white/50 focus-visible:ring-0 focus-visible:ring-offset-0"
+                    className="absolute bottom-3 right-3 z-[1] px-3 py-2 rounded-full bg-white/30 text-black hover:bg-white/50 focus-visible:ring-0 focus-visible:ring-offset-0 flex items-center gap-2"
                   >
-                    <Grid3X3 className="h-5 w-5 sm:h-6 sm:w-6" />
+                    <Grid3X3 className="h-4 w-4 sm:h-5 sm:w-5" />
+                    <span className="text-xs sm:text-sm font-medium">
+                      View all photos
+                    </span>
                   </Button>
                 </div>
 
