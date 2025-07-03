@@ -6,7 +6,19 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { type DayPickerProps } from "react-day-picker";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { ChevronLeft, ChevronRight, X, Home, Briefcase } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Home,
+  Briefcase,
+  Grid3X3,
+} from "lucide-react";
 import { getBookedDates } from "@/app/actions/get-booked-dates";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -215,6 +227,7 @@ const galleryItems: GalleryCategory[] = [
 
 export function GallerySection() {
   const [isFullScreenViewOpen, setIsFullScreenViewOpen] = useState(false);
+  const [isGridViewOpen, setIsGridViewOpen] = useState(false);
   const [activeGalleryImages, setActiveGalleryImages] = useState<
     GalleryImage[] | null
   >(null);
@@ -257,10 +270,20 @@ export function GallerySection() {
 
   const closeFullScreenView = () => {
     setIsFullScreenViewOpen(false);
+    setIsGridViewOpen(false);
     setActiveGalleryImages(null);
     setActiveGalleryCategoryName(null);
     setActiveBookingLinks(null);
     setActiveIcsUrl(null);
+  };
+
+  const openGridView = () => {
+    setIsGridViewOpen(true);
+  };
+
+  const selectImageFromGrid = (imageIndex: number) => {
+    setCurrentImageIndex(imageIndex);
+    setIsGridViewOpen(false);
   };
 
   const showNextImage = useCallback(() => {
@@ -456,175 +479,227 @@ export function GallerySection() {
         </div>
       </div>
 
-      {isFullScreenViewOpen &&
-        activeGalleryCategoryName &&
-        activeGalleryImages &&
-        currentImageInFullScreen &&
-        activeBookingLinks && (
-          <div
-            className="fixed inset-0 z-50 overflow-y-auto bg-black/90 p-2 sm:p-4 backdrop-blur-sm"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="fullscreen-gallery-title"
-            onClick={closeFullScreenView}
-          >
-            <div
-              className="relative mx-auto mt-12 mb-8 max-w-4xl w-full bg-background rounded-lg shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div
-                className={
-                  isMobile
-                    ? "relative h-[50vh] w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg"
-                    : "relative h-[65vh] w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg"
-                } // add conditional rendering
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseLeave}
-              >
-                <h2 className="sr-only" id="fullscreen-gallery-title">
-                  Image gallery: {activeGalleryCategoryName} - Image{" "}
-                  {currentImageIndex + 1} of {activeGalleryImages.length} -{" "}
-                  {currentImageInFullScreen.alt}
-                </h2>
+      {/* Main Gallery Sheet */}
+      <Sheet open={isFullScreenViewOpen} onOpenChange={setIsFullScreenViewOpen}>
+        <SheetContent
+          side="bottom"
+          className="h-[95vh] overflow-y-auto p-0"
+          onOpenAutoFocus={(e) => e.preventDefault()}
+        >
+          <SheetHeader className="sr-only">
+            <SheetTitle>
+              {activeGalleryCategoryName
+                ? `${activeGalleryCategoryName} Gallery`
+                : "Gallery"}
+            </SheetTitle>
+          </SheetHeader>
+          {activeGalleryCategoryName &&
+            activeGalleryImages &&
+            currentImageInFullScreen &&
+            activeBookingLinks && (
+              <div className="relative w-full h-full bg-background">
+                <div
+                  className={
+                    isMobile
+                      ? "relative h-[50vh] w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg"
+                      : "relative h-[65vh] w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg"
+                  } // add conditional rendering
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <h2 className="sr-only" id="fullscreen-gallery-title">
+                    Image gallery: {activeGalleryCategoryName} - Image{" "}
+                    {currentImageIndex + 1} of {activeGalleryImages.length} -{" "}
+                    {currentImageInFullScreen.alt}
+                  </h2>
 
+                  {activeGalleryImages.map((image, index) => (
+                    <div
+                      key={image.src}
+                      className={cn(
+                        "absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out",
+                        index === currentImageIndex
+                          ? "opacity-100 z-[1]"
+                          : "opacity-0 z-0 pointer-events-none"
+                      )}
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        data-ai-hint={image.hint}
+                        fill
+                        className={isMobile ? "object-contain" : "object-cover"} // object-cover = fit the image to screen; object-contain = preservers the image ratio
+                        sizes="100vw"
+                        priority={index === 0}
+                      />
+                    </div>
+                  ))}
+
+                  <div className="absolute top-3 left-1/2 -translate-x-1/2 z-[1] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
+                    <h3
+                      className="text-lg md:text-xl font-normal"
+                      title={activeGalleryCategoryName}
+                    >
+                      {activeGalleryCategoryName}
+                    </h3>
+                    <p className="text-xs sm:text-sm">
+                      ({currentImageIndex + 1} / {activeGalleryImages.length})
+                    </p>
+                  </div>
+
+                  <Button
+                    variant="ghost"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      showPrevImage();
+                    }}
+                    aria-label="Previous image"
+                    className="absolute left-1 top-1/2 -translate-y-1/2 sm:left-2 md:left-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
+                  >
+                    <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
+                  </Button>
+
+                  <Button
+                    variant="ghost"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      showNextImage();
+                    }}
+                    aria-label="Next image"
+                    className="absolute right-1 top-1/2 -translate-y-1/2 sm:right-2 md:right-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
+                  >
+                    <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
+                  </Button>
+
+                  <Button
+                    variant="ghost"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openGridView();
+                    }}
+                    aria-label="View all images in grid"
+                    className="absolute bottom-3 right-3 z-[1] p-1.5 sm:p-2 rounded-full bg-white/30 text-black hover:bg-white/50 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  >
+                    <Grid3X3 className="h-5 w-5 sm:h-6 sm:w-6" />
+                  </Button>
+                </div>
+
+                <div className="p-6 md:p-8">
+                  <h3
+                    className={
+                      isMobile
+                        ? "text-xl md:text-xl text-justify-left px-10 font-norlmal mb-2"
+                        : "text-xl md:text-2xl text-center font-headline"
+                    }
+                  >
+                    Availability
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-8 items-start md:p-10">
+                    <div className="flex justify-center">
+                      <Calendar
+                        mode="single"
+                        selected={date}
+                        // onSelect={setDate}
+                        className="rounded-md border"
+                        disabled={isLoadingCalendar ? true : disabledDates}
+                        footer={
+                          isLoadingCalendar ? (
+                            <p className="text-center text-sm text-muted-foreground p-2">
+                              Loading calendar...
+                            </p>
+                          ) : (
+                            ""
+                          )
+                        }
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center space-y-4 pt-0 md:pt-0">
+                      <p className="text-sm text-left px-10 md:text-left pb-2 font-normal">
+                        Check our availability and book your stay on your
+                        favorite platform.
+                      </p>
+                      <Button asChild className="w-full" size="lg">
+                        <Link
+                          href={activeBookingLinks.airbnb}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Home className="mr-2 h-5 w-5" />
+                          Book on Airbnb
+                        </Link>
+                      </Button>
+                      <Button
+                        asChild
+                        className="w-full"
+                        size="lg"
+                        variant="secondary"
+                      >
+                        <Link
+                          href={activeBookingLinks.booking}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Briefcase className="mr-2 h-5 w-5" />
+                          Book on Booking.com
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+        </SheetContent>
+      </Sheet>
+
+      {/* Grid View Sheet */}
+      <Sheet open={isGridViewOpen} onOpenChange={setIsGridViewOpen}>
+        <SheetContent side="bottom" className="h-[80vh] overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle>{activeGalleryCategoryName} - All Images</SheetTitle>
+          </SheetHeader>
+          <div className="mt-6">
+            {activeGalleryImages && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {activeGalleryImages.map((image, index) => (
-                  <div
+                  <button
                     key={image.src}
+                    type="button"
+                    onClick={() => selectImageFromGrid(index)}
                     className={cn(
-                      "absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out",
+                      "relative aspect-square overflow-hidden rounded-lg border-2 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
                       index === currentImageIndex
-                        ? "opacity-100 z-[1]"
-                        : "opacity-0 z-0 pointer-events-none"
+                        ? "border-primary ring-2 ring-primary ring-offset-2"
+                        : "border-transparent hover:border-primary/50"
                     )}
+                    aria-label={`View image ${index + 1}: ${image.alt}`}
                   >
                     <Image
                       src={image.src}
                       alt={image.alt}
                       data-ai-hint={image.hint}
                       fill
-                      className={isMobile ? "object-contain" : "object-cover"} // object-cover = fit the image to screen; object-contain = preservers the image ratio
-                      sizes="100vw"
-                      priority={index === 0}
+                      className="object-cover"
+                      sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
                     />
-                  </div>
+                    {index === currentImageIndex && (
+                      <div className="absolute inset-0 bg-primary/20 flex items-center justify-center">
+                        <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-medium">
+                          {index + 1}
+                        </div>
+                      </div>
+                    )}
+                  </button>
                 ))}
-
-                <div className="absolute top-3 left-1/2 -translate-x-1/2 z-[1] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center">
-                  <h3
-                    className="text-lg md:text-xl font-normal"
-                    title={activeGalleryCategoryName}
-                  >
-                    {activeGalleryCategoryName}
-                  </h3>
-                  <p className="text-xs sm:text-sm">
-                    ({currentImageIndex + 1} / {activeGalleryImages.length})
-                  </p>
-                </div>
-
-                <Button
-                  variant="ghost"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    showPrevImage();
-                  }}
-                  aria-label="Previous image"
-                  className="absolute left-1 top-1/2 -translate-y-1/2 sm:left-2 md:left-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
-                >
-                  <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
-                </Button>
-
-                <Button
-                  variant="ghost"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    showNextImage();
-                  }}
-                  aria-label="Next image"
-                  className="absolute right-1 top-1/2 -translate-y-1/2 sm:right-2 md:right-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
-                >
-                  <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
-                </Button>
               </div>
-
-              <div className="p-6 md:p-8">
-                <h3
-                  className={
-                    isMobile
-                      ? "text-xl md:text-xl text-justify-left px-10 font-norlmal mb-2"
-                      : "text-xl md:text-2xl text-center font-headline"
-                  }
-                >
-                  Availability
-                </h3>
-                <div className="grid md:grid-cols-2 gap-8 items-start md:p-10">
-                  <div className="flex justify-center">
-                    <Calendar
-                      mode="single"
-                      selected={date}
-                      // onSelect={setDate}
-                      className="rounded-md border"
-                      disabled={isLoadingCalendar ? true : disabledDates}
-                      footer={
-                        isLoadingCalendar ? (
-                          <p className="text-center text-sm text-muted-foreground p-2">
-                            Loading calendar...
-                          </p>
-                        ) : (
-                          ""
-                        )
-                      }
-                    />
-                  </div>
-                  <div className="flex flex-col justify-center space-y-4 pt-0 md:pt-0">
-                    <p className="text-sm text-left px-10 md:text-left pb-2 font-normal">
-                      Check our availability and book your stay on your favorite
-                      platform.
-                    </p>
-                    <Button asChild className="w-full" size="lg">
-                      <Link
-                        href={activeBookingLinks.airbnb}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Home className="mr-2 h-5 w-5" />
-                        Book on Airbnb
-                      </Link>
-                    </Button>
-                    <Button
-                      asChild
-                      className="w-full"
-                      size="lg"
-                      variant="secondary"
-                    >
-                      <Link
-                        href={activeBookingLinks.booking}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Briefcase className="mr-2 h-5 w-5" />
-                        Book on Booking.com
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <Button
-              variant="ghost"
-              onClick={closeFullScreenView}
-              aria-label="Close fullscreen view"
-              className="absolute top-3 right-3 z-[52] p-1.5 sm:p-2 rounded-full bg-white/30 text-black hover:bg-white/50 focus-visible:ring-0 focus-visible:ring-offset-0"
-            >
-              <X className="h-5 w-5 sm:h-6 sm:w-6" />
-            </Button>
+            )}
           </div>
-        )}
+        </SheetContent>
+      </Sheet>
     </section>
   );
 }
