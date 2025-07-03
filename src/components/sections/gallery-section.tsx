@@ -686,7 +686,9 @@ export function GallerySection() {
       <Sheet open={isGridViewOpen} onOpenChange={setIsGridViewOpen}>
         <SheetContent side="bottom" className="h-[80vh] overflow-y-auto">
           <SheetHeader>
-            <SheetTitle>{activeGalleryCategoryName} - All Images</SheetTitle>
+            <SheetTitle className="text-sm md:text-sm">
+              {activeGalleryCategoryName} - All Images
+            </SheetTitle>
           </SheetHeader>
           <div className="mt-6">
             {activeGalleryImages && (
