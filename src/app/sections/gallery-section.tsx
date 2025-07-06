@@ -870,13 +870,13 @@ export function GallerySection() {
                         onContactHostClick={() => setIsContactModalOpen(true)}
                       />
 
-                      <div className="border-t border-gray-200 my-6" />
+                      {/* <div className="border-t border-gray-200 my-6" />
                       {(() => {
                         const activeItem = galleryItems.find(
                           (item) => item.name === activeGalleryCategoryName
                         );
                         return activeItem ? (
-                          <div className="id gallery-map-section">
+                          <div className="id gallery-map-section mb-20 md:mb-16">
                             <h2 className="text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4">
                               LOCATION
                             </h2>
@@ -887,7 +887,7 @@ export function GallerySection() {
                             </div>
                           </div>
                         ) : null;
-                      })()}
+                      })()} */}
                     </div>
                   </div>
                 </div>
