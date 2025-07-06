@@ -860,7 +860,6 @@ export function GallerySection() {
                     </div>
 
                     {/* Availability & Booking Section - Right on desktop, Left on mobile */}
-                    {/* <div className="sticky top-4 bg-background/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg z-10"></div> */}
                     <div className="order-2 md:order-1 sticky top-4 bg-background/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg z-10">
                       <AvailabilityBookingSection
                         isMobile={isMobile}
