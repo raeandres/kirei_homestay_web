@@ -6,7 +6,7 @@ export function AboutSection() {
   const isMobile = useIsMobile();
 
   return (
-    <section id="about" className="py-24 md:py-24 bg-background">
+    <section id="about" className="pb-24 md:pb-24 bg-background">
       <div className="w-full">
         <div
           className={cn(
@@ -41,14 +41,14 @@ export function AboutSection() {
               <h2 className="text-lg md:text-2xl text-left px-4 font-headline mb-8">
                 WELCOME
               </h2>
-              <p className="text-sm md:text-sm text-white/90 mb-6 leading-relaxed px-4 sm:px-0 max-w-3xl ">
+              <p className="text-sm md:text-sm text-white/90 mb-6 leading-relaxed tracking-tighter px-4 sm:px-0 max-w-3xl ">
                 Kirei (綺麗), meaning beautiful and clean in Japanese, is more
                 than just a place to stay. It's an invitation to embrace slow,
                 intentional living. Our space is thoughtfully designed to be a
                 sanctuary of calm, where minimalist aesthetics meet cozy
                 comfort.
               </p>
-              <p className="text-sm md:text-sm text-white/90 leading-relaxed px-4 sm:px-0 max-w-3xl">
+              <p className="text-sm md:text-sm text-white/90 leading-relaxed px-4 tracking-tighter sm:px-0 max-w-3xl">
                 We believe in the beauty of simplicity and the importance of
                 mindful moments. Every detail at Kirei Homestay is curated to
                 help you unwind, reconnect, and find joy in the present.
