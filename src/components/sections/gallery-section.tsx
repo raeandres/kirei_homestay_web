@@ -952,6 +952,7 @@ export function GallerySection() {
                           </Button>
                         </div>
                       </div>
+                      {/* Maps section */}
                     </div>
 
                     {/* Right Section - Availability & Booking */}
