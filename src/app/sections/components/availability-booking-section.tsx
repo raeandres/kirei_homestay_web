@@ -4,11 +4,7 @@ import Link from "next/link";
 import { type DayPickerProps } from "react-day-picker";
 import { Button } from "@/app/ui/button";
 import { Calendar } from "@/app/ui/calendar";
-import {
-  Home,
-  Briefcase,
-  MessageSquare,
-} from "lucide-react";
+import { Home, Briefcase, MessageSquare } from "lucide-react";
 
 interface BookingLinks {
   airbnb: string;
@@ -33,7 +29,7 @@ export function AvailabilityBookingSection({
   onContactHostClick,
 }: AvailabilityBookingSectionProps) {
   return (
-    <div className="space-y-4">
+    <div className="sticky top-4 space-y-4 bg-background/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg z-10">
       <h2
         className={
           isMobile
@@ -65,8 +61,7 @@ export function AvailabilityBookingSection({
         </div>
         <div className="flex flex-col justify-center space-y-4 pt-0 md:pt-0">
           <p className="text-sm text-left px-10 md:text-left pb-2 font-normal">
-            Check our availability and book your stay on your
-            favorite platform.
+            Check our availability and book your stay on your favorite platform.
           </p>
           <Button asChild className="w-full" size="lg">
             <Link
@@ -78,12 +73,7 @@ export function AvailabilityBookingSection({
               Book on Airbnb
             </Link>
           </Button>
-          <Button
-            asChild
-            className="w-full"
-            size="lg"
-            variant="secondary"
-          >
+          <Button asChild className="w-full" size="lg" variant="secondary">
             <Link
               href={activeBookingLinks.booking}
               target="_blank"
