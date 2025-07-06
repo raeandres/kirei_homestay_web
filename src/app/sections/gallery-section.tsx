@@ -838,32 +838,39 @@ export function GallerySection() {
                 <div className="gallery-details" />
                 <div className="p-6 md:p-28">
                   <div className="grid md:grid-cols-2 gap-8 items-start">
-                    {/* Left Section - Property Details */}
-                    {(() => {
-                      const activeItem = galleryItems.find(
-                        (item) => item.name === activeGalleryCategoryName
-                      );
-                      return activeItem ? (
-                        <PropertyDetailsSection
-                          name={activeItem.name}
-                          unitType={activeItem.unitType}
-                          cardContent={activeItem.cardContent}
-                          galleryContent={activeItem.galleryContent}
-                          activeMapUrl={activeItem.activeMapUrl}
-                          onShowMoreClick={() => setIsDescriptionExpanded(true)}
-                        />
-                      ) : null;
-                    })()}
+                    {/* Property Details Section - Left on desktop, Right on mobile */}
+                    <div className="order-1 md:order-2">
+                      {(() => {
+                        const activeItem = galleryItems.find(
+                          (item) => item.name === activeGalleryCategoryName
+                        );
+                        return activeItem ? (
+                          <PropertyDetailsSection
+                            name={activeItem.name}
+                            unitType={activeItem.unitType}
+                            cardContent={activeItem.cardContent}
+                            galleryContent={activeItem.galleryContent}
+                            activeMapUrl={activeItem.activeMapUrl}
+                            onShowMoreClick={() =>
+                              setIsDescriptionExpanded(true)
+                            }
+                          />
+                        ) : null;
+                      })()}
+                    </div>
 
-                    {/* Right Section - Availability & Booking */}
-                    <AvailabilityBookingSection
-                      isMobile={isMobile}
-                      date={date}
-                      isLoadingCalendar={isLoadingCalendar}
-                      disabledDates={disabledDates}
-                      activeBookingLinks={activeBookingLinks}
-                      onContactHostClick={() => setIsContactModalOpen(true)}
-                    />
+                    {/* Availability & Booking Section - Right on desktop, Left on mobile */}
+                    {/* <div className="sticky top-4 bg-background/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg z-10"></div> */}
+                    <div className="order-2 md:order-1 sticky top-4 bg-background/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg z-10">
+                      <AvailabilityBookingSection
+                        isMobile={isMobile}
+                        date={date}
+                        isLoadingCalendar={isLoadingCalendar}
+                        disabledDates={disabledDates}
+                        activeBookingLinks={activeBookingLinks}
+                        onContactHostClick={() => setIsContactModalOpen(true)}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

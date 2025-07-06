@@ -29,7 +29,7 @@ export function AvailabilityBookingSection({
   onContactHostClick,
 }: AvailabilityBookingSectionProps) {
   return (
-    <div className="sticky top-4 space-y-4 bg-background/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg z-10">
+    <div className="space-y-4">
       <h2
         className={
           isMobile
