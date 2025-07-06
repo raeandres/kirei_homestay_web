@@ -27,6 +27,7 @@ import { GridViewSheet } from "@/app/sections/components/grid-view-sheet";
 import { ContactHostModal } from "@/app/sections/components/contact-host-modal";
 import { MapSection } from "@/app/sections/components/property-location/map-section";
 import { AvailabilityBookingSection } from "@/app/sections/components/availability-booking-section";
+import { PropertyDetailsSection } from "@/app/sections/components/property-details-section";
 
 interface GalleryContent {
   teaserDescription1: string;
@@ -838,126 +839,21 @@ export function GallerySection() {
                 <div className="p-6 md:p-28">
                   <div className="grid md:grid-cols-2 gap-8 items-start">
                     {/* Left Section - Property Details */}
-                    <div className="space-y-4">
-                      <div className="space-y-3">
-                        <CardDescription className="text-sm text-muted-foreground">
-                          <h3 className="text-xl md:text-2xl font-normal mb-4">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.name
-                            }
-                          </h3>
-                          <div className="text-sm font-medium text-muted-foreground">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.cardContent.location
-                            }
-                          </div>
-                        </CardDescription>
-
-                        <div className="text-sm font-medium text-muted-foreground">
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.guests
-                          }{" "}
-                          •{" "}
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.bedrooms
-                          }{" "}
-                          •{" "}
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.beds
-                          }{" "}
-                          •{" "}
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.bathrooms
-                          }
-                        </div>
-
-                        {/* Ratings and Reviews */}
-                        {/* <div className="flex font-medium items-center gap-2">
-                          <RatingStars
-                            rating={
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.cardContent.stars || 5
-                            }
-                            className="scale-75"
-                          />
-                          <span className="text-sm text-muted-foreground">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.cardContent.reviews
-                            }
-                          </span>
-                        </div> */}
-
-                        {/* Divider */}
-                        <div className="border-t border-gray-200 my-6" />
-
-                        {/* Property Description - Truncated */}
-                        <div className="space-y-4 text-sm pb-4 text-muted-foreground">
-                          <p className="section: teaser-description1 leading-relaxed">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.galleryContent.teaserDescription1
-                            }
-                          </p>
-
-                          <p className="section: teaser-description2 leading-relaxed">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.galleryContent.teaserDescription2
-                            }
-                          </p>
-
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => setIsDescriptionExpanded(true)}
-                            className="mt-4"
-                          >
-                            Show more
-                          </Button>
-                        </div>
-                      </div>
-                      {/* Divider */}
-                      <div className="border-t border-gray-200 my-6" />
-                      <div className="id gallery-map-section">
-                        {/* Maps section */}
-                        <h2 className="text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4">
-                          LOCATION
-                        </h2>
-                        <div className="id gallery-map ">
-                          <MapSection
-                            mapEmbedUrl={
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.activeMapUrl || ""
-                            }
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    {(() => {
+                      const activeItem = galleryItems.find(
+                        (item) => item.name === activeGalleryCategoryName
+                      );
+                      return activeItem ? (
+                        <PropertyDetailsSection
+                          name={activeItem.name}
+                          unitType={activeItem.unitType}
+                          cardContent={activeItem.cardContent}
+                          galleryContent={activeItem.galleryContent}
+                          activeMapUrl={activeItem.activeMapUrl}
+                          onShowMoreClick={() => setIsDescriptionExpanded(true)}
+                        />
+                      ) : null;
+                    })()}
 
                     {/* Right Section - Availability & Booking */}
                     <AvailabilityBookingSection
