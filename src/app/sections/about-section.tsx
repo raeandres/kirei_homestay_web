@@ -10,7 +10,7 @@ export function AboutSection() {
       <div className="w-full">
         <div
           className={cn(
-            "relative w-full overflow-hidden",
+            "relative w-full h-screen overflow-hidden",
             isMobile ? "aspect-[9/16]" : "aspect-video"
           )}
         >
