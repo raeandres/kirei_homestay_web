@@ -1,12 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/app/ui/sheet";
 import { cn } from "@/lib/utils";
 
 interface GalleryImage {

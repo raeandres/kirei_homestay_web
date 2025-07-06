@@ -7,8 +7,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetClose,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+} from "@/app/ui/sheet";
+import { Button } from "@/app/ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";

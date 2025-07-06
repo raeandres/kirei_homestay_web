@@ -9,8 +9,8 @@ import {
   ContactFormData,
   createContactFormHandler,
 } from "@/lib/contact-form";
-import { PropertyLocation } from "@/components/sections/components/property-location/property-location";
-import { ContactHostForm } from "@/components/sections/components/contact-host-form";
+import { PropertyLocation } from "@/app/sections/components/property-location/property-location";
+import { ContactHostForm } from "@/app/sections/components/contact-host-form";
 
 const nearbyPlaces = [
   { name: "Eastwood City", distance: "0.1 km" },

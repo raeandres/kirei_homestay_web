@@ -6,17 +6,12 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { type DayPickerProps } from "react-day-picker";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Card, CardContent, CardDescription } from "@/components/ui/card";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import { Button } from "@/app/ui/button";
+import { Calendar } from "@/app/ui/calendar";
+import { Card, CardContent, CardDescription } from "@/app/ui/card";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/app/ui/sheet";
 
-import { RatingStars } from "@/components/ui/rating-stars";
+import { RatingStars } from "@/app/ui/rating-stars";
 import {
   ChevronLeft,
   ChevronRight,
@@ -35,10 +30,10 @@ import {
   handleContactFormSubmit,
 } from "@/lib/contact-form";
 import { useToast } from "@/hooks/use-toast";
-import { PropertyDescriptionSheet } from "@/components/sections/components/property-description-sheet";
-import { FullScreenImageSheet } from "@/components/sections/components/full-screen-image-sheet";
-import { GridViewSheet } from "@/components/sections/components/grid-view-sheet";
-import { ContactHostModal } from "@/components/sections/components/contact-host-modal";
+import { PropertyDescriptionSheet } from "@/app/sections/components/property-description-sheet";
+import { FullScreenImageSheet } from "@/app/sections/components/full-screen-image-sheet";
+import { GridViewSheet } from "@/app/sections/components/grid-view-sheet";
+import { ContactHostModal } from "@/app/sections/components/contact-host-modal";
 
 interface GalleryContent {
   teaserDescription1: string;

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/ui/button";
 
 interface SocialMediaLink {
   name: string;
@@ -25,9 +25,7 @@ export function SocialMediaLinksSection({
             key={link.name}
             href={link.href}
             target={link.name === "Facebook" ? "_blank" : undefined}
-            rel={
-              link.name === "Facebook" ? "noopener noreferrer" : undefined
-            }
+            rel={link.name === "Facebook" ? "noopener noreferrer" : undefined}
           >
             <Button
               asChild

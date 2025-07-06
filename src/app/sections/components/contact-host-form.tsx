@@ -1,7 +1,7 @@
 "use client";
 
 import { UseFormReturn } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/ui/button";
 import {
   Form,
   FormControl,
@@ -9,15 +9,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+} from "@/app/ui/form";
+import { Input } from "@/app/ui/input";
+import { Textarea } from "@/app/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/app/ui/card";
 import { ContactFormData } from "@/lib/contact-form";
 
 interface ContactHostFormProps {
@@ -46,10 +41,7 @@ export function ContactHostForm({
         </CardHeader>
         <CardContent className="pt-0">
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-2"
-            >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
               <FormField
                 control={form.control}
                 name="name"

@@ -39,15 +39,15 @@ import {
   Wind,
   WindArrowDownIcon,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/app/ui/card";
+import { Button } from "@/app/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"; // Removed DialogHeader as it's not used directly for title here
-import { ScrollArea } from "@/components/ui/scroll-area";
+} from "@/app/ui/dialog"; // Removed DialogHeader as it's not used directly for title here
+import { ScrollArea } from "@/app/ui/scroll-area";
 
 interface Amenity {
   name: string;

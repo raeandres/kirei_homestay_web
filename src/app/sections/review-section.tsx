@@ -7,11 +7,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { RatingStars } from "@/components/ui/rating-stars";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+} from "@/app/ui/card";
+import { RatingStars } from "@/app/ui/rating-stars";
+import { Avatar, AvatarFallback, AvatarImage } from "@/app/ui/avatar";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/ui/button";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 

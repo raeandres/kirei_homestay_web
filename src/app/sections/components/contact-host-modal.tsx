@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@/app/ui/dialog";
 import {
   Form,
   FormControl,
@@ -14,10 +14,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+} from "@/app/ui/form";
+import { Input } from "@/app/ui/input";
+import { Textarea } from "@/app/ui/textarea";
+import { Button } from "@/app/ui/button";
 import { ContactFormData } from "@/lib/contact-form";
 
 interface ContactHostModalProps {
@@ -123,9 +123,7 @@ export function ContactHostModal({
                   className="w-full"
                   disabled={form.formState.isSubmitting}
                 >
-                  {form.formState.isSubmitting
-                    ? "Sending..."
-                    : "Send Inquiry"}
+                  {form.formState.isSubmitting ? "Sending..." : "Send Inquiry"}
                 </Button>
               </form>
             </Form>

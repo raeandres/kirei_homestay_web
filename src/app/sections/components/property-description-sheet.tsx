@@ -6,7 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetClose,
-} from "@/components/ui/sheet";
+} from "@/app/ui/sheet";
 import { X } from "lucide-react";
 
 interface GalleryContent {
