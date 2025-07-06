@@ -957,7 +957,7 @@ export function GallerySection() {
                       <div className="border-t border-gray-200 my-6" />
                       <div className="id gallery-map-section">
                         {/* Maps section */}
-                        <h2 className="text-lg md:text-xl text-left pt-4 font-headline mb-2">
+                        <h2 className="text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4">
                           LOCATION
                         </h2>
                         <div className="id gallery-map ">
@@ -975,9 +975,15 @@ export function GallerySection() {
 
                     {/* Right Section - Availability & Booking */}
                     <div className="space-y-4">
-                      <h1 className="text-sm md:text-md flex font-normal md:font-normal justify-center font-headline mb-4">
+                      <h2
+                        className={
+                          isMobile
+                            ? "text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4"
+                            : "text-sm md:text-md flex font-normal md:font-normal justify-center font-headline mb-4"
+                        }
+                      >
                         AVAILABILITY
-                      </h1>
+                      </h2>
 
                       <div className="space-y-6">
                         <div className="flex justify-center">
