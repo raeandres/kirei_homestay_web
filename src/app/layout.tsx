@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster"; // Added for contact form feedback
+import { Toaster } from "@/app/ui/toaster"; // Added for contact form feedback
 
 export const metadata: Metadata = {
   title: "Kirei House PH",
