@@ -835,11 +835,11 @@ export function GallerySection() {
                 </div>
 
                 {/* Two Section Layout */}
-                <div className="gallery-details" />
+                <div className="id gallery-details " />
                 <div className="p-6 md:p-28">
-                  <div className="grid md:grid-cols-2 gap-8 items-start">
+                  <div className="grid md:grid-cols-2 gap-20 items-baseline">
                     {/* Property Details Section - Left on desktop, Right on mobile */}
-                    <div className="order-1 md:order-2">
+                    <div className="order-1 md:order-2 px-4 md:px-28">
                       {(() => {
                         const activeItem = galleryItems.find(
                           (item) => item.name === activeGalleryCategoryName
@@ -860,7 +860,7 @@ export function GallerySection() {
                     </div>
 
                     {/* Availability & Booking Section - Right on desktop, Left on mobile */}
-                    <div className="order-2 md:order-1 sticky top-4 bg-background/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg z-10">
+                    <div className="order-2 md:order-1 sticky top-4 z-10 px-4 md:px-28">
                       <AvailabilityBookingSection
                         isMobile={isMobile}
                         date={date}
@@ -869,6 +869,25 @@ export function GallerySection() {
                         activeBookingLinks={activeBookingLinks}
                         onContactHostClick={() => setIsContactModalOpen(true)}
                       />
+
+                      <div className="border-t border-gray-200 my-6" />
+                      {(() => {
+                        const activeItem = galleryItems.find(
+                          (item) => item.name === activeGalleryCategoryName
+                        );
+                        return activeItem ? (
+                          <div className="id gallery-map-section">
+                            <h2 className="text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4">
+                              LOCATION
+                            </h2>
+                            <div className="id gallery-map ">
+                              <MapSection
+                                mapEmbedUrl={activeItem.activeMapUrl}
+                              />
+                            </div>
+                          </div>
+                        ) : null;
+                      })()}
                     </div>
                   </div>
                 </div>
