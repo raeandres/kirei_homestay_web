@@ -34,6 +34,7 @@ import { PropertyDescriptionSheet } from "@/app/sections/components/property-des
 import { FullScreenImageSheet } from "@/app/sections/components/full-screen-image-sheet";
 import { GridViewSheet } from "@/app/sections/components/grid-view-sheet";
 import { ContactHostModal } from "@/app/sections/components/contact-host-modal";
+import { MapSection } from "@/app/sections/components/property-location/map-section";
 
 interface GalleryContent {
   teaserDescription1: string;
@@ -90,6 +91,7 @@ interface GalleryCategory {
     booking: string;
   };
   icsUrl: string;
+  activeMapUrl: string;
 }
 
 const galleryItems: GalleryCategory[] = [
@@ -237,6 +239,8 @@ const galleryItems: GalleryCategory[] = [
         hint: "Kirei 1 - Amenities 2",
       },
     ],
+    activeMapUrl:
+      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d438.8887546439741!2d121.08111150085881!3d14.608037443965378!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b81d13b04c0d%3A0x7bb0ce56deb5b6fe!2sEastwood%20LeGrand%203!5e0!3m2!1sen!2ssg!4v1751795054321!5m2!1sen!2ssg",
     bookingLinks: {
       airbnb: "https://www.airbnb.com/rooms/1030897971821606234",
       booking:
@@ -387,6 +391,8 @@ const galleryItems: GalleryCategory[] = [
         hint: "Kirei 2 - Bed 7",
       },
     ],
+    activeMapUrl:
+      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d816.8502546510437!2d121.0808228177933!3d14.608080028428878!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b94bae284457%3A0x556240a3da88002a!2sEastwood%20Global%20Plaza%20Luxury%20Residence%2C%20Palm%20Tree%20Avenue%2C%20Bagumbayan%20Quezon%20City%201800!5e0!3m2!1sen!2ssg!4v1751794979901!5m2!1sen!2ssg",
     bookingLinks: {
       airbnb: "https://www.airbnb.com/rooms/1364997919482714933",
       booking:
@@ -918,7 +924,7 @@ export function GallerySection() {
                         <div className="border-t border-gray-200 my-6" />
 
                         {/* Property Description - Truncated */}
-                        <div className="space-y-4 text-sm text-muted-foreground">
+                        <div className="space-y-4 text-sm pb-4 text-muted-foreground">
                           <p className="section: teaser-description1 leading-relaxed">
                             {
                               galleryItems.find(
@@ -947,7 +953,24 @@ export function GallerySection() {
                           </Button>
                         </div>
                       </div>
-                      {/* Maps section */}
+                      {/* Divider */}
+                      <div className="border-t border-gray-200 my-6" />
+                      <div className="id gallery-map-section">
+                        {/* Maps section */}
+                        <h2 className="text-lg md:text-xl text-left pt-4 font-headline mb-2">
+                          LOCATION
+                        </h2>
+                        <div className="id gallery-map ">
+                          <MapSection
+                            mapEmbedUrl={
+                              galleryItems.find(
+                                (item) =>
+                                  item.name === activeGalleryCategoryName
+                              )?.activeMapUrl || ""
+                            }
+                          />
+                        </div>
+                      </div>
                     </div>
 
                     {/* Right Section - Availability & Booking */}
