@@ -14,29 +14,12 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetClose,
 } from "@/components/ui/sheet";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+
 import { RatingStars } from "@/components/ui/rating-stars";
 import {
   ChevronLeft,
   ChevronRight,
-  X,
   Home,
   Briefcase,
   Grid3X3,
@@ -52,6 +35,10 @@ import {
   handleContactFormSubmit,
 } from "@/lib/contact-form";
 import { useToast } from "@/hooks/use-toast";
+import { PropertyDescriptionSheet } from "@/components/sections/components/property-description-sheet";
+import { FullScreenImageSheet } from "@/components/sections/components/full-screen-image-sheet";
+import { GridViewSheet } from "@/components/sections/components/grid-view-sheet";
+import { ContactHostModal } from "@/components/sections/components/contact-host-modal";
 
 interface GalleryContent {
   teaserDescription1: string;
@@ -1044,437 +1031,50 @@ export function GallerySection() {
       </Sheet>
 
       {/* Grid View Sheet */}
-      <Sheet open={isGridViewOpen} onOpenChange={setIsGridViewOpen}>
-        <SheetContent side="bottom" className="h-[80vh] overflow-y-auto">
-          <SheetHeader>
-            <SheetTitle className="text-sm md:text-sm">
-              {activeGalleryCategoryName} - All Images
-            </SheetTitle>
-          </SheetHeader>
-          <div className="mt-6">
-            {activeGalleryImages && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                {activeGalleryImages.map((image, index) => (
-                  <button
-                    key={image.src}
-                    type="button"
-                    onClick={() => selectImageFromGrid(index)}
-                    className={cn(
-                      "relative aspect-square overflow-hidden rounded-lg border-2 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-                      index === currentImageIndex
-                        ? "border-primary ring-2 ring-primary ring-offset-2"
-                        : "border-transparent hover:border-primary/50"
-                    )}
-                    aria-label={`View image ${index + 1}: ${image.alt}`}
-                  >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      data-ai-hint={image.hint}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-                    />
-                    {index === currentImageIndex && (
-                      <div className="absolute inset-0 bg-primary/20 flex items-center justify-center">
-                        <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-medium">
-                          {index + 1}
-                        </div>
-                      </div>
-                    )}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        </SheetContent>
-      </Sheet>
+      {activeGalleryImages && activeGalleryCategoryName && (
+        <GridViewSheet
+          isOpen={isGridViewOpen}
+          onOpenChange={setIsGridViewOpen}
+          images={activeGalleryImages}
+          currentImageIndex={currentImageIndex}
+          categoryName={activeGalleryCategoryName}
+          onImageSelect={selectImageFromGrid}
+        />
+      )}
 
       {/* Full Screen Image Sheet */}
-      <Sheet
-        open={isFullScreenImageOpen}
-        onOpenChange={setIsFullScreenImageOpen}
-      >
-        <SheetContent
-          side="bottom"
-          className={cn(
-            "overflow-hidden p-0 [&>button]:hidden",
-            isMobile ? "h-[100dvh] pb-safe pt-safe-top" : "h-[100vh]"
-          )}
-          onOpenAutoFocus={(e) => e.preventDefault()}
-        >
-          <SheetHeader className="sr-only">
-            <SheetTitle>
-              {activeGalleryCategoryName &&
-              activeGalleryImages &&
-              activeGalleryImages[currentImageIndex]
-                ? `${activeGalleryCategoryName} - ${activeGalleryImages[currentImageIndex].alt}`
-                : "Full Screen Image"}
-            </SheetTitle>
-          </SheetHeader>
-          {activeGalleryImages && activeGalleryImages[currentImageIndex] && (
-            <div className="relative w-full h-full bg-black">
-              <Image
-                src={activeGalleryImages[currentImageIndex].src}
-                alt={activeGalleryImages[currentImageIndex].alt}
-                data-ai-hint={activeGalleryImages[currentImageIndex].hint}
-                fill
-                className="object-contain"
-                sizes="100vw"
-                priority
-              />
-
-              {/* Custom Close Button */}
-              <SheetClose asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className={cn(
-                    "absolute z-20 rounded-full bg-black/60 text-white hover:bg-black/80 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-0 border border-white/20",
-                    isMobile
-                      ? "top-4 right-4 h-12 w-12 mt-safe-top"
-                      : "top-6 right-6 h-10 w-10"
-                  )}
-                  aria-label="Close full screen view"
-                >
-                  <X className={isMobile ? "h-6 w-6" : "h-5 w-5"} />
-                </Button>
-              </SheetClose>
-
-              {/* Image info overlay */}
-              <div
-                className={cn(
-                  "absolute left-1/2 -translate-x-1/2 z-10 px-4 py-2 rounded-lg bg-black/50 text-white text-center",
-                  isMobile ? "top-20 mt-safe-top" : "top-4"
-                )}
-              >
-                <h3 className="text-lg font-medium">
-                  {activeGalleryCategoryName}
-                </h3>
-                <p className="text-sm opacity-90">
-                  {currentImageIndex + 1} of {activeGalleryImages.length}
-                </p>
-              </div>
-
-              {/* Navigation buttons */}
-              {activeGalleryImages.length > 1 && (
-                <>
-                  <Button
-                    variant="ghost"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      showPrevImage();
-                    }}
-                    aria-label="Previous image"
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 focus-visible:ring-0 focus-visible:ring-offset-0"
-                  >
-                    <ChevronLeft className="h-6 w-6" />
-                  </Button>
-
-                  <Button
-                    variant="ghost"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      showNextImage();
-                    }}
-                    aria-label="Next image"
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 focus-visible:ring-0 focus-visible:ring-offset-0"
-                  >
-                    <ChevronRight className="h-6 w-6" />
-                  </Button>
-                </>
-              )}
-            </div>
-          )}
-        </SheetContent>
-      </Sheet>
+      {activeGalleryImages && activeGalleryCategoryName && (
+        <FullScreenImageSheet
+          isOpen={isFullScreenImageOpen}
+          onOpenChange={setIsFullScreenImageOpen}
+          images={activeGalleryImages}
+          currentImageIndex={currentImageIndex}
+          categoryName={activeGalleryCategoryName}
+          onPrevImage={showPrevImage}
+          onNextImage={showNextImage}
+        />
+      )}
 
       {/* Property Description Sheet */}
-      <Sheet
-        open={isDescriptionExpanded}
-        onOpenChange={setIsDescriptionExpanded}
-      >
-        <SheetContent
-          side="bottom"
-          className="h-[80vh] overflow-y-auto p-6 md:p-20"
-        >
-          <div className="id bottomheet-contents px-2">
-            <SheetHeader>
-              <SheetTitle className="font-medium md:font-medium text-justify left-1 text-lg md:text-xl">
-                {activeGalleryCategoryName}
-              </SheetTitle>
-            </SheetHeader>
-            <div className="mt-6 space-y-6 text-sm text-muted-foreground">
-              <p className="id bottomsheet-property-description leading-relaxed ">
-                {
-                  galleryItems.find(
-                    (item) => item.name === activeGalleryCategoryName
-                  )?.galleryContent.propertyDescription
-                }
-              </p>
-
-              <div>
-                {galleryItems.find(
-                  (item) => item.name === activeGalleryCategoryName
-                )?.galleryContent.spaceDescription.length! > 0 && (
-                  <h5 className="font-medium text-foreground mb-2">
-                    The Space
-                  </h5>
-                )}
-                <p className="id bottomsheet-space-description leading-relaxed mb-4">
-                  {
-                    galleryItems.find(
-                      (item) => item.name === activeGalleryCategoryName
-                    )?.galleryContent.spaceDescription
-                  }
-                </p>
-                <div className="id bottomsheet-amenities my-8">
-                  <h5 className="font-medium text-foreground mb-2">
-                    IN-UNIT FEATURES & AMENITIES
-                  </h5>
-
-                  <div className="id bottomsheet-amenities-description leading-relaxed mb-4">
-                    {galleryItems
-                      .find((item) => item.name === activeGalleryCategoryName)
-                      ?.galleryContent.guestsAmenities.filter(
-                        (item) => item.trim() !== ""
-                      )
-                      .map((item, index) => (
-                        <p key={index} className="mb-1">
-                          {item.trim()}
-                        </p>
-                      ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Divider */}
-              <div className="border-t border-gray-200 my-6" />
-
-              <div className="id bottomsheet-guests-preference my-8">
-                <h5 className="font-medium text-foreground mb-2">
-                  WHY GUESTS LOVE KIREI
-                </h5>
-                <div className="id bottomsheet-guests-preference-list leading-relaxed mb-4">
-                  {galleryItems
-                    .find((item) => item.name === activeGalleryCategoryName)
-                    ?.galleryContent.guestsPreferenceList.filter(
-                      (item) => item.trim() !== ""
-                    )
-                    .map((item, index) => (
-                      <p key={index} className="mb-1">
-                        {item.trim()}
-                      </p>
-                    ))}
-                </div>
-                <div className="id bottomsheet-guests-preference-footer-note leading-relaxed mb-4">
-                  {
-                    galleryItems.find(
-                      (item) => item.name === activeGalleryCategoryName
-                    )?.galleryContent.guestsPreferenceFooterNote
-                  }
-                </div>
-              </div>
-
-              <div className="id bottomsheet-guest-access my-8">
-                <h4 className="font-medium text-foreground mb-2">
-                  GUEST ACCESS
-                </h4>
-                <p className="leading-relaxed mb-2">
-                  {
-                    galleryItems.find(
-                      (item) => item.name === activeGalleryCategoryName
-                    )?.galleryContent.guestsAccessSubtitle
-                  }
-                </p>
-                <div className="id bottomsheet-guest-access-description leading-relaxed mb-4">
-                  {galleryItems
-                    .find((item) => item.name === activeGalleryCategoryName)
-                    ?.galleryContent.guestsAccessList.filter(
-                      (item) => item.trim() !== ""
-                    )
-                    .map((item, index) => (
-                      <p key={index} className="mb-0">
-                        {item.trim()}
-                      </p>
-                    ))}
-                </div>
-              </div>
-
-              <div className="id bottomsheet-other-notes my-8">
-                <h5 className="font-medium text-foreground mb-2">
-                  Things to note
-                </h5>
-                <p className="id bottomsheet-other-notes-description leading-relaxed">
-                  {
-                    galleryItems.find(
-                      (item) => item.name === activeGalleryCategoryName
-                    )?.galleryContent.otherNotesDescription
-                  }
-                </p>
-              </div>
-
-              {/* Divider */}
-              <div className="border-t border-black my-6" />
-
-              {/* Amenity Fees conditional rendering */}
-              {galleryItems.find(
-                (item) => item.name === activeGalleryCategoryName
-              )?.galleryContent.amenityFeesDescription &&
-                galleryItems.find(
-                  (item) => item.name === activeGalleryCategoryName
-                )?.galleryContent.amenityFeeItems.length! > 0 && (
-                  <div className="id bottomsheet-amenity-fees my-8">
-                    <h5 className="id bottomsheet-amenity-fees-title font-medium text-foreground mb-2">
-                      AMENITY FEES
-                    </h5>
-                    <p className="id bottomsheet-amenity-fees-description font-medium leading-relaxed mb-2">
-                      {
-                        galleryItems.find(
-                          (item) => item.name === activeGalleryCategoryName
-                        )?.galleryContent.amenityFeesDescription
-                      }
-                    </p>
-
-                    <div className="id bottomsheet-amenity-fees-description px-8 leading-relaxed mb-4">
-                      {galleryItems
-                        .find((item) => item.name === activeGalleryCategoryName)
-                        ?.galleryContent.amenityFeeItems.filter(
-                          (item) => item.trim() !== ""
-                        )
-                        .map((item, index) => (
-                          <p key={index} className="mb-1">
-                            {item.trim()}
-                          </p>
-                        ))}
-                    </div>
-                  </div>
-                )}
-              <div id="bottomsheet-important-notes my-8">
-                <h5 className="font-medium text-foreground mb-2">
-                  IMPORTANT NOTES
-                </h5>
-                <div className="id bottomsheet-important-notes-description px-8 leading-relaxed mb-2">
-                  {galleryItems
-                    .find((item) => item.name === activeGalleryCategoryName)
-                    ?.galleryContent.importantNotesList.filter(
-                      (item) => item.trim() !== ""
-                    )
-                    .map((item, index) => (
-                      <p key={index} className="mb-1">
-                        {item.trim()}
-                      </p>
-                    ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </SheetContent>
-      </Sheet>
+      {activeGalleryCategoryName && (
+        <PropertyDescriptionSheet
+          isOpen={isDescriptionExpanded}
+          onOpenChange={setIsDescriptionExpanded}
+          propertyName={activeGalleryCategoryName}
+          galleryContent={
+            galleryItems.find((item) => item.name === activeGalleryCategoryName)
+              ?.galleryContent!
+          }
+        />
+      )}
 
       {/* Contact Host Modal */}
-      <Dialog open={isContactModalOpen} onOpenChange={setIsContactModalOpen}>
-        <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto safe-area-modal">
-          <div className="p-6 pt-8 pb-8">
-            <DialogHeader>
-              <DialogTitle>Contact the Host</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-4">
-              <p className="text-sm text-muted-foreground">
-                Interested to know more? Let us know what you think.
-              </p>
-              <Form {...contactForm}>
-                <form
-                  onSubmit={contactForm.handleSubmit(onContactSubmit)}
-                  className="space-y-4"
-                >
-                  <FormField
-                    control={contactForm.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Your Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Your Name" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={contactForm.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email Address</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="your.email@example.com"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={contactForm.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Phone Number{" "}
-                          <span className="text-xs text-muted-foreground">
-                            (Optional)
-                          </span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="tel"
-                            placeholder="(555) 123-4567"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={contactForm.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Your Message</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="I'm interested in booking your property and have a few questions..."
-                            className="min-h-[100px]"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    disabled={contactForm.formState.isSubmitting}
-                  >
-                    {contactForm.formState.isSubmitting
-                      ? "Sending..."
-                      : "Send Inquiry"}
-                  </Button>
-                </form>
-              </Form>
-              <p className="text-xs text-muted-foreground text-center">
-                We typically respond to inquiries within an hour.
-              </p>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <ContactHostModal
+        isOpen={isContactModalOpen}
+        onOpenChange={setIsContactModalOpen}
+        form={contactForm}
+        onSubmit={onContactSubmit}
+      />
     </section>
   );
 }
