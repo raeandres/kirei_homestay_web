@@ -60,9 +60,10 @@ interface GalleryContent {
   propertyDescription: string;
   spaceDescription: string;
   guestsPreferenceList: string[];
-  guestAmenities: string[];
-  guestAccessSubtitle: string;
-  guestAccessList: string[];
+  guestsPreferenceFooterNote: string;
+  guestsAmenities: string[];
+  guestsAccessSubtitle: string;
+  guestsAccessList: string[];
   importantNotesList: string[];
   otherNotesDescription: string;
   amenityFeesDescription: string;
@@ -135,7 +136,7 @@ const galleryItems: GalleryCategory[] = [
       propertyDescription:
         "Designed for clarity and comfort, Kirei House offers a true home away from home. This minimalist studio is designed to give you a peaceful space where you can rest, work, or relax without any distractions.\n\nWhether you’re traveling for business, a quick getaway, or just need a quiet spot to recharge, this space offers everything you need for a hassle-free stay. Kirei House is not just another Airbnb. It’s your space elevated.",
       spaceDescription: "",
-      guestAmenities: [
+      guestsAmenities: [
         " • A comfortable queen bed with fresh linens for a good night’s sleep. We also have full-size futon bed available upon request.",
         " • Simple, clutter-free furnishings to help you unwind.",
         " • A dedicated work desk with fast, reliable WiFi for productivity.",
@@ -148,10 +149,11 @@ const galleryItems: GalleryCategory[] = [
         "✔️ Seamless check-in with responsive host",
         "✔️ Ideal for solo travelers, couples, and WFH stays,",
         "✔️ Tastefully designed.",
-        "We got everything you need and nothing you don’t.",
       ],
-      guestAccessSubtitle: "",
-      guestAccessList: [
+      guestsPreferenceFooterNote:
+        "We got everything you need and nothing you don’t.",
+      guestsAccessSubtitle: "",
+      guestsAccessList: [
         " • Parking Basement 3",
         " • Pay parking inside the condominium",
         " • P350/night 1 slot only (kindly confirm in advance)",
@@ -288,7 +290,7 @@ const galleryItems: GalleryCategory[] = [
         "Right in the heart of Eastwood City is Kirei House - Ito, a serene Muji-inspired space high above the city. Relax in the elevated lounge, work by the window, or unwind in the cozy bedroom with sweeping skyline views. Every detail is curated for calm and comfort. A perfect retreat for mindful travelers seeking beauty in simplicity.",
       spaceDescription:
         "Our Muji-inspired home in Eastwood Global Plaza Luxury Residence is thoughtfully designed for comfort, calm, and quiet luxury. Guests enjoy full access to premium building amenities like the infinity pool (best enjoyed from 7PM - 10PM for city lights), fitness pool and jacuzzi, gym, sauna and spa, day care center and outdoor playground for kids, sun deck lounge, and hammock garden.",
-      guestAmenities: [
+      guestsAmenities: [
         " • Smart Entry: MGS ELITE PRO Smart Lock for seamless check-in.",
         ' • Entertainment: 55" TCL Google TV with Netflix, HBO Max, Disney+, Amazon Prime, and cable.',
         " • Internet: 300 Mbps Fiber WiFi, ideal for remote work and streaming.",
@@ -305,11 +307,12 @@ const galleryItems: GalleryCategory[] = [
         "✔️ Seamless check-in with responsive host",
         "✔️ Ideal for travelers, families, couples, business trips and WFH stays",
         "✔️ Tastefully designed. We got everything you need and nothing you don’t.",
-        "Book your stay and see why Kirei House - Ito is one of Eastwood’s most-loved homes.",
       ],
-      guestAccessSubtitle:
+      guestsPreferenceFooterNote:
+        "Book your stay and see why Kirei House - Ito is one of Eastwood’s most-loved homes.",
+      guestsAccessSubtitle:
         "Kirei House - Ito offers access to premium amenities designed for relaxation, wellness, and leisure:",
-      guestAccessList: [
+      guestsAccessList: [
         " • Infinity Pool",
         " • Fitness Pool & Jacuzzi",
         " • Fully Equipped Gym",
@@ -318,7 +321,7 @@ const galleryItems: GalleryCategory[] = [
         " • Hammock Garden & Sun Deck Lounge.",
       ],
       amenityFeesDescription:
-        "Please note that some facilities require a usage fee per person, per day to be paid at the Admin Office.",
+        "Eastwood Global Plaza facilities require a usage fee per person, per day to be paid at the Admin Office.",
       amenityFeeItems: [
         " • Swimming Pools & Gym P500",
         " • Swimming Pools & Day Care Center P500",
@@ -1211,7 +1214,13 @@ export function GallerySection() {
               </p>
 
               <div>
-                <h5 className="font-medium text-foreground mb-2">The space</h5>
+                {galleryItems.find(
+                  (item) => item.name === activeGalleryCategoryName
+                )?.galleryContent.spaceDescription.length! > 0 && (
+                  <h5 className="font-medium text-foreground mb-2">
+                    The Space
+                  </h5>
+                )}
                 <p className="id bottomsheet-space-description leading-relaxed mb-4">
                   {
                     galleryItems.find(
@@ -1219,30 +1228,34 @@ export function GallerySection() {
                     )?.galleryContent.spaceDescription
                   }
                 </p>
+                <div className="id bottomsheet-amenities my-8">
+                  <h5 className="font-medium text-foreground mb-2">
+                    IN-UNIT FEATURES & AMENITIES
+                  </h5>
 
-                <h5 className="font-medium text-foreground mb-2">
-                  In-Unit Features & Amenities
-                </h5>
-
-                <div className="id bottomsheet-amenities-description leading-relaxed mb-4">
-                  {galleryItems
-                    .find((item) => item.name === activeGalleryCategoryName)
-                    ?.galleryContent.guestAmenities.filter(
-                      (item) => item.trim() !== ""
-                    )
-                    .map((item, index) => (
-                      <p key={index} className="mb-1">
-                        {item.trim()}
-                      </p>
-                    ))}
+                  <div className="id bottomsheet-amenities-description leading-relaxed mb-4">
+                    {galleryItems
+                      .find((item) => item.name === activeGalleryCategoryName)
+                      ?.galleryContent.guestsAmenities.filter(
+                        (item) => item.trim() !== ""
+                      )
+                      .map((item, index) => (
+                        <p key={index} className="mb-1">
+                          {item.trim()}
+                        </p>
+                      ))}
+                  </div>
                 </div>
               </div>
 
-              <div>
+              {/* Divider */}
+              <div className="border-t border-gray-200 my-6" />
+
+              <div className="id bottomsheet-guests-preference my-8">
                 <h5 className="font-medium text-foreground mb-2">
-                  Why Guests Love Kirei House
+                  WHY GUESTS LOVE KIREI
                 </h5>
-                <div className="id bottomsheet-guests-preference leading-relaxed mb-4">
+                <div className="id bottomsheet-guests-preference-list leading-relaxed mb-4">
                   {galleryItems
                     .find((item) => item.name === activeGalleryCategoryName)
                     ?.galleryContent.guestsPreferenceList.filter(
@@ -1254,23 +1267,30 @@ export function GallerySection() {
                       </p>
                     ))}
                 </div>
-              </div>
-
-              <div>
-                <h4 className="font-medium text-foreground mb-2">
-                  Guest access
-                </h4>
-                <p className="leading-relaxed mb-3">
+                <div className="id bottomsheet-guests-preference-footer-note leading-relaxed mb-4">
                   {
                     galleryItems.find(
                       (item) => item.name === activeGalleryCategoryName
-                    )?.galleryContent.guestAccessSubtitle
+                    )?.galleryContent.guestsPreferenceFooterNote
+                  }
+                </div>
+              </div>
+
+              <div className="id bottomsheet-guest-access my-8">
+                <h4 className="font-medium text-foreground mb-2">
+                  GUEST ACCESS
+                </h4>
+                <p className="leading-relaxed mb-2">
+                  {
+                    galleryItems.find(
+                      (item) => item.name === activeGalleryCategoryName
+                    )?.galleryContent.guestsAccessSubtitle
                   }
                 </p>
                 <div className="id bottomsheet-guest-access-description leading-relaxed mb-4">
                   {galleryItems
                     .find((item) => item.name === activeGalleryCategoryName)
-                    ?.galleryContent.guestAccessList.filter(
+                    ?.galleryContent.guestsAccessList.filter(
                       (item) => item.trim() !== ""
                     )
                     .map((item, index) => (
@@ -1279,47 +1299,62 @@ export function GallerySection() {
                       </p>
                     ))}
                 </div>
+              </div>
 
-                {/* Amenity Fees conditional rendering */}
-                {galleryItems.find(
+              <div className="id bottomsheet-other-notes my-8">
+                <h5 className="font-medium text-foreground mb-2">
+                  Things to note
+                </h5>
+                <p className="id bottomsheet-other-notes-description leading-relaxed">
+                  {
+                    galleryItems.find(
+                      (item) => item.name === activeGalleryCategoryName
+                    )?.galleryContent.otherNotesDescription
+                  }
+                </p>
+              </div>
+
+              {/* Divider */}
+              <div className="border-t border-black my-6" />
+
+              {/* Amenity Fees conditional rendering */}
+              {galleryItems.find(
+                (item) => item.name === activeGalleryCategoryName
+              )?.galleryContent.amenityFeesDescription &&
+                galleryItems.find(
                   (item) => item.name === activeGalleryCategoryName
-                )?.galleryContent.amenityFeesDescription &&
-                  galleryItems.find(
-                    (item) => item.name === activeGalleryCategoryName
-                  )?.galleryContent.amenityFeeItems.length! > 0 && (
-                    <div>
-                      <h5 className="id bottomsheet-amenity-fees-title font-medium text-foreground mb-2">
-                        AMENITY FEES
-                      </h5>
-                      <p className="id bottomsheet-amenity-fee-description font-medium leading-relaxed mb-2">
-                        {
-                          galleryItems.find(
-                            (item) => item.name === activeGalleryCategoryName
-                          )?.galleryContent.amenityFeesDescription
-                        }
-                      </p>
+                )?.galleryContent.amenityFeeItems.length! > 0 && (
+                  <div className="id bottomsheet-amenity-fees my-8">
+                    <h5 className="id bottomsheet-amenity-fees-title font-medium text-foreground mb-2">
+                      AMENITY FEES
+                    </h5>
+                    <p className="id bottomsheet-amenity-fees-description font-medium leading-relaxed mb-2">
+                      {
+                        galleryItems.find(
+                          (item) => item.name === activeGalleryCategoryName
+                        )?.galleryContent.amenityFeesDescription
+                      }
+                    </p>
 
-                      <div className="id bottomsheet-amenity-fees-description leading-relaxed mb-4">
-                        {galleryItems
-                          .find(
-                            (item) => item.name === activeGalleryCategoryName
-                          )
-                          ?.galleryContent.amenityFeeItems.filter(
-                            (item) => item.trim() !== ""
-                          )
-                          .map((item, index) => (
-                            <p key={index} className="mb-1">
-                              {item.trim()}
-                            </p>
-                          ))}
-                      </div>
+                    <div className="id bottomsheet-amenity-fees-description px-8 leading-relaxed mb-4">
+                      {galleryItems
+                        .find((item) => item.name === activeGalleryCategoryName)
+                        ?.galleryContent.amenityFeeItems.filter(
+                          (item) => item.trim() !== ""
+                        )
+                        .map((item, index) => (
+                          <p key={index} className="mb-1">
+                            {item.trim()}
+                          </p>
+                        ))}
                     </div>
-                  )}
-
+                  </div>
+                )}
+              <div id="bottomsheet-important-notes my-8">
                 <h5 className="font-medium text-foreground mb-2">
                   IMPORTANT NOTES
                 </h5>
-                <div className="id bottomsheet-important-notes-description leading-relaxed mb-4">
+                <div className="id bottomsheet-important-notes-description px-8 leading-relaxed mb-2">
                   {galleryItems
                     .find((item) => item.name === activeGalleryCategoryName)
                     ?.galleryContent.importantNotesList.filter(
@@ -1331,19 +1366,6 @@ export function GallerySection() {
                       </p>
                     ))}
                 </div>
-              </div>
-
-              <div>
-                <h5 className="font-medium text-foreground mb-2">
-                  Other things to note
-                </h5>
-                <p className="id bottomsheet-other-notes-description leading-relaxed">
-                  {
-                    galleryItems.find(
-                      (item) => item.name === activeGalleryCategoryName
-                    )?.galleryContent.otherNotesDescription
-                  }
-                </p>
               </div>
             </div>
           </div>
