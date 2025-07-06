@@ -64,16 +64,7 @@ interface GalleryImage {
 
 interface GalleryCategory {
   name: string;
-  coverImage: GalleryImage;
-  images: GalleryImage[];
-  bookingLinks: {
-    airbnb: string;
-    booking: string;
-  };
-  icsUrl: string;
-}
-interface GalleryCategory {
-  name: string;
+  unitType: string;
   coverImage: GalleryImage;
   galleryContent: GalleryContent;
   cardContent: CardContent;
@@ -89,6 +80,7 @@ interface GalleryCategory {
 const galleryItems: GalleryCategory[] = [
   {
     name: "Kirei",
+    unitType: "Studio",
     coverImage: {
       src: "/gallery/kirei_1/converted_0007.webp",
       alt: "Kirei",
@@ -96,7 +88,7 @@ const galleryItems: GalleryCategory[] = [
     },
     cardContent: {
       location: "Eastwood LeGrand 3, Quezon City",
-      guests: "5 guests",
+      guests: "4 guests",
       bedrooms: "1 bedroom",
       beds: "2 beds",
       bathrooms: "1 bathroom",
@@ -243,6 +235,7 @@ const galleryItems: GalleryCategory[] = [
   },
   {
     name: "Kirei-ito",
+    unitType: "1 bedroom",
     coverImage: {
       src: "/gallery/kirei_2/converted_0002.webp",
       alt: "Kirei-ito",
@@ -657,7 +650,7 @@ export function GallerySection() {
               : "text-lg md:text-xl text-center text-justify-center  font-headline mb-8"
           }
         >
-          EXPLORE
+          ROOMS
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {galleryItems.map((item, index) => (
@@ -683,7 +676,7 @@ export function GallerySection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 p-3 md:p-4">
                     <h3 className="text-lg md:text-xl font-normal text-white">
-                      {item.name}
+                      {item.unitType}
                     </h3>
                   </div>
                 </div>
@@ -892,7 +885,8 @@ export function GallerySection() {
                           }
                         </div>
 
-                        <div className="flex font-medium items-center gap-2">
+                        {/* Ratings and Reviews */}
+                        {/* <div className="flex font-medium items-center gap-2">
                           <RatingStars
                             rating={
                               galleryItems.find(
@@ -910,7 +904,7 @@ export function GallerySection() {
                               )?.cardContent.reviews
                             }
                           </span>
-                        </div>
+                        </div> */}
 
                         {/* Divider */}
                         <div className="border-t border-gray-200 my-6" />
