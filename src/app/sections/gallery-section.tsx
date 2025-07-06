@@ -1,25 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { type DayPickerProps } from "react-day-picker";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/app/ui/button";
-import { Calendar } from "@/app/ui/calendar";
 import { Card, CardContent, CardDescription } from "@/app/ui/card";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/app/ui/sheet";
 
 import { RatingStars } from "@/app/ui/rating-stars";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Home,
-  Briefcase,
-  Grid3X3,
-  MessageSquare,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Grid3X3 } from "lucide-react";
 import { getBookedDates } from "@/app/actions/get-booked-dates";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -35,6 +26,7 @@ import { FullScreenImageSheet } from "@/app/sections/components/full-screen-imag
 import { GridViewSheet } from "@/app/sections/components/grid-view-sheet";
 import { ContactHostModal } from "@/app/sections/components/contact-host-modal";
 import { MapSection } from "@/app/sections/components/property-location/map-section";
+import { AvailabilityBookingSection } from "@/app/sections/components/availability-booking-section";
 
 interface GalleryContent {
   teaserDescription1: string;
@@ -957,7 +949,7 @@ export function GallerySection() {
                       <div className="border-t border-gray-200 my-6" />
                       <div className="id gallery-map-section">
                         {/* Maps section */}
-                        <h2 className="text-lg md:text-xl text-left pt-4 font-headline mb-2">
+                        <h2 className="text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4">
                           LOCATION
                         </h2>
                         <div className="id gallery-map ">
@@ -974,74 +966,14 @@ export function GallerySection() {
                     </div>
 
                     {/* Right Section - Availability & Booking */}
-                    <div className="space-y-4">
-                      <h1 className="text-sm md:text-md flex font-normal md:font-normal justify-center font-headline mb-4">
-                        AVAILABILITY
-                      </h1>
-
-                      <div className="space-y-6">
-                        <div className="flex justify-center">
-                          <Calendar
-                            mode="single"
-                            selected={date}
-                            // onSelect={setDate}
-                            className="rounded-md border"
-                            disabled={isLoadingCalendar ? true : disabledDates}
-                            footer={
-                              isLoadingCalendar ? (
-                                <p className="text-center text-sm text-muted-foreground p-2">
-                                  Loading calendar...
-                                </p>
-                              ) : (
-                                ""
-                              )
-                            }
-                          />
-                        </div>
-                        <div className="flex flex-col justify-center space-y-4 pt-0 md:pt-0">
-                          <p className="text-sm text-left px-10 md:text-left pb-2 font-normal">
-                            Check our availability and book your stay on your
-                            favorite platform.
-                          </p>
-                          <Button asChild className="w-full" size="lg">
-                            <Link
-                              href={activeBookingLinks.airbnb}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <Home className="mr-2 h-5 w-5" />
-                              Book on Airbnb
-                            </Link>
-                          </Button>
-                          <Button
-                            asChild
-                            className="w-full"
-                            size="lg"
-                            variant="secondary"
-                          >
-                            <Link
-                              href={activeBookingLinks.booking}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <Briefcase className="mr-2 h-5 w-5" />
-                              Book on Booking.com
-                            </Link>
-                          </Button>
-
-                          {/* Contact Host Button */}
-                          <Button
-                            onClick={() => setIsContactModalOpen(true)}
-                            className="w-full"
-                            size="lg"
-                            variant="outline"
-                          >
-                            <MessageSquare className="mr-2 h-5 w-5" />
-                            Contact Host
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
+                    <AvailabilityBookingSection
+                      isMobile={isMobile}
+                      date={date}
+                      isLoadingCalendar={isLoadingCalendar}
+                      disabledDates={disabledDates}
+                      activeBookingLinks={activeBookingLinks}
+                      onContactHostClick={() => setIsContactModalOpen(true)}
+                    />
                   </div>
                 </div>
               </div>
