@@ -53,6 +53,22 @@ import {
 } from "@/lib/contact-form";
 import { useToast } from "@/hooks/use-toast";
 
+interface GalleryContent {
+  teaserDescription1: string;
+  teaserDescription2: string;
+  propertyDetailsTitle: string;
+  propertyDescription: string;
+  spaceDescription: string;
+  guestsPreferenceList: string[];
+  guestAmenities: string[];
+  guestAccessSubtitle: string;
+  guestAccessList: string[];
+  importantNotesList: string[];
+  otherNotesDescription: string;
+  amenityFeesDescription: string;
+  amenityFeeItems: string[];
+}
+
 interface CardContent {
   location: string;
   guests: string;
@@ -83,6 +99,7 @@ interface GalleryCategory {
 interface GalleryCategory {
   name: string;
   coverImage: GalleryImage;
+  galleryContent: GalleryContent;
   cardContent: CardContent;
   images: GalleryImage[];
   bookingLinks: {
@@ -93,95 +110,6 @@ interface GalleryCategory {
 }
 
 const galleryItems: GalleryCategory[] = [
-  {
-    name: "Kirei-ito",
-    coverImage: {
-      src: "/gallery/kirei_2/converted_0002.webp",
-      alt: "Kirei-ito",
-      hint: "Minimalist 1 bedroom suite",
-    },
-    cardContent: {
-      location: "Eastwood Global Plaza, Quezon City",
-      guests: "5 guests",
-      bedrooms: "1 bedroom",
-      beds: "2 beds",
-      bathrooms: "1 bathroom",
-      basePriceSGD: 228,
-      reviews: "5 reviews",
-      stars: 5,
-    },
-    images: [
-      // Living Room
-      {
-        src: "/gallery/kirei_2/converted_0000.webp",
-        alt: "Living Room - Kirei 2",
-        hint: "Kirei 2 - living 1",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0001.webp",
-        alt: "Bedroom",
-        hint: "minimalist bedroom",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0002.webp",
-        alt: "Living Room - View 2",
-        hint: "Kirei 2 - living 2",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0003.webp",
-        alt: "Living Room - View 3",
-        hint: "Kirei 2 - living 3",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0004.webp",
-        alt: "Living Room - View 3",
-        hint: "Kirei 2 - living 4",
-      },
-      // Bedroom
-      {
-        src: "/gallery/kirei_2/converted_0005.webp",
-        alt: "Bed Room - View 1",
-        hint: "Kirei 2 - Bed 1",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0006.webp",
-        alt: "Bed Room - View 2",
-        hint: "Kirei 2 - Bed 2",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0007.webp",
-        alt: "Bed Room - View 3",
-        hint: "Kirei 2 - Bed 3",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0008.webp",
-        alt: "Bed Room - View 4",
-        hint: "Kirei 2 - Bed 4",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0009.webp",
-        alt: "Bed Room - View 5",
-        hint: "Kirei 2 - Bed 5",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0010.webp",
-        alt: "Bed Room - View 6",
-        hint: "Kirei 2 - Bed 6",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0011.webp",
-        alt: "Bed Room - View 7",
-        hint: "Kirei 2 - Bed 7",
-      },
-    ],
-    bookingLinks: {
-      airbnb: "https://www.airbnb.com/rooms/1364997919482714933",
-      booking:
-        "https://www.booking.com/hotel/ph/king-suite-eastwood-global-plaza-high-floor-quezon-city.html",
-    },
-    icsUrl:
-      "https://www.airbnb.com.sg/calendar/ical/1364997919482714933.ics?s=663892ccaa5dabea43e13966feabc6e1",
-  },
   {
     name: "Kirei",
     coverImage: {
@@ -198,6 +126,54 @@ const galleryItems: GalleryCategory[] = [
       basePriceSGD: 122,
       reviews: "5 reviews",
       stars: 5,
+    },
+    galleryContent: {
+      teaserDescription1:
+        "Designed for clarity and comfort, Kirei House offers a true home away from home. This minimalist studio is designed to give you a peaceful space where you can rest, work, or relax without any distractions.\n\n Whether you’re traveling for business, a quick getaway, or just need a quiet spot to recharge, this space offers everything you need for a hassle-free stay. Kirei House is not just another Airbnb. It’s your space elevated.",
+      teaserDescription2: "",
+      propertyDetailsTitle: "Kirei",
+      propertyDescription:
+        "Designed for clarity and comfort, Kirei House offers a true home away from home. This minimalist studio is designed to give you a peaceful space where you can rest, work, or relax without any distractions.\n\nWhether you’re traveling for business, a quick getaway, or just need a quiet spot to recharge, this space offers everything you need for a hassle-free stay. Kirei House is not just another Airbnb. It’s your space elevated.",
+      spaceDescription: "",
+      guestAmenities: [
+        " • A comfortable queen bed with fresh linens for a good night’s sleep. We also have full-size futon bed available upon request.",
+        " • Simple, clutter-free furnishings to help you unwind.",
+        " • A dedicated work desk with fast, reliable WiFi for productivity.",
+        " •  Netflix and other streaming platforms so you can kick back after a busy day.",
+        " • Fully functional kitchen with Nespresso and Smartoven.",
+        " •  Clean, well-maintained bathroom with essential toiletries provided.",
+      ],
+      guestsPreferenceList: [
+        "✔️ Clean, quiet, and well-maintained",
+        "✔️ Seamless check-in with responsive host",
+        "✔️ Ideal for solo travelers, couples, and WFH stays,",
+        "✔️ Tastefully designed.",
+        "We got everything you need and nothing you don’t.",
+      ],
+      guestAccessSubtitle: "",
+      guestAccessList: [
+        " • Parking Basement 3",
+        " • Pay parking inside the condominium",
+        " • P350/night 1 slot only (kindly confirm in advance)",
+        " • Pool Access 6th Floor",
+        " • Free for 4 guests, additional fee of P200 for succeeding guests. Pay at Admin Office or at the guard on duty",
+        " • Gym 6th Floor",
+        " • Day Care Center and Outdoor Playground 6th Floor",
+        " • Garden 6th Floor",
+      ],
+      amenityFeesDescription: "",
+      amenityFeeItems: [],
+      importantNotesList: [
+        " • Strictly imposing CLAY GO policy.",
+        " • Check in 2PM - 10PM",
+        " • Check out 11AM",
+        " • Quiet time 11PM - 8AM",
+        " • NO SMOKING AND ILLEGAL DRUGS AT ALL TIMES",
+        " • NO ADDITIONAL GUESTS",
+        " • NO UNRULY HOUSE PARTIES",
+      ],
+      otherNotesDescription:
+        "Eastwood City is within walking distance to shopping malls, convenience stores, groceries, restaurants, and entertainment such as bowling alley, billiards, dog parks, fitness gyms, food bazaars, movie theater, nightlife, and many more.",
     },
     images: [
       {
@@ -284,6 +260,155 @@ const galleryItems: GalleryCategory[] = [
     },
     icsUrl:
       "https://www.airbnb.com.sg/calendar/ical/1030897971821606234.ics?s=1b728ed92d212d0e42783ed473c0bb0f",
+  },
+  {
+    name: "Kirei-ito",
+    coverImage: {
+      src: "/gallery/kirei_2/converted_0002.webp",
+      alt: "Kirei-ito",
+      hint: "Minimalist 1 bedroom suite",
+    },
+    cardContent: {
+      location: "Eastwood Global Plaza, Quezon City",
+      guests: "5 guests",
+      bedrooms: "1 bedroom",
+      beds: "2 beds",
+      bathrooms: "1 bathroom",
+      basePriceSGD: 228,
+      reviews: "5 reviews",
+      stars: 5,
+    },
+    galleryContent: {
+      teaserDescription1:
+        "Right in the heart of Eastwood City is Kirei House - Ito, a serene Muji-inspired space high above the city. Relax in the elevated lounge, work by the window, or unwind in the cozy bedroom with sweeping skyline views. Every detail is curated for calm and comfort. A perfect retreat for mindful travelers seeking beauty in simplicity.",
+      teaserDescription2:
+        "Our Muji-inspired home in Eastwood Global Plaza Luxury Residence is thoughtfully designed for comfort, calm, and quiet luxury. Guests enjoy full access to premium building amenities like the infinity pool (best enjoyed from 7PM - 10PM for city lights), fitness pool and jacuzzi, gym, sauna and spa, day care center and outdoor playground for kids, sun deck lounge, and hammock garden.",
+      propertyDetailsTitle: "Kirei-ito",
+      propertyDescription:
+        "Right in the heart of Eastwood City is Kirei House - Ito, a serene Muji-inspired space high above the city. Relax in the elevated lounge, work by the window, or unwind in the cozy bedroom with sweeping skyline views. Every detail is curated for calm and comfort. A perfect retreat for mindful travelers seeking beauty in simplicity.",
+      spaceDescription:
+        "Our Muji-inspired home in Eastwood Global Plaza Luxury Residence is thoughtfully designed for comfort, calm, and quiet luxury. Guests enjoy full access to premium building amenities like the infinity pool (best enjoyed from 7PM - 10PM for city lights), fitness pool and jacuzzi, gym, sauna and spa, day care center and outdoor playground for kids, sun deck lounge, and hammock garden.",
+      guestAmenities: [
+        " • Smart Entry: MGS ELITE PRO Smart Lock for seamless check-in.",
+        ' • Entertainment: 55" TCL Google TV with Netflix, HBO Max, Disney+, Amazon Prime, and cable.',
+        " • Internet: 300 Mbps Fiber WiFi, ideal for remote work and streaming.",
+        " • Comfort: Centralized AC with ceiling fan, spacious king bed, full-size futon bed, ultra-comfy sofa, and a daybed for reading or relaxing.",
+        " • Workspace: Dedicated desk for working.",
+        " • Fun & Cozy Touches: Board games, card games, and plushies for pets.",
+        " • Kitchen: Fully equipped with cookware, tableware, teaware, Condura Inverter Fridge, SAMSUNG 4-in-1 Smart Oven (air fryer, microwave, oven, toaster), B Coffee Neo machine (with 4 complimentary pods), KYOWA rice cooker, and electric kettle.",
+        " • Bathroom Essentials: Shower heater, hairdryer, towels, dental kit, and complete toiletries.",
+        " • Laundry: TCL front-load washer and dryer with complimentary laundry capsules.",
+        " • Closet: Includes hangers, steamer/iron and ironing bed.",
+      ],
+      guestsPreferenceList: [
+        "✔️ Clean, quiet, and well-maintained",
+        "✔️ Seamless check-in with responsive host",
+        "✔️ Ideal for travelers, families, couples, business trips and WFH stays",
+        "✔️ Tastefully designed. We got everything you need and nothing you don’t.",
+        "Book your stay and see why Kirei House - Ito is one of Eastwood’s most-loved homes.",
+      ],
+      guestAccessSubtitle:
+        "Kirei House - Ito offers access to premium amenities designed for relaxation, wellness, and leisure:",
+      guestAccessList: [
+        " • Infinity Pool",
+        " • Fitness Pool & Jacuzzi",
+        " • Fully Equipped Gym",
+        " • Indoor Sauna & Spa",
+        " • Day Care Center & Outdoor Playground",
+        " • Hammock Garden & Sun Deck Lounge.",
+      ],
+      amenityFeesDescription:
+        "Please note that some facilities require a usage fee per person, per day to be paid at the Admin Office.",
+      amenityFeeItems: [
+        " • Swimming Pools & Gym P500",
+        " • Swimming Pools & Day Care Center P500",
+        " • Sauna P500",
+      ],
+      importantNotesList: [
+        " • Registered guests need to pay P250 registration fee as mandated by PMO.",
+        " • Unregistered guests are not allowed.",
+        " • CLAYGO (Clean As You Go) is strictly observed.",
+        " • Check-in is from 3PM to 10PM; check-out is at 12:00 PM.",
+        " • Quiet hours are from 10:00 PM to 8:00 AM.",
+        " • Smoking and illegal substances are strictly prohibited.",
+        " • No additional guests beyond your booking are allowed.",
+        " • No loud or unruly parties. This is a peaceful space meant for rest and relaxation.,",
+        "Please refer to the House Rules for the complete guidelines.",
+      ],
+      otherNotesDescription:
+        "Eastwood City is within walking distance to shopping malls, convenience stores, groceries, restaurants, and entertainment such as bowling alley, billiards, dog parks, fitness gyms, food bazaars, movie theater, nightlife, and many more.",
+    },
+    images: [
+      // Living Room
+      {
+        src: "/gallery/kirei_2/converted_0000.webp",
+        alt: "Living Room - Kirei 2",
+        hint: "Kirei 2 - living 1",
+      },
+      {
+        src: "/gallery/kirei_2/converted_0001.webp",
+        alt: "Bedroom",
+        hint: "minimalist bedroom",
+      },
+      {
+        src: "/gallery/kirei_2/converted_0002.webp",
+        alt: "Living Room - View 2",
+        hint: "Kirei 2 - living 2",
+      },
+      {
+        src: "/gallery/kirei_2/converted_0003.webp",
+        alt: "Living Room - View 3",
+        hint: "Kirei 2 - living 3",
+      },
+      {
+        src: "/gallery/kirei_2/converted_0004.webp",
+        alt: "Living Room - View 3",
+        hint: "Kirei 2 - living 4",
+      },
+      // Bedroom
+      {
+        src: "/gallery/kirei_2/converted_0005.webp",
+        alt: "Bed Room - View 1",
+        hint: "Kirei 2 - Bed 1",
+      },
+      {
+        src: "/gallery/kirei_2/converted_0006.webp",
+        alt: "Bed Room - View 2",
+        hint: "Kirei 2 - Bed 2",
+      },
+      {
+        src: "/gallery/kirei_2/converted_0007.webp",
+        alt: "Bed Room - View 3",
+        hint: "Kirei 2 - Bed 3",
+      },
+      {
+        src: "/gallery/kirei_2/converted_0008.webp",
+        alt: "Bed Room - View 4",
+        hint: "Kirei 2 - Bed 4",
+      },
+      {
+        src: "/gallery/kirei_2/converted_0009.webp",
+        alt: "Bed Room - View 5",
+        hint: "Kirei 2 - Bed 5",
+      },
+      {
+        src: "/gallery/kirei_2/converted_0010.webp",
+        alt: "Bed Room - View 6",
+        hint: "Kirei 2 - Bed 6",
+      },
+      {
+        src: "/gallery/kirei_2/converted_0011.webp",
+        alt: "Bed Room - View 7",
+        hint: "Kirei 2 - Bed 7",
+      },
+    ],
+    bookingLinks: {
+      airbnb: "https://www.airbnb.com/rooms/1364997919482714933",
+      booking:
+        "https://www.booking.com/hotel/ph/king-suite-eastwood-global-plaza-high-floor-quezon-city.html",
+    },
+    icsUrl:
+      "https://www.airbnb.com.sg/calendar/ical/1364997919482714933.ics?s=663892ccaa5dabea43e13966feabc6e1",
   },
 ];
 
@@ -587,34 +712,12 @@ export function GallerySection() {
                     {item.cardContent.location}
                   </CardDescription>
 
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm  text-black">
                     {item.cardContent.guests} • {item.cardContent.bedrooms} •{" "}
                     {item.cardContent.beds} • {item.cardContent.bathrooms}{" "}
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <RatingStars
-                      rating={item.cardContent.stars}
-                      className="scale-75"
-                    />
-                    <span className="text-sm text-muted-foreground">
-                      {item.cardContent.reviews}
-                    </span>
-                  </div>
-
-                  <div className="text-lg font-semibold text-foreground">
-                    {isLoadingCurrency ? (
-                      <span className="animate-pulse">Loading...</span>
-                    ) : (
-                      <>
-                        {formatPriceWithCurrency(item.cardContent.basePriceSGD)}{" "}
-                        {userCurrency.code}{" "}
-                        <span className="text-sm font-normal text-muted-foreground">
-                          for 1 night
-                        </span>
-                      </>
-                    )}
-                  </div>
+                  <div className="text-lg font-semibold text-foreground"></div>
                 </div>
               </CardContent>
             </Card>
@@ -762,7 +865,7 @@ export function GallerySection() {
                     <div className="space-y-4">
                       <div className="space-y-3">
                         <CardDescription className="text-sm text-muted-foreground">
-                          <h3 className="text-xl md:text-2xl font-semibold mb-4">
+                          <h3 className="text-xl md:text-2xl font-normal mb-4">
                             {
                               galleryItems.find(
                                 (item) =>
@@ -770,14 +873,17 @@ export function GallerySection() {
                               )?.name
                             }
                           </h3>
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.location
-                          }
+                          <div className="text-sm font-medium text-muted-foreground">
+                            {
+                              galleryItems.find(
+                                (item) =>
+                                  item.name === activeGalleryCategoryName
+                              )?.cardContent.location
+                            }
+                          </div>
                         </CardDescription>
 
-                        <div className="text-sm text-muted-foreground">
+                        <div className="text-sm font-medium text-muted-foreground">
                           {
                             galleryItems.find(
                               (item) => item.name === activeGalleryCategoryName
@@ -803,7 +909,7 @@ export function GallerySection() {
                           }
                         </div>
 
-                        <div className="flex items-center gap-2">
+                        <div className="flex font-medium items-center gap-2">
                           <RatingStars
                             rating={
                               galleryItems.find(
@@ -823,63 +929,29 @@ export function GallerySection() {
                           </span>
                         </div>
 
-                        {/* {  TODO: fix the price
-                        <div className="text-lg font-semibold text-foreground">
-                            {isLoadingCurrency ? (
-                              <span className="animate-pulse">Loading...</span>
-                            ) : (
-                              <>
-                                {formatPriceWithCurrency(
-                                  galleryItems.find(
-                                    (item) =>
-                                      item.name === activeGalleryCategoryName
-                                  )?.cardContent.basePriceSGD || 228
-                                )}{" "}
-                                {userCurrency.code}{" "}
-                                <span className="text-sm font-normal text-muted-foreground">
-                                  for 1 night
-                                </span>
-                              </>
-                            )}
-                          </div>
-                         */}
-
                         {/* Divider */}
-                        <div className="border-t border-gray-200 my-6"></div>
+                        <div className="border-t border-gray-200 my-6" />
 
                         {/* Property Description - Truncated */}
                         <div className="space-y-4 text-sm text-muted-foreground">
-                          <p className="leading-relaxed">
-                            Right in the heart of Eastwood City is Kirei House -
-                            Ito, a serene Muji-inspired space high above the
-                            city. Relax in the elevated lounge, work by the
-                            window, or unwind in the cozy bedroom with sweeping
-                            skyline views. Every detail is curated for calm and
-                            comfort. A perfect retreat for mindful travelers
-                            seeking beauty in simplicity.
+                          <p className="section: teaser-description1 leading-relaxed">
+                            {
+                              galleryItems.find(
+                                (item) =>
+                                  item.name === activeGalleryCategoryName
+                              )?.galleryContent.teaserDescription1
+                            }
                           </p>
 
-                          <p className="leading-relaxed">
-                            Our Muji-inspired home in Eastwood Global Plaza
-                            Luxury Residence is thoughtfully designed for
-                            comfort, calm, and quiet luxury. Guests enjoy full
-                            access to premium building amenities like the
-                            infinity pool, fitness pool and jacuzzi, gym, sauna
-                            and spa.
-                          </p>
-                          <p className="leading-relaxed">
-                            Features include smart entry system, 55" TCL Google
-                            TV with streaming services, 300 Mbps WiFi, and
-                            centralized AC. Fully equipped kitchen with modern
-                            appliances, comfortable workspace, and complete
-                            bathroom essentials.
-                          </p>
-                          <p className="leading-relaxed">
-                            Clean, quiet, and well-maintained space ideal for
-                            travelers, families, couples, and business trips.
+                          <p className="section: teaser-description2 leading-relaxed">
+                            {
+                              galleryItems.find(
+                                (item) =>
+                                  item.name === activeGalleryCategoryName
+                              )?.galleryContent.teaserDescription2
+                            }
                           </p>
 
-                          {/* Show More Button */}
                           <Button
                             variant="outline"
                             size="sm"
@@ -894,9 +966,9 @@ export function GallerySection() {
 
                     {/* Right Section - Availability & Booking */}
                     <div className="space-y-4">
-                      <h3 className="text-xl md:text-2xl flex justify-center font-headline mb-4">
-                        Availability
-                      </h3>
+                      <h1 className="text-sm md:text-md flex font-normal md:font-normal justify-center font-headline mb-4">
+                        AVAILABILITY
+                      </h1>
 
                       <div className="space-y-6">
                         <div className="flex justify-center">
@@ -1123,171 +1195,156 @@ export function GallerySection() {
           side="bottom"
           className="h-[80vh] overflow-y-auto p-6 md:p-20"
         >
-          <SheetHeader>
-            <SheetTitle className="text-lg md:text-xl">
-              Property Details - {activeGalleryCategoryName}
-            </SheetTitle>
-          </SheetHeader>
-          <div className="mt-6 space-y-6 text-sm text-muted-foreground">
-            <p className="leading-relaxed">
-              Right in the heart of Eastwood City is Kirei House - Ito, a serene
-              Muji-inspired space high above the city. Relax in the elevated
-              lounge, work by the window, or unwind in the cozy bedroom with
-              sweeping skyline views. Every detail is curated for calm and
-              comfort. A perfect retreat for mindful travelers seeking beauty in
-              simplicity.
-            </p>
-
-            <div>
-              <h4 className="font-semibold text-foreground mb-3">The space</h4>
-              <p className="leading-relaxed mb-4">
-                Our Muji-inspired home in Eastwood Global Plaza Luxury Residence
-                is thoughtfully designed for comfort, calm, and quiet luxury.
-                Guests enjoy full access to premium building amenities like the
-                infinity pool (best enjoyed from 7PM - 10PM for city lights),
-                fitness pool and jacuzzi, gym, sauna and spa, day care center
-                and outdoor playground for kids, sun deck lounge, and hammock
-                garden.
+          <div className="id bottomheet-contents px-2">
+            <SheetHeader>
+              <SheetTitle className="font-medium md:font-medium text-justify left-1 text-lg md:text-xl">
+                {activeGalleryCategoryName}
+              </SheetTitle>
+            </SheetHeader>
+            <div className="mt-6 space-y-6 text-sm text-muted-foreground">
+              <p className="id bottomsheet-property-description leading-relaxed ">
+                {
+                  galleryItems.find(
+                    (item) => item.name === activeGalleryCategoryName
+                  )?.galleryContent.propertyDescription
+                }
               </p>
 
-              <h5 className="font-medium text-foreground mb-2">
-                In-Unit Features & Amenities
-              </h5>
-              <div className="space-y-2 leading-relaxed">
-                <p>
-                  <strong>Smart Entry:</strong> MGS ELITE PRO Smart Lock for
-                  seamless check-in
+              <div>
+                <h5 className="font-medium text-foreground mb-2">The space</h5>
+                <p className="id bottomsheet-space-description leading-relaxed mb-4">
+                  {
+                    galleryItems.find(
+                      (item) => item.name === activeGalleryCategoryName
+                    )?.galleryContent.spaceDescription
+                  }
                 </p>
-                <p>
-                  <strong>Entertainment:</strong> 55" TCL Google TV with
-                  Netflix, HBO Max, Disney+, Amazon Prime, and cable
+
+                <h5 className="font-medium text-foreground mb-2">
+                  In-Unit Features & Amenities
+                </h5>
+
+                <div className="id bottomsheet-amenities-description leading-relaxed mb-4">
+                  {galleryItems
+                    .find((item) => item.name === activeGalleryCategoryName)
+                    ?.galleryContent.guestAmenities.filter(
+                      (item) => item.trim() !== ""
+                    )
+                    .map((item, index) => (
+                      <p key={index} className="mb-1">
+                        {item.trim()}
+                      </p>
+                    ))}
+                </div>
+              </div>
+
+              <div>
+                <h5 className="font-medium text-foreground mb-2">
+                  Why Guests Love Kirei House
+                </h5>
+                <div className="id bottomsheet-guests-preference leading-relaxed mb-4">
+                  {galleryItems
+                    .find((item) => item.name === activeGalleryCategoryName)
+                    ?.galleryContent.guestsPreferenceList.filter(
+                      (item) => item.trim() !== ""
+                    )
+                    .map((item, index) => (
+                      <p key={index} className="mb-1">
+                        {item.trim()}
+                      </p>
+                    ))}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-medium text-foreground mb-2">
+                  Guest access
+                </h4>
+                <p className="leading-relaxed mb-3">
+                  {
+                    galleryItems.find(
+                      (item) => item.name === activeGalleryCategoryName
+                    )?.galleryContent.guestAccessSubtitle
+                  }
                 </p>
-                <p>
-                  <strong>Internet:</strong> 300 Mbps Fiber WiFi, ideal for
-                  remote work and streaming
-                </p>
-                <p>
-                  <strong>Comfort:</strong> Centralized AC with ceiling fan,
-                  spacious king bed, full-size futon bed, ultra-comfy sofa, and
-                  a daybed for reading or relaxing
-                </p>
-                <p>
-                  <strong>Workspace:</strong> Dedicated desk for working
-                </p>
-                <p>
-                  <strong>Fun & Cozy Touches:</strong> Board games, card games,
-                  and plushies for pets
-                </p>
-                <p>
-                  <strong>Kitchen:</strong> Fully equipped with cookware,
-                  tableware, teaware, Condura Inverter Fridge, SAMSUNG 4-in-1
-                  Smart Oven (air fryer, microwave, oven, toaster), B Coffee Neo
-                  machine (with 4 complimentary pods), KYOWA rice cooker, and
-                  electric kettle
-                </p>
-                <p>
-                  <strong>Bathroom Essentials:</strong> Shower heater,
-                  hairdryer, towels, dental kit, and complete toiletries
-                </p>
-                <p>
-                  <strong>Laundry:</strong> TCL front-load washer and dryer with
-                  complimentary laundry capsules
-                </p>
-                <p>
-                  <strong>Closet:</strong> Includes hangers, steamer/iron and
-                  ironing bed.
+                <div className="id bottomsheet-guest-access-description leading-relaxed mb-4">
+                  {galleryItems
+                    .find((item) => item.name === activeGalleryCategoryName)
+                    ?.galleryContent.guestAccessList.filter(
+                      (item) => item.trim() !== ""
+                    )
+                    .map((item, index) => (
+                      <p key={index} className="mb-0">
+                        {item.trim()}
+                      </p>
+                    ))}
+                </div>
+
+                {/* Amenity Fees conditional rendering */}
+                {galleryItems.find(
+                  (item) => item.name === activeGalleryCategoryName
+                )?.galleryContent.amenityFeesDescription &&
+                  galleryItems.find(
+                    (item) => item.name === activeGalleryCategoryName
+                  )?.galleryContent.amenityFeeItems.length! > 0 && (
+                    <div>
+                      <h5 className="id bottomsheet-amenity-fees-title font-medium text-foreground mb-2">
+                        AMENITY FEES
+                      </h5>
+                      <p className="id bottomsheet-amenity-fee-description font-medium leading-relaxed mb-2">
+                        {
+                          galleryItems.find(
+                            (item) => item.name === activeGalleryCategoryName
+                          )?.galleryContent.amenityFeesDescription
+                        }
+                      </p>
+
+                      <div className="id bottomsheet-amenity-fees-description leading-relaxed mb-4">
+                        {galleryItems
+                          .find(
+                            (item) => item.name === activeGalleryCategoryName
+                          )
+                          ?.galleryContent.amenityFeeItems.filter(
+                            (item) => item.trim() !== ""
+                          )
+                          .map((item, index) => (
+                            <p key={index} className="mb-1">
+                              {item.trim()}
+                            </p>
+                          ))}
+                      </div>
+                    </div>
+                  )}
+
+                <h5 className="font-medium text-foreground mb-2">
+                  IMPORTANT NOTES
+                </h5>
+                <div className="id bottomsheet-important-notes-description leading-relaxed mb-4">
+                  {galleryItems
+                    .find((item) => item.name === activeGalleryCategoryName)
+                    ?.galleryContent.importantNotesList.filter(
+                      (item) => item.trim() !== ""
+                    )
+                    .map((item, index) => (
+                      <p key={index} className="mb-1">
+                        {item.trim()}
+                      </p>
+                    ))}
+                </div>
+              </div>
+
+              <div>
+                <h5 className="font-medium text-foreground mb-2">
+                  Other things to note
+                </h5>
+                <p className="id bottomsheet-other-notes-description leading-relaxed">
+                  {
+                    galleryItems.find(
+                      (item) => item.name === activeGalleryCategoryName
+                    )?.galleryContent.otherNotesDescription
+                  }
                 </p>
               </div>
-            </div>
-
-            <div>
-              <h5 className="font-medium text-foreground mb-2">
-                Why Guests Love Kirei House
-              </h5>
-              <div className="space-y-1">
-                <p>✔️ Clean, quiet, and well-maintained</p>
-                <p>✔️ Seamless check-in with responsive host</p>
-                <p>
-                  ✔️ Ideal for travelers, families, couples, business trips and
-                  WFH stays
-                </p>
-                <p>
-                  ✔️ Tastefully designed. We got everything you need and nothing
-                  you don't.
-                </p>
-              </div>
-              <p className="mt-3 leading-relaxed">
-                Book your stay and see why Kirei House - Ito is one of
-                Eastwood's most-loved homes.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-foreground mb-3">
-                Guest access
-              </h4>
-              <p className="leading-relaxed mb-3">
-                Kirei House - Ito offers access to premium amenities designed
-                for relaxation, wellness, and leisure:
-              </p>
-              <ul className="space-y-1 mb-4">
-                <li>- Infinity Pool</li>
-                <li>- Fitness Pool & Jacuzzi</li>
-                <li>- Fully Equipped Gym</li>
-                <li>- Indoor Sauna & Spa</li>
-                <li>- Day Care Center & Outdoor Playground</li>
-                <li>- Hammock Garden & Sun Deck Lounge</li>
-              </ul>
-
-              <h5 className="font-medium text-foreground mb-2">AMENITY FEES</h5>
-              <p className="leading-relaxed mb-2">
-                Please note that some facilities require a usage fee per person,
-                per day to be paid at the Admin Office.
-              </p>
-              <ul className="space-y-1 mb-4">
-                <li>- Swimming Pools & Gym P500</li>
-                <li>- Swimming Pools & Day Care Center P500</li>
-                <li>- Sauna P500</li>
-              </ul>
-
-              <h5 className="font-medium text-foreground mb-2">
-                IMPORTANT NOTES
-              </h5>
-              <ul className="space-y-1 leading-relaxed">
-                <li>
-                  - Registered guests need to pay P250 registration fee as
-                  mandated by PMO.
-                </li>
-                <li>- Unregistered guests are not allowed.</li>
-                <li>- CLAYGO (Clean As You Go) is strictly observed.</li>
-                <li>
-                  - Check-in is from 3PM to 10PM; check-out is at 12:00 PM.
-                </li>
-                <li>- Quiet hours are from 10:00 PM to 8:00 AM.</li>
-                <li>
-                  - Smoking and illegal substances are strictly prohibited.
-                </li>
-                <li>- No additional guests beyond your booking are allowed.</li>
-                <li>
-                  - No loud or unruly parties. This is a peaceful space meant
-                  for rest and relaxation.
-                </li>
-              </ul>
-              <p className="mt-3 leading-relaxed">
-                Please refer to the House Rules for the complete guidelines.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-foreground mb-3">
-                Other things to note
-              </h4>
-              <p className="leading-relaxed">
-                Eastwood City is within walking distance to shopping malls,
-                convenience stores, groceries, restaurants, and entertainment
-                such as bowling alley, billiards, dog parks, fitness gyms, food
-                bazaars, movie theater, nightlife, and many more.
-              </p>
             </div>
           </div>
         </SheetContent>
