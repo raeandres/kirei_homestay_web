@@ -59,41 +59,39 @@ export function AvailabilityBookingSection({
             }
           />
         </div>
-        <div className="flex flex-col justify-center pt-0 md:pt-0">
-          <p className="text-sm text-left px-10 md:text-left mb-2 mt-2 font-normal">
+        <div className="flex flex-col justify-left pt-0 md:pt-0">
+          <p className="text-sm md:text-sm text-left px-2 md:text-left my-2 font-normal">
             Check our availability and book your stay on your favorite platform.
           </p>
-          <div className="grid md:grid-cols-2 gap-1 items-baseline">
-            <div className="id airbnb-button mt-1 mb-1">
-              <Button
-                asChild
-                className="w-full border border-spacing-safe bg-white hover:bg-zinc-600 hover:text-white"
+          <div className="id airbnb-button mt-1 mb-1">
+            <Button
+              asChild
+              className="w-full border border-spacing-safe bg-white hover:bg-zinc-600 hover:text-white"
+            >
+              <Link
+                href={activeBookingLinks.airbnb}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Link
-                  href={activeBookingLinks.airbnb}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Book on Airbnb
-                </Link>
-              </Button>
-            </div>
+                Book on Airbnb
+              </Link>
+            </Button>
+          </div>
 
-            <div className="id booking-dot-com-button order-1 md:order-2 mt-1 mb-1">
-              <Button
-                asChild
-                className="w-full border border-spacing-safe bg-white hover:bg-zinc-600 hover:text-white"
+          <div className="id booking-dot-com-button mt-1 mb-1">
+            <Button
+              asChild
+              className="w-full border border-spacing-safe bg-white hover:bg-zinc-600 hover:text-white"
+            >
+              <Link
+                href={activeBookingLinks.booking}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Link
-                  href={activeBookingLinks.booking}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {" "}
-                  Book on Booking.com
-                </Link>
-              </Button>
-            </div>
+                {" "}
+                Book on Booking.com
+              </Link>
+            </Button>
           </div>
           <h3 className="id or text-md md:text-md font-normal text-center">
             {" "}
