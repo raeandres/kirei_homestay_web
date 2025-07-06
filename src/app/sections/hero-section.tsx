@@ -206,7 +206,7 @@ export function HeroSection() {
           <br />
           LIVING
         </h1>
-        <Link href="#about">
+        {/* <Link href="#about">
           <Button
             asChild
             size="lg"
@@ -217,7 +217,7 @@ export function HeroSection() {
               Explore More <ChevronDown className="ml-2 h-5 w-5" />
             </span>
           </Button>
-        </Link>
+        </Link> */}
       </div>
     </section>
   );

@@ -27,6 +27,7 @@ import { GridViewSheet } from "@/app/sections/components/grid-view-sheet";
 import { ContactHostModal } from "@/app/sections/components/contact-host-modal";
 import { MapSection } from "@/app/sections/components/property-location/map-section";
 import { AvailabilityBookingSection } from "@/app/sections/components/availability-booking-section";
+import { PropertyDetailsSection } from "@/app/sections/components/property-details-section";
 
 interface GalleryContent {
   teaserDescription1: string;
@@ -64,16 +65,7 @@ interface GalleryImage {
 
 interface GalleryCategory {
   name: string;
-  coverImage: GalleryImage;
-  images: GalleryImage[];
-  bookingLinks: {
-    airbnb: string;
-    booking: string;
-  };
-  icsUrl: string;
-}
-interface GalleryCategory {
-  name: string;
+  unitType: string;
   coverImage: GalleryImage;
   galleryContent: GalleryContent;
   cardContent: CardContent;
@@ -89,6 +81,7 @@ interface GalleryCategory {
 const galleryItems: GalleryCategory[] = [
   {
     name: "Kirei",
+    unitType: "Studio",
     coverImage: {
       src: "/gallery/kirei_1/converted_0007.webp",
       alt: "Kirei",
@@ -96,7 +89,7 @@ const galleryItems: GalleryCategory[] = [
     },
     cardContent: {
       location: "Eastwood LeGrand 3, Quezon City",
-      guests: "5 guests",
+      guests: "4 guests",
       bedrooms: "1 bedroom",
       beds: "2 beds",
       bathrooms: "1 bathroom",
@@ -243,6 +236,7 @@ const galleryItems: GalleryCategory[] = [
   },
   {
     name: "Kirei-ito",
+    unitType: "1 bedroom",
     coverImage: {
       src: "/gallery/kirei_2/converted_0002.webp",
       alt: "Kirei-ito",
@@ -657,7 +651,7 @@ export function GallerySection() {
               : "text-lg md:text-xl text-center text-justify-center  font-headline mb-8"
           }
         >
-          EXPLORE
+          ROOMS
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {galleryItems.map((item, index) => (
@@ -683,7 +677,7 @@ export function GallerySection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 p-3 md:p-4">
                     <h3 className="text-lg md:text-xl font-normal text-white">
-                      {item.name}
+                      {item.unitType}
                     </h3>
                   </div>
                 </div>
@@ -841,139 +835,60 @@ export function GallerySection() {
                 </div>
 
                 {/* Two Section Layout */}
-                <div className="gallery-details" />
+                <div className="id gallery-details " />
                 <div className="p-6 md:p-28">
-                  <div className="grid md:grid-cols-2 gap-8 items-start">
-                    {/* Left Section - Property Details */}
-                    <div className="space-y-4">
-                      <div className="space-y-3">
-                        <CardDescription className="text-sm text-muted-foreground">
-                          <h3 className="text-xl md:text-2xl font-normal mb-4">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.name
-                            }
-                          </h3>
-                          <div className="text-sm font-medium text-muted-foreground">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.cardContent.location
-                            }
-                          </div>
-                        </CardDescription>
-
-                        <div className="text-sm font-medium text-muted-foreground">
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.guests
-                          }{" "}
-                          •{" "}
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.bedrooms
-                          }{" "}
-                          •{" "}
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.beds
-                          }{" "}
-                          •{" "}
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.bathrooms
-                          }
-                        </div>
-
-                        <div className="flex font-medium items-center gap-2">
-                          <RatingStars
-                            rating={
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.cardContent.stars || 5
-                            }
-                            className="scale-75"
-                          />
-                          <span className="text-sm text-muted-foreground">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.cardContent.reviews
-                            }
-                          </span>
-                        </div>
-
-                        {/* Divider */}
-                        <div className="border-t border-gray-200 my-6" />
-
-                        {/* Property Description - Truncated */}
-                        <div className="space-y-4 text-sm pb-4 text-muted-foreground">
-                          <p className="section: teaser-description1 leading-relaxed">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.galleryContent.teaserDescription1
-                            }
-                          </p>
-
-                          <p className="section: teaser-description2 leading-relaxed">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.galleryContent.teaserDescription2
-                            }
-                          </p>
-
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => setIsDescriptionExpanded(true)}
-                            className="mt-4"
-                          >
-                            Show more
-                          </Button>
-                        </div>
-                      </div>
-                      {/* Divider */}
-                      <div className="border-t border-gray-200 my-6" />
-                      <div className="id gallery-map-section">
-                        {/* Maps section */}
-                        <h2 className="text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4">
-                          LOCATION
-                        </h2>
-                        <div className="id gallery-map ">
-                          <MapSection
-                            mapEmbedUrl={
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.activeMapUrl || ""
+                  <div className="grid md:grid-cols-2 gap-20 items-baseline">
+                    {/* Property Details Section - Left on desktop, Right on mobile */}
+                    <div className="order-1 md:order-2 px-4 md:px-28">
+                      {(() => {
+                        const activeItem = galleryItems.find(
+                          (item) => item.name === activeGalleryCategoryName
+                        );
+                        return activeItem ? (
+                          <PropertyDetailsSection
+                            name={activeItem.name}
+                            unitType={activeItem.unitType}
+                            cardContent={activeItem.cardContent}
+                            galleryContent={activeItem.galleryContent}
+                            activeMapUrl={activeItem.activeMapUrl}
+                            onShowMoreClick={() =>
+                              setIsDescriptionExpanded(true)
                             }
                           />
-                        </div>
-                      </div>
+                        ) : null;
+                      })()}
                     </div>
 
-                    {/* Right Section - Availability & Booking */}
-                    <AvailabilityBookingSection
-                      isMobile={isMobile}
-                      date={date}
-                      isLoadingCalendar={isLoadingCalendar}
-                      disabledDates={disabledDates}
-                      activeBookingLinks={activeBookingLinks}
-                      onContactHostClick={() => setIsContactModalOpen(true)}
-                    />
+                    {/* Availability & Booking Section - Right on desktop, Left on mobile */}
+                    <div className="order-2 md:order-1 sticky top-4 z-10 px-4 md:px-28">
+                      <AvailabilityBookingSection
+                        isMobile={isMobile}
+                        date={date}
+                        isLoadingCalendar={isLoadingCalendar}
+                        disabledDates={disabledDates}
+                        activeBookingLinks={activeBookingLinks}
+                        onContactHostClick={() => setIsContactModalOpen(true)}
+                      />
+
+                      <div className="border-t border-gray-200 my-6" />
+                      {(() => {
+                        const activeItem = galleryItems.find(
+                          (item) => item.name === activeGalleryCategoryName
+                        );
+                        return activeItem ? (
+                          <div className="id gallery-map-section">
+                            <h2 className="text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4">
+                              LOCATION
+                            </h2>
+                            <div className="id gallery-map ">
+                              <MapSection
+                                mapEmbedUrl={activeItem.activeMapUrl}
+                              />
+                            </div>
+                          </div>
+                        ) : null;
+                      })()}
+                    </div>
                   </div>
                 </div>
               </div>

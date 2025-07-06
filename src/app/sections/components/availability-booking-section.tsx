@@ -29,7 +29,7 @@ export function AvailabilityBookingSection({
   onContactHostClick,
 }: AvailabilityBookingSectionProps) {
   return (
-    <div className="sticky top-4 space-y-4 bg-background/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg z-10">
+    <div className="space-y-4">
       <h2
         className={
           isMobile
@@ -40,7 +40,7 @@ export function AvailabilityBookingSection({
         AVAILABILITY
       </h2>
 
-      <div className="space-y-6">
+      <div className="space-y-1">
         <div className="flex justify-center">
           <Calendar
             mode="single"
@@ -59,41 +59,59 @@ export function AvailabilityBookingSection({
             }
           />
         </div>
-        <div className="flex flex-col justify-center space-y-4 pt-0 md:pt-0">
-          <p className="text-sm text-left px-10 md:text-left pb-2 font-normal">
+        <div className="flex flex-col justify-center pt-0 md:pt-0">
+          <p className="text-sm text-left px-10 md:text-left mb-2 mt-2 font-normal">
             Check our availability and book your stay on your favorite platform.
           </p>
-          <Button asChild className="w-full" size="lg">
-            <Link
-              href={activeBookingLinks.airbnb}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Home className="mr-2 h-5 w-5" />
-              Book on Airbnb
-            </Link>
-          </Button>
-          <Button asChild className="w-full" size="lg" variant="secondary">
-            <Link
-              href={activeBookingLinks.booking}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Briefcase className="mr-2 h-5 w-5" />
-              Book on Booking.com
-            </Link>
-          </Button>
+          <div className="grid md:grid-cols-2 gap-1 items-baseline">
+            <div className="id airbnb-button mt-1 mb-1">
+              <Button
+                asChild
+                className="w-full border border-spacing-safe bg-white hover:bg-zinc-600 hover:text-white"
+              >
+                <Link
+                  href={activeBookingLinks.airbnb}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Book on Airbnb
+                </Link>
+              </Button>
+            </div>
 
-          {/* Contact Host Button */}
-          <Button
-            onClick={onContactHostClick}
-            className="w-full"
-            size="lg"
-            variant="outline"
-          >
-            <MessageSquare className="mr-2 h-5 w-5" />
-            Contact Host
-          </Button>
+            <div className="id booking-dot-com-button order-1 md:order-2 mt-1 mb-1">
+              <Button
+                asChild
+                className="w-full border border-spacing-safe bg-white hover:bg-zinc-600 hover:text-white"
+              >
+                <Link
+                  href={activeBookingLinks.booking}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  Book on Booking.com
+                </Link>
+              </Button>
+            </div>
+          </div>
+          <h3 className="id or text-md md:text-md font-normal text-center">
+            {" "}
+            OR{" "}
+          </h3>
+
+          <div className="id contact-host-button mt-1 mb-1">
+            {/* Contact Host Button */}
+            <Button
+              onClick={onContactHostClick}
+              className="w-full"
+              size="lg"
+              variant="outline"
+            >
+              <MessageSquare className="mr-2 h-5 w-5" />
+              Contact Host
+            </Button>
+          </div>
         </div>
       </div>
     </div>
