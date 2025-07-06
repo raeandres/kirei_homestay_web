@@ -41,12 +41,12 @@ export function AvailabilityBookingSection({
       </h2>
 
       <div className="space-y-1">
-        <div className="flex justify-center">
+        <div className="w-full max-w-none">
           <Calendar
             mode="single"
             selected={date}
             // onSelect={setDate}
-            className="rounded-md border"
+            className="w-full max-w-none rounded-md border [&_.rdp]:w-full [&_.rdp-table]:w-full [&_.rdp-cell]:p-0 [&_.rdp-day]:w-full [&_.rdp-day]:h-8 flex justify-center"
             disabled={isLoadingCalendar ? true : disabledDates}
             footer={
               isLoadingCalendar ? (
