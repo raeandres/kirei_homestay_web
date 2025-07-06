@@ -121,4 +121,12 @@
     display: block;
     padding-top: 66.6666%; /* (Height 2 / Width 3) * 100% for 3:2 aspect ratio */
   }
+
+  /* Safe area support for modals */
+  .safe-area-modal {
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
 }

@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
   SheetClose,
   SheetTitle,
-} from "@/components/ui/sheet"; // Added SheetTitle
+} from "@/app/ui/sheet"; // Added SheetTitle
 import { Menu } from "lucide-react";
 
 const navItems = [
