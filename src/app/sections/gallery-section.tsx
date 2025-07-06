@@ -28,6 +28,16 @@ import { ContactHostModal } from "@/app/sections/components/contact-host-modal";
 import { MapSection } from "@/app/sections/components/property-location/map-section";
 import { AvailabilityBookingSection } from "@/app/sections/components/availability-booking-section";
 import { PropertyDetailsSection } from "@/app/sections/components/property-details-section";
+import { AddressSection } from "@/app/sections/components/property-location/address-section";
+import { NearbyPlacesSection } from "@/app/sections/components/property-location/nearby-places-section";
+
+const nearbyPlaces = [
+  { name: "Eastwood City", distance: "0.1 km" },
+  { name: "Bonifacio Global City", distance: "6 km" },
+  { name: "Ortigas Center", distance: "3.8 km" },
+  { name: "Makati", distance: "7 km" },
+  { name: "Airport", distance: "12 km" },
+];
 
 interface GalleryContent {
   teaserDescription1: string;
@@ -243,7 +253,7 @@ const galleryItems: GalleryCategory[] = [
       hint: "Minimalist 1 bedroom suite",
     },
     cardContent: {
-      location: "Eastwood Global Plaza, Quezon City",
+      location: "Eastwood Global Plaza Luxury Residences, Quezon City",
       guests: "5 guests",
       bedrooms: "1 bedroom",
       beds: "2 beds",
@@ -714,7 +724,7 @@ export function GallerySection() {
         <SheetContent
           side="bottom"
           className={cn(
-            "overflow-y-auto p-0",
+            "overflow-y-auto p-0 mx-0 md:mx-64 rounded-t-lg ",
             isMobile ? "h-[95dvh] pb-safe pt-safe-top" : "h-[95vh]",
             // Style the default close button
             "[&>button]:absolute [&>button]:z-[60]  [&>button]:bg-transparent [&>button]:border [&>button]:border-transparent [&>button]:shadow-lg",
@@ -724,7 +734,7 @@ export function GallerySection() {
           )}
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <SheetHeader className="sr-only">
+          <SheetHeader className="sr-only md:mx-20">
             <SheetTitle>
               {activeGalleryCategoryName
                 ? `${activeGalleryCategoryName} Gallery`
@@ -738,7 +748,7 @@ export function GallerySection() {
               <div className="relative w-full h-full bg-background">
                 <div
                   className={cn(
-                    "relative w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg",
+                    "relative w-full cursor-grab active:cursor-grabbing overflow-hidden object-cover",
                     isMobile ? "h-[50vh]" : "h-[65vh]"
                   )}
                   onTouchStart={handleTouchStart}
@@ -835,11 +845,11 @@ export function GallerySection() {
                 </div>
 
                 {/* Two Section Layout */}
-                <div className="id gallery-details " />
-                <div className="p-6 md:p-28">
-                  <div className="grid md:grid-cols-2 gap-20 items-baseline">
-                    {/* Property Details Section - Left on desktop, Right on mobile */}
-                    <div className="order-1 md:order-2 px-4 md:px-28">
+                <div className="id gallery-details" />
+                <div className="mt-6 md:mt-28">
+                  <div className="grid md:grid-cols-2 gap-1 items-baseline">
+                    {/* Property Details Section - Right on desktop, Left on mobile */}
+                    <div className="order-1 md:order-2 px-4 md:px-10">
                       {(() => {
                         const activeItem = galleryItems.find(
                           (item) => item.name === activeGalleryCategoryName
@@ -859,8 +869,8 @@ export function GallerySection() {
                       })()}
                     </div>
 
-                    {/* Availability & Booking Section - Right on desktop, Left on mobile */}
-                    <div className="order-2 md:order-1 sticky top-4 z-10 px-4 md:px-28">
+                    {/* Availability & Booking Section - Left on desktop, Right on mobile */}
+                    <div className="order-1 md:order-2 sticky top-4 z-10 px-4 md:px-10">
                       <AvailabilityBookingSection
                         isMobile={isMobile}
                         date={date}
@@ -870,7 +880,7 @@ export function GallerySection() {
                         onContactHostClick={() => setIsContactModalOpen(true)}
                       />
 
-                      {/* <div className="border-t border-gray-200 my-6" />
+                      <div className="border-t border-gray-200 my-6" />
                       {(() => {
                         const activeItem = galleryItems.find(
                           (item) => item.name === activeGalleryCategoryName
@@ -885,9 +895,20 @@ export function GallerySection() {
                                 mapEmbedUrl={activeItem.activeMapUrl}
                               />
                             </div>
+                            <div className="space-y-6 pt-4">
+                              {/* Address Section */}
+                              <AddressSection
+                                address={activeItem.cardContent.location}
+                              />
+
+                              {/* Nearby Places Section */}
+                              <NearbyPlacesSection
+                                nearbyPlaces={nearbyPlaces}
+                              />
+                            </div>
                           </div>
                         ) : null;
-                      })()} */}
+                      })()}
                     </div>
                   </div>
                 </div>

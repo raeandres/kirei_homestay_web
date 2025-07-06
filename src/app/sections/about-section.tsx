@@ -7,10 +7,10 @@ export function AboutSection() {
 
   return (
     <section id="about" className="py-24 md:py-24 bg-background">
-      <div className="container max-w-6xl mx-auto">
+      <div className="w-full">
         <div
           className={cn(
-            "relative w-full max-w-[1080px] mx-auto mb-8 shadow-lg overflow-hidden",
+            "relative w-full overflow-hidden",
             isMobile ? "aspect-[9/16]" : "aspect-video"
           )}
         >

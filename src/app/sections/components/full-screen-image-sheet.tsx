@@ -50,7 +50,7 @@ export function FullScreenImageSheet({
       <SheetContent
         side="bottom"
         className={cn(
-          "overflow-hidden p-0 [&>button]:hidden",
+          "overflow-hidden p-0 [&>button]:hidden md:mx-64 rounded-t-lg",
           isMobile ? "h-[100dvh] pb-safe pt-safe-top" : "h-[100vh]"
         )}
         onOpenAutoFocus={(e) => e.preventDefault()}

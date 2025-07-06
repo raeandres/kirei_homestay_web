@@ -91,14 +91,14 @@ export function PropertyDetailsSection({
       {/* Divider */}
       <div className="border-t border-gray-200 my-6" />
       {/* Maps section */}
-      <div className="id gallery-map-section">
+      {/* <div className="id gallery-map-section">
         <h2 className="text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4">
           LOCATION
         </h2>
         <div className="id gallery-map ">
           <MapSection mapEmbedUrl={activeMapUrl} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
