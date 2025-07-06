@@ -43,18 +43,18 @@ export function PropertyDescriptionSheet({
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
       <SheetContent side="bottom" className="h-[80vh] overflow-y-auto">
         {/* Sticky Close Button */}
-        <button
+        {/* <button
           onClick={() => onOpenChange(false)}
           className="fixed top-4 right-4 z-50 bg-white border border-gray-300 rounded-full p-2 shadow-lg hover:bg-gray-50"
           aria-label="Close"
         >
           <X className="h-4 w-4 text-gray-600" />
-        </button>
+        </button> */}
 
         <div className="p-6">
           <SheetHeader>
             <SheetTitle className="text-lg font-medium">
-              {propertyName} - Property Details
+              {propertyName}
             </SheetTitle>
           </SheetHeader>
 
