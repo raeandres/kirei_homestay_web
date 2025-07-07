@@ -12,7 +12,7 @@ import { RatingStars } from "@/app/ui/rating-stars";
 import { Avatar, AvatarFallback, AvatarImage } from "@/app/ui/avatar";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/app/ui/button";
-import { cn } from "@/lib/utils";
+
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const reviews = [
@@ -124,10 +124,6 @@ export function ReviewsSection() {
       prevIndex <= 0 ? lastIndex : prevIndex - 1
     );
   }, [lastIndex]);
-
-  const goToReview = useCallback((index: number) => {
-    setCurrentIndex(index);
-  }, []);
 
   // Handlers for swipe gestures
   const minSwipeDistance = 50;
@@ -251,22 +247,6 @@ export function ReviewsSection() {
           >
             <ChevronRight className="h-6 w-6" />
           </Button>
-
-          <div className="flex justify-center space-x-2 mt-6">
-            {reviews.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToReview(index)}
-                aria-label={`Go to review ${index + 1}`}
-                className={cn(
-                  "h-2 w-2 rounded-full transition-colors",
-                  currentIndex === index
-                    ? "bg-primary"
-                    : "bg-muted-foreground/50 hover:bg-muted-foreground"
-                )}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>
