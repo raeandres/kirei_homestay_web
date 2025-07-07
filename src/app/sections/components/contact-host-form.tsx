@@ -34,9 +34,11 @@ export function ContactHostForm({
     <div className="space-y-6">
       <Card className="shadow-xl h-full">
         <CardHeader>
-          <CardTitle className="text-sm font-normal">
+          <CardTitle className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal">
             {title}
-            <p className="text-sm font-normal pt-1">{subtitle}</p>
+            <p className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal pt-1">
+              {subtitle}
+            </p>
           </CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
@@ -47,9 +49,15 @@ export function ContactHostForm({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Your Name</FormLabel>
+                    <FormLabel className="text-sm md:text-sm lg:text-sm text-gray-600 tracking-tighter">
+                      Your Name
+                    </FormLabel>
                     <FormControl>
-                      <Input placeholder="Your Name" {...field} />
+                      <Input
+                        placeholder="Your Name"
+                        {...field}
+                        className="text-sm md:text-sm lg:text-sm text-gray-600 tracking-tighter"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -60,12 +68,15 @@ export function ContactHostForm({
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email Address</FormLabel>
+                    <FormLabel className="text-sm md:text-sm text-gray-600 lg:text-sm tracking-tighter">
+                      Email Address
+                    </FormLabel>
                     <FormControl>
                       <Input
                         type="email"
                         placeholder="your.email@example.com"
                         {...field}
+                        className="text-sm md:text-sm text-gray-600 lg:text-sm tracking-tighter"
                       />
                     </FormControl>
                     <FormMessage />
@@ -77,7 +88,7 @@ export function ContactHostForm({
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
+                    <FormLabel className="text-sm md:text-sm text-gray-600 lg:text-sm tracking-tighter">
                       Phone Number{" "}
                       <span className="text-xs text-muted-foreground">
                         (Optional)
@@ -88,6 +99,7 @@ export function ContactHostForm({
                         type="tel"
                         placeholder="(555) 123-4567"
                         {...field}
+                        className="text-xs text-gray-600 text-muted-foreground tracking-tighter"
                       />
                     </FormControl>
                     <FormMessage />
@@ -99,11 +111,13 @@ export function ContactHostForm({
                 name="message"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Your Message</FormLabel>
+                    <FormLabel className="text-xs text-gray-600 text-muted-foreground tracking-tighter">
+                      Your Message
+                    </FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="I'm interested in booking your property and have a few questions..."
-                        className="min-h-[100px]"
+                        className="min-h-[100px] text-xs text-gray-600 text-muted-foreground tracking-tighter"
                         {...field}
                       />
                     </FormControl>
@@ -113,7 +127,7 @@ export function ContactHostForm({
               />
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full text-xs text-gray-600 text-muted-foreground tracking-tighter"
                 disabled={form.formState.isSubmitting}
               >
                 {form.formState.isSubmitting ? "Sending..." : "Send Inquiry"}

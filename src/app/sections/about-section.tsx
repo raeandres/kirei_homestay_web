@@ -38,7 +38,7 @@ export function AboutSection() {
           </video>
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-8">
             <div className="text-center text-white">
-              <h2 className="text-lg md:text-2xl text-left px-4 font-headline mb-8">
+              <h2 className="text-lg md:text-2xl text-left px-4 font-headline tracking-wide mb-8">
                 WELCOME
               </h2>
               <p className="text-sm md:text-sm text-white/90 mb-6 leading-relaxed tracking-tighter px-4 sm:px-0 max-w-3xl ">
@@ -48,7 +48,7 @@ export function AboutSection() {
                 sanctuary of calm, where minimalist aesthetics meet cozy
                 comfort.
               </p>
-              <p className="text-sm md:text-sm text-white/90 leading-relaxed px-4 tracking-tighter sm:px-0 max-w-3xl">
+              <p className="text-sm md:text-sm text-white/90 leading-relaxed tracking-tighter sm:px-0 max-w-3xl">
                 We believe in the beauty of simplicity and the importance of
                 mindful moments. Every detail at Kirei Homestay is curated to
                 help you unwind, reconnect, and find joy in the present.

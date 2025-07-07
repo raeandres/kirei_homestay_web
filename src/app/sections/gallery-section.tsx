@@ -657,8 +657,8 @@ export function GallerySection() {
         <h2
           className={
             isMobile
-              ? "text-lg md:text-xl text-left  font-headline mb-8"
-              : "text-lg md:text-xl text-center text-justify-center  font-headline mb-8"
+              ? "text-lg md:text-xl text-left  font-headline mb-8 tracking-wide"
+              : "text-lg md:text-xl text-center text-justify-center  font-headline mb-8 tracking-wide"
           }
         >
           ROOMS

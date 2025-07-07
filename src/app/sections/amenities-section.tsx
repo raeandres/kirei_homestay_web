@@ -170,8 +170,8 @@ export function AmenitiesSection() {
         <h2
           className={
             isMobileHookResult
-              ? "text-lg md:text-xl text-left font-headline mb-8"
-              : "text-lg md:text-xl text-center text-justify-center font-headline mb-8"
+              ? "text-lg md:text-xl text-left font-headline mb-8 tracking-wide"
+              : "text-lg md:text-xl text-center text-justify-center font-headline tracking-wide mb-8"
           }
         >
           AMENITIES
@@ -179,13 +179,13 @@ export function AmenitiesSection() {
         <Card className="shadow-lg">
           <CardHeader className="pb-4"></CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-1 gap-y-0">
               {amenitiesToDisplayOnPage.map((amenity) => {
                 const AmenityIconComponent = amenity.icon;
                 return (
                   <div
                     key={amenity.name}
-                    className="flex items-center text-foreground/80 p-3 rounded-lg hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                    className="flex items-center text-sm md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed m-2 rounded-lg hover:bg-muted/50 transition-colors duration-200 ease-in-out"
                   >
                     <AmenityIconComponent className="mr-3 h-5 w-5 text-accent flex-shrink-0" />
                     <span>{amenity.name}</span>
@@ -199,7 +199,10 @@ export function AmenitiesSection() {
                 <div className="mt-6 flex justify-center">
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline" className="w-full sm:w-auto">
+                      <Button
+                        variant="outline"
+                        className="w-full sm:w-auto text-sm md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed m-2"
+                      >
                         Show all {allAmenities.length} amenities
                       </Button>
                     </DialogTrigger>
@@ -212,13 +215,13 @@ export function AmenitiesSection() {
                       </VisuallyHidden>
 
                       <ScrollArea className="max-h-[60vh] pr-3 pt-2">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 py-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-1 gap-y-2">
                           {allAmenities.map((amenity) => {
                             const AmenityIconComponent = amenity.icon;
                             return (
                               <div
                                 key={amenity.name + "-dialog"}
-                                className="flex items-center text-foreground/80 p-3 rounded-lg hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                                className="flex items-center text-sm md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed m-1 rounded-lg hover:bg-muted/50 transition-colors duration-200 ease-in-out"
                               >
                                 <AmenityIconComponent className="mr-3 h-5 w-5 text-accent flex-shrink-0" />
                                 <span>{amenity.name}</span>
