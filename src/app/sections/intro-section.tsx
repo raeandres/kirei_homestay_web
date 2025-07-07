@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { Button } from "@/app/ui/button";
 import { ChevronDown } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function IntroSection() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       id="intro"
@@ -19,27 +22,26 @@ export function IntroSection() {
           }
         }}
       >
-        <h2 className="text-lg md:text-lg lg:text-lg text-center text-zinc-700 font-normal tracking-tighter leading-relaxed">
+        <h2
+          className={
+            isMobile
+              ? "text-sm md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed max-w-3xl"
+              : "text-lg md:text-lg lg:text-lg text-center text-gray-600 font-normal tracking-tighter leading-relaxed"
+          }
+        >
           {/* Thoughtfully designed spaces for mindful stays */}
-          THOUGHTFULLY DESIGNED SPACES FOR MINDFUL STAYS
+          Thoughtfully designed spaces for mindful stays
         </h2>
-        <h3 className="text-sm md:text-sm lg:text-sm text-center text-zinc-700 font-normal tracking-wide text-muted-foreground">
-          EXPLORE MORE
-        </h3>
 
-        {/* <Link href="#about">
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="bg-transparent border-transparent text-black hover:bg-transparent hover:text-black animate-fade-in animation-delay-[1800ms]"
-          >
-            <span>
-              Explore More{" "}
-              <ChevronDown className="text-lg md:text-2xl lg:text-3xl text-center font-light text-muted-foreground" />
-            </span>
-          </Button>
-        </Link> */}
+        <h3
+          className={
+            isMobile
+              ? "text-sm md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed max-w-3xl"
+              : "text-lg md:text-lg lg:text-lg text-center text-gray-600 font-normal tracking-tighter leading-relaxed"
+          }
+        >
+          explore more
+        </h3>
       </div>
     </section>
   );

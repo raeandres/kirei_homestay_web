@@ -11,21 +11,23 @@ interface NearbyPlacesSectionProps {
   nearbyPlaces: NearbyPlace[];
 }
 
-export function NearbyPlacesSection({ nearbyPlaces }: NearbyPlacesSectionProps) {
+export function NearbyPlacesSection({
+  nearbyPlaces,
+}: NearbyPlacesSectionProps) {
   return (
     <div>
       <h2 className="font-semibold text-sm flex items-center">
-        <Clock className="mr-4 h-5 w-5 text-accent mt-1 shrink-0" />
+        <Clock className="mr-4 h-5 w-5 mt-1 shrink-0 text-xs text-gray-600 text-muted-foreground tracking-tighter" />
         Nearby Places
       </h2>
       <ul className="space-y-1 text-sm px-9">
         {nearbyPlaces.map((place) => (
           <li
             key={place.name}
-            className="flex justify-between text-muted-foreground"
+            className="flex justify-between text-xs text-gray-600 text-muted-foreground tracking-tighter"
           >
             <span>{place.name}</span>
-            <span className="font-medium text-foreground/90">
+            <span className="font-medium text-xs text-gray-600 text-muted-foreground tracking-tighter">
               {place.distance}
             </span>
           </li>

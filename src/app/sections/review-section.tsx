@@ -175,8 +175,8 @@ export function ReviewsSection() {
         <h2
           className={
             isMobile
-              ? "text-lg md:text-xl text-left text-justify-left font-headline mb-8"
-              : "text-lg md:text-xl text-center text-justify-center font-headline mb-8"
+              ? "text-lg md:text-xl text-left text-justify-left font-headline tracking-wide mb-8"
+              : "text-lg md:text-xl text-center text-justify-center font-headline tracking-wide mb-8"
           }
         >
           EXPERIENCES
@@ -212,14 +212,14 @@ export function ReviewsSection() {
                         </AvatarFallback>
                       </Avatar>
                       <div>
-                        <CardTitle className="text-lg font-headline">
+                        <CardTitle className="text-lg font-semibold tracking-tight leading-relaxed">
                           {review.name}
                         </CardTitle>
                         <RatingStars rating={review.rating} />
                       </div>
                     </CardHeader>
                     <CardContent className="flex-grow">
-                      <p className="text-foreground/80 italic">
+                      <p className="text-sm md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed">
                         "{review.review}"
                       </p>
                     </CardContent>

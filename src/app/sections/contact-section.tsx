@@ -11,6 +11,7 @@ import {
 } from "@/lib/contact-form";
 import { PropertyLocation } from "@/app/sections/components/property-location/property-location";
 import { ContactHostForm } from "@/app/sections/components/contact-host-form";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const nearbyPlaces = [
   { name: "Eastwood City", distance: "0.1 km" },
@@ -48,17 +49,30 @@ export function ContactSection() {
 
   // Use the externalized contact form handler
   const onSubmit = createContactFormHandler(toast, () => form.reset());
+  const isMobile = useIsMobile();
 
   return (
     <section id="contact" className="py-8 md:py-24 bg-background">
       <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-lg md:text-xl text-left px-4 font-headline mb-2">
+        <h2
+          className={
+            isMobile
+              ? "text-lg md:text-xl text-left  font-headline mb-4 tracking-wide"
+              : "text-lg md:text-xl text-center text-justify-center  font-headline mb-4"
+          }
+        >
           LOCATE US
         </h2>
-        <p className="text-sm px-4 text-left mb-4">
+        <h3
+          className={
+            isMobile
+              ? "text-sm md:text-sm text-left  font-headline tracking-tighter mb-2"
+              : "text-sm md:text-sm text-left text-justify-center tracking-tighter font-headline mb-2"
+          }
+        >
           Find us and explore the neighborhood
-        </p>
-        <div className="container max-w-6xl mx-auto px-4 overflow-x-hidden">
+        </h3>
+        <div className="container max-w-6xl mx-auto overflow-x-hidden">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Column: Property Location & Get in touch */}
             <PropertyLocation
