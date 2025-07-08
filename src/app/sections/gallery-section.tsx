@@ -11,6 +11,34 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/app/ui/sheet";
 
 import { RatingStars } from "@/app/ui/rating-stars";
 import { ChevronLeft, ChevronRight, Grid3X3 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import {
+  BathIcon,
+  BatteryCharging,
+  BedDouble,
+  BedDoubleIcon,
+  Blocks,
+  BookOpen,
+  Building2,
+  Coffee,
+  Dumbbell,
+  Microwave,
+  ParkingCircle,
+  PawPrintIcon,
+  Refrigerator,
+  ShieldCheck,
+  Shirt,
+  ShowerHeadIcon,
+  Thermometer,
+  Toilet,
+  Tv,
+  Users,
+  Utensils,
+  WashingMachine,
+  WavesLadder,
+  Wifi,
+  Wind,
+} from "lucide-react";
 import { getBookedDates } from "@/app/actions/get-booked-dates";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -28,8 +56,95 @@ import { ContactHostModal } from "@/app/sections/components/contact-host-modal";
 import { MapSection } from "@/app/sections/components/property-location/map-section";
 import { AvailabilityBookingSection } from "@/app/sections/components/availability-booking-section";
 import { PropertyDetailsSection } from "@/app/sections/components/property-details-section";
+import { AmenitiesCard } from "@/app/sections/components/amenities-card";
 import { AddressSection } from "@/app/sections/components/property-location/address-section";
 import { NearbyPlacesSection } from "@/app/sections/components/property-location/nearby-places-section";
+
+// Amenity interface for the card
+interface Amenity {
+  name: string;
+  icon: LucideIcon;
+}
+
+// Function to map amenity names to icons
+const getAmenityIcon = (amenityName: string): LucideIcon => {
+  const name = amenityName.toLowerCase().trim();
+
+  // Map common amenity names to icons
+  if (name.includes("pet") || name.includes("dog") || name.includes("cat"))
+    return PawPrintIcon;
+  if (name.includes("gym") || name.includes("fitness")) return Dumbbell;
+  if (name.includes("pool") || name.includes("swimming")) return WavesLadder;
+  if (name.includes("playground") || name.includes("kids")) return Blocks;
+  if (name.includes("sauna") || name.includes("spa")) return BathIcon;
+  if (name.includes("view") || name.includes("city")) return Building2;
+  if (name.includes("bed") && name.includes("king")) return BedDoubleIcon;
+  if (name.includes("bed") || name.includes("futon")) return BedDouble;
+  if (
+    name.includes("air conditioning") ||
+    name.includes("ac") ||
+    name.includes("cooling")
+  )
+    return Thermometer;
+  if (name.includes("game") || name.includes("board")) return Users;
+  if (name.includes("tv") || name.includes("television")) return Tv;
+  if (name.includes("book") || name.includes("reading")) return BookOpen;
+  if (
+    name.includes("smoke") ||
+    name.includes("alarm") ||
+    name.includes("safety")
+  )
+    return ShieldCheck;
+  if (name.includes("refrigerator") || name.includes("fridge"))
+    return Refrigerator;
+  if (name.includes("microwave")) return Microwave;
+  if (name.includes("coffee")) return Coffee;
+  if (
+    name.includes("dishes") ||
+    name.includes("utensils") ||
+    name.includes("silverware")
+  )
+    return Utensils;
+  if (
+    name.includes("cooking") ||
+    name.includes("pots") ||
+    name.includes("pans")
+  )
+    return Utensils;
+  if (name.includes("hot water") || name.includes("shower"))
+    return ShowerHeadIcon;
+  if (name.includes("bidet") || name.includes("toilet")) return Toilet;
+  if (name.includes("hair dryer") || name.includes("dryer")) return Wind;
+  if (name.includes("towel")) return Shirt;
+  if (name.includes("wifi") || name.includes("internet")) return Wifi;
+  if (name.includes("workspace") || name.includes("desk")) return BookOpen;
+  if (name.includes("washing machine") || name.includes("laundry"))
+    return WashingMachine;
+  if (
+    name.includes("charging") ||
+    name.includes("socket") ||
+    name.includes("power")
+  )
+    return BatteryCharging;
+  if (name.includes("iron") || name.includes("hangers")) return Shirt;
+  if (name.includes("parking")) return ParkingCircle;
+  if (name.includes("elevator")) return Users;
+
+  // Default icon for unmatched amenities
+  return ShieldCheck;
+};
+
+// Function to convert string amenities to Amenity objects
+const mapStringAmenitiesToAmenities = (
+  stringAmenities: string[]
+): Amenity[] => {
+  return stringAmenities
+    .filter((amenity) => amenity.trim() !== "")
+    .map((amenity) => ({
+      name: amenity.trim().replace(/^[•\-\s]+/, ""), // Remove bullet points and leading spaces/dashes
+      icon: getAmenityIcon(amenity),
+    }));
+};
 
 const nearbyPlaces = [
   { name: "Eastwood City", distance: "0.1 km" },
@@ -418,6 +533,9 @@ export function GallerySection() {
 
   // Property description state
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+
+  // Amenities sheet state
+  const [isAmenitiesExpanded, setIsAmenitiesExpanded] = useState(false);
 
   // Contact modal state
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -864,6 +982,9 @@ export function GallerySection() {
                             onShowMoreClick={() =>
                               setIsDescriptionExpanded(true)
                             }
+                            onShowAmenitiesClick={() =>
+                              setIsAmenitiesExpanded(true)
+                            }
                           />
                         ) : null;
                       })()}
@@ -953,6 +1074,34 @@ export function GallerySection() {
               ?.galleryContent!
           }
         />
+      )}
+
+      {/* Amenities Card Sheet */}
+      {activeGalleryCategoryName && (
+        <Sheet open={isAmenitiesExpanded} onOpenChange={setIsAmenitiesExpanded}>
+          <SheetContent
+            side="bottom"
+            className="h-[80vh] overflow-y-auto md:mx-64 rounded-t-lg"
+          >
+            <div className="p-6">
+              <SheetHeader>
+                <SheetTitle className="text-lg font-medium mb-4">
+                  What this place offers
+                </SheetTitle>
+              </SheetHeader>
+
+              <AmenitiesCard
+                amenities={mapStringAmenitiesToAmenities(
+                  galleryItems.find(
+                    (item) => item.name === activeGalleryCategoryName
+                  )?.galleryContent.guestsAmenities || []
+                )}
+                isMobileView={isMobile}
+                previewCount={50} // Show all amenities in the sheet
+              />
+            </div>
+          </SheetContent>
+        </Sheet>
       )}
 
       {/* Contact Host Modal */}
