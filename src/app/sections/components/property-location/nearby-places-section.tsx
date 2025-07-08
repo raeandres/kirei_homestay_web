@@ -16,18 +16,15 @@ export function NearbyPlacesSection({
 }: NearbyPlacesSectionProps) {
   return (
     <div>
-      <h2 className="font-semibold text-sm flex items-center">
-        <Clock className="mr-4 h-5 w-5 mt-1 shrink-0 text-xs text-gray-600 text-muted-foreground tracking-tighter" />
-        Nearby Places
-      </h2>
-      <ul className="space-y-1 text-sm px-9">
+      <h2 className="font-semibold text-sm flex items-center">Nearby Places</h2>
+      <ul className="space-y-1 text-sm my-1">
         {nearbyPlaces.map((place) => (
           <li
             key={place.name}
-            className="flex justify-between text-xs text-gray-600 text-muted-foreground tracking-tighter"
+            className="flex justify-between text-xs text-gray-600 text-muted-foreground font-normal"
           >
             <span>{place.name}</span>
-            <span className="font-medium text-xs text-gray-600 text-muted-foreground tracking-tighter">
+            <span className="text-xs text-gray-600 text-muted-foreground font-normal">
               {place.distance}
             </span>
           </li>
