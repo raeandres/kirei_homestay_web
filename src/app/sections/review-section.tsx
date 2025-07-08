@@ -195,7 +195,7 @@ export function ReviewsSection() {
                   key={review.name}
                   className="w-full md:w-1/2 flex-shrink-0 p-2"
                 >
-                  <Card className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 min-h-[22rem] md:min-h-[18rem]">
+                  <Card className="flex flex-col duration-300 min-h-[22rem] md:min-h-[18rem] rounded-none">
                     <CardHeader className="flex flex-row items-center space-x-4 pb-4">
                       <Avatar>
                         <AvatarImage
@@ -234,7 +234,7 @@ export function ReviewsSection() {
             variant="ghost"
             onClick={showPrev}
             aria-label="Previous review"
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 z-[2] p-2 rounded-full bg-background/50 text-foreground hover:bg-background/75 hidden md:flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 z-[2] p-2 bg-background/50 text-foreground hidden md:flex"
           >
             <ChevronLeft className="h-6 w-6" />
           </Button>
@@ -243,7 +243,7 @@ export function ReviewsSection() {
             variant="ghost"
             onClick={showNext}
             aria-label="Next review"
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 z-[2] p-2 rounded-full bg-background/50 text-foreground hover:bg-background/75 hidden md:flex"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 z-[2] p-2 bg-background/50 text-foreground hidden md:flex"
           >
             <ChevronRight className="h-6 w-6" />
           </Button>
