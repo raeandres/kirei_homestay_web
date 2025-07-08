@@ -34,7 +34,7 @@ export function PropertyLocation({
       {/* Map Section */}
       <MapSection mapEmbedUrl={mapEmbedUrl} />
 
-      <div className="space-y-6 pt-4">
+      <div className="space-y-6 pt-6">
         {/* Address Section */}
         <AddressSection address={address} />
 

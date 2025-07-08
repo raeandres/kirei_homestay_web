@@ -106,8 +106,7 @@ export function AvailabilityBookingSection({
               size="lg"
               variant="outline"
             >
-              <MessageSquare className="mr-2 h-5 w-5" />
-              Contact Host
+              Message us
             </Button>
           </div>
         </div>

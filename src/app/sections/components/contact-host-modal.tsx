@@ -38,10 +38,12 @@ export function ContactHostModal({
       <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto safe-area-modal">
         <div className="p-6 pt-8 pb-8">
           <DialogHeader>
-            <DialogTitle>Contact the Host</DialogTitle>
+            <DialogTitle className="text-lg md:text-lg lg:text-lg tracking-tight text-gray-600 font-normal text-muted-foreground">
+              Message us
+            </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm md:text-sm lg:text-sm tracking-tighter text-gray-600 font-normal text-muted-foreground">
               Interested to know more? Let us know what you think.
             </p>
             <Form {...form}>
@@ -54,9 +56,15 @@ export function ContactHostModal({
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Your Name</FormLabel>
+                      <FormLabel className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
+                        Your Name
+                      </FormLabel>
                       <FormControl>
-                        <Input placeholder="Your Name" {...field} />
+                        <Input
+                          className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
+                          placeholder="Your Name"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -67,9 +75,12 @@ export function ContactHostModal({
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email Address</FormLabel>
+                      <FormLabel className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
+                        Email Address
+                      </FormLabel>
                       <FormControl>
                         <Input
+                          className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
                           type="email"
                           placeholder="your.email@example.com"
                           {...field}
@@ -84,14 +95,15 @@ export function ContactHostModal({
                   name="phone"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
+                      <FormLabel className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
                         Phone Number{" "}
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
                           (Optional)
                         </span>
                       </FormLabel>
                       <FormControl>
                         <Input
+                          className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
                           type="tel"
                           placeholder="(555) 123-4567"
                           {...field}
@@ -106,11 +118,13 @@ export function ContactHostModal({
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Your Message</FormLabel>
+                      <FormLabel className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
+                        Your Message
+                      </FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder="I'm interested in booking your property and have a few questions..."
-                          className="min-h-[100px]"
+                          className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
                           {...field}
                         />
                       </FormControl>
@@ -120,14 +134,14 @@ export function ContactHostModal({
                 />
                 <Button
                   type="submit"
-                  className="w-full"
+                  className="w-full text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
                   disabled={form.formState.isSubmitting}
                 >
-                  {form.formState.isSubmitting ? "Sending..." : "Send Inquiry"}
+                  {form.formState.isSubmitting ? "Sending..." : "Message us"}
                 </Button>
               </form>
             </Form>
-            <p className="text-xs text-muted-foreground text-center">
+            <p className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
               We typically respond to inquiries within an hour.
             </p>
           </div>

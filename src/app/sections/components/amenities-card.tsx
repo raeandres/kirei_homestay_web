@@ -24,10 +24,10 @@ interface AmenitiesCardProps {
   previewCount?: number;
 }
 
-export function AmenitiesCard({ 
-  amenities, 
-  isMobileView, 
-  previewCount = 5 
+export function AmenitiesCard({
+  amenities,
+  isMobileView,
+  previewCount = 5,
 }: AmenitiesCardProps) {
   const generatedDialogTitleId = useId();
 
@@ -38,7 +38,7 @@ export function AmenitiesCard({
 
   return (
     <Card className="id amenities-card shadow-lg">
-      <CardHeader className="pb-4"></CardHeader>
+      <CardHeader className="pb-0"></CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-1 gap-y-0">
           {amenitiesToDisplayOnPage.map((amenity) => {
@@ -61,7 +61,7 @@ export function AmenitiesCard({
               <DialogTrigger asChild>
                 <Button
                   variant="outline"
-                  className="w-full sm:w-auto text-sm md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed m-2"
+                  className="w-full sm:w-auto text-xs md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed m-2"
                 >
                   Show all {amenities.length} amenities
                 </Button>
