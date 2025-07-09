@@ -29,7 +29,7 @@ export function AvailabilityBookingSection({
   onContactHostClick,
 }: AvailabilityBookingSectionProps) {
   return (
-    <div className="space-y-4">
+    <div className={isMobile ? "space-y-4 mt-4 md:p-8" : "space-y-4"}>
       <h2
         className={
           isMobile

@@ -50,7 +50,7 @@ export function PropertyDetailsSection({
   onShowMoreClick,
 }: PropertyDetailsSectionProps) {
   return (
-    <div className="id property-details-section space-y-8">
+    <div className="id property-details-section space-y-4">
       <div className="id property-details-info">
         <CardDescription className="text-sm text-muted-foreground">
           <h3 className="text-xl md:text-2xl font-normal mb-4">{name}</h3>

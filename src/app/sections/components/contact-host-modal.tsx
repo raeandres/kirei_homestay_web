@@ -56,12 +56,12 @@ export function ContactHostModal({
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
+                      <FormLabel className="text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
                         Your Name
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
+                          className="text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
                           placeholder="Your Name"
                           {...field}
                         />
@@ -75,12 +75,12 @@ export function ContactHostModal({
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
+                      <FormLabel className="text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
                         Email Address
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
+                          className="text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
                           type="email"
                           placeholder="your.email@example.com"
                           {...field}
@@ -95,15 +95,15 @@ export function ContactHostModal({
                   name="phone"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
+                      <FormLabel className="text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
                         Phone Number{" "}
-                        <span className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
+                        <span className="text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
                           (Optional)
                         </span>
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
+                          className="text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
                           type="tel"
                           placeholder="(555) 123-4567"
                           {...field}
@@ -118,13 +118,13 @@ export function ContactHostModal({
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground">
+                      <FormLabel className="text-xs md:text-sm lg:text-sm tracking-tight text-gray-900 font-normal text-muted-foreground">
                         Your Message
                       </FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder="I'm interested in booking your property and have a few questions..."
-                          className="text-sm md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
+                          className="text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
                           {...field}
                         />
                       </FormControl>
