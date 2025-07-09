@@ -52,14 +52,16 @@ export function PropertyDetailsSection({
   return (
     <div className="id property-details-section space-y-4">
       <div className="id property-details-info">
-        <CardDescription className="text-sm text-muted-foreground">
-          <h3 className="text-xl md:text-2xl font-normal mb-4">{name}</h3>
-          <div className="text-sm font-medium text-muted-foreground">
+        <CardDescription className="text-sm text-stormy-blue">
+          <h3 className="text-xl md:text-2xl font-normal mb-4 text-stormy-blue">
+            {name}
+          </h3>
+          <div className="text-sm font-medium text-stormy-blue">
             {cardContent.location}
           </div>
         </CardDescription>
 
-        <div className="text-sm font-medium text-muted-foreground">
+        <div className="text-sm font-medium text-stormy-blue">
           {cardContent.guests} • {cardContent.bedrooms} • {cardContent.beds} •{" "}
           {cardContent.bathrooms}
         </div>
@@ -68,7 +70,7 @@ export function PropertyDetailsSection({
         <div className="border-t border-gray-200 my-6" />
 
         {/* Property Description - Truncated */}
-        <div className="space-y-4 text-sm pb-4 text-muted-foreground">
+        <div className="space-y-4 text-sm pb-4 text-stormy-blue">
           <p className="section: teaser-description1 leading-relaxed">
             {galleryContent.teaserDescription1}
           </p>

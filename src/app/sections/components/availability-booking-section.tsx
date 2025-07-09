@@ -33,8 +33,8 @@ export function AvailabilityBookingSection({
       <h2
         className={
           isMobile
-            ? "text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4"
-            : "text-sm md:text-md flex font-normal md:font-normal justify-center font-headline mb-4"
+            ? "text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4 text-stormy-blue"
+            : "text-sm md:text-md flex font-normal md:font-normal justify-center font-headline mb-4 text-stormy-blue"
         }
       >
         AVAILABILITY
@@ -51,7 +51,7 @@ export function AvailabilityBookingSection({
             disabled={isLoadingCalendar ? true : disabledDates}
             footer={
               isLoadingCalendar ? (
-                <p className="text-center text-sm text-muted-foreground p-2">
+                <p className="text-center text-sm text-stormy-blue p-2">
                   Loading calendar...
                 </p>
               ) : (
@@ -61,7 +61,7 @@ export function AvailabilityBookingSection({
           />
         </div>
         <div className="flex flex-col justify-left pt-0 md:pt-0">
-          <p className="text-sm md:text-sm text-left px-2 md:text-left my-2 font-normal">
+          <p className="text-sm md:text-sm text-left px-2 md:text-left my-2 font-normal text-stormy-blue">
             Check our availability and book your stay on your favorite platform.
           </p>
           <div className="id airbnb-button mt-1 mb-1">
@@ -94,7 +94,7 @@ export function AvailabilityBookingSection({
               </Link>
             </Button>
           </div>
-          <h3 className="id or text-md md:text-md font-normal text-center">
+          <h3 className="id or text-md md:text-md font-normal text-center text-stormy-blue">
             {" "}
             OR{" "}
           </h3>

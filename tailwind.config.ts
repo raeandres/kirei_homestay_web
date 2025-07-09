@@ -23,6 +23,7 @@ export default {
         '7xl': ['4.5rem', { lineHeight: '1.2' }],
       },
       colors: {
+        'stormy-blue': '#3f414b',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

@@ -695,7 +695,7 @@ export function GallerySection() {
 
               <CardContent className="p-4">
                 <div className="space-y-2">
-                  <CardDescription className="text-sm text-muted-foreground">
+                  <CardDescription className="text-sm text-stormy-blue">
                     {item.cardContent.location}
                   </CardDescription>
 
@@ -704,7 +704,7 @@ export function GallerySection() {
                     {item.cardContent.beds} • {item.cardContent.bathrooms}{" "}
                   </div>
 
-                  <div className="text-lg font-semibold text-foreground"></div>
+                  <div className="text-lg font-semibold text-stormy-blue"></div>
                 </div>
               </CardContent>
             </Card>

@@ -46,7 +46,7 @@ export function AmenitiesCard({
             return (
               <div
                 key={amenity.name}
-                className="flex items-center text-sm md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed m-2 rounded-lg hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                className="flex items-center text-sm md:text-sm lg:text-sm text-center text-stormy-blue font-normal tracking-tight leading-relaxed m-2 rounded-lg hover:bg-muted/50 transition-colors duration-200 ease-in-out"
               >
                 <AmenityIconComponent className="mr-3 h-5 w-5 text-accent flex-shrink-0" />
                 <span>{amenity.name}</span>
@@ -61,7 +61,7 @@ export function AmenitiesCard({
               <DialogTrigger asChild>
                 <Button
                   variant="outline"
-                  className="w-full sm:w-auto text-xs md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed m-2"
+                  className="w-full sm:w-auto text-xs md:text-sm lg:text-sm text-center text-stormy-blue font-normal tracking-tight leading-relaxed m-2"
                 >
                   Show all {amenities.length} amenities
                 </Button>
@@ -81,7 +81,7 @@ export function AmenitiesCard({
                       return (
                         <div
                           key={amenity.name + "-dialog"}
-                          className="flex items-center text-sm md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed m-1 rounded-lg hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                          className="flex items-center text-sm md:text-sm lg:text-sm text-center text-stormy-blue font-normal tracking-tight leading-relaxed m-1 rounded-lg hover:bg-muted/50 transition-colors duration-200 ease-in-out"
                         >
                           <AmenityIconComponent className="mr-3 h-5 w-5 text-accent flex-shrink-0" />
                           <span>{amenity.name}</span>
