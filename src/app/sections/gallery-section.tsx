@@ -785,7 +785,7 @@ export function GallerySection() {
           {galleryItems.map((item, index) => (
             <Card
               key={item.name}
-              className="group overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              className="group overflow-hidden duration-300 rounded-none"
             >
               <button
                 type="button"

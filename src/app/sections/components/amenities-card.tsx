@@ -37,7 +37,7 @@ export function AmenitiesCard({
       : amenities;
 
   return (
-    <Card className="id amenities-card shadow-lg">
+    <Card className="id amenities-card rounded-none">
       <CardHeader className="pb-0"></CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-1 gap-y-0">

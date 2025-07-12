@@ -66,7 +66,7 @@ export function ContactHostForm({
 
   return (
     <div className="space-y-6">
-      <Card className="shadow-xl h-full">
+      <Card className=" h-full rounded-none">
         <CardHeader>
           <CardTitle className="text-lg md:text-lg lg:text-lg tracking-tight text-gray-600 font-normal text-muted-foreground">
             {title}
