@@ -73,21 +73,6 @@ export function PropertyDescriptionSheet({
               <p className="id bottomsheet-space-description leading-relaxed mb-4">
                 {galleryContent.spaceDescription}
               </p>
-              <div className="id bottomsheet-amenities my-8">
-                <h5 className="font-medium text-foreground mb-2">
-                  IN-UNIT FEATURES & AMENITIES
-                </h5>
-
-                <div className="id bottomsheet-amenities-description leading-relaxed mb-4">
-                  {galleryContent.guestsAmenities
-                    .filter((item) => item.trim() !== "")
-                    .map((item, index) => (
-                      <p key={index} className="mb-1">
-                        {item.trim()}
-                      </p>
-                    ))}
-                </div>
-              </div>
             </div>
 
             {/* Divider */}
