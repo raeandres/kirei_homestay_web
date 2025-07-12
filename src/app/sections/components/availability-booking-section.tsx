@@ -46,6 +46,7 @@ export function AvailabilityBookingSection({
             mode="single"
             selected={date}
             // onSelect={setDate}
+            showOutsideDays={false}
             className="w-full max-w-none rounded-md border [&_.rdp]:w-full [&_.rdp-table]:w-full [&_.rdp-cell]:p-0 [&_.rdp-day]:w-full [&_.rdp-day]:h-8 flex justify-center"
             disabled={isLoadingCalendar ? true : disabledDates}
             footer={
