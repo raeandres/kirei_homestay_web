@@ -1,6 +1,7 @@
 "use client";
 
 import { UseFormReturn } from "react-hook-form";
+import { useState, useEffect } from "react";
 import { Button } from "@/app/ui/button";
 import {
   Form,
@@ -30,6 +31,39 @@ export function ContactHostForm({
   subtitle = "Let us know what you think.",
   footerText = "We typically respond to inquiries within an hour.",
 }: ContactHostFormProps) {
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  // Don't render form until hydrated to prevent Chrome autofill hydration issues
+  if (!isHydrated) {
+    return (
+      <div className="space-y-6">
+        <Card className="shadow-xl h-full">
+          <CardHeader>
+            <CardTitle className="text-lg md:text-lg lg:text-lg tracking-tight text-gray-600 font-normal text-muted-foreground">
+              {title}
+              <p className="text-xs md:text-sm lg:text-sm tracking-tighter text-gray-600 font-normal text-muted-foreground">
+                {subtitle}
+              </p>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="space-y-4">
+              <div className="h-20 bg-gray-100 rounded-md animate-pulse"></div>
+              <div className="h-20 bg-gray-100 rounded-md animate-pulse"></div>
+              <div className="h-20 bg-gray-100 rounded-md animate-pulse"></div>
+              <div className="h-32 bg-gray-100 rounded-md animate-pulse"></div>
+              <div className="h-10 bg-gray-100 rounded-md animate-pulse"></div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <Card className="shadow-xl h-full">
@@ -43,7 +77,12 @@ export function ContactHostForm({
         </CardHeader>
         <CardContent className="pt-0">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-2"
+              autoComplete="off"
+              noValidate
+            >
               <FormField
                 control={form.control}
                 name="name"
@@ -57,6 +96,8 @@ export function ContactHostForm({
                         placeholder="Your Name"
                         {...field}
                         className="text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
+                        autoComplete="off"
+                        data-form-type="other"
                       />
                     </FormControl>
                     <FormMessage />
@@ -77,6 +118,8 @@ export function ContactHostForm({
                         placeholder="your.email@example.com"
                         {...field}
                         className="text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
+                        autoComplete="off"
+                        data-form-type="other"
                       />
                     </FormControl>
                     <FormMessage />
@@ -100,6 +143,8 @@ export function ContactHostForm({
                         placeholder="(555) 123-4567"
                         {...field}
                         className="text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal text-muted-foreground"
+                        autoComplete="off"
+                        data-form-type="other"
                       />
                     </FormControl>
                     <FormMessage />
@@ -119,6 +164,8 @@ export function ContactHostForm({
                         placeholder="I'm interested in booking your property and have a few questions..."
                         className="text-xs md:text-sm lg:text-xs tracking-tight text-gray-600 font-normal text-muted-foreground"
                         {...field}
+                        autoComplete="off"
+                        data-form-type="other"
                       />
                     </FormControl>
                     <FormMessage />

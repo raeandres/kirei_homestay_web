@@ -41,7 +41,7 @@ import {
 } from "lucide-react";
 import { getBookedDates } from "@/app/actions/get-booked-dates";
 import { cn } from "@/lib/utils";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useDevice } from "@/hooks/use-device";
 import { useCurrency } from "@/lib/currency";
 import {
   contactFormSchema,
@@ -583,7 +583,7 @@ export function GallerySection() {
   >([]);
   const [isLoadingCalendar, setIsLoadingCalendar] = useState(true);
 
-  const isMobile = useIsMobile();
+  const { isMobile } = useDevice();
 
   // Effect to initialize currency on component mount
   useEffect(() => {

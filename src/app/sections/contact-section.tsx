@@ -11,7 +11,7 @@ import {
 } from "@/lib/contact-form";
 import { PropertyLocation } from "@/app/sections/components/property-location/property-location";
 import { ContactHostForm } from "@/app/sections/components/contact-host-form";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useDevice } from "@/hooks/use-device";
 
 const nearbyPlaces = [
   { name: "Eastwood City", distance: "0.1 km" },
@@ -49,7 +49,8 @@ export function ContactSection() {
 
   // Use the externalized contact form handler
   const onSubmit = createContactFormHandler(toast, () => form.reset());
-  const isMobile = useIsMobile();
+
+  const { isMobile } = useDevice();
 
   return (
     <section id="contact" className="py-8 md:py-24 bg-background">

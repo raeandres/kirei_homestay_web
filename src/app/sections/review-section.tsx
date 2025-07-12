@@ -13,7 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/app/ui/avatar";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/app/ui/button";
 
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useDevice } from "@/hooks/use-device";
 
 const reviews = [
   // {
@@ -100,7 +100,7 @@ const reviews = [
 ];
 
 export function ReviewsSection() {
-  const isMobile = useIsMobile();
+  const { isMobile } = useDevice();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // State for swipe gestures

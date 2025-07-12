@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { Button } from "@/app/ui/button";
 import { ChevronDown } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useDevice } from "@/hooks/use-device";
 
 export function IntroSection() {
-  const isMobile = useIsMobile();
+  const { isMobile } = useDevice();
 
   return (
     <section

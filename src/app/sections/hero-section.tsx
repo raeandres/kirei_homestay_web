@@ -13,7 +13,7 @@ import {
   Hotel as HotelIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useDevice } from "@/hooks/use-device";
 
 const landscapeImages = [
   // Kirei 1
@@ -136,19 +136,16 @@ export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imagesToDisplay, setImagesToDisplay] = useState(landscapeImages); // Default to landscape
 
-  const isMobileResult = useIsMobile(); // This is the raw result from the hook
+  const { isMobile } = useDevice();
 
   useEffect(() => {
-    // This effect runs after mount and when isMobileResult changes.
-    // isMobileResult will be undefined on server and then boolean on client.
-    if (typeof isMobileResult === "boolean") {
-      if (isMobileResult) {
-        setImagesToDisplay(portraitImages);
-      } else {
-        setImagesToDisplay(landscapeImages);
-      }
+    // Update images based on device type
+    if (isMobile) {
+      setImagesToDisplay(portraitImages);
+    } else {
+      setImagesToDisplay(landscapeImages);
     }
-  }, [isMobileResult]);
+  }, [isMobile]);
 
   useEffect(() => {
     if (imagesToDisplay.length === 0) return; // Prevent errors if imagesToDisplay is empty
@@ -194,30 +191,51 @@ export function HeroSection() {
           />
         </div>
       ))}
-      <div className="absolute inset-0 bg-black/30 z-[2]" />{" "}
-      {/* Overlay on top of images */}
-      <div className="relative z-[3] flex flex-col items-center justify-center h-full text-center text-white p-4">
-        {" "}
-        {/* Content on top of overlay */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-thin tracking-widest mb-6 font-headline animate-fade-in">
-          SLOW
-          <br />
-          INTENTIONAL
-          <br />
-          LIVING
-        </h1>
-        {/* <Link href="#about">
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="bg-transparent border-transparent text-white hover:bg-transparent hover:text-white animate-fade-in animation-delay-[1800ms]"
-          >
-            <span>
-              Explore More <ChevronDown className="ml-2 h-5 w-5" />
+      {/* Luxury gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/50 z-[2]" />
+
+      {/* Hero content */}
+      <div className="relative z-[3] flex flex-col items-center justify-center h-full text-center text-white px-4 py-8">
+        {/* Main heading with luxury typography */}
+        <div className="space-y-4 mb-12">
+          <h1 className="text-luxury-light text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[0.15em] font-headline">
+            <span className="block animate-fade-in-up stagger-1 [animation-fill-mode:both]">
+              SLOW
             </span>
-          </Button>
-        </Link> */}
+            <span className="block animate-fade-in-up stagger-2 [animation-fill-mode:both]">
+              INTENTIONAL
+            </span>
+            <span className="block animate-fade-in-up stagger-3 [animation-fill-mode:both]">
+              LIVING
+            </span>
+          </h1>
+
+          {/* Elegant subtitle */}
+          <p className="text-luxury-light text-lg sm:text-xl md:text-2xl tracking-[0.08em] max-w-2xl mx-auto animate-fade-in-up stagger-4 [animation-fill-mode:both]">
+            Experience mindful hospitality in the heart of Quezon City
+          </p>
+        </div>
+
+        {/* Luxury CTA button */}
+        <div className="animate-fade-in-up stagger-5 [animation-fill-mode:both]">
+          <Link href="#gallery">
+            <Button
+              size="lg"
+              className="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-luxury px-8 py-4 text-base tracking-[0.05em] font-light rounded-full shadow-luxury"
+            >
+              <span>Discover Our Spaces</span>
+              <ChevronDown className="ml-3 h-5 w-5 animate-luxury-float" />
+            </Button>
+          </Link>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in-up [animation-delay:1.5s] [animation-fill-mode:both]">
+          <div className="flex flex-col items-center space-y-2 text-white/70">
+            <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/50"></div>
+            <ChevronDown className="h-4 w-4 animate-luxury-pulse" />
+          </div>
+        </div>
       </div>
     </section>
   );

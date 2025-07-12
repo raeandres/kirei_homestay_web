@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Button } from "@/app/ui/button";
 import { CardDescription, Card, CardContent } from "@/app/ui/card";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { AmenitiesCard } from "./amenities-card";
+import { useDevice } from "@/hooks/use-device";
+
 import {
   Sheet,
   SheetContent,
@@ -267,12 +266,7 @@ export function PropertyDetailsSection({
   onShowMoreClick,
   onShowAmenitiesClick,
 }: PropertyDetailsSectionProps) {
-  const [isMobileView, setIsMobileView] = useState(false);
-  const isMobileHookResult = useIsMobile();
-
-  useEffect(() => {
-    setIsMobileView(isMobileHookResult);
-  }, [isMobileHookResult]);
+  const { isMobile } = useDevice();
 
   // Convert string amenities to Amenity objects with icons
   const amenitiesWithIcons = mapStringAmenitiesToAmenities(
