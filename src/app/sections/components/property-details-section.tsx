@@ -325,7 +325,9 @@ export function PropertyDetailsSection({
       {/* Amenities Teaser */}
       {amenitiesWithIcons.length > 0 && (
         <div className="id amenities-teaser-section">
-          <h4 className="text-lg font-medium mb-4">What this place offers</h4>
+          <h4 className="text-lg font-medium mb-4">
+            IN-UNIT FEATURES & AMENITIES
+          </h4>
 
           {/* Amenities Preview Box */}
           <Card className=" border border-gray-200 mb-6 md:mb-6">
@@ -359,7 +361,7 @@ export function PropertyDetailsSection({
                   >
                     <div className="p-6">
                       <SheetHeader>
-                        <SheetTitle className="text-lg font-medium mb-6">
+                        <SheetTitle className="sm:text-lg md:text-lg lg:text-lg font-medium mb-6">
                           What this place offers
                         </SheetTitle>
                       </SheetHeader>

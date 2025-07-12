@@ -793,7 +793,12 @@ export function GallerySection() {
                 className="block w-full p-0 border-0 text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                 aria-label={`View images of ${item.name}`}
               >
-                <div className="relative w-full aspect-[3/2] overflow-hidden">
+                <div
+                  className={cn(
+                    "relative w-full overflow-hidden",
+                    isMobile ? "aspect-[3/2]" : "aspect-[3/3]"
+                  )}
+                >
                   <Image
                     src={item.coverImage.src}
                     alt={item.coverImage.alt}
@@ -842,7 +847,7 @@ export function GallerySection() {
         <SheetContent
           side="bottom"
           className={cn(
-            "overflow-y-auto p-0 mx-0 md:mx-64 rounded-t-lg ",
+            "overflow-y-auto p-0 mx-0 md:mx-4 lg:mx-24 xl:mx-32 rounded-t-lg ",
             isMobile ? "h-[95dvh] pb-safe pt-safe-top" : "h-[95vh]",
             // Style the default close button
             "[&>button]:absolute [&>button]:z-[60]  [&>button]:bg-transparent [&>button]:border [&>button]:border-transparent [&>button]:shadow-lg",
@@ -898,7 +903,11 @@ export function GallerySection() {
                         alt={image.alt}
                         data-ai-hint={image.hint}
                         fill
-                        className={isMobile ? "object-contain" : "object-cover"} // object-cover = fit the image to screen; object-contain = preservers the image ratio
+                        className={
+                          isMobile
+                            ? "absolute h-96 object-cover max-h-96 "
+                            : "object-cover"
+                        } // object-cover = fit the image to screen; object-contain = preservers the image ratio
                         sizes="100vw"
                         priority={index === 0}
                       />
