@@ -11,7 +11,7 @@ import {
 import { Button } from "@/app/ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useDevice } from "@/hooks/use-device";
 
 interface GalleryImage {
   src: string;
@@ -38,7 +38,7 @@ export function FullScreenImageSheet({
   onPrevImage,
   onNextImage,
 }: FullScreenImageSheetProps) {
-  const isMobile = useIsMobile();
+  const { isMobile } = useDevice();
   const currentImage = images[currentImageIndex];
 
   if (!currentImage) {

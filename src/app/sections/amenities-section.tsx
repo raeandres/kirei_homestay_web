@@ -1,8 +1,8 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import { useState, useEffect } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useDevice } from "@/hooks/use-device";
+import { Card, CardContent } from "@/app/ui/card";
 import {
   BathIcon,
   BatteryCharging,
@@ -127,15 +127,8 @@ const amenityCategories: AmenityCategory[] = [
   },
 ];
 
-const ITEMS_PREVIEW_COUNT_MOBILE = 5;
-
 export function AmenitiesSection() {
-  const [isMobileView, setIsMobileView] = useState(false);
-  const isMobileHookResult = useIsMobile();
-
-  useEffect(() => {
-    setIsMobileView(isMobileHookResult);
-  }, [isMobileHookResult]);
+  const { isMobile } = useDevice();
 
   const allAmenities = amenityCategories.flatMap(
     (category) => category.amenities
@@ -146,19 +139,32 @@ export function AmenitiesSection() {
       <div className="container max-w-6xl mx-auto px-4">
         <h2
           className={
-            isMobileHookResult
+            isMobile
               ? "text-lg md:text-xl text-left font-headline mb-8 tracking-wide"
               : "text-lg md:text-xl text-center text-justify-center font-headline tracking-wide mb-8"
           }
         >
           AMENITIES
         </h2>
-        {/* Amenities section */}
-        <AmenitiesCard
-          amenities={allAmenities}
-          isMobileView={isMobileView}
-          previewCount={ITEMS_PREVIEW_COUNT_MOBILE}
-        />
+        {/* Amenities section - Single Grid */}
+        <Card className="shadow-lg border border-gray-200">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4 gap-x-6">
+              {allAmenities.map((amenity) => {
+                const AmenityIconComponent = amenity.icon;
+                return (
+                  <div
+                    key={amenity.name}
+                    className="flex items-center text-sm text-stormy-blue font-normal min-h-[28px] p-2 rounded-lg hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                  >
+                    <AmenityIconComponent className="mr-3 h-5 w-5 text-accent flex-shrink-0" />
+                    <span className="leading-tight">{amenity.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );
