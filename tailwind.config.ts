@@ -10,6 +10,10 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        '2k': '1440px',  // 1440p resolution
+        '4k': '2560px',  // 4K resolution
+      },
       fontFamily: {
         body: ['Montserrat', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
         headline: ['Montserrat', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],

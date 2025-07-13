@@ -54,12 +54,12 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-8 md:py-24 bg-background">
-      <div className="container max-w-6xl mx-auto px-4">
+      <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
           className={
             isMobile
-              ? "text-lg md:text-xl text-left  font-headline mb-4 tracking-wide"
-              : "text-lg md:text-xl text-center text-justify-center  font-headline mb-4"
+              ? "text-lg md:text-xl text-left  font-headline tracking-wide"
+              : "text-lg md:text-xl text-left text-justify-center font-headline tracking-wide xl:text-2xl 2k:text-4xl 4k:text-4xl"
           }
         >
           LOCATE US
@@ -67,17 +67,17 @@ export function ContactSection() {
         <h3
           className={
             isMobile
-              ? "text-sm md:text-sm text-left  font-headline tracking-tighter mb-2"
-              : "text-sm md:text-sm text-left text-justify-center tracking-tighter font-headline mb-2"
+              ? "text-sm text-left font-headlline tracking-tighter mb-2"
+              : "text-sm xl:text-lg 2k:text-xl 4k:text-xlmd:text-xl text-left text-justify-left font-headline mb-2 tracking-tighter "
           }
         >
           Find us and explore the neighborhood
         </h3>
-        <div className="container max-w-6xl mx-auto overflow-x-hidden">
+        <div className="ccontainer max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto overflow-x-hidden">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Column: Property Location & Get in touch */}
             <PropertyLocation
-              mapEmbedUrl="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d5199.74430346861!2d121.08133734244423!3d14.6075846246003!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ssg!4v1749335816648!5m2!1sen!2ssg"
+              mapEmbedUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.2719348889746!2d121.07763483908126!3d14.60976159571077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b81d78e5cc63%3A0xbd6fcecf7127264c!2sEastwood%20City!5e1!3m2!1sen!2sph!4v1752381686394!5m2!1sen!2sph"
               address="Palm Tree Avenue, Eastwood City, Libis, Quezon City 1800"
               nearbyPlaces={nearbyPlaces}
               socialMediaLinks={socialMediaLinks}
