@@ -102,12 +102,35 @@ const reviews = [
 export function ReviewsSection() {
   const { isMobile } = useDevice();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(2);
 
   // State for swipe gestures
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
 
-  const itemsPerView = isMobile ? 1 : 2;
+  // Responsive items per view based on screen size
+  useEffect(() => {
+    const updateItemsPerView = () => {
+      const width = window.innerWidth;
+      if (width >= 2560) {
+        // 4K resolution
+        setItemsPerView(5);
+      } else if (width >= 1440) {
+        // 1440p resolution
+        setItemsPerView(3);
+      } else if (width >= 768) {
+        // Desktop/tablet
+        setItemsPerView(2);
+      } else {
+        // Mobile
+        setItemsPerView(1);
+      }
+    };
+
+    updateItemsPerView();
+    window.addEventListener("resize", updateItemsPerView);
+    return () => window.removeEventListener("resize", updateItemsPerView);
+  }, []);
   // Calculate the last possible index for the carousel to start from.
   // This ensures the carousel doesn't show empty space at the end.
   const lastIndex =
@@ -161,23 +184,17 @@ export function ReviewsSection() {
 
   return (
     <section id="reviews" className="py-0 md:py-0 bg-secondary/30">
-      <div
-        className={
-          isMobile
-            ? "container max-w-6xl mx-auto px-4"
-            : "container max-w-6xl mx-auto"
-        }
-      >
+      <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
           className={
             isMobile
-              ? "text-lg md:text-xl text-left text-justify-left font-headline tracking-wide mb-8"
-              : "text-lg md:text-xl text-center text-justify-center font-headline tracking-wide mb-8"
+              ? "text-lg md:text-xl text-left font-headline mb-8 tracking-wide text-stormy-blue"
+              : "text-lg md:text-xl text-left text-justify-left font-headline mb-8 tracking-wide xl:text-2xl 2k:text-4xl 4k:text-4xl text-stormy-blue"
           }
         >
           EXPERIENCES
         </h2>
-        <div className="relative w-full max-w-3xl mx-auto">
+        <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
           <div
             className="overflow-hidden"
             onTouchStart={handleTouchStart}
@@ -193,9 +210,19 @@ export function ReviewsSection() {
               {reviews.map((review) => (
                 <div
                   key={review.name}
-                  className="w-full md:w-1/2 flex-shrink-0 p-2"
+                  className={`flex-shrink-0 p-2 ${
+                    itemsPerView === 1
+                      ? "w-full"
+                      : itemsPerView === 2
+                      ? "w-1/2"
+                      : itemsPerView === 3
+                      ? "w-1/3"
+                      : itemsPerView === 3
+                      ? "w-1/5"
+                      : "w-1/2"
+                  }`}
                 >
-                  <Card className="flex flex-col duration-300 min-h-[22rem] md:min-h-[18rem] rounded-none">
+                  <Card className="flex flex-col duration-400 min-h-[22rem] md:min-h-[18rem] rounded-none">
                     <CardHeader className="flex flex-row items-center space-x-4 pb-4">
                       <Avatar>
                         <AvatarImage
@@ -208,19 +235,22 @@ export function ReviewsSection() {
                         </AvatarFallback>
                       </Avatar>
                       <div>
-                        <CardTitle className="text-lg font-semibold tracking-tight leading-relaxed">
+                        <CardTitle className="text-md md:text-sm lg:text-lg xl:text-lg 2k:text-xl 4k:text-2xl text-stormy-blue font-semibold tracking-tight leading-relaxed">
                           {review.name}
                         </CardTitle>
-                        <RatingStars rating={review.rating} />
+                        <RatingStars
+                          className="text-stormy-blue"
+                          rating={review.rating}
+                        />
                       </div>
                     </CardHeader>
                     <CardContent className="flex-grow">
-                      <p className="text-sm md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed">
+                      <p className="text-sm md:text-sm lg:text-sm xl:text-xl 2k:text-lg 4k:text-xl text-center text-stormy-blue font-normal tracking-tight leading-relaxed">
                         "{review.review}"
                       </p>
                     </CardContent>
                     <CardFooter>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm md:text-sm lg:text-sm xl:text-xl 2k:text-xl 4k:text-xl text-center text-stormy-blue font-normal tracking-tight leading-relaxed">
                         {review.date}
                       </p>
                     </CardFooter>

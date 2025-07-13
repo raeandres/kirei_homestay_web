@@ -771,17 +771,17 @@ export function GallerySection() {
 
   return (
     <section id="gallery" className="py-0 md:py-24 bg-secondary/30">
-      <div className="container max-w-6xl mx-auto px-4">
+      <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
           className={
             isMobile
-              ? "text-lg md:text-xl text-left  font-headline mb-8 tracking-wide"
-              : "text-lg md:text-xl text-center text-justify-center  font-headline mb-8 tracking-wide"
+              ? "text-lg md:text-xl text-left  font-headline mb-8 tracking-wide text-stormy-blue"
+              : "text-lg md:text-xl text-left text-justify-center  font-headline mb-8 tracking-wide xl:text-2xl 2k:text-4xl 4k:text-4xl text-stormy-blue"
           }
         >
           ROOMS
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 2k:grid-cols-2 4k:grid-cols-2 gap-6 md:gap-8 2k:gap-12 4k:gap-16">
           {galleryItems.map((item, index) => (
             <Card
               key={item.name}
@@ -796,7 +796,9 @@ export function GallerySection() {
                 <div
                   className={cn(
                     "relative w-full overflow-hidden",
-                    isMobile ? "aspect-[3/2]" : "aspect-[3/3]"
+                    isMobile
+                      ? "aspect-[3/2]"
+                      : "aspect-[3/3] 2k:aspect-[4/3] 4k:aspect-[5/3]"
                   )}
                 >
                   <Image
@@ -818,11 +820,11 @@ export function GallerySection() {
 
               <CardContent className="p-4">
                 <div className="space-y-2">
-                  <CardDescription className="text-sm text-muted-foreground">
+                  <CardDescription className="text-sm md:text-sm lg:text-md xl:text-xl 2k:text-xl 4k:text-2xl text-left text-justify-left font-headline text-muted-foreground tracking-normal text-stormy-blue">
                     {item.cardContent.location}
                   </CardDescription>
 
-                  <div className="text-sm  text-black">
+                  <div className="text-sm md:text-sm lg:text-md xl:text-xl 2k:text-xl 4k:text-2xl text-muted-foreground text-left text-justify-left tracking-normal">
                     {item.cardContent.guests} • {item.cardContent.bedrooms} •{" "}
                     {item.cardContent.beds} • {item.cardContent.bathrooms}{" "}
                   </div>
