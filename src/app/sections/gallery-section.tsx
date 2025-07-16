@@ -360,11 +360,11 @@ const galleryItems: GalleryCategory[] = [
       "https://www.airbnb.com.sg/calendar/ical/1030897971821606234.ics?s=1b728ed92d212d0e42783ed473c0bb0f",
   },
   {
-    name: "Kirei-ito",
-    unitType: "1 bedroom",
+    name: "Kirei - Ito",
+    unitType: "One Bedroom",
     coverImage: {
       src: "/gallery/kirei_2/converted_0002.webp",
-      alt: "Kirei-ito",
+      alt: "Kirei - Ito",
       hint: "Minimalist 1 bedroom suite",
     },
     cardContent: {
@@ -775,11 +775,11 @@ export function GallerySection() {
         <h2
           className={
             isMobile
-              ? "text-lg md:text-xl text-left  font-headline mb-8 tracking-wide text-stormy-blue"
-              : "text-lg md:text-xl text-left text-justify-center  font-headline mb-8 tracking-wide xl:text-2xl 2k:text-4xl 4k:text-4xl text-stormy-blue"
+              ? "text-4xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue "
+              : "text-4xl md:text-2xl xl:text-2xl 2k:text-4xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter  text-stormy-blue"
           }
         >
-          ROOMS
+          Rooms
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 2k:grid-cols-2 4k:grid-cols-2 gap-6 md:gap-8 2k:gap-12 4k:gap-16">
           {galleryItems.map((item, index) => (
@@ -820,11 +820,11 @@ export function GallerySection() {
 
               <CardContent className="p-4">
                 <div className="space-y-2">
-                  <CardDescription className="text-sm md:text-sm lg:text-md xl:text-xl 2k:text-xl 4k:text-2xl text-left text-justify-left font-headline text-muted-foreground tracking-normal text-stormy-blue">
+                  <CardDescription className="text-sm md:text-sm lg:text-md xl:text-md 2k:text-xl 4k:text-xl text-left text-justify-left font-headline text-muted-foreground tracking-normal text-stormy-blue">
                     {item.cardContent.location}
                   </CardDescription>
 
-                  <div className="text-sm md:text-sm lg:text-md xl:text-xl 2k:text-xl 4k:text-2xl text-muted-foreground text-left text-justify-left tracking-normal">
+                  <div className="text-sm md:text-sm lg:text-md xl:text-lg 2k:text-xl 4k:text-xl text-muted-foreground text-left text-justify-left tracking-normal">
                     {item.cardContent.guests} • {item.cardContent.bedrooms} •{" "}
                     {item.cardContent.beds} • {item.cardContent.bathrooms}{" "}
                   </div>
@@ -1029,14 +1029,14 @@ export function GallerySection() {
                             </div>
                             <div className="space-y-6 pt-4">
                               {/* Address Section */}
-                              <AddressSection
+                              {/* <AddressSection
                                 address={activeItem.cardContent.location}
-                              />
+                              /> */}
 
                               {/* Nearby Places Section */}
-                              <NearbyPlacesSection
+                              {/* <NearbyPlacesSection
                                 nearbyPlaces={nearbyPlaces}
-                              />
+                              /> */}
                             </div>
                           </div>
                         ) : null;
@@ -1096,7 +1096,7 @@ export function GallerySection() {
           >
             <div className="p-6">
               <SheetHeader>
-                <SheetTitle className="text-lg font-medium mb-4">
+                <SheetTitle className="text-lg font-medium mb-4 ">
                   What this place offers
                 </SheetTitle>
               </SheetHeader>

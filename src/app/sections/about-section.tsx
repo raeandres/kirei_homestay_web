@@ -91,7 +91,7 @@ export function AboutSection() {
               {/* Luxury content */}
               <div
                 className={cn(
-                  "space-y-8 transition-all duration-1000 ease-out delay-500",
+                  "space-y-8 transition-all duration-1000 ease-out delay-500 font-playfair-display",
                   isVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"

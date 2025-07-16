@@ -278,13 +278,15 @@ export function PropertyDetailsSection({
     <div className="id property-details-section space-y-8">
       <div className="id property-details-info">
         <CardDescription className="text-sm text-muted-foreground">
-          <h3 className="text-xl md:text-2xl font-normal mb-4">{name}</h3>
-          <div className="text-sm font-medium text-muted-foreground">
+          <h3 className="text-2xl md:text-2xl xl:text-3xl 2k:text-5xl 4k:text-7xl font-playfair-display mb-4">
+            {name}
+          </h3>
+          <div className="text-sm font-playfair-display text-muted-foreground">
             {cardContent.location}
           </div>
         </CardDescription>
 
-        <div className="text-sm font-medium text-muted-foreground">
+        <div className="text-sm font-playfair-display text-muted-foreground">
           {cardContent.guests} • {cardContent.bedrooms} • {cardContent.beds} •{" "}
           {cardContent.bathrooms}
         </div>
@@ -293,7 +295,7 @@ export function PropertyDetailsSection({
         <div className="border-t border-gray-200 my-6" />
 
         {/* Property Description - Truncated */}
-        <div className="space-y-4 text-sm pb-4 text-muted-foreground">
+        <div className="space-y-4 text-sm pb-4 text-muted-foreground font-light font-playfair-display text-stormy-blue">
           <p className="section: teaser-description1 leading-relaxed">
             {galleryContent.teaserDescription1}
           </p>
@@ -332,7 +334,7 @@ export function PropertyDetailsSection({
                   return (
                     <div
                       key={index}
-                      className="flex items-center text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal"
+                      className="flex items-center text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal font-playfair-display"
                     >
                       <AmenityIconComponent className="mr-3 h-4 w-4 text-accent flex-shrink-0" />
                       <span>{amenity.name}</span>

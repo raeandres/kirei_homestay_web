@@ -58,17 +58,17 @@ export function ContactSection() {
         <h2
           className={
             isMobile
-              ? "text-lg md:text-xl text-left  font-headline tracking-wide"
-              : "text-lg md:text-xl text-left text-justify-center font-headline tracking-wide xl:text-2xl 2k:text-4xl 4k:text-4xl"
+              ? "text-4xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue "
+              : "text-4xl md:text-2xl xl:text-2xl 2k:text-4xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter  text-stormy-blue"
           }
         >
-          LOCATE US
+          Locate us
         </h2>
         <h3
           className={
             isMobile
               ? "text-sm text-left font-headlline tracking-tighter mb-2"
-              : "text-sm xl:text-lg 2k:text-xl 4k:text-xlmd:text-xl text-left text-justify-left font-headline mb-2 tracking-tighter "
+              : "text-sm xl:text-lg 2k:text-lg 4k:text-xlmd:text-xl text-left text-justify-left font-headline mb-2 tracking-tighter "
           }
         >
           Find us and explore the neighborhood

@@ -140,11 +140,11 @@ export function AmenitiesSection() {
         <h2
           className={
             isMobile
-              ? "text-lg md:text-xl text-left  font-headline mb-8 tracking-wide"
-              : "text-lg md:text-xl text-left text-justify-center  font-headline mb-8 tracking-wide xl:text-2xl 2k:text-4xl 4k:text-4xl"
+              ? "text-4xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue "
+              : "text-4xl md:text-2xl xl:text-2xl 2k:text-4xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter  text-stormy-blue"
           }
         >
-          AMENITIES
+          Amenities
         </h2>
         {/* Amenities section - Single Grid */}
         <Card className="shadow-lg border border-gray-200">

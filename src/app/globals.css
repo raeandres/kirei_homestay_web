@@ -168,6 +168,10 @@
 }
 
 @layer utilities {
+  /* styles.module.css */
+  .italic {
+    font-style: italic;
+  }
   /* Luxury typography utilities */
   .text-luxury {
     font-weight: 300;
