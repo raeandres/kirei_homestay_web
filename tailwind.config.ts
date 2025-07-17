@@ -20,6 +20,7 @@ export default {
         serif: ['"Zen Old Mincho"', '"Hina Mincho"', 'Georgia', 'serif'],
         code: ['SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'monospace'],
         hina: ['"Hina Mincho"', 'serif'],
+        'playfair-display': ['"Playfair Display"', 'serif'],
         'zen-old-mincho': ['"Zen Old Mincho"', 'serif'],
       },
       fontWeight: {

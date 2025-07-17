@@ -34,7 +34,7 @@ export function AvailabilityBookingSection({
         className={
           isMobile
             ? "text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4"
-            : "text-sm md:text-md flex font-normal md:font-normal justify-center font-headline mb-4"
+            : "text-lg md:text-lg lg:text-xl 2k:text-xl 4k:text-3xl tracking-tight text-stormy-blue text-center text-muted-foreground"
         }
       >
         AVAILABILITY
@@ -47,7 +47,7 @@ export function AvailabilityBookingSection({
             selected={date}
             // onSelect={setDate}
             showOutsideDays={false}
-            className="w-full max-w-none border [&_.rdp]:w-full [&_.rdp-table]:w-full [&_.rdp-cell]:p-0 [&_.rdp-day]:w-full [&_.rdp-day]:h-8 flex justify-center"
+            className="h-full w-full max-w-none border [&_.rdp]:w-full [&_.rdp-table]:w-full [&_.rdp-cell]:p-0 [&_.rdp-day]:w-full [&_.rdp-day]:h-8 flex justify-center"
             disabled={isLoadingCalendar ? true : disabledDates}
             footer={
               isLoadingCalendar ? (
@@ -60,14 +60,14 @@ export function AvailabilityBookingSection({
             }
           />
         </div>
-        <div className="flex flex-col justify-left pt-0 md:pt-0">
-          <p className="text-sm md:text-sm text-left px-2 md:text-left my-2 font-normal">
+        <div className="flex flex-col justify-center pt-0 md:pt-0">
+          <p className="text-sm md:text-sm text-center px-2 md:text-cemter my-2 font-normal">
             Check our availability and book your stay on your favorite platform.
           </p>
-          <div className="id airbnb-button mt-1 mb-1">
+          <div className="id airbnb-button content-center text-center mt-1 mb-1">
             <Button
               asChild
-              className="w-full border border-spacing-safe bg-white hover:bg-zinc-600 hover:text-white"
+              className="rounded-none w-full sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue"
             >
               <Link
                 href={activeBookingLinks.airbnb}
@@ -79,10 +79,10 @@ export function AvailabilityBookingSection({
             </Button>
           </div>
 
-          <div className="id booking-dot-com-button mt-1 mb-1">
+          <div className="id booking-dot-com-button content-center text-center mt-1 mb-1">
             <Button
               asChild
-              className="w-full border border-spacing-safe bg-white hover:bg-zinc-600 hover:text-white"
+              className="rounded-none w-full sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue"
             >
               <Link
                 href={activeBookingLinks.booking}
@@ -94,18 +94,12 @@ export function AvailabilityBookingSection({
               </Link>
             </Button>
           </div>
-          <h3 className="id or text-md md:text-md font-normal text-center">
-            {" "}
-            OR{" "}
-          </h3>
-
-          <div className="id contact-host-button mt-1 mb-1">
+          <h3 className="text-base font-normal text-center"> OR </h3>
+          <div className="id contact-host-button content-center text-center mt-1 mb-1">
             {/* Contact Host Button */}
             <Button
               onClick={onContactHostClick}
-              className="w-full"
-              size="lg"
-              variant="outline"
+              className="rounded-none w-full sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue"
             >
               Message us
             </Button>

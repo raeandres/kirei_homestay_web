@@ -33,7 +33,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
+        <nav className="hidden md:flex items-center space-x-6 text-xs text-stormy-blue font-medium">
           {navItems.map((item) => (
             <Link
               key={item.name}
@@ -61,7 +61,7 @@ export function Header() {
                   <SheetClose key={item.name} asChild>
                     <Link
                       href={item.href}
-                      className="text-lg font-medium text-foreground/80 hover:text-foreground transition-colors"
+                      className="text-sm text-stormy-blue font-medium text-foreground/80 hover:text-foreground transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {item.name}

@@ -28,7 +28,7 @@ export function MapSection({ mapEmbedUrl }: MapSectionProps) {
   }
 
   return (
-    <div className="relative aspect-video bg-muted rounded-lg overflow-hidden shadow-md">
+    <div className="relative aspect-video bg-muted rounded-none overflow-hidden shadow-md">
       <iframe
         src={mapEmbedUrl}
         loading="lazy"

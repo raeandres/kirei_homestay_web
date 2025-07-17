@@ -33,7 +33,7 @@ export function AboutSection() {
   }, []);
 
   return (
-    <section id="about" className="pb-24 md:pb-24 bg-background">
+    <section id="about" className="pb-8 md:pb-8 bg-background">
       <div className="w-full">
         <div
           className={cn(
@@ -91,7 +91,7 @@ export function AboutSection() {
               {/* Luxury content */}
               <div
                 className={cn(
-                  "space-y-8 transition-all duration-1000 ease-out delay-500",
+                  "space-y-8 transition-all duration-1000 ease-out delay-500 font-playfair-display",
                   isVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"

@@ -278,13 +278,15 @@ export function PropertyDetailsSection({
     <div className="id property-details-section space-y-8">
       <div className="id property-details-info">
         <CardDescription className="text-sm text-muted-foreground">
-          <h3 className="text-xl md:text-2xl font-normal mb-4">{name}</h3>
-          <div className="text-sm font-medium text-muted-foreground">
+          <h3 className="text-2xl md:text-2xl xl:text-3xl 2k:text-3xl 4k:text-7xl font-playfair-display mb-4">
+            {name}
+          </h3>
+          <div className="text-sm font-playfair-display tracking-wide text-stormy-blue mb-1">
             {cardContent.location}
           </div>
         </CardDescription>
 
-        <div className="text-sm font-medium text-muted-foreground">
+        <div className="text-sm font-playfair-display tracking-wide text-stormy-blue">
           {cardContent.guests} • {cardContent.bedrooms} • {cardContent.beds} •{" "}
           {cardContent.bathrooms}
         </div>
@@ -293,12 +295,12 @@ export function PropertyDetailsSection({
         <div className="border-t border-gray-200 my-6" />
 
         {/* Property Description - Truncated */}
-        <div className="space-y-4 text-sm pb-4 text-muted-foreground">
-          <p className="section: teaser-description1 leading-relaxed">
+        <div className="space-y-4 text-base pb-4 text-muted-foreground font-light text-stormy-blue">
+          <p className="section: teaser-description1 font-playfair-display leading-relaxed">
             {galleryContent.teaserDescription1}
           </p>
 
-          <p className="section: teaser-description2 leading-relaxed">
+          <p className="section: teaser-description2 font-playfair-display leading-relaxed">
             {galleryContent.teaserDescription2}
           </p>
 
@@ -319,7 +321,7 @@ export function PropertyDetailsSection({
       {/* Amenities Teaser */}
       {amenitiesWithIcons.length > 0 && (
         <div className="id amenities-teaser-section">
-          <h4 className="text-lg font-medium mb-4">
+          <h4 className="text-base font-light mb-4">
             IN-UNIT FEATURES & AMENITIES
           </h4>
 
@@ -332,9 +334,9 @@ export function PropertyDetailsSection({
                   return (
                     <div
                       key={index}
-                      className="flex items-center text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-normal"
+                      className="flex items-center text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-medium"
                     >
-                      <AmenityIconComponent className="mr-3 h-4 w-4 text-accent flex-shrink-0" />
+                      <AmenityIconComponent className="mr-3 h-4 w-4 text-slate-400 flex-shrink-0" />
                       <span>{amenity.name}</span>
                     </div>
                   );
@@ -355,7 +357,7 @@ export function PropertyDetailsSection({
                   >
                     <div className="p-6">
                       <SheetHeader>
-                        <SheetTitle className="sm:text-lg md:text-lg lg:text-lg font-medium mb-6">
+                        <SheetTitle className="sm:text-lg md:text-lg lg:text-lg font-medium font-playfair-display mb-6">
                           What this place offers
                         </SheetTitle>
                       </SheetHeader>
@@ -373,9 +375,9 @@ export function PropertyDetailsSection({
                                   return (
                                     <div
                                       key={amenity.name}
-                                      className="flex items-center text-sm text-gray-600 font-normal min-h-[24px]"
+                                      className="flex items-center text-sm md:text-sm lg:text-lg 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
                                     >
-                                      <AmenityIconComponent className="mr-3 h-4 w-4 text-accent flex-shrink-0" />
+                                      <AmenityIconComponent className="mr-3 h-4 w-4 text-slate-400 flex-shrink-0" />
                                       <span className="leading-tight">
                                         {amenity.name}
                                       </span>

@@ -197,8 +197,8 @@ export function HeroSection() {
       {/* Hero content */}
       <div className="relative z-[3] flex flex-col items-center justify-center h-full text-center text-white px-4 py-8">
         {/* Main heading with luxury typography */}
-        <div className="space-y-4 mb-12">
-          <h1 className="text-luxury-light text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[0.15em] font-headline">
+        <div className="space-y-4 mb-12 font-playfair-display">
+          <h1 className=" text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-ultra-light">
             <span className="block animate-fade-in-up stagger-1 [animation-fill-mode:both]">
               SLOW
             </span>
@@ -211,7 +211,7 @@ export function HeroSection() {
           </h1>
 
           {/* Elegant subtitle */}
-          <p className="text-luxury-light text-lg sm:text-xl md:text-2xl tracking-[0.08em] max-w-2xl mx-auto animate-fade-in-up stagger-4 [animation-fill-mode:both]">
+          <p className="text-luxury-light text-lg sm:text-xl md:text-2xl tracking-tighter max-w-3xl mx-auto animate-fade-in-up stagger-4 [animation-fill-mode:both]">
             Experience mindful hospitality in the heart of Quezon City
           </p>
         </div>

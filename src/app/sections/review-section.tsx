@@ -183,17 +183,18 @@ export function ReviewsSection() {
   const slidePercentage = 100 / itemsPerView;
 
   return (
-    <section id="reviews" className="py-0 md:py-0 bg-secondary/30">
+    <section id="reviews" className="py-0 md:py-0 pb-8 md:pb-8 bg-secondary/30">
       <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
           className={
             isMobile
-              ? "text-lg md:text-xl text-left font-headline mb-8 tracking-wide text-stormy-blue"
-              : "text-lg md:text-xl text-left text-justify-left font-headline mb-8 tracking-wide xl:text-2xl 2k:text-4xl 4k:text-4xl text-stormy-blue"
+              ? "text-2xl md:text-2xl text-left tracking-wide text-stormy-blue"
+              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left tracking-tighter text-stormy-blue"
           }
         >
           EXPERIENCES
         </h2>
+        <div className="border-t border-gray-200 my-6" />
         <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
           <div
             className="overflow-hidden"
@@ -222,35 +223,25 @@ export function ReviewsSection() {
                       : "w-1/2"
                   }`}
                 >
-                  <Card className="flex flex-col duration-400 min-h-[22rem] md:min-h-[18rem] rounded-none">
-                    <CardHeader className="flex flex-row items-center space-x-4 pb-4">
-                      <Avatar>
-                        <AvatarImage
-                          src={review.avatar}
-                          alt={review.name}
-                          data-ai-hint={review.avatarHint}
-                        />
-                        <AvatarFallback>
-                          {review.name.substring(0, 2).toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
+                  <Card className="flex flex-col duration-400 min-h-[22rem] md:min-h-[18rem] rounded-none font-playfair-display">
+                    <CardHeader className="flex flex-row items-left space-x-4 pb-4">
                       <div>
-                        <CardTitle className="text-md md:text-sm lg:text-lg xl:text-lg 2k:text-xl 4k:text-2xl text-stormy-blue font-semibold tracking-tight leading-relaxed">
+                        <CardTitle className="text-xl text-luxury-light text-stormy-blue font-extralight tracking-tight leading-relaxed">
                           {review.name}
                         </CardTitle>
                         <RatingStars
-                          className="text-stormy-blue"
+                          className="text-gray-300 h-1 w-1"
                           rating={review.rating}
                         />
                       </div>
                     </CardHeader>
                     <CardContent className="flex-grow">
-                      <p className="text-sm md:text-sm lg:text-sm xl:text-xl 2k:text-lg 4k:text-xl text-center text-stormy-blue font-normal tracking-tight leading-relaxed">
+                      <p className="italic text-base md:text-sm lg:text-sm xl:text-lg 2k:text-base 4k:text-xl text-left text-stormy-blue font-extra-light tracking-tight leading-relaxed">
                         "{review.review}"
                       </p>
                     </CardContent>
                     <CardFooter>
-                      <p className="text-sm md:text-sm lg:text-sm xl:text-xl 2k:text-xl 4k:text-xl text-center text-stormy-blue font-normal tracking-tight leading-relaxed">
+                      <p className="text-xs md:text-sm lg:text-sm xl:text-sm 2k:text-sm 4k:text-xl text-left text-stormy-blue font-extra-light tracking-tight leading-relaxed">
                         {review.date}
                       </p>
                     </CardFooter>
