@@ -58,22 +58,22 @@ export function ContactSection() {
         <h2
           className={
             isMobile
-              ? "text-4xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue "
-              : "text-4xl md:text-2xl xl:text-2xl 2k:text-4xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter  text-stormy-blue"
+              ? "text-2xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue"
+              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter text-stormy-blue"
           }
         >
-          Locate us
+          LOCATE US
         </h2>
         <h3
           className={
             isMobile
               ? "text-sm text-left font-headlline tracking-tighter mb-2"
-              : "text-sm xl:text-lg 2k:text-lg 4k:text-xlmd:text-xl text-left text-justify-left font-headline mb-2 tracking-tighter "
+              : "text-sm xl:text-lg 2k:text-base 4k:text-xlmd:text-xl text-left text-justify-left font-headline mb-2 tracking-tighter "
           }
         >
           Find us and explore the neighborhood
         </h3>
-        <div className="ccontainer max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto overflow-x-hidden">
+        <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto overflow-x-hidden">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Column: Property Location & Get in touch */}
             <PropertyLocation

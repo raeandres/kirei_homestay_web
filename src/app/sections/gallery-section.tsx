@@ -770,16 +770,16 @@ export function GallerySection() {
     : null;
 
   return (
-    <section id="gallery" className="py-0 md:py-24 bg-secondary/30">
+    <section id="gallery" className="py-0 md:py-0 bg-secondary/30">
       <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
           className={
             isMobile
-              ? "text-4xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue "
-              : "text-4xl md:text-2xl xl:text-2xl 2k:text-4xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter  text-stormy-blue"
+              ? "text-2xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue"
+              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter text-stormy-blue"
           }
         >
-          Rooms
+          ROOMS
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 2k:grid-cols-2 4k:grid-cols-2 gap-6 md:gap-8 2k:gap-12 4k:gap-16">
           {galleryItems.map((item, index) => (

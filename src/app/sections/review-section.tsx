@@ -188,11 +188,11 @@ export function ReviewsSection() {
         <h2
           className={
             isMobile
-              ? "text-4xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue"
-              : "text-4xl md:text-2xl xl:text-2xl 2k:text-4xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter text-stormy-blue"
+              ? "text-2xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue"
+              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter text-stormy-blue"
           }
         >
-          Experiences
+          EXPERIENCES
         </h2>
         <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
           <div
@@ -225,7 +225,7 @@ export function ReviewsSection() {
                   <Card className="flex flex-col duration-400 min-h-[22rem] md:min-h-[18rem] rounded-none font-playfair-display">
                     <CardHeader className="flex flex-row items-left space-x-4 pb-4">
                       <div>
-                        <CardTitle className="text-3xl text-luxury-light text-stormy-blue font-extralight tracking-tight leading-relaxed">
+                        <CardTitle className="text-xl text-luxury-light text-stormy-blue font-extralight tracking-tight leading-relaxed">
                           {review.name}
                         </CardTitle>
                         <RatingStars
@@ -235,7 +235,7 @@ export function ReviewsSection() {
                       </div>
                     </CardHeader>
                     <CardContent className="flex-grow">
-                      <p className="italic text-lg md:text-sm lg:text-sm xl:text-lg 2k:text-lg 4k:text-xl text-left text-stormy-blue font-extra-light tracking-tight leading-relaxed">
+                      <p className="italic text-base md:text-sm lg:text-sm xl:text-lg 2k:text-base 4k:text-xl text-left text-stormy-blue font-extra-light tracking-tight leading-relaxed">
                         "{review.review}"
                       </p>
                     </CardContent>

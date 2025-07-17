@@ -140,14 +140,14 @@ export function AmenitiesSection() {
         <h2
           className={
             isMobile
-              ? "text-4xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue "
-              : "text-4xl md:text-2xl xl:text-2xl 2k:text-4xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter  text-stormy-blue"
+              ? "text-2xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue"
+              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter text-stormy-blue"
           }
         >
-          Amenities
+          AMENITIES
         </h2>
         {/* Amenities section - Single Grid */}
-        <Card className="shadow-lg border border-gray-200">
+        <Card className="shadow-lg border rounded-none border-gray-200">
           <CardContent className="p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4 gap-x-6">
               {allAmenities.map((amenity) => {
@@ -155,9 +155,9 @@ export function AmenitiesSection() {
                 return (
                   <div
                     key={amenity.name}
-                    className="flex items-center text-sm md:text-sm lg:text-lg 2k:text-lg 4k:text-lg tracking-tighter text-stormy-blue font-normal min-h-[28px] p-2 rounded-lg hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                    className="flex items-center text-sm md:text-sm lg:text-lg 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue font-normal min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
                   >
-                    <AmenityIconComponent className="mr-3 h-5 w-5 text-accent flex-shrink-0" />
+                    <AmenityIconComponent className="mr-3 h-5 w-5 text-stormy-blue flex-shrink-0" />
                     <span className="leading-tight">{amenity.name}</span>
                   </div>
                 );
