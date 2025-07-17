@@ -1,8 +1,10 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
+import { useState, useEffect, useId } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useDevice } from "@/hooks/use-device";
-import { Card, CardContent } from "@/app/ui/card";
 import {
   BathIcon,
   BatteryCharging,
@@ -30,7 +32,15 @@ import {
   Wifi,
   Wind,
 } from "lucide-react";
-import { AmenitiesCard } from "./components/amenities-card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/app/ui/card";
+import { Button } from "@/app/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/app/ui/dialog"; // Removed DialogHeader as it's not used directly for title here
+import { ScrollArea } from "@/app/ui/scroll-area";
 
 interface Amenity {
   name: string;
@@ -127,12 +137,20 @@ const amenityCategories: AmenityCategory[] = [
   },
 ];
 
+const ITEMS_PREVIEW_COUNT_MOBILE = 5;
+
 export function AmenitiesSection() {
   const { isMobile } = useDevice();
+  const generatedDialogTitleId = useId();
 
   const allAmenities = amenityCategories.flatMap(
     (category) => category.amenities
   );
+
+  const amenitiesToDisplayOnPage =
+    isMobile && allAmenities.length > ITEMS_PREVIEW_COUNT_MOBILE
+      ? allAmenities.slice(0, ITEMS_PREVIEW_COUNT_MOBILE)
+      : allAmenities;
 
   return (
     <section id="amenities" className="py-8 md:py-24 bg-background">
@@ -150,7 +168,7 @@ export function AmenitiesSection() {
         <Card className="shadow-lg border rounded-none border-gray-200">
           <CardContent className="p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4 gap-x-6">
-              {allAmenities.map((amenity) => {
+              {amenitiesToDisplayOnPage.map((amenity) => {
                 const AmenityIconComponent = amenity.icon;
                 return (
                   <div
@@ -163,6 +181,43 @@ export function AmenitiesSection() {
                 );
               })}
             </div>
+
+            {isMobile && allAmenities.length > ITEMS_PREVIEW_COUNT_MOBILE && (
+              <div className="mt-6 flex justify-center">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" className="w-full sm:w-auto">
+                      Show all {allAmenities.length} amenities
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent
+                    className="sm:max-w-md md:max-w-lg lg:max-w-xl"
+                    aria-labelledby={generatedDialogTitleId}
+                  >
+                    <VisuallyHidden>
+                      <DialogTitle>All Available Amenities</DialogTitle>
+                    </VisuallyHidden>
+
+                    <ScrollArea className="max-h-[60vh] pr-3 pt-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 py-4">
+                        {allAmenities.map((amenity) => {
+                          const AmenityIconComponent = amenity.icon;
+                          return (
+                            <div
+                              key={amenity.name + "-dialog"}
+                              className="flex items-center text-foreground/80 p-3 rounded-lg hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                            >
+                              <AmenityIconComponent className="mr-3 h-5 w-5 text-accent flex-shrink-0" />
+                              <span>{amenity.name}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </ScrollArea>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
