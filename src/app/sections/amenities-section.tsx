@@ -158,12 +158,13 @@ export function AmenitiesSection() {
         <h2
           className={
             isMobile
-              ? "text-2xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue"
-              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter text-stormy-blue"
+              ? "text-2xl md:text-2xl text-left tracking-wide text-stormy-blue"
+              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left tracking-tighter text-stormy-blue"
           }
         >
           AMENITIES
         </h2>
+        <div className="border-t border-gray-200 my-6" />
         {/* Amenities section - Single Grid */}
         <Card className="shadow-lg border rounded-none border-gray-200">
           <CardContent className="p-6">
@@ -173,9 +174,9 @@ export function AmenitiesSection() {
                 return (
                   <div
                     key={amenity.name}
-                    className="flex items-center text-sm md:text-sm lg:text-lg 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue font-normal min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                    className="flex items-center text-sm md:text-sm lg:text-lg 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
                   >
-                    <AmenityIconComponent className="mr-3 h-5 w-5 text-stormy-blue flex-shrink-0" />
+                    <AmenityIconComponent className="mr-3 h-5 w-5 text-slate-400 flex-shrink-0" />
                     <span className="leading-tight">{amenity.name}</span>
                   </div>
                 );
@@ -205,9 +206,9 @@ export function AmenitiesSection() {
                           return (
                             <div
                               key={amenity.name + "-dialog"}
-                              className="flex items-center text-foreground/80 p-3 rounded-lg hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                              className="flex items-center text-sm md:text-sm lg:text-lg 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue font-normal min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
                             >
-                              <AmenityIconComponent className="mr-3 h-5 w-5 text-accent flex-shrink-0" />
+                              <AmenityIconComponent className="mr-3 h-5 w-5 text-slate-400 flex-shrink-0" />
                               <span>{amenity.name}</span>
                             </div>
                           );

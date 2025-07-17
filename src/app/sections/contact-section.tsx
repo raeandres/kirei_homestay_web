@@ -58,8 +58,8 @@ export function ContactSection() {
         <h2
           className={
             isMobile
-              ? "text-2xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue"
-              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter text-stormy-blue"
+              ? "text-2xl md:text-2xl text-left tracking-wide text-stormy-blue"
+              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left tracking-tighter text-stormy-blue"
           }
         >
           LOCATE US
@@ -73,6 +73,7 @@ export function ContactSection() {
         >
           Find us and explore the neighborhood
         </h3>
+        <div className="border-t border-gray-200 my-6" />
         <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto overflow-x-hidden">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Column: Property Location & Get in touch */}

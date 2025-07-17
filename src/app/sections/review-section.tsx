@@ -183,17 +183,18 @@ export function ReviewsSection() {
   const slidePercentage = 100 / itemsPerView;
 
   return (
-    <section id="reviews" className="py-0 md:py-0 bg-secondary/30">
+    <section id="reviews" className="py-0 md:py-0 pb-8 md:pb-8 bg-secondary/30">
       <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
           className={
             isMobile
-              ? "text-2xl md:text-2xl text-left font-playfair-display tracking-wide text-stormy-blue"
-              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left font-playfair-display tracking-tighter text-stormy-blue"
+              ? "text-2xl md:text-2xl text-left tracking-wide text-stormy-blue"
+              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left tracking-tighter text-stormy-blue"
           }
         >
           EXPERIENCES
         </h2>
+        <div className="border-t border-gray-200 my-6" />
         <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
           <div
             className="overflow-hidden"

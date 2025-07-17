@@ -34,7 +34,7 @@ export function AvailabilityBookingSection({
         className={
           isMobile
             ? "text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4"
-            : "text-lg md:text-lg lg:text-xl 2k:text-2xl 4k:text-3xl tracking-tight text-stormy-blue text-center text-muted-foreground"
+            : "text-lg md:text-lg lg:text-xl 2k:text-xl 4k:text-3xl tracking-tight text-stormy-blue text-center text-muted-foreground"
         }
       >
         AVAILABILITY
@@ -67,7 +67,7 @@ export function AvailabilityBookingSection({
           <div className="id airbnb-button content-center text-center mt-1 mb-1">
             <Button
               asChild
-              className="sm:w-full md:w-full lg:w-full xl:w-6/12 2k:w-6/12 4k:w-6/12 border border-spacing-safe sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue"
+              className="rounded-none w-full sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue"
             >
               <Link
                 href={activeBookingLinks.airbnb}
@@ -82,7 +82,7 @@ export function AvailabilityBookingSection({
           <div className="id booking-dot-com-button content-center text-center mt-1 mb-1">
             <Button
               asChild
-              className="sm:w-full md:w-full lg:w-full xl:w-6/12 2k:w-6/12 4k:w-6/12 border border-spacing-safe sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue"
+              className="rounded-none w-full sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue"
             >
               <Link
                 href={activeBookingLinks.booking}
@@ -94,17 +94,12 @@ export function AvailabilityBookingSection({
               </Link>
             </Button>
           </div>
-          <h3 className="id or sm:text-sm md:text-sm lg:text-md xl:text-md 2k:text-lg 4k:text-lg font-normal text-center">
-            {" "}
-            OR{" "}
-          </h3>
-
+          <h3 className="text-base font-normal text-center"> OR </h3>
           <div className="id contact-host-button content-center text-center mt-1 mb-1">
             {/* Contact Host Button */}
             <Button
               onClick={onContactHostClick}
-              className="sm:w-full md:w-full lg:w-full xl:w-6/12 2k:w-6/12 4k:w-6/12border border-spacing-safe sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue"
-              size="lg"
+              className="rounded-none w-full sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue"
             >
               Message us
             </Button>
