@@ -91,13 +91,31 @@ export function AboutSection() {
               {/* Luxury content */}
               <div
                 className={cn(
-                  "space-y-8 transition-all duration-1000 ease-out delay-500 font-playfair-display",
+                  "space-y-8 transition-all duration-1000 ease-out delay-500 font-body",
                   isVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"
                 )}
               >
-                <p className="text-luxury-light text-base md:text-lg lg:text-xl leading-relaxed tracking-wide px-4 sm:px-0 max-w-4xl mx-auto">
+                <p
+                  className=" text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto"
+                  style={
+                    isMobile
+                      ? {
+                          lineHeight: "1.5",
+                          letterSpacing: "0.03em",
+                          fontSize: "1rem",
+                          fontWeight: "300",
+                        }
+                      : {
+                          lineHeight: "1.3",
+                          letterSpacing: "0.05em",
+                          textIndent: "2rem",
+                          fontSize: "1rem",
+                          fontWeight: "300",
+                        }
+                  }
+                >
                   <span className="font-serif text-xl md:text-2xl">Kirei</span>{" "}
                   <span className="text-white/80">(綺麗)</span>, meaning
                   beautiful and clean in Japanese, is more than just a place to
@@ -106,7 +124,25 @@ export function AboutSection() {
                   where minimalist aesthetics meet cozy comfort.
                 </p>
 
-                <p className="text-luxury-light text-base md:text-lg lg:text-xl leading-relaxed tracking-wide px-4 sm:px-0 max-w-4xl mx-auto">
+                <p
+                  className=" text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto"
+                  style={
+                    isMobile
+                      ? {
+                          lineHeight: "1.5",
+                          letterSpacing: "0.03em",
+                          fontSize: "1rem",
+                          fontWeight: "300",
+                        }
+                      : {
+                          lineHeight: "1.3",
+                          letterSpacing: "0.05em",
+                          textIndent: "2rem",
+                          fontSize: "1rem",
+                          fontWeight: "300",
+                        }
+                  }
+                >
                   We believe in the beauty of simplicity and the importance of
                   mindful moments. Every detail at Kirei Homestay is curated to
                   help you unwind, reconnect, and find joy in the present.

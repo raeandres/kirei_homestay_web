@@ -14,6 +14,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/app/ui/button";
 
 import { useDevice } from "@/hooks/use-device";
+import AdaptiveCard from "../ui/AdaptiveCard";
 
 const reviews = [
   // {
@@ -188,7 +189,7 @@ export function ReviewsSection() {
         <h2
           className={
             isMobile
-              ? "text-2xl md:text-2xl text-left tracking-wide text-stormy-blue"
+              ? "text-2xl md:text-2xl text-left tracking-normal text-stormy-blue"
               : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left tracking-tighter text-stormy-blue"
           }
         >
@@ -223,10 +224,16 @@ export function ReviewsSection() {
                       : "w-1/2"
                   }`}
                 >
-                  <Card className="flex flex-col duration-400 min-h-[22rem] md:min-h-[18rem] rounded-none font-playfair-display">
+                  <Card className="flex flex-col duration-400 min-h-[22rem] md:min-h-[18rem] rounded-none">
                     <CardHeader className="flex flex-row items-left space-x-4 pb-4">
                       <div>
-                        <CardTitle className="text-xl text-luxury-light text-stormy-blue font-extralight tracking-tight leading-relaxed">
+                        <CardTitle
+                          className="text-2xl text-luxury-light text-stormy-blue tracking-normal leading-relaxed font-title"
+                          style={{
+                            lineHeight: "2",
+                            letterSpacing: "0.05em",
+                          }}
+                        >
                           {review.name}
                         </CardTitle>
                         <RatingStars
@@ -236,12 +243,34 @@ export function ReviewsSection() {
                       </div>
                     </CardHeader>
                     <CardContent className="flex-grow">
-                      <p className="italic text-base md:text-sm lg:text-sm xl:text-lg 2k:text-base 4k:text-xl text-left text-stormy-blue font-extra-light tracking-tight leading-relaxed">
+                      <p
+                        className="text-sm md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                        style={
+                          isMobile
+                            ? {
+                                lineHeight: "1.5",
+                                letterSpacing: "0.03em",
+                                textIndent: "2rem",
+                              }
+                            : {
+                                lineHeight: "1.3",
+                                letterSpacing: "0.01em",
+                                textIndent: "2rem",
+                                fontSize: "0.9rem",
+                              }
+                        }
+                      >
                         "{review.review}"
                       </p>
                     </CardContent>
                     <CardFooter>
-                      <p className="text-xs md:text-sm lg:text-sm xl:text-sm 2k:text-sm 4k:text-xl text-left text-stormy-blue font-extra-light tracking-tight leading-relaxed">
+                      <p
+                        className="text-sm md:text-sm lg:text-sm xl:text-sm 2k:text-sm 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                        style={{
+                          lineHeight: "1.5",
+                          letterSpacing: "0.02em",
+                        }}
+                      >
                         {review.date}
                       </p>
                     </CardFooter>

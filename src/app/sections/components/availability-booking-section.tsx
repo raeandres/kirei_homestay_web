@@ -67,7 +67,7 @@ export function AvailabilityBookingSection({
           <div className="id airbnb-button content-center text-center mt-1 mb-1">
             <Button
               asChild
-              className="rounded-none w-full sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue"
+              className="rounded-none w-full sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue/80"
             >
               <Link
                 href={activeBookingLinks.airbnb}
@@ -82,7 +82,7 @@ export function AvailabilityBookingSection({
           <div className="id booking-dot-com-button content-center text-center mt-1 mb-1">
             <Button
               asChild
-              className="rounded-none w-full sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue"
+              className="rounded-none w-full sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue/80"
             >
               <Link
                 href={activeBookingLinks.booking}
@@ -99,7 +99,7 @@ export function AvailabilityBookingSection({
             {/* Contact Host Button */}
             <Button
               onClick={onContactHostClick}
-              className="rounded-none w-full sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue"
+              className="rounded-none w-full sm:mx-2 md:mx-2 lg:mx-4 xl:mx-4 2k:mx-4 4k:mx-4 bg-stormy-blue/80"
             >
               Message us
             </Button>

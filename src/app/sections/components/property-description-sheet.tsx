@@ -7,7 +7,10 @@ import {
   SheetTitle,
   SheetClose,
 } from "@/app/ui/sheet";
+import { useDevice } from "@/hooks/use-device";
 import { X } from "lucide-react";
+
+import { Footer } from "../../layout/footer";
 
 interface GalleryContent {
   teaserDescription1: string;
@@ -39,6 +42,7 @@ export function PropertyDescriptionSheet({
   propertyName,
   galleryContent,
 }: PropertyDescriptionSheetProps) {
+  const { isMobile } = useDevice();
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
       <SheetContent
@@ -56,13 +60,29 @@ export function PropertyDescriptionSheet({
 
         <div className="p-6">
           <SheetHeader>
-            <SheetTitle className="text-lg font-medium">
+            <SheetTitle className="text-3xl md:text-2xl xl:text-3xl 2k:text-4xl 4k:text-7xl font-playfair-display mb-4 font-light">
               {propertyName}
             </SheetTitle>
           </SheetHeader>
 
           <div className="mt-6 space-y-6 text-sm text-muted-foreground">
-            <p className="id bottomsheet-property-description leading-relaxed ">
+            <p
+              className="text-sm md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+              style={
+                isMobile
+                  ? {
+                      lineHeight: "1.5",
+                      letterSpacing: "0.03em",
+                      textIndent: "2rem",
+                    }
+                  : {
+                      lineHeight: "1.3",
+                      letterSpacing: "0.01em",
+                      textIndent: "2rem",
+                      fontSize: "0.9rem",
+                    }
+              }
+            >
               {galleryContent.propertyDescription}
             </p>
 
@@ -70,7 +90,23 @@ export function PropertyDescriptionSheet({
               {galleryContent.spaceDescription.length > 0 && (
                 <h5 className="font-medium text-foreground mb-2">The Space</h5>
               )}
-              <p className="id bottomsheet-space-description leading-relaxed mb-4">
+              <p
+                className="text-sm md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                style={
+                  isMobile
+                    ? {
+                        lineHeight: "1.5",
+                        letterSpacing: "0.03em",
+                        textIndent: "2rem",
+                      }
+                    : {
+                        lineHeight: "1.3",
+                        letterSpacing: "0.01em",
+                        textIndent: "2rem",
+                        fontSize: "0.9rem",
+                      }
+                }
+              >
                 {galleryContent.spaceDescription}
               </p>
             </div>
@@ -80,32 +116,92 @@ export function PropertyDescriptionSheet({
 
             <div className="id bottomsheet-guests-preference my-8">
               <h5 className="font-medium text-foreground mb-2">
-                WHY GUESTS LOVE KIREI
+                Why guests love {propertyName}
               </h5>
               <div className="id bottomsheet-guests-preference-list leading-relaxed mb-4">
                 {galleryContent.guestsPreferenceList
                   .filter((item) => item.trim() !== "")
                   .map((item, index) => (
-                    <p key={index} className="mb-1">
+                    <p
+                      key={index}
+                      className="flex items-center mb-1 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                      style={
+                        isMobile
+                          ? {
+                              lineHeight: "1.5",
+                              letterSpacing: "0.01em",
+                            }
+                          : {
+                              lineHeight: "1.3",
+                              letterSpacing: "0.01em",
+                              fontSize: "0.9rem",
+                            }
+                      }
+                    >
                       {item.trim()}
                     </p>
                   ))}
               </div>
               <div className="id bottomsheet-guests-preference-footer-note leading-relaxed mb-4">
-                {galleryContent.guestsPreferenceFooterNote}
+                <p
+                  className="flex items-center text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                  style={
+                    isMobile
+                      ? {
+                          lineHeight: "1.5",
+                          letterSpacing: "0.01em",
+                        }
+                      : {
+                          lineHeight: "1.3",
+                          letterSpacing: "0.01em",
+                          fontSize: "0.9rem",
+                        }
+                  }
+                >
+                  {galleryContent.guestsPreferenceFooterNote}
+                </p>
               </div>
             </div>
 
             <div className="id bottomsheet-guest-access my-8">
-              <h4 className="font-medium text-foreground mb-2">GUEST ACCESS</h4>
-              <p className="leading-relaxed mb-2">
+              <h4 className="font-medium text-foreground mb-2">Guest Access</h4>
+              <p
+                className="flex items-center mb-2 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                style={
+                  isMobile
+                    ? {
+                        lineHeight: "1.5",
+                        letterSpacing: "0.01em",
+                      }
+                    : {
+                        lineHeight: "1.3",
+                        letterSpacing: "0.01em",
+                        fontSize: "0.9rem",
+                      }
+                }
+              >
                 {galleryContent.guestsAccessSubtitle}
               </p>
               <div className="id bottomsheet-guest-access-description leading-relaxed mb-4">
                 {galleryContent.guestsAccessList
                   .filter((item) => item.trim() !== "")
                   .map((item, index) => (
-                    <p key={index} className="mb-0">
+                    <p
+                      key={index}
+                      className="flex items-center mb-1 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                      style={
+                        isMobile
+                          ? {
+                              lineHeight: "1.5",
+                              letterSpacing: "0.01em",
+                            }
+                          : {
+                              lineHeight: "1.3",
+                              letterSpacing: "0.01em",
+                              fontSize: "0.9rem",
+                            }
+                      }
+                    >
                       {item.trim()}
                     </p>
                   ))}
@@ -116,7 +212,21 @@ export function PropertyDescriptionSheet({
               <h5 className="font-medium text-foreground mb-2">
                 Things to note
               </h5>
-              <p className="id bottomsheet-other-notes-description leading-relaxed">
+              <p
+                className="flex items-center mb-2 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                style={
+                  isMobile
+                    ? {
+                        lineHeight: "1.5",
+                        letterSpacing: "0.01em",
+                      }
+                    : {
+                        lineHeight: "1.3",
+                        letterSpacing: "0.01em",
+                        fontSize: "0.9rem",
+                      }
+                }
+              >
                 {galleryContent.otherNotesDescription}
               </p>
             </div>
@@ -129,9 +239,23 @@ export function PropertyDescriptionSheet({
               galleryContent.amenityFeeItems.length > 0 && (
                 <div className="id bottomsheet-amenity-fees my-8">
                   <h5 className="id bottomsheet-amenity-fees-title font-medium text-foreground mb-2">
-                    AMENITY FEES
+                    Amenity Fees
                   </h5>
-                  <p className="id bottomsheet-amenity-fees-description font-medium leading-relaxed mb-2">
+                  <p
+                    className="flex items-center mb-2 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                    style={
+                      isMobile
+                        ? {
+                            lineHeight: "1.5",
+                            letterSpacing: "0.01em",
+                          }
+                        : {
+                            lineHeight: "1.3",
+                            letterSpacing: "0.01em",
+                            fontSize: "0.9rem",
+                          }
+                    }
+                  >
                     {galleryContent.amenityFeesDescription}
                   </p>
 
@@ -139,7 +263,22 @@ export function PropertyDescriptionSheet({
                     {galleryContent.amenityFeeItems
                       .filter((item) => item.trim() !== "")
                       .map((item, index) => (
-                        <p key={index} className="mb-1">
+                        <p
+                          key={index}
+                          className="flex items-center mb-1 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                          style={
+                            isMobile
+                              ? {
+                                  lineHeight: "1.5",
+                                  letterSpacing: "0.01em",
+                                }
+                              : {
+                                  lineHeight: "1.3",
+                                  letterSpacing: "0.01em",
+                                  fontSize: "0.9rem",
+                                }
+                          }
+                        >
                           {item.trim()}
                         </p>
                       ))}
@@ -154,7 +293,22 @@ export function PropertyDescriptionSheet({
                 {galleryContent.importantNotesList
                   .filter((item) => item.trim() !== "")
                   .map((item, index) => (
-                    <p key={index} className="mb-1">
+                    <p
+                      key={index}
+                      className="flex items-center mb-1 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                      style={
+                        isMobile
+                          ? {
+                              lineHeight: "1.5",
+                              letterSpacing: "0.01em",
+                            }
+                          : {
+                              lineHeight: "1.3",
+                              letterSpacing: "0.01em",
+                              fontSize: "0.9rem",
+                            }
+                      }
+                    >
                       {item.trim()}
                     </p>
                   ))}
@@ -163,6 +317,7 @@ export function PropertyDescriptionSheet({
           </div>
         </div>
       </SheetContent>
+      <Footer />;
     </Sheet>
   );
 }

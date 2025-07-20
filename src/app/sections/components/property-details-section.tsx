@@ -278,15 +278,15 @@ export function PropertyDetailsSection({
     <div className="id property-details-section space-y-8">
       <div className="id property-details-info">
         <CardDescription className="text-sm text-muted-foreground">
-          <h3 className="text-2xl md:text-2xl xl:text-3xl 2k:text-3xl 4k:text-7xl font-playfair-display mb-4">
+          <h3 className="text-3xl md:text-2xl xl:text-3xl 2k:text-4xl 4k:text-7xl font-playfair-display mb-4">
             {name}
           </h3>
-          <div className="text-sm font-playfair-display tracking-wide text-stormy-blue mb-1">
+          <div className="text-sm font-body tracking-wide  text-stormy-blue/80 font-normal leading-relaxed mb-1">
             {cardContent.location}
           </div>
         </CardDescription>
 
-        <div className="text-sm font-playfair-display tracking-wide text-stormy-blue">
+        <div className="text-sm font-body tracking-wide  text-stormy-blue/80 font-normal leading-relaxed">
           {cardContent.guests} • {cardContent.bedrooms} • {cardContent.beds} •{" "}
           {cardContent.bathrooms}
         </div>
@@ -295,20 +295,52 @@ export function PropertyDetailsSection({
         <div className="border-t border-gray-200 my-6" />
 
         {/* Property Description - Truncated */}
-        <div className="space-y-4 text-base pb-4 text-muted-foreground font-light text-stormy-blue">
-          <p className="section: teaser-description1 font-playfair-display leading-relaxed">
+        <div className="space-y-4 text-sm pb-4 font-light text-stormy-blue/80">
+          <p
+            className="text-sm md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+            style={
+              isMobile
+                ? {
+                    lineHeight: "1.5",
+                    letterSpacing: "0.03em",
+                    textIndent: "2rem",
+                  }
+                : {
+                    lineHeight: "1.3",
+                    letterSpacing: "0.01em",
+                    textIndent: "2rem",
+                    fontSize: "0.9rem",
+                  }
+            }
+          >
             {galleryContent.teaserDescription1}
           </p>
 
-          <p className="section: teaser-description2 font-playfair-display leading-relaxed">
+          {/* <p
+            className="text-sm md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+            style={
+              isMobile
+                ? {
+                    lineHeight: "1.5",
+                    letterSpacing: "0.03em",
+                    textIndent: "2rem",
+                  }
+                : {
+                    lineHeight: "1.3",
+                    letterSpacing: "0.01em",
+                    textIndent: "2rem",
+                    fontSize: "0.9rem",
+                  }
+            }
+          >
             {galleryContent.teaserDescription2}
-          </p>
+          </p> */}
 
           <Button
             variant="outline"
             size="sm"
             onClick={onShowMoreClick}
-            className="mt-4"
+            className="mt-4 font-body text-stormy-blue/80 rounded-none"
           >
             Show more
           </Button>
@@ -321,7 +353,22 @@ export function PropertyDetailsSection({
       {/* Amenities Teaser */}
       {amenitiesWithIcons.length > 0 && (
         <div className="id amenities-teaser-section">
-          <h4 className="text-base font-light mb-4">
+          <h4
+            className="text-base md:text-2xl xl:text-3xl 2k:text-2xl 4k:text-7xl font-body mb-4 font-light"
+            style={
+              isMobile
+                ? {
+                    lineHeight: "1",
+                    letterSpacing: "0.01em",
+                    fontSize: "1rem",
+                  }
+                : {
+                    lineHeight: "1.3",
+                    letterSpacing: "0.01em",
+                    fontSize: "1.2rem",
+                  }
+            }
+          >
             IN-UNIT FEATURES & AMENITIES
           </h4>
 
@@ -334,7 +381,19 @@ export function PropertyDetailsSection({
                   return (
                     <div
                       key={index}
-                      className="flex items-center text-xs md:text-sm lg:text-sm tracking-tight text-gray-600 font-medium"
+                      className="flex items-center text-xs 2k:text-sm 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                      style={
+                        isMobile
+                          ? {
+                              lineHeight: "1.5",
+                              letterSpacing: "0.002em",
+                              fontWeight: "500",
+                            }
+                          : {
+                              lineHeight: "1.3",
+                              letterSpacing: "0.01em",
+                            }
+                      }
                     >
                       <AmenityIconComponent className="mr-3 h-4 w-4 text-slate-400 flex-shrink-0" />
                       <span>{amenity.name}</span>
@@ -357,7 +416,7 @@ export function PropertyDetailsSection({
                   >
                     <div className="p-6">
                       <SheetHeader>
-                        <SheetTitle className="sm:text-lg md:text-lg lg:text-lg font-medium font-playfair-display mb-6">
+                        <SheetTitle className="sm:text-lg md:text-lg lg:text-lg font-normal mb-6">
                           What this place offers
                         </SheetTitle>
                       </SheetHeader>

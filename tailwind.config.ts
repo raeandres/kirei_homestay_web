@@ -17,6 +17,7 @@ export default {
       fontFamily: {
         body: ['Montserrat', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
         headline: ['Montserrat', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        title: ['"Playfair Display"','serif'],
         serif: ['"Zen Old Mincho"', '"Hina Mincho"', 'Georgia', 'serif'],
         code: ['SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'monospace'],
         hina: ['"Hina Mincho"', 'serif'],
