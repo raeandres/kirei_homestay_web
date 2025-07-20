@@ -56,21 +56,15 @@ export function ContactSection() {
     <section id="contact" className="py-8 md:py-24 bg-background">
       <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
-          className={
-            isMobile
-              ? "text-2xl md:text-2xl text-left tracking-wide text-stormy-blue"
-              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left tracking-tighter text-stormy-blue"
-          }
+          className="text-2xl md:text-lg lg:text-xl 2k:text-4xl 4k:text-7xl text-stormy-blue/80 font-playfair-display"
+          style={{
+            letterSpacing: "0.01em",
+            fontWeight: "500",
+          }}
         >
-          LOCATE US
+          Locate Us
         </h2>
-        <h3
-          className={
-            isMobile
-              ? "text-sm text-left font-headlline tracking-tighter mb-2"
-              : "text-sm xl:text-lg 2k:text-base 4k:text-xlmd:text-xl text-left text-justify-left font-headline mb-2 tracking-tighter "
-          }
-        >
+        <h3 className="text-lg md:text-sm lg:text-sm 2k:text-lg 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
           Find us and explore the neighborhood
         </h3>
         <div className="border-t border-gray-200 my-6" />

@@ -65,21 +65,24 @@ export function PropertyDescriptionSheet({
             </SheetTitle>
           </SheetHeader>
 
-          <div className="mt-6 space-y-6 text-sm text-muted-foreground">
+          <div
+            className={
+              isMobile
+                ? "mt-6 space-y-6 text-sm text-muted-foreground"
+                : "mt-6 mx-8 space-y-6 text-sm text-muted-foreground"
+            }
+          >
             <p
-              className="text-sm md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+              className="text-base md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-playfair-display leading-relaxed mb-8"
               style={
                 isMobile
                   ? {
                       lineHeight: "1.5",
-                      letterSpacing: "0.03em",
-                      textIndent: "2rem",
+                      letterSpacing: "0.003em",
                     }
                   : {
                       lineHeight: "1.3",
-                      letterSpacing: "0.01em",
-                      textIndent: "2rem",
-                      fontSize: "0.9rem",
+                      letterSpacing: "0.005em",
                     }
               }
             >
@@ -88,22 +91,21 @@ export function PropertyDescriptionSheet({
 
             <div>
               {galleryContent.spaceDescription.length > 0 && (
-                <h5 className="font-medium text-foreground mb-2">The Space</h5>
+                <h5 className="font-medium text-xl font-playfair-display font-stormy-blue/60 mb-2">
+                  The Space
+                </h5>
               )}
               <p
-                className="text-sm md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                className="text-base md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-playfair-display leading-relaxed"
                 style={
                   isMobile
                     ? {
                         lineHeight: "1.5",
-                        letterSpacing: "0.03em",
-                        textIndent: "2rem",
+                        letterSpacing: "0.003em",
                       }
                     : {
                         lineHeight: "1.3",
-                        letterSpacing: "0.01em",
-                        textIndent: "2rem",
-                        fontSize: "0.9rem",
+                        letterSpacing: "0.005em",
                       }
                 }
               >
@@ -115,7 +117,7 @@ export function PropertyDescriptionSheet({
             <div className="border-t border-gray-200 my-6" />
 
             <div className="id bottomsheet-guests-preference my-8">
-              <h5 className="font-medium text-foreground mb-2">
+              <h5 className="text-xl md:text-xs lg:text-sm xl:text-base 2k:text-xl 4k:text-xl font-playfair-display font-stormy-blue/60 font-medium mb-2">
                 Why guests love {propertyName}
               </h5>
               <div className="id bottomsheet-guests-preference-list leading-relaxed mb-4">
@@ -124,11 +126,11 @@ export function PropertyDescriptionSheet({
                   .map((item, index) => (
                     <p
                       key={index}
-                      className="flex items-center mb-1 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                      className="flex items-center mb-1 text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-playfair-display leading-relaxed"
                       style={
                         isMobile
                           ? {
-                              lineHeight: "1.5",
+                              lineHeight: "1.3",
                               letterSpacing: "0.01em",
                             }
                           : {
@@ -142,19 +144,20 @@ export function PropertyDescriptionSheet({
                     </p>
                   ))}
               </div>
-              <div className="id bottomsheet-guests-preference-footer-note leading-relaxed mb-4">
+              <div className="id bottomsheet-guests-preference-footer-note leading-relaxed mb-8">
                 <p
-                  className="flex items-center text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                  className="text-sm md:text-xs lg:text-sm xl:text-base 2k:text-sm 4k:text-xl text-left text-stormy-blue/80 font-playfair-display leading-relaxed"
                   style={
                     isMobile
                       ? {
-                          lineHeight: "1.5",
-                          letterSpacing: "0.01em",
+                          lineHeight: "1.2",
+                          letterSpacing: "0.003em",
+                          fontSize: "1rem",
                         }
                       : {
                           lineHeight: "1.3",
-                          letterSpacing: "0.01em",
-                          fontSize: "0.9rem",
+                          letterSpacing: "0.005em",
+                          fontSize: "1rem",
                         }
                   }
                 >
@@ -164,9 +167,11 @@ export function PropertyDescriptionSheet({
             </div>
 
             <div className="id bottomsheet-guest-access my-8">
-              <h4 className="font-medium text-foreground mb-2">Guest Access</h4>
+              <h4 className="font-medium text-xl font-playfair-display font-stormy-blue/60 mb-2">
+                Guest Access
+              </h4>
               <p
-                className="flex items-center mb-2 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                className="flex items-center text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-playfair-display font-normal leading-relaxed mb-2"
                 style={
                   isMobile
                     ? {
@@ -188,11 +193,11 @@ export function PropertyDescriptionSheet({
                   .map((item, index) => (
                     <p
                       key={index}
-                      className="flex items-center mb-1 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                      className="flex items-center mb-1 text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-playfair-display leading-relaxed"
                       style={
                         isMobile
                           ? {
-                              lineHeight: "1.5",
+                              lineHeight: "1.2",
                               letterSpacing: "0.01em",
                             }
                           : {
@@ -209,11 +214,11 @@ export function PropertyDescriptionSheet({
             </div>
 
             <div className="id bottomsheet-other-notes my-8">
-              <h5 className="font-medium text-foreground mb-2">
+              <h5 className="font-medium font-playfair-display text-xl font-stormy-blue/60 mb-2">
                 Things to note
               </h5>
               <p
-                className="flex items-center mb-2 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                className="flex items-center mb-2 text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-playfair-display font-normal leading-relaxed"
                 style={
                   isMobile
                     ? {
@@ -238,11 +243,11 @@ export function PropertyDescriptionSheet({
             {galleryContent.amenityFeesDescription &&
               galleryContent.amenityFeeItems.length > 0 && (
                 <div className="id bottomsheet-amenity-fees my-8">
-                  <h5 className="id bottomsheet-amenity-fees-title font-medium text-foreground mb-2">
+                  <h5 className="font-medium font-playfair-display text-xl font-stormy-blue/60 mb-2">
                     Amenity Fees
                   </h5>
                   <p
-                    className="flex items-center mb-2 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                    className="flex items-center mb-2 text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-playfair-display font-normal leading-relaxed"
                     style={
                       isMobile
                         ? {
@@ -265,11 +270,11 @@ export function PropertyDescriptionSheet({
                       .map((item, index) => (
                         <p
                           key={index}
-                          className="flex items-center mb-1 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                          className="flex items-center mb-1 text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-playfair-display leading-relaxed"
                           style={
                             isMobile
                               ? {
-                                  lineHeight: "1.5",
+                                  lineHeight: "1.2",
                                   letterSpacing: "0.01em",
                                 }
                               : {
@@ -286,24 +291,24 @@ export function PropertyDescriptionSheet({
                 </div>
               )}
             <div id="bottomsheet-important-notes my-8">
-              <h5 className="font-medium text-foreground mb-2">
-                IMPORTANT NOTES
+              <h5 className="font-medium font-playfair-display text-xl font-stormy-blue/60 mb-2">
+                Important Notes
               </h5>
-              <div className="id bottomsheet-important-notes-description px-8 leading-relaxed mb-2">
+              <div className="id bottomsheet-important-notes-description leading-relaxed mb-2">
                 {galleryContent.importantNotesList
                   .filter((item) => item.trim() !== "")
                   .map((item, index) => (
                     <p
                       key={index}
-                      className="flex items-center mb-1 text-sm 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                      className="flex items-center mb-1 text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-playfair-display leading-relaxed"
                       style={
                         isMobile
                           ? {
-                              lineHeight: "1.5",
+                              lineHeight: "1.3",
                               letterSpacing: "0.01em",
                             }
                           : {
-                              lineHeight: "1.3",
+                              lineHeight: "1.5",
                               letterSpacing: "0.01em",
                               fontSize: "0.9rem",
                             }

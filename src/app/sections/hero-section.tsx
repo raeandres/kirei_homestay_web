@@ -211,7 +211,7 @@ export function HeroSection() {
           </h1>
 
           {/* Elegant subtitle */}
-          <p className="text-luxury-light text-lg sm:text-xl md:text-2xl tracking-tighter max-w-3xl mx-auto animate-fade-in-up stagger-4 [animation-fill-mode:both]">
+          <p className="text-luxury-light text-lg sm:text-xl md:text-2xl tracking-tighter font-ultra-light max-w-3xl mx-auto animate-fade-in-up stagger-4 [animation-fill-mode:both]">
             Experience mindful hospitality in the heart of Quezon City
           </p>
         </div>

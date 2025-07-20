@@ -277,16 +277,31 @@ export function PropertyDetailsSection({
   return (
     <div className="id property-details-section space-y-8">
       <div className="id property-details-info">
-        <CardDescription className="text-sm text-muted-foreground">
+        <CardDescription>
           <h3 className="text-3xl md:text-2xl xl:text-3xl 2k:text-4xl 4k:text-7xl font-playfair-display mb-4">
             {name}
           </h3>
-          <div className="text-sm font-body tracking-wide  text-stormy-blue/80 font-normal leading-relaxed mb-1">
-            {cardContent.location}
+          <div>
+            <h4
+              className="text-base md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl font-playfair-display text-stormy-blue/80 font-normal leading-relaxed mb-1"
+              style={
+                isMobile
+                  ? {
+                      lineHeight: "1.3",
+                      letterSpacing: "0.01em",
+                    }
+                  : {
+                      lineHeight: "1.5",
+                      letterSpacing: "0.05em",
+                    }
+              }
+            >
+              {cardContent.location}
+            </h4>
           </div>
         </CardDescription>
 
-        <div className="text-sm font-body tracking-wide  text-stormy-blue/80 font-normal leading-relaxed">
+        <div className="text-base font-playfair-display tracking-wide  text-stormy-blue/80 font-normal leading-relaxed">
           {cardContent.guests} • {cardContent.bedrooms} • {cardContent.beds} •{" "}
           {cardContent.bathrooms}
         </div>
@@ -297,19 +312,20 @@ export function PropertyDetailsSection({
         {/* Property Description - Truncated */}
         <div className="space-y-4 text-sm pb-4 font-light text-stormy-blue/80">
           <p
-            className="text-sm md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+            className="4k:text-xl text-left text-stormy-blue/80 font-normal font-playfair-display leading-relaxed"
             style={
               isMobile
                 ? {
                     lineHeight: "1.5",
-                    letterSpacing: "0.03em",
-                    textIndent: "2rem",
+                    letterSpacing: "0.01em",
+                    fontWeight: "500",
+                    fontSize: "1rem",
                   }
                 : {
-                    lineHeight: "1.3",
-                    letterSpacing: "0.01em",
-                    textIndent: "2rem",
-                    fontSize: "0.9rem",
+                    lineHeight: "1.4",
+                    letterSpacing: "0.03em",
+                    fontSize: "1rem",
+                    fontWeight: "200",
                   }
             }
           >
@@ -340,7 +356,7 @@ export function PropertyDetailsSection({
             variant="outline"
             size="sm"
             onClick={onShowMoreClick}
-            className="mt-4 font-body text-stormy-blue/80 rounded-none"
+            className="mt-4 font-playfair-display text-stormy-blue/80 rounded-none"
           >
             Show more
           </Button>
@@ -354,22 +370,20 @@ export function PropertyDetailsSection({
       {amenitiesWithIcons.length > 0 && (
         <div className="id amenities-teaser-section">
           <h4
-            className="text-base md:text-2xl xl:text-3xl 2k:text-2xl 4k:text-7xl font-body mb-4 font-light"
+            className="text-2xl md:text-2xl xl:text-3xl 2k:text-2xl 4k:text-7xl text-stormy-blue/60 font-playfair-display mb-4 font-light"
             style={
               isMobile
                 ? {
                     lineHeight: "1",
                     letterSpacing: "0.01em",
-                    fontSize: "1rem",
                   }
                 : {
                     lineHeight: "1.3",
                     letterSpacing: "0.01em",
-                    fontSize: "1.2rem",
                   }
             }
           >
-            IN-UNIT FEATURES & AMENITIES
+            In-unit feature & amenities
           </h4>
 
           {/* Amenities Preview Box */}
@@ -381,17 +395,18 @@ export function PropertyDetailsSection({
                   return (
                     <div
                       key={index}
-                      className="flex items-center text-xs 2k:text-sm 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                      className="flex items-center text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-playfair-display leading-relaxed"
                       style={
                         isMobile
                           ? {
                               lineHeight: "1.5",
                               letterSpacing: "0.002em",
-                              fontWeight: "500",
+                              fontWeight: "100",
                             }
                           : {
                               lineHeight: "1.3",
                               letterSpacing: "0.01em",
+                              fontWeight: "100",
                             }
                       }
                     >
@@ -406,7 +421,7 @@ export function PropertyDetailsSection({
               {amenitiesWithIcons.length > 5 && (
                 <Sheet>
                   <SheetTrigger asChild>
-                    <button className="mt-4 text-sm font-medium text-foreground underline hover:no-underline cursor-pointer">
+                    <button className="mt-4 text-sm font-medium text-foreground underline hover:no-underline cursor-pointer font-playfair-display">
                       Show all {amenitiesWithIcons.length} amenities
                     </button>
                   </SheetTrigger>

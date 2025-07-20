@@ -43,9 +43,9 @@ export function ContactHostForm({
       <div className="space-y-6">
         <Card className="shadow-xl h-full">
           <CardHeader>
-            <CardTitle className="text-lg md:text-lg lg:text-lg tracking-tight text-gray-600 font-normal text-muted-foreground">
+            <CardTitle className="text-lg md:text-lg lg:text-lg tracking-tight font-stormy-blue/60 font-normal text-muted-foreground">
               {title}
-              <p className="text-xs md:text-sm lg:text-sm tracking-tighter text-gray-600 font-normal text-muted-foreground">
+              <p className="text-xs md:text-sm lg:text-sm tracking-tighter font-stormy-blue/60 font-normal text-muted-foreground">
                 {subtitle}
               </p>
             </CardTitle>
@@ -68,9 +68,9 @@ export function ContactHostForm({
     <div className="space-y-6">
       <Card className="h-relative rounded-none">
         <CardHeader>
-          <CardTitle className="text-lg md:text-lg lg:text-xl 2k:text-base 4k:text-2xl tracking-tight text-stormy-blue font-normal text-muted-foreground">
+          <CardTitle className="text-2xl md:text-lg lg:text-xl 2k:text-2xl 4k:text-2xl text-stormy-blue/60 font-playfair-display">
             {title}
-            <p className="text-xs md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal text-muted-foreground">
+            <p className="text-lg md:text-sm lg:text-sm 2k:text-lg 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
               {subtitle}
             </p>
           </CardTitle>
@@ -88,14 +88,18 @@ export function ContactHostForm({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-xs md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal text-muted-foreground">
+                    <FormLabel className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
                       Your Name
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Your Name"
                         {...field}
-                        className="text-xs md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal text-muted-foreground"
+                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                        style={{
+                          letterSpacing: "0.01em",
+                          fontWeight: "100",
+                        }}
                         autoComplete="off"
                         data-form-type="other"
                       />
@@ -109,7 +113,7 @@ export function ContactHostForm({
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-xs md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal text-muted-foreground">
+                    <FormLabel className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
                       Email Address
                     </FormLabel>
                     <FormControl>
@@ -117,7 +121,11 @@ export function ContactHostForm({
                         type="email"
                         placeholder="your.email@example.com"
                         {...field}
-                        className="text-xs md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal text-muted-foreground"
+                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                        style={{
+                          letterSpacing: "0.01em",
+                          fontWeight: "100",
+                        }}
                         autoComplete="off"
                         data-form-type="other"
                       />
@@ -131,9 +139,9 @@ export function ContactHostForm({
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-xs md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal text-muted-foreground">
+                    <FormLabel className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
                       Phone Number{" "}
-                      <span className="text-xs md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal text-muted-foreground">
+                      <span className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
                         (Optional)
                       </span>
                     </FormLabel>
@@ -142,7 +150,11 @@ export function ContactHostForm({
                         type="tel"
                         placeholder="(555) 123-4567"
                         {...field}
-                        className="text-xs md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal text-muted-foreground"
+                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                        style={{
+                          letterSpacing: "0.01em",
+                          fontWeight: "100",
+                        }}
                         autoComplete="off"
                         data-form-type="other"
                       />
@@ -156,13 +168,13 @@ export function ContactHostForm({
                 name="message"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-xs md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal text-muted-foregroundr">
+                    <FormLabel className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
                       Your Message
                     </FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="I'm interested in booking your property and have a few questions..."
-                        className="text-xs md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal text-muted-foreground"
+                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
                         {...field}
                         autoComplete="off"
                         data-form-type="other"
@@ -174,14 +186,14 @@ export function ContactHostForm({
               />
               <Button
                 type="submit"
-                className="w-full text-xs md:text-sm lg:text-sm 2k:text-sm 4k:text-lg bg-stormy-blue tracking-tighter hover:text-white text-white font-medium rounded-none"
+                className="w-full text-lg md:text-sm lg:text-sm 2k:text-lg 4k:text-lg bg-stormy-blue tracking-tighter font-playfair-display hover:text-white text-white font-medium rounded-none"
                 disabled={form.formState.isSubmitting}
               >
                 {form.formState.isSubmitting ? "Sending..." : "Message us"}
               </Button>
             </form>
           </Form>
-          <p className="mt-6 text-xs md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-center">
+          <p className="mt-6 text-base md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-center font-playfair-display text-stormy-blue/60">
             {footerText}
           </p>
         </CardContent>

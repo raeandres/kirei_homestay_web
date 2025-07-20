@@ -773,13 +773,13 @@ export function GallerySection() {
     <section id="gallery" className="py-0 md:py-0 pb-8 md:pb-8 bg-secondary/30">
       <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
-          className={
-            isMobile
-              ? "text-2xl md:text-2xl text-left tracking-wide text-stormy-blue"
-              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left tracking-tighter text-stormy-blue"
-          }
+          className="text-2xl md:text-lg lg:text-xl 2k:text-4xl 4k:text-7xl text-stormy-blue/80 font-playfair-display"
+          style={{
+            letterSpacing: "0.01em",
+            fontWeight: "500",
+          }}
         >
-          ROOMS
+          Rooms
         </h2>
         <div className="border-t border-gray-200 my-6" />
         <div className="grid grid-cols-1 md:grid-cols-2 2k:grid-cols-2 4k:grid-cols-2 gap-6 md:gap-8 2k:gap-12 4k:gap-16">
@@ -812,7 +812,7 @@ export function GallerySection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 p-3 md:p-4">
-                    <h3 className="text-lg md:text-xl font-normal text-white">
+                    <h3 className="text-lg md:text-xl font-playfair-display text-white">
                       {item.unitType}
                     </h3>
                   </div>
@@ -821,11 +821,23 @@ export function GallerySection() {
 
               <CardContent className="p-4">
                 <div className="space-y-2">
-                  <CardDescription className="text-sm md:text-sm lg:text-md xl:text-md 2k:text-sm 4k:text-xl text-left text-justify-left font-headline text-muted-foreground tracking-normal font-normal text-stormy-blue">
+                  <CardDescription
+                    className="text-base md:text-sm lg:text-md xl:text-md 2k:text-lg 4k:text-xl text-left text-justify-left tracking-normal font-playfair-display text-stormy-blue/60"
+                    style={{
+                      lineHeight: "1.5",
+                      letterSpacing: "0.01em",
+                    }}
+                  >
                     {item.cardContent.location}
                   </CardDescription>
 
-                  <div className="text-sm md:text-sm lg:text-md xl:text-lg 2k:text-sm 4k:text-xl font-normal text-left text-justify-left tracking-normal text-stormy-blue">
+                  <div
+                    className="text-base md:text-sm lg:text-md xl:text-lg 2k:text-lg 4k:text-xl text-left text-justify-left font-playfair-display text-stormy-blue/60"
+                    style={{
+                      lineHeight: "1.5",
+                      letterSpacing: "0.01em",
+                    }}
+                  >
                     {item.cardContent.guests} • {item.cardContent.bedrooms} •{" "}
                     {item.cardContent.beds} • {item.cardContent.bathrooms}{" "}
                   </div>
@@ -1003,9 +1015,22 @@ export function GallerySection() {
                         );
                         return activeItem ? (
                           <div className="id gallery-map-section mb-20 md:mb-16">
-                            <h2 className="text-sm md:text-md lg:text-md 2k:text-lg 4k:text-md flex font-light md:font-light justify-left font-headline mb-4">
-                              LOCATION
-                            </h2>
+                            <h4
+                              className="text-2xl md:text-2xl xl:text-3xl 2k:text-2xl 4k:text-7xl text-stormy-blue/60 font-playfair-display mb-4 font-light"
+                              style={
+                                isMobile
+                                  ? {
+                                      lineHeight: "1",
+                                      letterSpacing: "0.01em",
+                                    }
+                                  : {
+                                      lineHeight: "1.3",
+                                      letterSpacing: "0.01em",
+                                    }
+                              }
+                            >
+                              Find us
+                            </h4>
                             <div className="id gallery-map ">
                               <MapSection
                                 mapEmbedUrl={activeItem.activeMapUrl}

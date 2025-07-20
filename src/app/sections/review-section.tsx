@@ -187,13 +187,13 @@ export function ReviewsSection() {
     <section id="reviews" className="py-0 md:py-0 pb-8 md:pb-8 bg-secondary/30">
       <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
-          className={
-            isMobile
-              ? "text-2xl md:text-2xl text-left tracking-normal text-stormy-blue"
-              : "text-4xl md:text-2xl xl:text-2xl 2k:text-2xl 4k:text-4xl text-left text-justify-left tracking-tighter text-stormy-blue"
-          }
+          className="text-2xl md:text-lg lg:text-xl 2k:text-4xl 4k:text-7xl text-stormy-blue/80 font-playfair-display"
+          style={{
+            letterSpacing: "0.01em",
+            fontWeight: "500",
+          }}
         >
-          EXPERIENCES
+          Experiences
         </h2>
         <div className="border-t border-gray-200 my-6" />
         <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
@@ -228,7 +228,7 @@ export function ReviewsSection() {
                     <CardHeader className="flex flex-row items-left space-x-4 pb-4">
                       <div>
                         <CardTitle
-                          className="text-2xl text-luxury-light text-stormy-blue tracking-normal leading-relaxed font-title"
+                          className="text-2xl text-luxury-light text-stormy-blue/80 tracking-normal leading-relaxed font-title"
                           style={{
                             lineHeight: "2",
                             letterSpacing: "0.05em",
@@ -244,19 +244,18 @@ export function ReviewsSection() {
                     </CardHeader>
                     <CardContent className="flex-grow">
                       <p
-                        className="text-sm md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                        className="text-base md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/60 font-playfair-display font-normal leading-relaxed"
                         style={
                           isMobile
                             ? {
                                 lineHeight: "1.5",
                                 letterSpacing: "0.03em",
-                                textIndent: "2rem",
+                                fontWeight: "100",
                               }
                             : {
                                 lineHeight: "1.3",
                                 letterSpacing: "0.01em",
-                                textIndent: "2rem",
-                                fontSize: "0.9rem",
+                                fontWeight: "100",
                               }
                         }
                       >
@@ -265,7 +264,7 @@ export function ReviewsSection() {
                     </CardContent>
                     <CardFooter>
                       <p
-                        className="text-sm md:text-sm lg:text-sm xl:text-sm 2k:text-sm 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+                        className="text-sm md:text-sm lg:text-sm xl:text-sm 2k:text-sm 4k:text-xl text-left text-stormy-blue/60 font-normal font-playfair-display leading-relaxed"
                         style={{
                           lineHeight: "1.5",
                           letterSpacing: "0.02em",
