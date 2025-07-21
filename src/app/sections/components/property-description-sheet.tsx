@@ -47,7 +47,7 @@ export function PropertyDescriptionSheet({
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
       <SheetContent
         side="bottom"
-        className="h-[80vh] overflow-y-auto md:mx-64 rounded-t-lg"
+        className="h-[80vh] overflow-y-auto md:mx-4 rounded-t-lg"
       >
         {/* Sticky Close Button */}
         {/* <button

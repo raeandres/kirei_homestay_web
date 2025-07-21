@@ -278,7 +278,7 @@ export function PropertyDetailsSection({
     <div className="id property-details-section space-y-8">
       <div className="id property-details-info">
         <CardDescription>
-          <h3 className="text-3xl md:text-2xl xl:text-3xl 2k:text-4xl 4k:text-7xl font-playfair-display mb-4">
+          <h3 className="text-3xl md:text-2xl xl:text-3xl 2k:text-4xl 4k:text-7xl font-playfair-display">
             {name}
           </h3>
           <div>
@@ -427,11 +427,11 @@ export function PropertyDetailsSection({
                   </SheetTrigger>
                   <SheetContent
                     side="bottom"
-                    className="h-[85vh] overflow-y-auto md:mx-64 rounded-t-lg"
+                    className="h-[85vh] overflow-y-auto md:mx-4 rounded-t-lg"
                   >
                     <div className="p-6">
                       <SheetHeader>
-                        <SheetTitle className="sm:text-lg md:text-lg lg:text-lg font-normal mb-6">
+                        <SheetTitle className="sm:text-lg md:text-lg lg:text-lg mb-6 text-stormy-blue/60 font-playfair-display">
                           What this place offers
                         </SheetTitle>
                       </SheetHeader>
@@ -440,7 +440,7 @@ export function PropertyDetailsSection({
                         <div className="space-y-6">
                           {amenityCategories.map((category) => (
                             <div key={category.title} className="space-y-3">
-                              <h4 className="text-base font-semibold text-foreground border-b border-gray-200 pb-2">
+                              <h4 className="text-base font-semibold text-foreground border-b border-gray-200 pb-2 font-playfair-display">
                                 {category.title}
                               </h4>
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
@@ -449,7 +449,7 @@ export function PropertyDetailsSection({
                                   return (
                                     <div
                                       key={amenity.name}
-                                      className="flex items-center text-sm md:text-sm lg:text-lg 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue font-normal min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                                      className="flex items-center text-sm md:text-sm lg:text-lg 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue/80 font-playfair-display min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
                                     >
                                       <AmenityIconComponent className="mr-3 h-4 w-4 text-slate-400 flex-shrink-0" />
                                       <span className="leading-tight">

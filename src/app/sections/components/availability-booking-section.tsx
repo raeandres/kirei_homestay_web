@@ -114,7 +114,7 @@ export function AvailabilityBookingSection({
               </Link>
             </Button>
           </div>
-          <h3 className="text-2xl font-normal text-center font-playfair-display">
+          <h3 className="text-lg font-normal text-center font-playfair-display">
             {" "}
             or{" "}
           </h3>

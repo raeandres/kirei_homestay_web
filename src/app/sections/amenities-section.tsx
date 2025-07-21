@@ -153,7 +153,10 @@ export function AmenitiesSection() {
       : allAmenities;
 
   return (
-    <section id="amenities" className="py-8 md:py-24 bg-background">
+    <section
+      id="amenities"
+      className="py-0 md:py-0 pb-8 md:pb-8 bg-secondary/30"
+    >
       <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
           className="text-2xl md:text-lg lg:text-xl 2k:text-4xl 4k:text-7xl text-stormy-blue/80 font-playfair-display"
@@ -166,7 +169,7 @@ export function AmenitiesSection() {
         </h2>
         <div className="border-t border-gray-200 my-6" />
         {/* Amenities section - Single Grid */}
-        <Card className="shadow-lg border rounded-none border-gray-200">
+        <Card className="border rounded-none border-gray-200">
           <CardContent className="p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4 gap-x-6">
               {amenitiesToDisplayOnPage.map((amenity) => {
@@ -187,7 +190,10 @@ export function AmenitiesSection() {
               <div className="mt-6 flex justify-center">
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="outline" className="w-full sm:w-auto">
+                    <Button
+                      variant="outline"
+                      className="w-full sm:w-auto font-playfair-display text-base text-stormy-blue/60"
+                    >
                       Show all {allAmenities.length} amenities
                     </Button>
                   </DialogTrigger>
