@@ -27,8 +27,10 @@ export default function HomePage() {
     console.log("Booking submitted:", bookingData);
     // Here you would typically send the booking data to your backend
     alert(
-      `Booking submitted!\nCheck-in: ${bookingData.checkIn.toDateString()}\nCheck-out: ${bookingData.checkOut.toDateString()}\nGuests: ${
+      `Booking submitted!\nCheck-in: ${bookingData.checkIn.toDateString()}\nCheck-out: ${bookingData.checkOut.toDateString()}\nAdults: ${
         bookingData.guests
+      }\nChildren: ${bookingData.children}\nPets: ${
+        bookingData.pets
       }\nTotal: $${bookingData.totalPrice} SGD\nPayment: ${
         bookingData.paymentMethod
       }`
