@@ -1,47 +1,68 @@
 "use client";
 
-import Link from "next/link";
-import { Button } from "@/app/ui/button";
-import { ChevronDown } from "lucide-react";
 import { useDevice } from "@/hooks/use-device";
+import { BookingComponent } from "./components/booking-component";
 
-export function IntroSection() {
+interface IntroSectionProps {
+  occupiedDates?: Date[];
+  onBookingSubmit?: (bookingData: any) => void;
+}
+
+export function IntroSection({
+  occupiedDates = [],
+  onBookingSubmit,
+}: IntroSectionProps) {
   const { isMobile } = useDevice();
+
+  // Sample property data - you can replace this with real data
+  const propertyData = {
+    name: "Kirei House PH",
+    unitType: "Deluxe Studio",
+    basePriceSGD: 120,
+    location: "Eastwood City, Quezon City",
+    maxGuests: 4,
+  };
 
   return (
     <section
       id="intro"
-      className="bg-background flex flex-col items-center justify-center"
+      className="py-12 md:py-16 bg-background flex flex-col items-center justify-center"
     >
-      <div
-        className="flex flex-col items-center justify-center text-center sm:my-8 my-8 md:my-8 lg:my-8 max-w-4xl mx-8 md:mx-8 lg:mx-8"
-        onClick={() => {
-          const aboutSection = document.getElementById("about");
-          if (aboutSection) {
-            aboutSection.scrollIntoView({ behavior: "smooth" });
-          }
-        }}
-      >
-        <h2
-          className={
-            isMobile
-              ? "text-sm md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed max-w-3xl"
-              : "text-lg md:text-lg lg:text-lg text-center text-gray-600 font-normal tracking-tighter leading-relaxed"
-          }
-        >
-          {/* Thoughtfully designed spaces for mindful stays */}
-          Thoughtfully designed spaces for mindful stays
-        </h2>
+      <div className="container max-w-4xl mx-auto px-4">
+        {/* Section Header */}
+        <div className="text-center mb-8">
+          <h2
+            className={
+              isMobile
+                ? "text-2xl md:text-3xl text-center text-stormy-blue/80 font-playfair-display font-light tracking-wide leading-relaxed mb-2"
+                : "text-3xl md:text-4xl text-center text-stormy-blue/80 font-playfair-display font-light tracking-wide leading-relaxed mb-2"
+            }
+          >
+            Reserve Your Stay
+          </h2>
+          <p
+            className={
+              isMobile
+                ? "text-sm text-center text-stormy-blue/60 font-playfair-display font-normal tracking-wide leading-relaxed max-w-2xl mx-auto"
+                : "text-base text-center text-stormy-blue/60 font-playfair-display font-normal tracking-wide leading-relaxed max-w-2xl mx-auto"
+            }
+          >
+            Book your mindful stay at our thoughtfully designed spaces
+          </p>
+        </div>
 
-        <h3
-          className={
-            isMobile
-              ? "text-sm md:text-sm lg:text-sm text-center text-gray-600 font-normal tracking-tight leading-relaxed max-w-3xl"
-              : "text-lg md:text-lg lg:text-lg text-center text-gray-600 font-normal tracking-tighter leading-relaxed"
-          }
-        >
-          explore more
-        </h3>
+        {/* Booking Component */}
+        <div className="flex justify-center">
+          <BookingComponent
+            propertyName={propertyData.name}
+            unitType={propertyData.unitType}
+            basePriceSGD={propertyData.basePriceSGD}
+            location={propertyData.location}
+            maxGuests={propertyData.maxGuests}
+            occupiedDates={occupiedDates}
+            onBookingSubmit={onBookingSubmit}
+          />
+        </div>
       </div>
     </section>
   );
