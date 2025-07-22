@@ -211,9 +211,9 @@ export function HeroSection() {
           </h1>
 
           {/* Elegant subtitle */}
-          <p className="text-luxury-light text-lg sm:text-xl md:text-2xl tracking-tighter font-ultra-light max-w-3xl mx-auto animate-fade-in-up stagger-4 [animation-fill-mode:both]">
+          {/* <p className="text-luxury-light text-lg sm:text-xl md:text-2xl tracking-tighter font-ultra-light max-w-3xl mx-auto animate-fade-in-up stagger-4 [animation-fill-mode:both]">
             Experience mindful hospitality in the heart of Quezon City
-          </p>
+          </p> */}
         </div>
 
         {/* Luxury CTA button */}
@@ -221,7 +221,7 @@ export function HeroSection() {
           <Link href="#gallery">
             <Button
               size="lg"
-              className="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-luxury px-8 py-4 text-base tracking-[0.05em] font-light rounded-full shadow-luxury"
+              className="bg-transparent backdrop-blur-sm border border-transparent text-white hover:bg-transparent hover:border-transparent transition-luxury px-8 py-4 text-base tracking-[0.05em] font-light rounded-full shadow-luxury"
             >
               <span>Discover Our Spaces</span>
               <ChevronDown className="ml-3 h-5 w-5 animate-luxury-float" />

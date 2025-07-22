@@ -56,12 +56,12 @@ export function ContactHostModal({
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
+                      <FormLabel className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
                         Your Name
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                          className="text-sm md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
                           placeholder="Your Name"
                           {...field}
                         />
@@ -75,12 +75,12 @@ export function ContactHostModal({
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
+                      <FormLabel className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
                         Email Address
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                          className="text-sm md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
                           type="email"
                           placeholder="your.email@example.com"
                           {...field}
@@ -95,15 +95,15 @@ export function ContactHostModal({
                   name="phone"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
+                      <FormLabel className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
                         Phone Number{" "}
-                        <span className="text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
+                        <span className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
                           (Optional)
                         </span>
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                          className="text-sm md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
                           type="tel"
                           placeholder="(555) 123-4567"
                           {...field}
@@ -118,7 +118,7 @@ export function ContactHostModal({
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
+                      <FormLabel className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
                         Your Message
                       </FormLabel>
                       <FormControl>
@@ -141,7 +141,7 @@ export function ContactHostModal({
                 </Button>
               </form>
             </Form>
-            <p className="mt-6 text-base md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-center font-playfair-display text-stormy-blue/60">
+            <p className="mt-6 text-base md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-center font-playfair-display text-stormy-blue/60">
               We typically respond to inquiries within an hour.
             </p>
           </div>

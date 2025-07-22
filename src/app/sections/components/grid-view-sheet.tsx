@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/app/ui/sheet";
 import { cn } from "@/lib/utils";
+import { Footer } from "../../layout/footer";
 
 interface GalleryImage {
   src: string;
@@ -69,6 +70,7 @@ export function GridViewSheet({
             ))}
           </div>
         </div>
+        <Footer />
       </SheetContent>
     </Sheet>
   );

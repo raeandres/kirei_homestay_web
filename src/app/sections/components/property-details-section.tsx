@@ -42,6 +42,7 @@ import {
   Wind,
 } from "lucide-react";
 import { MapSection } from "./property-location/map-section";
+import { Footer } from "../../layout/footer";
 
 interface AmenityCategory {
   title: string;
@@ -449,7 +450,7 @@ export function PropertyDetailsSection({
                                   return (
                                     <div
                                       key={amenity.name}
-                                      className="flex items-center text-sm md:text-sm lg:text-lg 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue/80 font-playfair-display min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                                      className="flex items-center text-sm md:text-base lg:text-lg 2k:text-lg 4k:text-lg tracking-tighter text-stormy-blue/80 font-playfair-display min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
                                     >
                                       <AmenityIconComponent className="mr-3 h-4 w-4 text-slate-400 flex-shrink-0" />
                                       <span className="leading-tight">

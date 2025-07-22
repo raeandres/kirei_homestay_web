@@ -321,8 +321,8 @@ export function PropertyDescriptionSheet({
             </div>
           </div>
         </div>
+        <Footer />
       </SheetContent>
-      <Footer />;
     </Sheet>
   );
 }
