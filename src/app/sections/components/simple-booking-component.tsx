@@ -111,8 +111,8 @@ export function SimpleBookingComponent({
               </DialogHeader>
               <Calendar
                 mode="single"
-                selected={checkIn}
-                onSelect={setCheckIn}
+                selected={checkIn || undefined}
+                onSelect={(date) => setCheckIn(date || null)}
                 disabled={disabledDates}
                 className="w-full"
                 classNames={{
@@ -149,12 +149,12 @@ export function SimpleBookingComponent({
               </DialogHeader>
               <Calendar
                 mode="single"
-                selected={checkOut}
-                onSelect={setCheckOut}
+                selected={checkOut || undefined}
+                onSelect={(date) => setCheckOut(date || null)}
                 disabled={[
                   ...disabledDates,
-                  checkIn ? { before: checkIn } : undefined,
-                ].filter(Boolean)}
+                  ...(checkIn ? [{ before: checkIn }] : []),
+                ]}
                 className="w-full"
                 classNames={{
                   day_selected: "bg-primary text-primary-foreground",

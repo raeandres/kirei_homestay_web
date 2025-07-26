@@ -8,12 +8,10 @@ import { useDevice } from "@/hooks/use-device";
 import {
   CalendarDays,
   Users,
-  Search,
   Baby,
   Heart,
   MapPin,
   AlertCircle,
-  Badge,
   CheckCircle,
   Clock,
   CreditCard,
@@ -22,9 +20,10 @@ import {
 import { format, startOfDay } from "date-fns";
 import type { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
-import { RadioGroup, Separator } from "@radix-ui/react-dropdown-menu";
-import { RadioGroupItem } from "@radix-ui/react-radio-group";
-import { Label } from "recharts";
+import { Badge } from "@/app/ui/badge";
+import { Separator } from "@/app/ui/separator";
+import { RadioGroup, RadioGroupItem } from "@/app/ui/radio-group";
+import { Label } from "@/app/ui/label";
 
 interface BookingComponentProps {
   propertyName: string;
