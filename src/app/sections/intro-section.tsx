@@ -47,7 +47,8 @@ export function IntroSection({
                 : "text-base text-center text-stormy-blue/60 font-playfair-display font-normal tracking-wide leading-relaxed max-w-2xl mx-auto"
             }
           >
-            Book your mindful stay at our thoughtfully designed spaces
+            Experience slow intentional living at our thoughtfully designed
+            spaces
           </p>
         </div>
 

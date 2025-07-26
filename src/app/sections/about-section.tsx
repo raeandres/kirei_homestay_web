@@ -2,6 +2,7 @@
 import { useDevice } from "@/hooks/use-device";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export function AboutSection() {
   const { isMobile } = useDevice();
@@ -41,7 +42,7 @@ export function AboutSection() {
             isMobile ? "aspect-[9/16]" : "aspect-video"
           )}
         >
-          <video
+          {/* <video
             key={isMobile ? "mobile" : "desktop"}
             autoPlay
             muted
@@ -62,10 +63,10 @@ export function AboutSection() {
               />
             )}
             Your browser does not support the video tag.
-          </video>
+          </video> */}
           {/* Luxury gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/60 flex items-center justify-center p-8">
-            <div className="text-center text-white max-w-5xl mx-auto space-y-8">
+          <div className="absolute inset-0  from-black/30 via-black/40 to-black/60 flex items-center justify-center p-8">
+            <div className="text-center text-stormy-blue/80 max-w-5xl mx-auto space-y-8">
               {/* Elegant header */}
               <div
                 className={cn(
@@ -75,9 +76,15 @@ export function AboutSection() {
                     : "opacity-0 translate-y-8"
                 )}
               >
-                <h2 className="text-luxury-light text-2xl md:text-4xl lg:text-5xl font-headline tracking-[0.15em] mb-4">
-                  WELCOME
-                </h2>
+                {/* <Image
+                  src="https://placehold.co/800x400.png"
+                  src="/images/hero/dining_1.jpg"
+                  alt="Peaceful Kirei interior detail"
+                  data-ai-hint="zen decor"
+                  width={800}
+                  height={400}
+                  className="rounded-lg shadow-lg mx-auto mb-8 object-cover"
+                /> */}
                 <div
                   className={cn(
                     "w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent mx-auto transition-all duration-1000 ease-out delay-300",
@@ -86,6 +93,14 @@ export function AboutSection() {
                       : "opacity-0 scale-x-0"
                   )}
                 ></div>
+                <Image
+                  src="/gallery/kirei_2/converted_0001.webp"
+                  alt="Peaceful Kirei interior detail"
+                  data-ai-hint="zen decor"
+                  width={600}
+                  height={400}
+                  className="rounded-none shadow-lg mx-auto mb-8 object-cover"
+                />
               </div>
 
               {/* Luxury content */}
@@ -98,7 +113,7 @@ export function AboutSection() {
                 )}
               >
                 <p
-                  className=" text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto"
+                  className="text-stormy-blue/60 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-extralight px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
                   style={
                     isMobile
                       ? {
@@ -117,7 +132,7 @@ export function AboutSection() {
                   }
                 >
                   <span className="font-serif text-xl md:text-2xl">Kirei</span>{" "}
-                  <span className="text-white/80">(綺麗)</span>, meaning
+                  <span className="text-stormy-blue/80">(綺麗)</span>, meaning
                   beautiful and clean in Japanese, is more than just a place to
                   stay. It's an invitation to embrace slow, intentional living.
                   Our space is thoughtfully designed to be a sanctuary of calm,
@@ -125,7 +140,7 @@ export function AboutSection() {
                 </p>
 
                 <p
-                  className=" text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto"
+                  className=" text-stormy-blue/60 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
                   style={
                     isMobile
                       ? {

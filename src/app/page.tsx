@@ -42,13 +42,15 @@ export default function HomePage() {
       <Header />
       <main className="flex-grow pt-16">
         <HeroSection />
+        <GallerySection />
+        <AboutSection />
         <IntroSection
           occupiedDates={occupiedDates}
           onBookingSubmit={handleBookingSubmit}
         />
-        <AboutSection />
+
         <ReviewsSection />
-        <GallerySection />
+
         <AmenitiesSection />
         <ContactSection />
       </main>
