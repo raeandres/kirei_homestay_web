@@ -39,8 +39,28 @@ export function SimpleBookingComponent({
   const [children, setChildren] = useState(0);
   const [pets, setPets] = useState(0);
 
+  // Dialog states for auto-dismiss
+  const [isCheckInDialogOpen, setIsCheckInDialogOpen] = useState(false);
+  const [isCheckOutDialogOpen, setIsCheckOutDialogOpen] = useState(false);
+  const [isGuestsDialogOpen, setIsGuestsDialogOpen] = useState(false);
+
   // Create disabled dates (occupied dates + past dates)
   const disabledDates = [...occupiedDates, { before: startOfDay(new Date()) }];
+
+  // Handlers with auto-dismiss
+  const handleCheckInSelect = (date: Date | undefined) => {
+    setCheckIn(date || null);
+    if (date) {
+      setIsCheckInDialogOpen(false);
+    }
+  };
+
+  const handleCheckOutSelect = (date: Date | undefined) => {
+    setCheckOut(date || null);
+    if (date) {
+      setIsCheckOutDialogOpen(false);
+    }
+  };
 
   const handleSearchRooms = () => {
     if (onSearchRooms) {
@@ -86,7 +106,10 @@ export function SimpleBookingComponent({
             </p>
           </div>
           {/* 2. Check-in Calendar Button */}
-          <Dialog>
+          <Dialog
+            open={isCheckInDialogOpen}
+            onOpenChange={setIsCheckInDialogOpen}
+          >
             <DialogTrigger asChild>
               <Button
                 variant="outline"
@@ -105,26 +128,32 @@ export function SimpleBookingComponent({
             </DialogTrigger>
             <DialogContent className="max-w-md">
               <DialogHeader>
-                <DialogTitle className="font-playfair-display text-stormy-blue/80">
+                <DialogTitle className="font-playfair-display text-stormy-blue/80 text-center">
                   Select Check-in Date
                 </DialogTitle>
               </DialogHeader>
-              <Calendar
-                mode="single"
-                selected={checkIn || undefined}
-                onSelect={(date) => setCheckIn(date || null)}
-                disabled={disabledDates}
-                className="w-full"
-                classNames={{
-                  day_selected: "bg-primary text-primary-foreground",
-                  day_disabled: "text-muted-foreground opacity-50 line-through",
-                }}
-              />
+              <div className="flex justify-center">
+                <Calendar
+                  mode="single"
+                  selected={checkIn || undefined}
+                  onSelect={handleCheckInSelect}
+                  disabled={disabledDates}
+                  className="w-full flex justify-center"
+                  classNames={{
+                    day_selected: "bg-primary text-primary-foreground",
+                    day_disabled:
+                      "text-muted-foreground opacity-50 line-through",
+                  }}
+                />
+              </div>
             </DialogContent>
           </Dialog>
 
           {/* 3. Check-out Calendar Button */}
-          <Dialog>
+          <Dialog
+            open={isCheckOutDialogOpen}
+            onOpenChange={setIsCheckOutDialogOpen}
+          >
             <DialogTrigger asChild>
               <Button
                 variant="outline"
@@ -143,29 +172,35 @@ export function SimpleBookingComponent({
             </DialogTrigger>
             <DialogContent className="max-w-md">
               <DialogHeader>
-                <DialogTitle className="font-playfair-display text-stormy-blue/80">
+                <DialogTitle className="font-playfair-display text-stormy-blue/80 text-center">
                   Select Check-out Date
                 </DialogTitle>
               </DialogHeader>
-              <Calendar
-                mode="single"
-                selected={checkOut || undefined}
-                onSelect={(date) => setCheckOut(date || null)}
-                disabled={[
-                  ...disabledDates,
-                  ...(checkIn ? [{ before: checkIn }] : []),
-                ]}
-                className="w-full"
-                classNames={{
-                  day_selected: "bg-primary text-primary-foreground",
-                  day_disabled: "text-muted-foreground opacity-50 line-through",
-                }}
-              />
+              <div className="flex justify-center">
+                <Calendar
+                  mode="single"
+                  selected={checkOut || undefined}
+                  onSelect={handleCheckOutSelect}
+                  disabled={[
+                    ...disabledDates,
+                    ...(checkIn ? [{ before: checkIn }] : []),
+                  ]}
+                  className="w-full flex justify-center"
+                  classNames={{
+                    day_selected: "bg-primary text-primary-foreground",
+                    day_disabled:
+                      "text-muted-foreground opacity-50 line-through",
+                  }}
+                />
+              </div>
             </DialogContent>
           </Dialog>
 
           {/* 4. Guests Button */}
-          <Dialog>
+          <Dialog
+            open={isGuestsDialogOpen}
+            onOpenChange={setIsGuestsDialogOpen}
+          >
             <DialogTrigger asChild>
               <Button
                 variant="outline"
@@ -184,7 +219,7 @@ export function SimpleBookingComponent({
             </DialogTrigger>
             <DialogContent className="max-w-md">
               <DialogHeader>
-                <DialogTitle className="font-playfair-display text-stormy-blue/80">
+                <DialogTitle className="font-playfair-display text-stormy-blue/80 text-center">
                   Select Guests
                 </DialogTitle>
               </DialogHeader>
