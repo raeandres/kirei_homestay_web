@@ -22,18 +22,18 @@ export default function HomePage() {
     new Date(2025, 0, 2), // January 2, 2025
   ];
 
-  // Booking submission handler
-  const handleBookingSubmit = (bookingData: any) => {
-    console.log("Booking submitted:", bookingData);
-    // Here you would typically send the booking data to your backend
+  // Room search handler
+  const handleSearchRooms = (searchData: any) => {
+    console.log("Room search:", searchData);
+    // Here you would typically search for available rooms
+    const checkInStr = searchData.checkIn
+      ? searchData.checkIn.toDateString()
+      : "Not selected";
+    const checkOutStr = searchData.checkOut
+      ? searchData.checkOut.toDateString()
+      : "Not selected";
     alert(
-      `Booking submitted!\nCheck-in: ${bookingData.checkIn.toDateString()}\nCheck-out: ${bookingData.checkOut.toDateString()}\nAdults: ${
-        bookingData.guests
-      }\nChildren: ${bookingData.children}\nPets: ${
-        bookingData.pets
-      }\nTotal: $${bookingData.totalPrice} SGD\nPayment: ${
-        bookingData.paymentMethod
-      }`
+      `Searching for rooms...\nCheck-in: ${checkInStr}\nCheck-out: ${checkOutStr}\nAdults: ${searchData.adults}\nChildren: ${searchData.children}\nPets: ${searchData.pets}`
     );
   };
 
@@ -42,13 +42,12 @@ export default function HomePage() {
       <Header />
       <main className="flex-grow pt-16">
         <HeroSection />
-        <GallerySection />
-        <AboutSection />
         <IntroSection
           occupiedDates={occupiedDates}
-          onBookingSubmit={handleBookingSubmit}
+          onSearchRooms={handleSearchRooms}
         />
-
+        <GallerySection />
+        <AboutSection />
         <ReviewsSection />
 
         <AmenitiesSection />

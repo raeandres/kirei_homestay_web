@@ -775,7 +775,7 @@ export function GallerySection() {
       className="py-0 md:py-0 pb-8 md:pb-8 mt-8 bg-secondary/30"
     >
       <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
-        <h2
+        {/* <h2
           className="text-2xl md:text-lg lg:text-xl 2k:text-4xl 4k:text-7xl text-stormy-blue/80 font-playfair-display"
           style={{
             letterSpacing: "0.01em",
@@ -784,7 +784,7 @@ export function GallerySection() {
         >
           Rooms
         </h2>
-        <div className="border-t border-gray-200 my-6" />
+        <div className="border-t border-gray-200 my-6" /> */}
         <div className="grid grid-cols-1 md:grid-cols-2 2k:grid-cols-2 4k:grid-cols-2 gap-6 md:gap-8 2k:gap-12 4k:gap-16">
           {galleryItems.map((item, index) => (
             <Card
