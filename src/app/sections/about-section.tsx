@@ -42,28 +42,6 @@ export function AboutSection() {
             isMobile ? "aspect-[9/16]" : "aspect-video"
           )}
         >
-          {/* <video
-            key={isMobile ? "mobile" : "desktop"}
-            autoPlay
-            muted
-            loop
-            playsInline
-            data-ai-hint="zen decor"
-            className="w-full h-full object-cover"
-          >
-            {isMobile ? (
-              <source
-                src="/about/kirei_about_portrait.webm"
-                type="video/webm"
-              />
-            ) : (
-              <source
-                src="/about/kirei_about_landscape.webm"
-                type="video/webm"
-              />
-            )}
-            Your browser does not support the video tag.
-          </video> */}
           {/* Luxury gradient overlay */}
           <div className="absolute inset-0  from-black/30 via-black/40 to-black/60 flex items-center justify-center p-8">
             <div className="text-center text-stormy-blue/80 max-w-5xl mx-auto space-y-8">
@@ -94,7 +72,7 @@ export function AboutSection() {
                   )}
                 ></div>
                 <Image
-                  src="/gallery/kirei_2/converted_0001.webp"
+                  src="/about/converted_0000.webp"
                   alt="Peaceful Kirei interior detail"
                   data-ai-hint="zen decor"
                   width={600}
