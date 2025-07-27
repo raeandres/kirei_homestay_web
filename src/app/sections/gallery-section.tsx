@@ -799,14 +799,15 @@ export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
 
         {/* Show availability filter message */}
         {availableRooms.length > 0 && (
-          <div className="text-center mb-8 p-4 bg-green-50 border border-green-200rounded-none">
-            <p className="text-green-800 font-playfair-display">
-              {filteredGalleryItems.length} available room
-              {filteredGalleryItems.length !== 1 ? "s" : ""} on these dates
+          <div className="text-center mb-8 p-2 bg-green-50 border border-green-200 rounded-none">
+            <p className="text-green-600 font-playfair-display">
+              Found {filteredGalleryItems.length} available room
+              {filteredGalleryItems.length !== 1 ? "s" : ""} on the selected
+              dates
             </p>
-            <p className="text-green-600 text-sm mt-1 font-playfair-display">
+            {/* <p className="text-green-800 text-sm mt-1 font-playfair-display">
               {availableRooms.join(", ")}
-            </p>
+            </p> */}
           </div>
         )}
 

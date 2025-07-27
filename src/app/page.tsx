@@ -63,10 +63,16 @@ export default function HomePage() {
       // Note: Add other calendar sources here when URLs are available
       createCalendarSource(
         "Booking.com",
-        "https://ical.booking.com/v1/export?t=42eba3ad-a5f1-4f7a-b758-bdc17af96cc0"
+        "https://ical.booking.com/v1/export?t=42eba3ad-a5f1-4f7a-b758-bdc17af96cc0" // Example URL - replace with actual
       ),
-      // createCalendarSource("Agoda", "https://agoda.com/actual-url"),
-      // createCalendarSource("Direct Bookings", "https://your-domain.com/actual-url"),
+      // createCalendarSource(
+      //   "Agoda",
+      //   "https://www.agoda.com/calendar/ical/kirei-ito.ics" // Example URL - replace with actual
+      // ),
+      // createCalendarSource(
+      //   "Direct Bookings",
+      //   "https://your-domain.com/calendar/ical/kirei-ito-direct.ics" // Example URL - replace with actual
+      // ),
     ],
 
     // Example: How to add more rooms
