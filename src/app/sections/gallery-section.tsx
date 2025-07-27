@@ -189,6 +189,11 @@ interface GalleryImage {
   hint: string;
 }
 
+interface CalendarSource {
+  platform: string;
+  url: string;
+}
+
 interface GalleryCategory {
   name: string;
   unitType: string;
@@ -200,7 +205,7 @@ interface GalleryCategory {
     airbnb: string;
     booking: string;
   };
-  icsUrl: string;
+  icsUrls: CalendarSource[];
   activeMapUrl: string;
 }
 
@@ -357,8 +362,25 @@ const galleryItems: GalleryCategory[] = [
       booking:
         "https://www.booking.com/hotel/ph/cozy-home-in-eastwood-pet-friendly-fast-wifi.html",
     },
-    icsUrl:
-      "https://www.airbnb.com.sg/calendar/ical/1030897971821606234.ics?s=1b728ed92d212d0e42783ed473c0bb0f",
+    icsUrls: [
+      {
+        platform: "Airbnb",
+        url: "https://www.airbnb.com.sg/calendar/ical/1030897971821606234.ics?s=1b728ed92d212d0e42783ed473c0bb0f",
+      },
+      // Example: Add more calendar sources when URLs become available
+      {
+        platform: "Booking.com",
+        url: "https://ical.booking.com/v1/export?t=8e69dadf-d9aa-4d48-b092-dc9042edeff7",
+      },
+      // {
+      //   platform: "Agoda",
+      //   url: "https://agoda.com/calendar/ical/actual-agoda-url-for-kirei.ics",
+      // },
+      // {
+      //   platform: "Direct Bookings",
+      //   url: "https://your-domain.com/calendar/ical/kirei-direct.ics",
+      // },
+    ],
   },
   {
     name: "Kirei - Ito",
@@ -510,8 +532,25 @@ const galleryItems: GalleryCategory[] = [
       booking:
         "https://www.booking.com/hotel/ph/king-suite-eastwood-global-plaza-high-floor-quezon-city.html",
     },
-    icsUrl:
-      "https://www.airbnb.com.sg/calendar/ical/1364997919482714933.ics?s=663892ccaa5dabea43e13966feabc6e1",
+    icsUrls: [
+      {
+        platform: "Airbnb",
+        url: "https://www.airbnb.com.sg/calendar/ical/1364997919482714933.ics?s=663892ccaa5dabea43e13966feabc6e1",
+      },
+      // Example: Add more calendar sources when URLs become available
+      {
+        platform: "Booking.com",
+        url: "https://ical.booking.com/v1/export?t=42eba3ad-a5f1-4f7a-b758-bdc17af96cc0",
+      },
+      // {
+      //   platform: "Agoda",
+      //   url: "https://agoda.com/calendar/ical/actual-agoda-url-for-kirei-ito.ics",
+      // },
+      // {
+      //   platform: "Direct Bookings",
+      //   url: "https://your-domain.com/calendar/ical/kirei-ito-direct.ics",
+      // },
+    ],
   },
 ];
 
@@ -533,7 +572,9 @@ export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
     airbnb: string;
     booking: string;
   } | null>(null);
-  const [activeIcsUrl, setActiveIcsUrl] = useState<string | null>(null);
+  const [activeIcsUrls, setActiveIcsUrls] = useState<CalendarSource[] | null>(
+    null
+  );
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
   // Property description state
@@ -606,7 +647,7 @@ export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
     setActiveGalleryImages(category.images);
     setActiveGalleryCategoryName(category.name);
     setActiveBookingLinks(category.bookingLinks);
-    setActiveIcsUrl(category.icsUrl);
+    setActiveIcsUrls(category.icsUrls);
     setCurrentImageIndex(0);
     setIsFullScreenViewOpen(true);
   };
@@ -617,7 +658,7 @@ export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
     setActiveGalleryImages(null);
     setActiveGalleryCategoryName(null);
     setActiveBookingLinks(null);
-    setActiveIcsUrl(null);
+    setActiveIcsUrls(null);
   };
 
   const openGridView = () => {
@@ -708,32 +749,65 @@ export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
     }
   };
 
-  // Effect to fetch and process ICS data when the modal is opened
+  // Effect to fetch and process ICS data from multiple calendar sources when the modal is opened
   useEffect(() => {
-    if (!activeIcsUrl) {
+    if (!activeIcsUrls || activeIcsUrls.length === 0) {
       return;
     }
 
-    const fetchBookedDates = async () => {
+    const fetchBookedDatesFromAllSources = async () => {
       setIsLoadingCalendar(true);
 
-      const bookedDateStrings = await getBookedDates(activeIcsUrl);
+      try {
+        // Fetch booked dates from all calendar sources in parallel
+        const allBookedDatesPromises = activeIcsUrls.map(async (source) => {
+          try {
+            console.log(`Fetching calendar data from ${source.platform}...`);
+            const bookedDateStrings = await getBookedDates(source.url);
+            return bookedDateStrings;
+          } catch (error) {
+            console.error(
+              `Failed to fetch calendar from ${source.platform}:`,
+              error
+            );
+            return []; // Return empty array if this source fails
+          }
+        });
 
-      const dateRanges = bookedDateStrings.map((range) => ({
-        from: new Date(range.from),
-        to: new Date(range.to),
-      }));
+        // Wait for all calendar sources to complete
+        const allBookedDatesArrays = await Promise.all(allBookedDatesPromises);
 
-      // Also disable past dates for a better user experience
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
+        // Combine all booked dates from all sources
+        const combinedBookedDates = allBookedDatesArrays.flat();
 
-      setDisabledDates([{ before: today }, ...dateRanges]);
-      setIsLoadingCalendar(false);
+        // Convert to date ranges
+        const dateRanges = combinedBookedDates.map((range) => ({
+          from: new Date(range.from),
+          to: new Date(range.to),
+        }));
+
+        // Also disable past dates for a better user experience
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        setDisabledDates([{ before: today }, ...dateRanges]);
+
+        console.log(
+          `Combined ${combinedBookedDates.length} booked date ranges from ${activeIcsUrls.length} calendar sources`
+        );
+      } catch (error) {
+        console.error("Error fetching calendar data:", error);
+        // Fallback: just disable past dates
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        setDisabledDates([{ before: today }]);
+      } finally {
+        setIsLoadingCalendar(false);
+      }
     };
 
-    fetchBookedDates();
-  }, [activeIcsUrl]);
+    fetchBookedDatesFromAllSources();
+  }, [activeIcsUrls]);
 
   // Effect for slide show timer
   useEffect(() => {
