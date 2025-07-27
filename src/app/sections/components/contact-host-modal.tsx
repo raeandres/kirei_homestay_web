@@ -19,6 +19,7 @@ import { Input } from "@/app/ui/input";
 import { Textarea } from "@/app/ui/textarea";
 import { Button } from "@/app/ui/button";
 import { ContactFormData } from "@/lib/contact-form";
+import { Footer } from "@/app/layout/footer";
 
 interface ContactHostModalProps {
   isOpen: boolean;
@@ -61,7 +62,7 @@ export function ContactHostModal({
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="text-sm md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                          className="text-sm md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display placeholder:text-stormy-blue/40"
                           placeholder="Your Name"
                           {...field}
                         />
@@ -80,7 +81,7 @@ export function ContactHostModal({
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="text-sm md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                          className="text-sm md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display placeholder:text-stormy-blue/40"
                           type="email"
                           placeholder="your.email@example.com"
                           {...field}
@@ -103,7 +104,7 @@ export function ContactHostModal({
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="text-sm md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                          className="text-sm md:text-sm lg:text-sm 2k:text-sm 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display placeholder:text-stormy-blue/40"
                           type="tel"
                           placeholder="(555) 123-4567"
                           {...field}
@@ -124,7 +125,7 @@ export function ContactHostModal({
                       <FormControl>
                         <Textarea
                           placeholder="I'm interested in booking your property and have a few questions..."
-                          className="text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                          className="text-lg tracking-tighter text-stormy-blue/60 font-playfair-display placeholder:text-stormy-blue/40"
                           {...field}
                         />
                       </FormControl>
@@ -146,6 +147,7 @@ export function ContactHostModal({
             </p>
           </div>
         </div>
+        <Footer />
       </DialogContent>
     </Dialog>
   );

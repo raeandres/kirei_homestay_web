@@ -95,7 +95,7 @@ export function ContactHostForm({
                       <Input
                         placeholder="Your Name"
                         {...field}
-                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display placeholder:text-stormy-blue/40"
                         style={{
                           letterSpacing: "0.01em",
                           fontWeight: "100",
@@ -121,7 +121,7 @@ export function ContactHostForm({
                         type="email"
                         placeholder="your.email@example.com"
                         {...field}
-                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display placeholder:text-stormy-blue/40"
                         style={{
                           letterSpacing: "0.01em",
                           fontWeight: "100",
@@ -150,7 +150,7 @@ export function ContactHostForm({
                         type="tel"
                         placeholder="(555) 123-4567"
                         {...field}
-                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display placeholder:text-stormy-blue/40"
                         style={{
                           letterSpacing: "0.01em",
                           fontWeight: "100",
@@ -174,7 +174,7 @@ export function ContactHostForm({
                     <FormControl>
                       <Textarea
                         placeholder="I'm interested in booking your property and have a few questions..."
-                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display"
+                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display placeholder:text-stormy-blue/40"
                         {...field}
                         autoComplete="off"
                         data-form-type="other"
