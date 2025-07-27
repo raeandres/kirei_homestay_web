@@ -55,7 +55,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="my-0 md:my-0 mb-8 md:mb-8 mt-8 bg-secondary/30"
+      className="my-0 md:my-0 mb-8 md:mb-8 mt-8 bg-background"
     >
       <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2

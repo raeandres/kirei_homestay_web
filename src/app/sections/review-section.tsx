@@ -184,7 +184,7 @@ export function ReviewsSection() {
   const slidePercentage = 100 / itemsPerView;
 
   return (
-    <section id="reviews" className="mb-16 md:mb-16 bg-secondary/30">
+    <section id="reviews" className="mb-16 md:mb-16 bg-background">
       <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
           className="text-2xl md:text-lg lg:text-xl 2k:text-4xl 4k:text-7xl text-stormy-blue/80 font-playfair-display"
