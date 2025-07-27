@@ -62,14 +62,14 @@ export default function HomePage() {
         "Booking.com",
         "https://ical.booking.com/v1/export?t=42eba3ad-a5f1-4f7a-b758-bdc17af96cc0" // Example URL - replace with actual
       ),
-      createCalendarSource(
-        "Agoda",
-        "https://www.agoda.com/calendar/ical/kirei-ito.ics" // Example URL - replace with actual
-      ),
-      createCalendarSource(
-        "Direct Bookings",
-        "https://your-domain.com/calendar/ical/kirei-ito-direct.ics" // Example URL - replace with actual
-      ),
+      // createCalendarSource(
+      //   "Agoda",
+      //   "https://www.agoda.com/calendar/ical/kirei-ito.ics" // Example URL - replace with actual
+      // ),
+      // createCalendarSource(
+      //   "Direct Bookings",
+      //   "https://your-domain.com/calendar/ical/kirei-ito-direct.ics" // Example URL - replace with actual
+      // ),
     ],
 
     // Example: How to add more rooms
@@ -158,8 +158,8 @@ export default function HomePage() {
     );
 
     const availableRoomsList = [];
-    if (room1Available) availableRoomsList.push("Kirei");
-    if (room2Available) availableRoomsList.push("Kirei - Ito");
+    if (room1Available) availableRoomsList.push("Studio");
+    if (room2Available) availableRoomsList.push("One Bedroom");
 
     // Update available rooms state
     setAvailableRooms(availableRoomsList);

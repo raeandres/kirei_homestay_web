@@ -593,7 +593,7 @@ export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
   // Filter gallery items based on available rooms
   const filteredGalleryItems =
     availableRooms.length > 0
-      ? galleryItems.filter((item) => availableRooms.includes(item.name))
+      ? galleryItems.filter((item) => availableRooms.includes(item.unitType))
       : galleryItems;
 
   // Effect to initialize currency on component mount
@@ -799,15 +799,15 @@ export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
 
         {/* Show availability filter message */}
         {availableRooms.length > 0 && (
-          <div className="text-center mb-8 p-4 bg-green-50 border border-green-200 rounded-lg">
-            <p className="text-green-800 font-playfair-display">
-              Showing {filteredGalleryItems.length} available room
-              {filteredGalleryItems.length !== 1 ? "s" : ""} for your selected
+          <div className="text-center mb-8 p-2 bg-green-50 border border-green-200 rounded-none">
+            <p className="text-green-600 font-playfair-display">
+              Found {filteredGalleryItems.length} available room
+              {filteredGalleryItems.length !== 1 ? "s" : ""} on the selected
               dates
             </p>
-            <p className="text-green-600 text-sm mt-1">
+            {/* <p className="text-green-800 text-sm mt-1 font-playfair-display">
               {availableRooms.join(", ")}
-            </p>
+            </p> */}
           </div>
         )}
 
