@@ -34,7 +34,7 @@ export function AboutSection() {
   }, []);
 
   return (
-    <section id="about" className="pb-8 md:pb-8 bg-background">
+    <section id="about" className="mb-8 md:mb-8 bg-background">
       <div className="w-full">
         <div
           className={cn(

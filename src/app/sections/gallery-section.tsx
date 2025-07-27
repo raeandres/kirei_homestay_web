@@ -863,20 +863,23 @@ export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
               <CardContent className="p-4">
                 <div className="space-y-2">
                   <CardDescription
-                    className="text-base md:text-sm lg:text-md xl:text-md 2k:text-lg 4k:text-xl text-left text-justify-left tracking-normal font-playfair-display text-stormy-blue/60"
+                    className="text-sm md:text-sm lg:text-md xl:text-md 2k:text-lg 4k:text-xl text-left text-justify-left tracking-normal font-playfair-display text-stormy-blue/60"
                     style={{
                       lineHeight: "1.5",
                       letterSpacing: "0.01em",
+                      fontWeight: "300",
+                      // fontSize: "0.9rem",
                     }}
                   >
                     {item.cardContent.location}
                   </CardDescription>
 
                   <div
-                    className="text-base md:text-sm lg:text-md xl:text-lg 2k:text-lg 4k:text-xl text-left text-justify-left font-playfair-display text-stormy-blue/60"
+                    className="text-sm md:text-sm lg:text-md xl:text-lg 2k:text-lg 4k:text-xl text-left text-justify-left font-playfair-display text-stormy-blue/60"
                     style={{
                       lineHeight: "1.5",
                       letterSpacing: "0.01em",
+                      fontSize: "0.8rem",
                     }}
                   >
                     {item.cardContent.guests} • {item.cardContent.bedrooms} •{" "}
