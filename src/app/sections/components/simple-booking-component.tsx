@@ -12,7 +12,14 @@ import {
   DialogTrigger,
 } from "@/app/ui/dialog";
 import { useDevice } from "@/hooks/use-device";
-import { CalendarDays, Users, Search, Baby, Heart } from "lucide-react";
+import {
+  CalendarDays,
+  Users,
+  Search,
+  Baby,
+  Heart,
+  Loader2,
+} from "lucide-react";
 import { format, startOfDay } from "date-fns";
 
 interface SimpleBookingComponentProps {
@@ -44,6 +51,9 @@ export function SimpleBookingComponent({
   const [isCheckOutDialogOpen, setIsCheckOutDialogOpen] = useState(false);
   const [isGuestsDialogOpen, setIsGuestsDialogOpen] = useState(false);
 
+  // Loading state for room search
+  const [isSearching, setIsSearching] = useState(false);
+
   // Create disabled dates (occupied dates + past dates)
   const disabledDates = [...occupiedDates, { before: startOfDay(new Date()) }];
 
@@ -62,293 +72,346 @@ export function SimpleBookingComponent({
     }
   };
 
-  const handleSearchRooms = () => {
-    if (onSearchRooms) {
-      onSearchRooms({
-        checkIn,
-        checkOut,
-        adults,
-        children,
-        pets,
-      });
-    }
+  const handleSearchRooms = async () => {
+    if (!onSearchRooms) return;
+
+    setIsSearching(true);
+
+    // Call the search function
+    onSearchRooms({
+      checkIn,
+      checkOut,
+      adults,
+      children,
+      pets,
+    });
+
+    // Add a delay to show the loading dialog
+    setTimeout(() => {
+      setIsSearching(false);
+    }, 3000); // 3 seconds to simulate real search time
   };
 
   const totalGuests = adults + children + pets;
 
   return (
-    <Card className="w-full max-w-full mx-auto shadow-none border border-gray-200 rounded-none">
-      <CardContent className="p-6">
-        {/* 1. Title and Subtitle */}
-        <div className="text-center mb-6">
-          <h2 className="text-2xl md:text-3xl 2k:text-xl font-playfair-display text-stormy-blue/80 font-light mb-2">
-            Check available rooms
-          </h2>
-          {/* <p className="text-sm md:text-base text-stormy-blue/60 font-playfair-display">
+    <>
+      <Card className="w-full max-w-full mx-auto shadow-none border border-gray-200 rounded-none">
+        <CardContent className="p-6">
+          {/* 1. Title and Subtitle */}
+          <div className="text-center mb-6">
+            <h2 className="text-2xl md:text-3xl 2k:text-xl font-playfair-display text-stormy-blue/80 font-light mb-2">
+              Check available rooms
+            </h2>
+            {/* <p className="text-sm md:text-base text-stormy-blue/60 font-playfair-display">
             Experience slow intentional living at our thoughtfully designed
             spaces
           </p> */}
-        </div>
+          </div>
 
-        {/* Booking Controls */}
-        <div
-          className={`grid gap-4 ${isMobile ? "grid-cols-1" : "grid-cols-4"}`}
-        >
-          {/* 1. Title and Subtitle */}
-          {/* <div className="text-center mb-2">
+          {/* Booking Controls */}
+          <div
+            className={`grid gap-4 ${isMobile ? "grid-cols-1" : "grid-cols-4"}`}
+          >
+            {/* 1. Title and Subtitle */}
+            {/* <div className="text-center mb-2">
             <h2 className="text-2xl md:text-3xl 2k:text-xl font-playfair-display text-stormy-blue/80 font-light mb-2">
               Check our available rooms
             </h2> */}
-          {/* <p className="text-sm md:text-base 2k:text-sm  text-stormy-blue/60 font-playfair-display"> */}
-          {/* Experience slow intentional living at our thoughtfully designed
+            {/* <p className="text-sm md:text-base 2k:text-sm  text-stormy-blue/60 font-playfair-display"> */}
+            {/* Experience slow intentional living at our thoughtfully designed
             spaces */}
-          {/* Accomodation Guaranteed */}
-          {/* </p> */}
-          {/* </div> */}
-          {/* 2. Check-in Calendar Button */}
-          <Dialog
-            open={isCheckInDialogOpen}
-            onOpenChange={setIsCheckInDialogOpen}
-          >
-            <DialogTrigger asChild>
-              <Button
-                variant="outline"
-                className="h-16 flex flex-col items-start justify-center p-4 rounded-none border-gray-200 hover:bg-muted/50"
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <CalendarDays className="h-4 w-4 text-stormy-blue/60" />
-                  <span className="text-xs font-playfair-display text-stormy-blue/60">
-                    Check-in
+            {/* Accomodation Guaranteed */}
+            {/* </p> */}
+            {/* </div> */}
+            {/* 2. Check-in Calendar Button */}
+            <Dialog
+              open={isCheckInDialogOpen}
+              onOpenChange={setIsCheckInDialogOpen}
+            >
+              <DialogTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="h-16 flex flex-col items-start justify-center p-4 rounded-none border-gray-200 hover:bg-muted/50"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <CalendarDays className="h-4 w-4 text-stormy-blue/60" />
+                    <span className="text-xs font-playfair-display text-stormy-blue/60">
+                      Check-in
+                    </span>
+                  </div>
+                  <span className="text-sm font-playfair-display text-stormy-blue/80">
+                    {checkIn ? format(checkIn, "MMM dd, yyyy") : "Select date"}
                   </span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-md">
+                <DialogHeader>
+                  <DialogTitle className="font-playfair-display text-stormy-blue/80 text-center">
+                    Select Check-in Date
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="flex justify-center">
+                  <Calendar
+                    mode="single"
+                    selected={checkIn || undefined}
+                    onSelect={handleCheckInSelect}
+                    disabled={disabledDates}
+                    className="w-full flex justify-center"
+                    classNames={{
+                      day_selected: "bg-primary text-primary-foreground",
+                      day_disabled:
+                        "text-muted-foreground opacity-50 line-through",
+                    }}
+                  />
                 </div>
-                <span className="text-sm font-playfair-display text-stormy-blue/80">
-                  {checkIn ? format(checkIn, "MMM dd, yyyy") : "Select date"}
-                </span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-md">
-              <DialogHeader>
-                <DialogTitle className="font-playfair-display text-stormy-blue/80 text-center">
-                  Select Check-in Date
-                </DialogTitle>
-              </DialogHeader>
-              <div className="flex justify-center">
-                <Calendar
-                  mode="single"
-                  selected={checkIn || undefined}
-                  onSelect={handleCheckInSelect}
-                  disabled={disabledDates}
-                  className="w-full flex justify-center"
-                  classNames={{
-                    day_selected: "bg-primary text-primary-foreground",
-                    day_disabled:
-                      "text-muted-foreground opacity-50 line-through",
-                  }}
-                />
-              </div>
-            </DialogContent>
-          </Dialog>
+              </DialogContent>
+            </Dialog>
 
-          {/* 3. Check-out Calendar Button */}
-          <Dialog
-            open={isCheckOutDialogOpen}
-            onOpenChange={setIsCheckOutDialogOpen}
-          >
-            <DialogTrigger asChild>
-              <Button
-                variant="outline"
-                className="h-16 flex flex-col items-start justify-center p-4 rounded-none border-gray-200 hover:bg-muted/50"
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <CalendarDays className="h-4 w-4 text-stormy-blue/60" />
-                  <span className="text-xs font-playfair-display text-stormy-blue/60">
-                    Check-out
+            {/* 3. Check-out Calendar Button */}
+            <Dialog
+              open={isCheckOutDialogOpen}
+              onOpenChange={setIsCheckOutDialogOpen}
+            >
+              <DialogTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="h-16 flex flex-col items-start justify-center p-4 rounded-none border-gray-200 hover:bg-muted/50"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <CalendarDays className="h-4 w-4 text-stormy-blue/60" />
+                    <span className="text-xs font-playfair-display text-stormy-blue/60">
+                      Check-out
+                    </span>
+                  </div>
+                  <span className="text-sm font-playfair-display text-stormy-blue/80">
+                    {checkOut
+                      ? format(checkOut, "MMM dd, yyyy")
+                      : "Select date"}
                   </span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-md">
+                <DialogHeader>
+                  <DialogTitle className="font-playfair-display text-stormy-blue/80 text-center">
+                    Select Check-out Date
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="flex justify-center">
+                  <Calendar
+                    mode="single"
+                    selected={checkOut || undefined}
+                    onSelect={handleCheckOutSelect}
+                    disabled={[
+                      ...disabledDates,
+                      ...(checkIn ? [{ before: checkIn }] : []),
+                    ]}
+                    className="w-full flex justify-center"
+                    classNames={{
+                      day_selected: "bg-primary text-primary-foreground",
+                      day_disabled:
+                        "text-muted-foreground opacity-50 line-through",
+                    }}
+                  />
                 </div>
-                <span className="text-sm font-playfair-display text-stormy-blue/80">
-                  {checkOut ? format(checkOut, "MMM dd, yyyy") : "Select date"}
-                </span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-md">
-              <DialogHeader>
-                <DialogTitle className="font-playfair-display text-stormy-blue/80 text-center">
-                  Select Check-out Date
-                </DialogTitle>
-              </DialogHeader>
-              <div className="flex justify-center">
-                <Calendar
-                  mode="single"
-                  selected={checkOut || undefined}
-                  onSelect={handleCheckOutSelect}
-                  disabled={[
-                    ...disabledDates,
-                    ...(checkIn ? [{ before: checkIn }] : []),
-                  ]}
-                  className="w-full flex justify-center"
-                  classNames={{
-                    day_selected: "bg-primary text-primary-foreground",
-                    day_disabled:
-                      "text-muted-foreground opacity-50 line-through",
-                  }}
-                />
-              </div>
-            </DialogContent>
-          </Dialog>
+              </DialogContent>
+            </Dialog>
 
-          {/* 4. Guests Button */}
-          <Dialog
-            open={isGuestsDialogOpen}
-            onOpenChange={setIsGuestsDialogOpen}
-          >
-            <DialogTrigger asChild>
-              <Button
-                variant="outline"
-                className="h-16 flex flex-col items-start justify-center p-4 rounded-none border-gray-200 hover:bg-muted/50"
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <Users className="h-4 w-4 text-stormy-blue/60" />
-                  <span className="text-xs font-playfair-display text-stormy-blue/60">
-                    Guests
-                  </span>
-                </div>
-                <span className="text-sm font-playfair-display text-stormy-blue/80">
-                  {totalGuests} guest{totalGuests !== 1 ? "s" : ""}
-                </span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-md">
-              <DialogHeader>
-                <DialogTitle className="font-playfair-display text-stormy-blue/80 text-center">
-                  Select Guests
-                </DialogTitle>
-              </DialogHeader>
-              <div className="space-y-4">
-                {/* Adults */}
-                <div className="flex items-center justify-between p-3 border border-gray-200 rounded-none">
-                  <div className="flex items-center gap-2">
+            {/* 4. Guests Button */}
+            <Dialog
+              open={isGuestsDialogOpen}
+              onOpenChange={setIsGuestsDialogOpen}
+            >
+              <DialogTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="h-16 flex flex-col items-start justify-center p-4 rounded-none border-gray-200 hover:bg-muted/50"
+                >
+                  <div className="flex items-center gap-2 mb-1">
                     <Users className="h-4 w-4 text-stormy-blue/60" />
-                    <div>
-                      <span className="text-sm font-playfair-display text-stormy-blue/80">
-                        Adults
+                    <span className="text-xs font-playfair-display text-stormy-blue/60">
+                      Guests
+                    </span>
+                  </div>
+                  <span className="text-sm font-playfair-display text-stormy-blue/80">
+                    {totalGuests} guest{totalGuests !== 1 ? "s" : ""}
+                  </span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-md">
+                <DialogHeader>
+                  <DialogTitle className="font-playfair-display text-stormy-blue/80 text-center">
+                    Select Guests
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  {/* Adults */}
+                  <div className="flex items-center justify-between p-3 border border-gray-200 rounded-none">
+                    <div className="flex items-center gap-2">
+                      <Users className="h-4 w-4 text-stormy-blue/60" />
+                      <div>
+                        <span className="text-sm font-playfair-display text-stormy-blue/80">
+                          Adults
+                        </span>
+                        <p className="text-xs text-stormy-blue/50">Ages 13+</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setAdults(Math.max(1, adults - 1))}
+                        disabled={adults <= 1}
+                        className="h-8 w-8 p-0 rounded-none"
+                      >
+                        -
+                      </Button>
+                      <span className="text-sm font-playfair-display text-stormy-blue/80 min-w-[20px] text-center">
+                        {adults}
                       </span>
-                      <p className="text-xs text-stormy-blue/50">Ages 13+</p>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setAdults(Math.min(8, adults + 1))}
+                        disabled={adults >= 5}
+                        className="h-8 w-8 p-0 rounded-none"
+                      >
+                        +
+                      </Button>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setAdults(Math.max(1, adults - 1))}
-                      disabled={adults <= 1}
-                      className="h-8 w-8 p-0 rounded-none"
-                    >
-                      -
-                    </Button>
-                    <span className="text-sm font-playfair-display text-stormy-blue/80 min-w-[20px] text-center">
-                      {adults}
-                    </span>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setAdults(Math.min(8, adults + 1))}
-                      disabled={adults >= 8}
-                      className="h-8 w-8 p-0 rounded-none"
-                    >
-                      +
-                    </Button>
-                  </div>
-                </div>
 
-                {/* Children */}
-                <div className="flex items-center justify-between p-3 border border-gray-200 rounded-none">
-                  <div className="flex items-center gap-2">
-                    <Baby className="h-4 w-4 text-stormy-blue/60" />
-                    <div>
-                      <span className="text-sm font-playfair-display text-stormy-blue/80">
-                        Children
+                  {/* Children */}
+                  <div className="flex items-center justify-between p-3 border border-gray-200 rounded-none">
+                    <div className="flex items-center gap-2">
+                      <Baby className="h-4 w-4 text-stormy-blue/60" />
+                      <div>
+                        <span className="text-sm font-playfair-display text-stormy-blue/80">
+                          Children
+                        </span>
+                        <p className="text-xs text-stormy-blue/50">Ages 2-12</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setChildren(Math.max(0, children - 1))}
+                        disabled={children <= 0}
+                        className="h-8 w-8 p-0 rounded-none"
+                      >
+                        -
+                      </Button>
+                      <span className="text-sm font-playfair-display text-stormy-blue/80 min-w-[20px] text-center">
+                        {children}
                       </span>
-                      <p className="text-xs text-stormy-blue/50">Ages 2-12</p>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setChildren(Math.min(4, children + 1))}
+                        disabled={children >= 4}
+                        className="h-8 w-8 p-0 rounded-none"
+                      >
+                        +
+                      </Button>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setChildren(Math.max(0, children - 1))}
-                      disabled={children <= 0}
-                      className="h-8 w-8 p-0 rounded-none"
-                    >
-                      -
-                    </Button>
-                    <span className="text-sm font-playfair-display text-stormy-blue/80 min-w-[20px] text-center">
-                      {children}
-                    </span>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setChildren(Math.min(4, children + 1))}
-                      disabled={children >= 4}
-                      className="h-8 w-8 p-0 rounded-none"
-                    >
-                      +
-                    </Button>
-                  </div>
-                </div>
 
-                {/* Pets */}
-                <div className="flex items-center justify-between p-3 border border-gray-200 rounded-none">
-                  <div className="flex items-center gap-2">
-                    <Heart className="h-4 w-4 text-stormy-blue/60" />
-                    <div>
-                      <span className="text-sm font-playfair-display text-stormy-blue/80">
-                        Pets
+                  {/* Pets */}
+                  <div className="flex items-center justify-between p-3 border border-gray-200 rounded-none">
+                    <div className="flex items-center gap-2">
+                      <Heart className="h-4 w-4 text-stormy-blue/60" />
+                      <div>
+                        <span className="text-sm font-playfair-display text-stormy-blue/80">
+                          Pets
+                        </span>
+                        <p className="text-xs text-stormy-blue/50">
+                          Pet-friendly
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setPets(Math.max(0, pets - 1))}
+                        disabled={pets <= 0}
+                        className="h-8 w-8 p-0 rounded-none"
+                      >
+                        -
+                      </Button>
+                      <span className="text-sm font-playfair-display text-stormy-blue/80 min-w-[20px] text-center">
+                        {pets}
                       </span>
-                      <p className="text-xs text-stormy-blue/50">
-                        Pet-friendly
-                      </p>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setPets(Math.min(2, pets + 1))}
+                        disabled={pets >= 2}
+                        className="h-8 w-8 p-0 rounded-none"
+                      >
+                        +
+                      </Button>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setPets(Math.max(0, pets - 1))}
-                      disabled={pets <= 0}
-                      className="h-8 w-8 p-0 rounded-none"
-                    >
-                      -
-                    </Button>
-                    <span className="text-sm font-playfair-display text-stormy-blue/80 min-w-[20px] text-center">
-                      {pets}
-                    </span>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setPets(Math.min(2, pets + 1))}
-                      disabled={pets >= 2}
-                      className="h-8 w-8 p-0 rounded-none"
-                    >
-                      +
-                    </Button>
-                  </div>
                 </div>
+              </DialogContent>
+            </Dialog>
+
+            {/* 5. Find Room Button */}
+            <Button
+              onClick={handleSearchRooms}
+              className="h-16 bg-primary hover:bg-primary/90 text-primary-foreground rounded-none font-playfair-display"
+            >
+              <div className="flex items-center gap-2">
+                <Search className="h-4 w-4" />
+                Find Room
               </div>
-            </DialogContent>
-          </Dialog>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
-          {/* 5. Find Room Button */}
-          <Button
-            onClick={handleSearchRooms}
-            className="h-16 bg-primary hover:bg-primary/90 text-primary-foreground rounded-none font-playfair-display"
-          >
-            <div className="flex items-center gap-2">
-              <Search className="h-4 w-4" />
-              Find Room
+      {/* Loading Dialog */}
+      <Dialog open={isSearching} onOpenChange={() => {}}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="font-playfair-display text-stormy-blue/80 text-center">
+              Searching Available Rooms
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex flex-col items-center justify-center py-4">
+            <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
+            <p className="text-sm text-stormy-blue/60 text-center font-playfair-display mb-4">
+              Checking availability across all booking platforms...
+            </p>
+            <div className="space-y-1 text-xs text-stormy-blue/50">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="font-playfair-display">
+                  Checking calendars
+                </span>
+              </div>
+              {/* <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span>Checking Airbnb calendars</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <span>Checking Booking.com calendars</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                <span>Checking Agoda calendars</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                <span>Checking direct bookings</span>
+              </div> */}
             </div>
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
