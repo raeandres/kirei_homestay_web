@@ -799,29 +799,31 @@ export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
 
         {/* Show availability filter message */}
         {availableRooms.length > 0 && (
-          <div className="text-center mb-8 p-4 bg-green-50 border border-green-200 rounded-lg">
-            <p className="text-green-800 font-playfair-display">
+          <div className="text-center mb-8 p-4 bg-stormy-blue/80 border rounded-none">
+            <p className="text-white font-playfair-display">
               Showing {filteredGalleryItems.length} available room
               {filteredGalleryItems.length !== 1 ? "s" : ""} for your selected
               dates
             </p>
-            <p className="text-green-600 text-sm mt-1">
+            <p className="text-white text-sm mt-1 font-playfair-display">
               {availableRooms.join(", ")}
             </p>
           </div>
         )}
 
         {/* Show no rooms available message */}
-        {availableRooms.length === 0 && filteredGalleryItems.length === 0 && (
-          <div className="text-center mb-8 p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-red-800 font-playfair-display">
-              No rooms available for your selected dates
-            </p>
-            <p className="text-red-600 text-sm mt-1">
-              Please try different dates using the search form above
-            </p>
-          </div>
-        )}
+        {availableRooms === undefined ||
+          (availableRooms.length === 0 && filteredGalleryItems === undefined) ||
+          (filteredGalleryItems.length === 0 && (
+            <div className="text-center mb-8 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-800 font-playfair-display">
+                No rooms available for your selected dates
+              </p>
+              <p className="text-red-600 text-sm mt-1">
+                Please try different dates using the search form above
+              </p>
+            </div>
+          ))}
 
         <div className="grid grid-cols-1 md:grid-cols-2 2k:grid-cols-2 4k:grid-cols-2 gap-6 md:gap-8 2k:gap-12 4k:gap-16">
           {filteredGalleryItems.map((item, index) => (
