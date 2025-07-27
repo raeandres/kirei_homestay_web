@@ -155,8 +155,8 @@ export default function HomePage() {
     );
 
     const availableRoomsList = [];
-    if (room1Available) availableRoomsList.push("Kirei");
-    if (room2Available) availableRoomsList.push("Kirei - Ito");
+    if (room1Available) availableRoomsList.push("Studio");
+    if (room2Available) availableRoomsList.push("One Bedroom");
 
     // Update available rooms state
     setAvailableRooms(availableRoomsList);
