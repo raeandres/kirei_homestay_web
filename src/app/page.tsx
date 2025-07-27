@@ -29,7 +29,9 @@ const createCalendarSource = (source: string, url: string): CalendarSource => ({
 });
 
 export default function HomePage() {
-  const [availableRooms, setAvailableRooms] = useState<string[]>([]);
+  const [availableRooms, setAvailableRooms] = useState<string[] | undefined>(
+    undefined
+  );
   // Sample occupied dates (you can replace this with real data from your backend)
   const occupiedDates = [
     new Date(2024, 12, 31), // December 31, 2024
