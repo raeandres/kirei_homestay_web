@@ -148,6 +148,29 @@ export function AboutSection() {
                   cozy corners, everything is designed to help you unwind,
                   reconnect, and feel at home.
                 </p>
+
+                <p
+                  className=" text-stormy-blue/60 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
+                  style={
+                    isMobile
+                      ? {
+                          lineHeight: "1.5",
+                          letterSpacing: "0.03em",
+                          fontSize: "1rem",
+                          fontWeight: "300",
+                        }
+                      : {
+                          lineHeight: "1.3",
+                          letterSpacing: "0.05em",
+                          textIndent: "2rem",
+                          fontSize: "1rem",
+                          fontWeight: "300",
+                        }
+                  }
+                >
+                  Kirei House is just steps away from shops, restaurants, and
+                  offices in the vibrant Eastwood community.
+                </p>
               </div>
 
               {/* Decorative element */}
