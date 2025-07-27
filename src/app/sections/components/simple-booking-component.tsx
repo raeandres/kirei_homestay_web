@@ -176,6 +176,8 @@ export function SimpleBookingComponent({
                 <div className="flex justify-center">
                   <Calendar
                     mode="single"
+                    showOutsideDays={false}
+                    defaultMonth={checkIn || undefined}
                     selected={checkIn || undefined}
                     onSelect={handleCheckInSelect}
                     disabled={disabledDates}
@@ -236,6 +238,7 @@ export function SimpleBookingComponent({
                 <div className="flex justify-center">
                   <Calendar
                     mode="single"
+                    showOutsideDays={false}
                     selected={checkOut || undefined}
                     onSelect={handleCheckOutSelect}
                     disabled={[
@@ -245,7 +248,7 @@ export function SimpleBookingComponent({
                         ? [{ before: addDays(checkIn, 1) }]
                         : [{ before: startOfDay(new Date()) }]),
                     ]}
-                    month={checkIn || undefined}
+                    defaultMonth={checkIn || undefined}
                     className="w-full flex justify-center"
                     classNames={{
                       day_selected: "bg-primary text-primary-foreground",
