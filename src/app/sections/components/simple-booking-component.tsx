@@ -20,11 +20,11 @@ import {
   Heart,
   Loader2,
 } from "lucide-react";
-import { format, startOfDay } from "date-fns";
+import { format, startOfDay, addDays, isAfter, isBefore } from "date-fns";
 
 interface SimpleBookingComponentProps {
   occupiedDates?: Date[];
-  onSearchRooms?: (searchData: SearchData) => void;
+  onSearchRooms?: (searchData: SearchData) => Promise<void>;
 }
 
 interface SearchData {
@@ -59,7 +59,14 @@ export function SimpleBookingComponent({
 
   // Handlers with auto-dismiss
   const handleCheckInSelect = (date: Date | undefined) => {
-    setCheckIn(date || null);
+    const newCheckIn = date || null;
+    setCheckIn(newCheckIn);
+
+    // Clear check-out if it's before or same as the new check-in date
+    if (newCheckIn && checkOut && !isAfter(checkOut, newCheckIn)) {
+      setCheckOut(null);
+    }
+
     if (date) {
       setIsCheckInDialogOpen(false);
     }
@@ -75,21 +82,36 @@ export function SimpleBookingComponent({
   const handleSearchRooms = async () => {
     if (!onSearchRooms) return;
 
+    // Validate dates
+    if (!checkIn || !checkOut) {
+      alert("Please select both check-in and check-out dates");
+      return;
+    }
+
+    if (!isAfter(checkOut, checkIn)) {
+      alert("Check-out date must be after check-in date");
+      return;
+    }
+
     setIsSearching(true);
 
-    // Call the search function
-    onSearchRooms({
-      checkIn,
-      checkOut,
-      adults,
-      children,
-      pets,
-    });
+    try {
+      // Call the search function and wait for it to complete
+      await onSearchRooms({
+        checkIn,
+        checkOut,
+        adults,
+        children,
+        pets,
+      });
 
-    // Add a delay to show the loading dialog
-    setTimeout(() => {
+      // Add a small delay to show the loading dialog
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    } catch (error) {
+      console.error("Error during room search:", error);
+    } finally {
       setIsSearching(false);
-    }, 3000); // 3 seconds to simulate real search time
+    }
   };
 
   const totalGuests = adults + children + pets;
@@ -176,7 +198,10 @@ export function SimpleBookingComponent({
               <DialogTrigger asChild>
                 <Button
                   variant="outline"
-                  className="h-16 flex flex-col items-start justify-center p-4 rounded-none border-gray-200 hover:bg-muted/50"
+                  className={`h-16 flex flex-col items-start justify-center p-4 rounded-none border-gray-200 hover:bg-muted/50 ${
+                    !checkIn ? "opacity-60 cursor-not-allowed" : ""
+                  }`}
+                  disabled={!checkIn}
                 >
                   <div className="flex items-center gap-2 mb-1">
                     <CalendarDays className="h-4 w-4 text-stormy-blue/60" />
@@ -187,7 +212,9 @@ export function SimpleBookingComponent({
                   <span className="text-sm font-playfair-display text-stormy-blue/80">
                     {checkOut
                       ? format(checkOut, "MMM dd, yyyy")
-                      : "Select date"}
+                      : checkIn
+                      ? "Select date"
+                      : "Select check-in first"}
                   </span>
                 </Button>
               </DialogTrigger>
@@ -196,6 +223,15 @@ export function SimpleBookingComponent({
                   <DialogTitle className="font-playfair-display text-stormy-blue/80 text-center">
                     Select Check-out Date
                   </DialogTitle>
+                  {checkIn && (
+                    <p className="text-sm text-stormy-blue/60 text-center mt-2 font-playfair-display">
+                      Check-in: {format(checkIn, "MMM dd, yyyy")}
+                      <br />
+                      <span className="text-sm font-playfair-display">
+                        Minimum stay: 1 night
+                      </span>
+                    </p>
+                  )}
                 </DialogHeader>
                 <div className="flex justify-center">
                   <Calendar
@@ -204,8 +240,12 @@ export function SimpleBookingComponent({
                     onSelect={handleCheckOutSelect}
                     disabled={[
                       ...disabledDates,
-                      ...(checkIn ? [{ before: checkIn }] : []),
+                      // Disable dates before and including check-in date (minimum 1 night stay)
+                      ...(checkIn
+                        ? [{ before: addDays(checkIn, 1) }]
+                        : [{ before: startOfDay(new Date()) }]),
                     ]}
+                    month={checkIn || undefined}
                     className="w-full flex justify-center"
                     classNames={{
                       day_selected: "bg-primary text-primary-foreground",
