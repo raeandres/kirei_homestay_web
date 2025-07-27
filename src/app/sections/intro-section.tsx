@@ -4,7 +4,7 @@ import { SimpleBookingComponent } from "./components/simple-booking-component";
 
 interface IntroSectionProps {
   occupiedDates?: Date[];
-  onSearchRooms?: (searchData: any) => void;
+  onSearchRooms?: (searchData: any) => Promise<void>;
 }
 
 export function IntroSection({
