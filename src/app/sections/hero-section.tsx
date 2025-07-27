@@ -218,7 +218,7 @@ export function HeroSection() {
 
         {/* Luxury CTA button */}
         <div className="animate-fade-in-up stagger-5 [animation-fill-mode:both]">
-          <Link href="#gallery">
+          <Link href="#intro">
             <Button
               size="lg"
               className="bg-transparent backdrop-blur-sm border border-transparent text-white hover:bg-transparent hover:border-transparent transition-luxury px-8 py-4 text-base tracking-[0.05em] font-light rounded-full shadow-luxury"

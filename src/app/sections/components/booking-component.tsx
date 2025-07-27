@@ -1,29 +1,29 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/app/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/ui/card";
 import { Calendar } from "@/app/ui/calendar";
-import { Label } from "@/app/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/app/ui/radio-group";
-import { Badge } from "@/app/ui/badge";
-import { Separator } from "@/app/ui/separator";
 import { useDevice } from "@/hooks/use-device";
-import { cn } from "@/lib/utils";
 import {
   CalendarDays,
-  CreditCard,
-  QrCode,
   Users,
-  MapPin,
-  Clock,
-  CheckCircle,
-  AlertCircle,
   Baby,
   Heart,
+  MapPin,
+  AlertCircle,
+  CheckCircle,
+  Clock,
+  CreditCard,
+  QrCode,
 } from "lucide-react";
-import { format, addDays, isBefore, isAfter, startOfDay } from "date-fns";
+import { format, startOfDay } from "date-fns";
 import type { DateRange } from "react-day-picker";
+import { cn } from "@/lib/utils";
+import { Badge } from "@/app/ui/badge";
+import { Separator } from "@/app/ui/separator";
+import { RadioGroup, RadioGroupItem } from "@/app/ui/radio-group";
+import { Label } from "@/app/ui/label";
 
 interface BookingComponentProps {
   propertyName: string;
