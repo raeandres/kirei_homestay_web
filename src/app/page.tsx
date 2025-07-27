@@ -12,51 +12,121 @@ import { ReviewsSection } from "./sections/review-section";
 import { ContactSection } from "./sections/contact-section";
 import { getBookedDates } from "./actions/get-booked-dates";
 
+// Types for calendar sources
+interface CalendarSource {
+  source: string;
+  url: string;
+}
+
+interface RoomCalendars {
+  [roomName: string]: CalendarSource[];
+}
+
+// Helper function to create calendar sources
+const createCalendarSource = (source: string, url: string): CalendarSource => ({
+  source,
+  url,
+});
+
 export default function HomePage() {
   const [availableRooms, setAvailableRooms] = useState<string[]>([]);
   // Sample occupied dates (you can replace this with real data from your backend)
   const occupiedDates = [
-    new Date(2024, 11, 15), // December 15, 2024
-    new Date(2024, 11, 16), // December 16, 2024
-    new Date(2024, 11, 17), // December 17, 2024
-    new Date(2024, 11, 25), // December 25, 2024
-    new Date(2024, 11, 26), // December 26, 2024
-    new Date(2025, 0, 1), // January 1, 2025
-    new Date(2025, 0, 2), // January 2, 2025
+    new Date(2024, 12, 31), // December 31, 2024
+    // new Date(2024, 11, 16), // December 16, 2024
+    // new Date(2024, 11, 17), // December 17, 2024
+    // new Date(2024, 11, 25), // December 25, 2024
+    // new Date(2024, 11, 26), // December 26, 2024
+    // new Date(2025, 0, 1), // January 1, 2025
+    // new Date(2025, 0, 2), // January 2, 2025
   ];
 
-  // Room calendar URLs - these correspond to the ICS URLs from gallery items
-  const roomCalendars = {
-    Kirei:
-      "https://www.airbnb.com.sg/calendar/ical/1030897971821606234.ics?s=1b728ed92d212d0e42783ed473c0bb0f",
-    "Kirei - Ito":
-      "https://www.airbnb.com.sg/calendar/ical/1364997919482714933.ics?s=663892ccaa5dabea43e13966feabc6e1",
+  // Room calendar URLs with multiple sources per room
+  const roomCalendars: RoomCalendars = {
+    Kirei: [
+      createCalendarSource(
+        "Airbnb",
+        "https://www.airbnb.com.sg/calendar/ical/1030897971821606234.ics?s=1b728ed92d212d0e42783ed473c0bb0f"
+      ),
+      createCalendarSource(
+        "Booking.com",
+        "https://ical.booking.com/v1/export?t=8e69dadf-d9aa-4d48-b092-dc9042edeff7" // Example URL - replace with actual
+      ),
+    ],
+    "Kirei - Ito": [
+      createCalendarSource(
+        "Airbnb",
+        "https://www.airbnb.com.sg/calendar/ical/1364997919482714933.ics?s=663892ccaa5dabea43e13966feabc6e1"
+      ),
+      createCalendarSource(
+        "Booking.com",
+        "https://ical.booking.com/v1/export?t=42eba3ad-a5f1-4f7a-b758-bdc17af96cc0" // Example URL - replace with actual
+      ),
+      createCalendarSource(
+        "Agoda",
+        "https://www.agoda.com/calendar/ical/kirei-ito.ics" // Example URL - replace with actual
+      ),
+      createCalendarSource(
+        "Direct Bookings",
+        "https://your-domain.com/calendar/ical/kirei-ito-direct.ics" // Example URL - replace with actual
+      ),
+    ],
+
+    // Example: How to add more rooms
+    // "Kirei - Premium": [
+    //   createCalendarSource("Airbnb", "https://airbnb.com/calendar/ical/premium-room.ics"),
+    //   createCalendarSource("Booking.com", "https://booking.com/calendar/ical/premium-room.ics"),
+    //   createCalendarSource("Expedia", "https://expedia.com/calendar/ical/premium-room.ics"),
+    //   createCalendarSource("VRBO", "https://vrbo.com/calendar/ical/premium-room.ics"),
+    //   createCalendarSource("Direct Bookings", "https://your-domain.com/calendar/ical/premium-direct.ics"),
+    // ],
   };
 
-  // Function to check if dates are available for a room
+  // Function to check if dates are available for a room across all calendar sources
   const checkRoomAvailability = async (
     roomName: string,
     checkIn: Date,
     checkOut: Date
   ): Promise<boolean> => {
     try {
-      const icsUrl = roomCalendars[roomName as keyof typeof roomCalendars];
-      if (!icsUrl) return false;
+      const calendarSources =
+        roomCalendars[roomName as keyof typeof roomCalendars];
+      if (!calendarSources || calendarSources.length === 0) return false;
 
-      const bookedDateRanges = await getBookedDates(icsUrl);
+      // Check all calendar sources for this room
+      for (const calendarSource of calendarSources) {
+        console.log(
+          `Checking ${calendarSource.source} calendar for ${roomName}...`
+        );
 
-      // Check if the requested dates overlap with any booked dates
-      for (const range of bookedDateRanges) {
-        const bookedStart = new Date(range.from);
-        const bookedEnd = new Date(range.to);
+        try {
+          const bookedDateRanges = await getBookedDates(calendarSource.url);
 
-        // Check for overlap: requested dates overlap if checkIn < bookedEnd && checkOut > bookedStart
-        if (checkIn < bookedEnd && checkOut > bookedStart) {
-          return false; // Room is not available
+          // Check if the requested dates overlap with any booked dates from this source
+          for (const range of bookedDateRanges) {
+            const bookedStart = new Date(range.from);
+            const bookedEnd = new Date(range.to);
+
+            // Check for overlap: requested dates overlap if checkIn < bookedEnd && checkOut > bookedStart
+            if (checkIn < bookedEnd && checkOut > bookedStart) {
+              console.log(
+                `${roomName} is not available - conflict found in ${calendarSource.source}`
+              );
+              return false; // Room is not available if ANY source shows conflict
+            }
+          }
+        } catch (sourceError) {
+          console.error(
+            `Error checking ${calendarSource.source} calendar for ${roomName}:`,
+            sourceError
+          );
+          // Continue checking other sources even if one fails
+          // You might want to return false here if you want to be conservative
         }
       }
 
-      return true; // Room is available
+      console.log(`${roomName} is available across all calendar sources`);
+      return true; // Room is available if NO conflicts found in ANY source
     } catch (error) {
       console.error(`Error checking availability for ${roomName}:`, error);
       return false; // Assume not available on error
@@ -94,22 +164,25 @@ export default function HomePage() {
     // Update available rooms state
     setAvailableRooms(availableRoomsList);
 
-    // Show results to user
-    if (availableRoomsList.length === 0) {
-      alert(
-        `No rooms available for the selected dates:\nCheck-in: ${checkInStr}\nCheck-out: ${checkOutStr}\n\nPlease try different dates.`
-      );
-    } else {
-      alert(
-        `Available rooms found!\nCheck-in: ${checkInStr}\nCheck-out: ${checkOutStr}\nGuests: ${
-          searchData.adults
-        } adults, ${searchData.children} children, ${
-          searchData.pets
-        } pets\n\nAvailable rooms:\n${availableRoomsList.join(
-          ", "
-        )}\n\nScroll down to see only available rooms in the gallery.`
-      );
-    }
+    // Show results to user with calendar source information
+    // if (availableRoomsList.length === 0) {
+    //   alert(
+    //     `No rooms available for the selected dates:\nCheck-in: ${checkInStr}\nCheck-out: ${checkOutStr}\n\nChecked across all calendar sources:\n• Airbnb\n• Booking.com\n• Agoda\n• Direct Bookings\n\nPlease try different dates.`
+    //   );
+    // } else {
+    //   const calendarSourcesInfo =
+    //     "Availability checked across multiple sources:\n• Airbnb calendars\n• Booking.com calendars\n• Agoda calendars\n• Direct booking calendars";
+
+    //   alert(
+    //     `Available rooms found!\nCheck-in: ${checkInStr}\nCheck-out: ${checkOutStr}\nGuests: ${
+    //       searchData.adults
+    //     } adults, ${searchData.children} children, ${
+    //       searchData.pets
+    //     } pets\n\nAvailable rooms:\n${availableRoomsList.join(
+    //       ", "
+    //     )}\n\n${calendarSourcesInfo}\n\nScroll down to see only available rooms in the gallery.`
+    //   );
+    // }
   };
 
   return (
