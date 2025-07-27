@@ -555,10 +555,10 @@ const galleryItems: GalleryCategory[] = [
 ];
 
 interface GallerySectionProps {
-  availableRooms?: string[];
+  availableRooms?: string[] | undefined;
 }
 
-export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
+export function GallerySection({ availableRooms }: GallerySectionProps) {
   const [isFullScreenViewOpen, setIsFullScreenViewOpen] = useState(false);
   const [isGridViewOpen, setIsGridViewOpen] = useState(false);
   const [isFullScreenImageOpen, setIsFullScreenImageOpen] = useState(false);
@@ -632,10 +632,13 @@ export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
   const { isMobile } = useDevice();
 
   // Filter gallery items based on available rooms
-  const filteredGalleryItems =
-    availableRooms.length > 0
+  // availableRooms is undefined initially, then becomes an array after search
+  const hasSearchBeenPerformed = availableRooms !== undefined;
+  const filteredGalleryItems = hasSearchBeenPerformed
+    ? availableRooms.length > 0
       ? galleryItems.filter((item) => availableRooms.includes(item.unitType))
-      : galleryItems;
+      : [] // Show no rooms if search was performed but no rooms available
+    : galleryItems; // Show all rooms if no search has been performed
 
   // Effect to initialize currency on component mount
   useEffect(() => {
@@ -871,38 +874,40 @@ export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
         </h2>
         <div className="border-t border-gray-200 my-6" /> */}
 
-        {/* Show availability filter message */}
-        {availableRooms.length > 0 && (
-          <div className="text-center mb-8 p-2 bg-green-50 border border-green-200 rounded-none">
-            <p className="text-green-600 font-playfair-display">
-              Found {filteredGalleryItems.length} available room
-              {filteredGalleryItems.length !== 1 ? "s" : ""} on the selected
-              dates
-            </p>
-            {/* <p className="text-green-800 text-sm mt-1 font-playfair-display">
-              {availableRooms.join(", ")}
-            </p> */}
-          </div>
-        )}
+        {/* Show availability filter message - when search found rooms */}
+        {hasSearchBeenPerformed &&
+          availableRooms &&
+          availableRooms.length > 0 && (
+            <div className="text-center mb-8 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <p className="text-green-800 font-playfair-display font-medium">
+                Found {filteredGalleryItems.length} available room
+                {filteredGalleryItems.length !== 1 ? "s" : ""} for your selected
+                dates
+              </p>
+              {/* <p className="text-green-600 text-sm mt-1">
+                Available: {availableRooms.join(", ")}
+              </p> */}
+            </div>
+          )}
 
-        {/* Show no rooms available message */}
-        {availableRooms === undefined ||
-          (availableRooms.length === 0 && filteredGalleryItems === undefined) ||
-          (filteredGalleryItems.length === 0 && (
+        {/* Show no rooms available message - when search was performed but no rooms found */}
+        {hasSearchBeenPerformed &&
+          availableRooms &&
+          availableRooms.length === 0 && (
             <div className="text-center mb-8 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <p className="text-red-800 font-playfair-display">
+              <p className="text-red-800 font-playfair-display font-medium">
                 No rooms available for your selected dates
               </p>
-              <p className="text-red-600 text-sm mt-1">
+              <p className="text-red-600 font-playfair-display text-sm mt-1">
                 Please try different dates using the search form above
               </p>
             </div>
-          ))}
+          )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 2k:grid-cols-2 4k:grid-cols-2 gap-6 md:gap-8 2k:gap-12 4k:gap-16">
           {filteredGalleryItems.map((item, index) => (
             <Card
-              key={item.name}
+              key={item.unitType}
               className="group overflow-hidden duration-300 rounded-none"
             >
               <button
