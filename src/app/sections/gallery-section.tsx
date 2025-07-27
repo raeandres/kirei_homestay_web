@@ -59,6 +59,7 @@ import { PropertyDetailsSection } from "@/app/sections/components/property-detai
 import { AmenitiesCard } from "@/app/sections/components/amenities-card";
 import { AddressSection } from "@/app/sections/components/property-location/address-section";
 import { NearbyPlacesSection } from "@/app/sections/components/property-location/nearby-places-section";
+import { Footer } from "@/app/layout/footer";
 
 // Amenity interface for the card
 interface Amenity {
@@ -514,7 +515,11 @@ const galleryItems: GalleryCategory[] = [
   },
 ];
 
-export function GallerySection() {
+interface GallerySectionProps {
+  availableRooms?: string[];
+}
+
+export function GallerySection({ availableRooms = [] }: GallerySectionProps) {
   const [isFullScreenViewOpen, setIsFullScreenViewOpen] = useState(false);
   const [isGridViewOpen, setIsGridViewOpen] = useState(false);
   const [isFullScreenImageOpen, setIsFullScreenImageOpen] = useState(false);
@@ -585,13 +590,19 @@ export function GallerySection() {
 
   const { isMobile } = useDevice();
 
+  // Filter gallery items based on available rooms
+  const filteredGalleryItems =
+    availableRooms.length > 0
+      ? galleryItems.filter((item) => availableRooms.includes(item.name))
+      : galleryItems;
+
   // Effect to initialize currency on component mount
   useEffect(() => {
     initializeCurrency();
   }, [initializeCurrency]);
 
   const openFullScreenView = (categoryIndex: number) => {
-    const category = galleryItems[categoryIndex];
+    const category = filteredGalleryItems[categoryIndex];
     setActiveGalleryImages(category.images);
     setActiveGalleryCategoryName(category.name);
     setActiveBookingLinks(category.bookingLinks);
@@ -785,8 +796,35 @@ export function GallerySection() {
           Rooms
         </h2>
         <div className="border-t border-gray-200 my-6" /> */}
+
+        {/* Show availability filter message */}
+        {availableRooms.length > 0 && (
+          <div className="text-center mb-8 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <p className="text-green-800 font-playfair-display">
+              Showing {filteredGalleryItems.length} available room
+              {filteredGalleryItems.length !== 1 ? "s" : ""} for your selected
+              dates
+            </p>
+            <p className="text-green-600 text-sm mt-1">
+              {availableRooms.join(", ")}
+            </p>
+          </div>
+        )}
+
+        {/* Show no rooms available message */}
+        {availableRooms.length === 0 && filteredGalleryItems.length === 0 && (
+          <div className="text-center mb-8 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-red-800 font-playfair-display">
+              No rooms available for your selected dates
+            </p>
+            <p className="text-red-600 text-sm mt-1">
+              Please try different dates using the search form above
+            </p>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 2k:grid-cols-2 4k:grid-cols-2 gap-6 md:gap-8 2k:gap-12 4k:gap-16">
-          {galleryItems.map((item, index) => (
+          {filteredGalleryItems.map((item, index) => (
             <Card
               key={item.name}
               className="group overflow-hidden duration-300 rounded-none"
@@ -825,20 +863,23 @@ export function GallerySection() {
               <CardContent className="p-4">
                 <div className="space-y-2">
                   <CardDescription
-                    className="text-base md:text-sm lg:text-md xl:text-md 2k:text-lg 4k:text-xl text-left text-justify-left tracking-normal font-playfair-display text-stormy-blue/60"
+                    className="text-sm md:text-sm lg:text-md xl:text-md 2k:text-lg 4k:text-xl text-left text-justify-left tracking-normal font-playfair-display text-stormy-blue/60"
                     style={{
                       lineHeight: "1.5",
                       letterSpacing: "0.01em",
+                      fontWeight: "300",
+                      // fontSize: "0.9rem",
                     }}
                   >
                     {item.cardContent.location}
                   </CardDescription>
 
                   <div
-                    className="text-base md:text-sm lg:text-md xl:text-lg 2k:text-lg 4k:text-xl text-left text-justify-left font-playfair-display text-stormy-blue/60"
+                    className="text-sm md:text-sm lg:text-md xl:text-lg 2k:text-lg 4k:text-xl text-left text-justify-left font-playfair-display text-stormy-blue/60"
                     style={{
                       lineHeight: "1.5",
                       letterSpacing: "0.01em",
+                      fontSize: "0.8rem",
                     }}
                   >
                     {item.cardContent.guests} • {item.cardContent.bedrooms} •{" "}
@@ -875,189 +916,192 @@ export function GallerySection() {
           )}
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <SheetHeader className="sr-only md:mx-20">
-            <SheetTitle>
-              {activeGalleryCategoryName
-                ? `${activeGalleryCategoryName} Gallery`
-                : "Gallery"}
-            </SheetTitle>
-          </SheetHeader>
-          {activeGalleryCategoryName &&
-            activeGalleryImages &&
-            currentImageInFullScreen &&
-            activeBookingLinks && (
-              <div className="relative w-full h-full bg-background">
-                <div
-                  className={cn(
-                    "relative w-full cursor-grab active:cursor-grabbing overflow-hidden object-cover",
-                    isMobile ? "h-[50vh]" : "h-[65vh]"
-                  )}
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <h2 className="sr-only" id="fullscreen-gallery-title">
-                    Image gallery: {activeGalleryCategoryName} - Image{" "}
-                    {currentImageIndex + 1} of {activeGalleryImages.length} -{" "}
-                    {currentImageInFullScreen.alt}
-                  </h2>
+          <div className="relative">
+            <SheetHeader className="sr-only md:mx-20">
+              <SheetTitle>
+                {activeGalleryCategoryName
+                  ? `${activeGalleryCategoryName} Gallery`
+                  : "Gallery"}
+              </SheetTitle>
+            </SheetHeader>
+            {activeGalleryCategoryName &&
+              activeGalleryImages &&
+              currentImageInFullScreen &&
+              activeBookingLinks && (
+                <div className="relative w-full h-full bg-background">
+                  <div
+                    className={cn(
+                      "relative w-full cursor-grab active:cursor-grabbing overflow-hidden object-cover",
+                      isMobile ? "h-[50vh]" : "h-[65vh]"
+                    )}
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <h2 className="sr-only" id="fullscreen-gallery-title">
+                      Image gallery: {activeGalleryCategoryName} - Image{" "}
+                      {currentImageIndex + 1} of {activeGalleryImages.length} -{" "}
+                      {currentImageInFullScreen.alt}
+                    </h2>
 
-                  {activeGalleryImages.map((image, index) => (
-                    <div
-                      key={image.src}
-                      className={cn(
-                        "absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out",
-                        index === currentImageIndex
-                          ? "opacity-100 z-[1]"
-                          : "opacity-0 z-0 pointer-events-none"
-                      )}
+                    {activeGalleryImages.map((image, index) => (
+                      <div
+                        key={image.src}
+                        className={cn(
+                          "absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out",
+                          index === currentImageIndex
+                            ? "opacity-100 z-[1]"
+                            : "opacity-0 z-0 pointer-events-none"
+                        )}
+                      >
+                        <Image
+                          src={image.src}
+                          alt={image.alt}
+                          data-ai-hint={image.hint}
+                          fill
+                          className={
+                            isMobile
+                              ? "absolute h-96 object-cover max-h-96 "
+                              : "object-cover"
+                          } // object-cover = fit the image to screen; object-contain = preservers the image ratio
+                          sizes="100vw"
+                          priority={index === 0}
+                        />
+                      </div>
+                    ))}
+
+                    <Button
+                      variant="ghost"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        showPrevImage();
+                      }}
+                      aria-label="Previous image"
+                      className="absolute left-1 top-1/2 -translate-y-1/2 sm:left-2 md:left-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
                     >
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        data-ai-hint={image.hint}
-                        fill
-                        className={
-                          isMobile
-                            ? "absolute h-96 object-cover max-h-96 "
-                            : "object-cover"
-                        } // object-cover = fit the image to screen; object-contain = preservers the image ratio
-                        sizes="100vw"
-                        priority={index === 0}
-                      />
-                    </div>
-                  ))}
+                      <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
+                    </Button>
 
-                  <Button
-                    variant="ghost"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      showPrevImage();
-                    }}
-                    aria-label="Previous image"
-                    className="absolute left-1 top-1/2 -translate-y-1/2 sm:left-2 md:left-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
-                  >
-                    <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
-                  </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        showNextImage();
+                      }}
+                      aria-label="Next image"
+                      className="absolute right-1 top-1/2 -translate-y-1/2 sm:right-2 md:right-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
+                    >
+                      <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
+                    </Button>
 
-                  <Button
-                    variant="ghost"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      showNextImage();
-                    }}
-                    aria-label="Next image"
-                    className="absolute right-1 top-1/2 -translate-y-1/2 sm:right-2 md:right-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
-                  >
-                    <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
-                  </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openGridView();
+                      }}
+                      aria-label="View all images in grid"
+                      className="absolute bottom-3 right-3 z-[1] px-3 py-2 rounded-full bg-white/30 text-black hover:bg-white/50 focus-visible:ring-0 focus-visible:ring-offset-0 flex items-center gap-2"
+                    >
+                      <Grid3X3 className="h-4 w-4 sm:h-5 sm:w-5" />
+                      <span className="text-xs sm:text-sm font-medium">
+                        View all photos
+                      </span>
+                    </Button>
+                  </div>
 
-                  <Button
-                    variant="ghost"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openGridView();
-                    }}
-                    aria-label="View all images in grid"
-                    className="absolute bottom-3 right-3 z-[1] px-3 py-2 rounded-full bg-white/30 text-black hover:bg-white/50 focus-visible:ring-0 focus-visible:ring-offset-0 flex items-center gap-2"
-                  >
-                    <Grid3X3 className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <span className="text-xs sm:text-sm font-medium">
-                      View all photos
-                    </span>
-                  </Button>
-                </div>
-
-                {/* Two Section Layout */}
-                <div className="id gallery-details" />
-                <div className="mt-6 md:mt-28">
-                  <div className="grid md:grid-cols-2 gap-1 items-baseline">
-                    {/* Property Details Section - Right on desktop, Left on mobile */}
-                    <div className="order-1 md:order-2 px-4 md:px-10">
-                      {(() => {
-                        const activeItem = galleryItems.find(
-                          (item) => item.name === activeGalleryCategoryName
-                        );
-                        return activeItem ? (
-                          <PropertyDetailsSection
-                            name={activeItem.name}
-                            unitType={activeItem.unitType}
-                            cardContent={activeItem.cardContent}
-                            galleryContent={activeItem.galleryContent}
-                            activeMapUrl={activeItem.activeMapUrl}
-                            onShowMoreClick={() =>
-                              setIsDescriptionExpanded(true)
-                            }
-                            onShowAmenitiesClick={() =>
-                              setIsAmenitiesExpanded(true)
-                            }
-                          />
-                        ) : null;
-                      })()}
-                    </div>
-
-                    {/* Availability & Booking Section - Left on desktop, Right on mobile */}
-                    <div className="order-1 md:order-2 sticky top-4 z-10 px-4 md:px-10">
-                      <AvailabilityBookingSection
-                        isMobile={isMobile}
-                        date={date}
-                        isLoadingCalendar={isLoadingCalendar}
-                        disabledDates={disabledDates}
-                        activeBookingLinks={activeBookingLinks}
-                        onContactHostClick={() => setIsContactModalOpen(true)}
-                      />
-
-                      <div className="border-t border-gray-200 my-6" />
-                      {(() => {
-                        const activeItem = galleryItems.find(
-                          (item) => item.name === activeGalleryCategoryName
-                        );
-                        return activeItem ? (
-                          <div className="id gallery-map-section mb-20 md:mb-16">
-                            <h4
-                              className="text-2xl md:text-2xl xl:text-3xl 2k:text-2xl 4k:text-7xl text-stormy-blue/60 font-playfair-display mb-4 font-light"
-                              style={
-                                isMobile
-                                  ? {
-                                      lineHeight: "1",
-                                      letterSpacing: "0.01em",
-                                    }
-                                  : {
-                                      lineHeight: "1.3",
-                                      letterSpacing: "0.01em",
-                                    }
+                  {/* Two Section Layout */}
+                  <div className="id gallery-details" />
+                  <div className="mt-6 md:mt-28">
+                    <div className="grid md:grid-cols-2 gap-1 items-baseline">
+                      {/* Property Details Section - Right on desktop, Left on mobile */}
+                      <div className="order-1 md:order-2 px-4 md:px-10">
+                        {(() => {
+                          const activeItem = galleryItems.find(
+                            (item) => item.name === activeGalleryCategoryName
+                          );
+                          return activeItem ? (
+                            <PropertyDetailsSection
+                              name={activeItem.name}
+                              unitType={activeItem.unitType}
+                              cardContent={activeItem.cardContent}
+                              galleryContent={activeItem.galleryContent}
+                              activeMapUrl={activeItem.activeMapUrl}
+                              onShowMoreClick={() =>
+                                setIsDescriptionExpanded(true)
                               }
-                            >
-                              Find us
-                            </h4>
-                            <div className="id gallery-map ">
-                              <MapSection
-                                mapEmbedUrl={activeItem.activeMapUrl}
-                              />
-                            </div>
-                            <div className="space-y-6 pt-4">
-                              {/* Address Section */}
-                              {/* <AddressSection
+                              onShowAmenitiesClick={() =>
+                                setIsAmenitiesExpanded(true)
+                              }
+                            />
+                          ) : null;
+                        })()}
+                      </div>
+
+                      {/* Availability & Booking Section - Left on desktop, Right on mobile */}
+                      <div className="order-1 md:order-2 sticky top-4 z-10 px-4 md:px-10">
+                        <AvailabilityBookingSection
+                          isMobile={isMobile}
+                          date={date}
+                          isLoadingCalendar={isLoadingCalendar}
+                          disabledDates={disabledDates}
+                          activeBookingLinks={activeBookingLinks}
+                          onContactHostClick={() => setIsContactModalOpen(true)}
+                        />
+
+                        <div className="border-t border-gray-200 my-6" />
+                        {(() => {
+                          const activeItem = galleryItems.find(
+                            (item) => item.name === activeGalleryCategoryName
+                          );
+                          return activeItem ? (
+                            <div className="id gallery-map-section mb-20 md:mb-16">
+                              <h4
+                                className="text-2xl md:text-2xl xl:text-3xl 2k:text-2xl 4k:text-7xl text-stormy-blue/60 font-playfair-display mb-4 font-light"
+                                style={
+                                  isMobile
+                                    ? {
+                                        lineHeight: "1",
+                                        letterSpacing: "0.01em",
+                                      }
+                                    : {
+                                        lineHeight: "1.3",
+                                        letterSpacing: "0.01em",
+                                      }
+                                }
+                              >
+                                Find us
+                              </h4>
+                              <div className="id gallery-map ">
+                                <MapSection
+                                  mapEmbedUrl={activeItem.activeMapUrl}
+                                />
+                              </div>
+                              <div className="space-y-6 pt-4">
+                                {/* Address Section */}
+                                {/* <AddressSection
                                 address={activeItem.cardContent.location}
                               /> */}
 
-                              {/* Nearby Places Section */}
-                              {/* <NearbyPlacesSection
+                                {/* Nearby Places Section */}
+                                {/* <NearbyPlacesSection
                                 nearbyPlaces={nearbyPlaces}
                               /> */}
+                              </div>
                             </div>
-                          </div>
-                        ) : null;
-                      })()}
+                          ) : null;
+                        })()}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+          </div>
+          <Footer />
         </SheetContent>
       </Sheet>
 

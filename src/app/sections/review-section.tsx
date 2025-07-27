@@ -184,7 +184,7 @@ export function ReviewsSection() {
   const slidePercentage = 100 / itemsPerView;
 
   return (
-    <section id="reviews" className="py-0 md:py-0 pb-8 md:pb-8 bg-secondary/30">
+    <section id="reviews" className="mb-16 md:mb-16 bg-secondary/30">
       <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
           className="text-2xl md:text-lg lg:text-xl 2k:text-4xl 4k:text-7xl text-stormy-blue/80 font-playfair-display"
@@ -228,7 +228,7 @@ export function ReviewsSection() {
                     <CardHeader className="flex flex-row items-left space-x-4 pb-4">
                       <div>
                         <CardTitle
-                          className="text-2xl text-luxury-light text-stormy-blue/80 tracking-normal leading-relaxed font-title"
+                          className="text-xl text-luxury-light text-stormy-blue/80 tracking-normal leading-relaxed font-title"
                           style={{
                             lineHeight: "2",
                             letterSpacing: "0.05em",
@@ -244,16 +244,17 @@ export function ReviewsSection() {
                     </CardHeader>
                     <CardContent className="flex-grow">
                       <p
-                        className="text-base md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/60 font-playfair-display font-normal leading-relaxed"
+                        className="text-sm md:text-sm lg:text-sm xl:text-base 2k:text-sm 4k:text-xl text-left text-stormy-blue/60 font-playfair-display font-normal leading-relaxed"
                         style={
                           isMobile
                             ? {
-                                lineHeight: "1.5",
-                                letterSpacing: "0.03em",
+                                lineHeight: "1.4",
+                                letterSpacing: "0.04em",
                                 fontWeight: "100",
+                                // fontSize: "0.8rem",
                               }
                             : {
-                                lineHeight: "1.3",
+                                lineHeight: "1.5",
                                 letterSpacing: "0.01em",
                                 fontWeight: "100",
                               }

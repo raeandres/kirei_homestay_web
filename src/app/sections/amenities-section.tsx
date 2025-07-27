@@ -171,13 +171,13 @@ export function AmenitiesSection() {
         {/* Amenities section - Single Grid */}
         <Card className="border rounded-none border-gray-200">
           <CardContent className="p-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4 gap-x-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-2 gap-x-6">
               {amenitiesToDisplayOnPage.map((amenity) => {
                 const AmenityIconComponent = amenity.icon;
                 return (
                   <div
                     key={amenity.name}
-                    className="flex items-center text-lg md:text-sm lg:text-lg 2k:text-lg 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                    className="flex items-center text-sm md:text-sm lg:text-base 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
                   >
                     <AmenityIconComponent className="mr-3 h-5 w-5 text-slate-400 flex-shrink-0" />
                     <span className="leading-tight">{amenity.name}</span>
@@ -206,13 +206,13 @@ export function AmenitiesSection() {
                     </VisuallyHidden>
 
                     <ScrollArea className="max-h-[60vh] pr-3 pt-2">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 py-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 py-4">
                         {allAmenities.map((amenity) => {
                           const AmenityIconComponent = amenity.icon;
                           return (
                             <div
                               key={amenity.name + "-dialog"}
-                              className="flex items-center text-lg md:text-sm lg:text-lg 2k:text-lg 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                              className="flex items-center text-sm md:text-sm lg:text-base 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
                             >
                               <AmenityIconComponent className="mr-3 h-5 w-5 text-slate-400 flex-shrink-0" />
                               <span>{amenity.name}</span>

@@ -34,7 +34,7 @@ export function AboutSection() {
   }, []);
 
   return (
-    <section id="about" className="pb-8 md:pb-8 bg-background">
+    <section id="about" className="mb-8 md:mb-8 bg-background">
       <div className="w-full">
         <div
           className={cn(
@@ -77,7 +77,7 @@ export function AboutSection() {
                   data-ai-hint="zen decor"
                   width={600}
                   height={400}
-                  className="rounded-none shadow-lg mx-auto mb-8 object-cover"
+                  className="rounded-none shadow-none mx-auto mb-8 object-cover"
                 />
               </div>
 

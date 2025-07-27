@@ -53,18 +53,49 @@ export function ContactSection() {
   const { isMobile } = useDevice();
 
   return (
-    <section id="contact" className="py-0 md:py-0 pb-8 md:pb-8 bg-secondary/30">
+    <section
+      id="contact"
+      className="my-0 md:my-0 mb-8 md:mb-8 mt-8 bg-secondary/30"
+    >
       <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
         <h2
           className="text-2xl md:text-lg lg:text-xl 2k:text-4xl 4k:text-7xl text-stormy-blue/80 font-playfair-display"
-          style={{
-            letterSpacing: "0.01em",
-            fontWeight: "500",
-          }}
+          style={
+            isMobile
+              ? {
+                  lineHeight: "1.5",
+                  letterSpacing: "0.01em",
+                  fontWeight: "300",
+                  // fontSize: "0.9rem",
+                }
+              : {
+                  lineHeight: "1.5",
+                  letterSpacing: "0.01em",
+                  fontWeight: "300",
+                  // fontSize: "0.9rem",
+                }
+          }
         >
           Locate Us
         </h2>
-        <h3 className="text-lg md:text-sm lg:text-sm 2k:text-lg 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
+        <h3
+          className="text-sm md:text-sm lg:text-base xl:text-base 2k:text-base 4k:text-xl text-left text-justify-left tracking-normal font-playfair-display text-stormy-blue/60"
+          style={
+            isMobile
+              ? {
+                  lineHeight: "1.5",
+                  letterSpacing: "0.01em",
+                  fontWeight: "300",
+                  // fontSize: "0.9rem",
+                }
+              : {
+                  lineHeight: "1.5",
+                  letterSpacing: "0.01em",
+                  fontWeight: "300",
+                  // fontSize: "0.9rem",
+                }
+          }
+        >
           Find us and explore the neighborhood
         </h3>
         <div className="border-t border-gray-200 my-6" />
