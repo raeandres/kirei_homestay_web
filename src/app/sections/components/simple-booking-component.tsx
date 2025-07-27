@@ -382,13 +382,15 @@ export function SimpleBookingComponent({
           </DialogHeader>
           <div className="flex flex-col items-center justify-center py-4">
             <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
-            <p className="text-sm text-stormy-blue/60 text-center mb-4">
+            <p className="text-sm text-stormy-blue/60 text-center font-playfair-display mb-4">
               Checking availability across all booking platforms...
             </p>
             <div className="space-y-1 text-xs text-stormy-blue/50">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span>Checking calendars</span>
+                <span className="font-playfair-display">
+                  Checking calendars
+                </span>
               </div>
               {/* <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
