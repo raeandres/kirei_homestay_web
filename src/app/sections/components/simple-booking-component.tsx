@@ -80,31 +80,31 @@ export function SimpleBookingComponent({
     <Card className="w-full max-w-full mx-auto shadow-none border border-gray-200 rounded-none">
       <CardContent className="p-6">
         {/* 1. Title and Subtitle */}
-        {/* <div className="text-center mb-6">
-          <h2 className="text-2xl md:text-3xl font-playfair-display text-stormy-blue/80 font-light mb-2">
-            Check out available rooms
+        <div className="text-center mb-6">
+          <h2 className="text-2xl md:text-3xl 2k:text-xl font-playfair-display text-stormy-blue/80 font-light mb-2">
+            Check available rooms
           </h2>
-          <p className="text-sm md:text-base text-stormy-blue/60 font-playfair-display">
+          {/* <p className="text-sm md:text-base text-stormy-blue/60 font-playfair-display">
             Experience slow intentional living at our thoughtfully designed
             spaces
-          </p>
-        </div> */}
+          </p> */}
+        </div>
 
         {/* Booking Controls */}
         <div
-          className={`grid gap-4 ${isMobile ? "grid-cols-1" : "grid-cols-5"}`}
+          className={`grid gap-4 ${isMobile ? "grid-cols-1" : "grid-cols-4"}`}
         >
           {/* 1. Title and Subtitle */}
-          <div className="text-center mb-2">
+          {/* <div className="text-center mb-2">
             <h2 className="text-2xl md:text-3xl 2k:text-xl font-playfair-display text-stormy-blue/80 font-light mb-2">
               Check our available rooms
-            </h2>
-            <p className="text-sm md:text-base 2k:text-sm  text-stormy-blue/60 font-playfair-display">
-              {/* Experience slow intentional living at our thoughtfully designed
+            </h2> */}
+          {/* <p className="text-sm md:text-base 2k:text-sm  text-stormy-blue/60 font-playfair-display"> */}
+          {/* Experience slow intentional living at our thoughtfully designed
             spaces */}
-              Accomodation Guaranteed
-            </p>
-          </div>
+          {/* Accomodation Guaranteed */}
+          {/* </p> */}
+          {/* </div> */}
           {/* 2. Check-in Calendar Button */}
           <Dialog
             open={isCheckInDialogOpen}
