@@ -48,28 +48,25 @@ export default function HomePage() {
         "Airbnb",
         "https://www.airbnb.com.sg/calendar/ical/1030897971821606234.ics?s=1b728ed92d212d0e42783ed473c0bb0f"
       ),
+      // Note: Add other calendar sources here when URLs are available
       createCalendarSource(
         "Booking.com",
-        "https://ical.booking.com/v1/export?t=8e69dadf-d9aa-4d48-b092-dc9042edeff7" // Example URL - replace with actual
+        "https://ical.booking.com/v1/export?t=8e69dadf-d9aa-4d48-b092-dc9042edeff7"
       ),
+      // createCalendarSource("Agoda", "https://agoda.com/actual-url"),
     ],
     "Kirei - Ito": [
       createCalendarSource(
         "Airbnb",
         "https://www.airbnb.com.sg/calendar/ical/1364997919482714933.ics?s=663892ccaa5dabea43e13966feabc6e1"
       ),
+      // Note: Add other calendar sources here when URLs are available
       createCalendarSource(
         "Booking.com",
-        "https://ical.booking.com/v1/export?t=42eba3ad-a5f1-4f7a-b758-bdc17af96cc0" // Example URL - replace with actual
+        "https://ical.booking.com/v1/export?t=42eba3ad-a5f1-4f7a-b758-bdc17af96cc0"
       ),
-      createCalendarSource(
-        "Agoda",
-        "https://www.agoda.com/calendar/ical/kirei-ito.ics" // Example URL - replace with actual
-      ),
-      createCalendarSource(
-        "Direct Bookings",
-        "https://your-domain.com/calendar/ical/kirei-ito-direct.ics" // Example URL - replace with actual
-      ),
+      // createCalendarSource("Agoda", "https://agoda.com/actual-url"),
+      // createCalendarSource("Direct Bookings", "https://your-domain.com/actual-url"),
     ],
 
     // Example: How to add more rooms
@@ -158,8 +155,8 @@ export default function HomePage() {
     );
 
     const availableRoomsList = [];
-    if (room1Available) availableRoomsList.push("Kirei");
-    if (room2Available) availableRoomsList.push("Kirei - Ito");
+    if (room1Available) availableRoomsList.push("Studio");
+    if (room2Available) availableRoomsList.push("One Bedroom");
 
     // Update available rooms state
     setAvailableRooms(availableRoomsList);

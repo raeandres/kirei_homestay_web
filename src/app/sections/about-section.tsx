@@ -109,12 +109,17 @@ export function AboutSection() {
                         }
                   }
                 >
-                  <span className="font-serif text-xl md:text-2xl">Kirei</span>{" "}
+                  {" "}
+                  Rooted in the Japanese word{" "}
+                  <span className="text-stormy-blue/80 font-lg text-lg md:text-lg lg:text-lg xl:text-lg 2k:text-lg 4k:text-xl">
+                    kirei
+                  </span>{" "}
                   <span className="text-stormy-blue/80">(綺麗)</span>, meaning
-                  beautiful and clean in Japanese, is more than just a place to
-                  stay. It's an invitation to embrace slow, intentional living.
-                  Our space is thoughtfully designed to be a sanctuary of calm,
-                  where minimalist aesthetics meet cozy comfort.
+                  both “beautiful” and “neat”, our spaces embody quiet elegance,
+                  intentional design, and hotel-grade comfort. Whether you're
+                  traveling for work or seeking a temporary home in Metro
+                  Manila, our spaces are designed to meet you where you are and
+                  elevate your experience.
                 </p>
 
                 <p
@@ -136,9 +141,12 @@ export function AboutSection() {
                         }
                   }
                 >
-                  We believe in the beauty of simplicity and the importance of
-                  mindful moments. Every detail at Kirei Homestay is curated to
-                  help you unwind, reconnect, and find joy in the present.
+                  Each space is carefully curated with calming interiors, warm
+                  neutral tones and a focus on cleanliness and functionality. We
+                  believe in the beauty of simplicity and the importance of
+                  mindful moments. From seamless check-ins to soft linens and
+                  cozy corners, everything is designed to help you unwind,
+                  reconnect, and feel at home.
                 </p>
               </div>
 
