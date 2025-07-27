@@ -394,6 +394,12 @@ export function SimpleBookingComponent({
                       </Button>
                     </div>
                   </div>
+                  <Button
+                    onClick={() => setIsGuestsDialogOpen(false)}
+                    className="h-16 w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-none font-playfair-display"
+                  >
+                    <div className="flex items-center">OK</div>
+                  </Button>
                 </div>
               </DialogContent>
             </Dialog>
