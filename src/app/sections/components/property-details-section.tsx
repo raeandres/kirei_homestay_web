@@ -279,21 +279,25 @@ export function PropertyDetailsSection({
     <div className="id property-details-section space-y-8">
       <div className="id property-details-info">
         <CardDescription>
-          <h3 className="text-3xl md:text-2xl xl:text-3xl 2k:text-4xl 4k:text-7xl font-playfair-display">
+          <h3 className="text-2xl md:text-2xl xl:text-3xl 2k:text-4xl 4k:text-7xl font-playfair-display mb-2">
             {name}
           </h3>
           <div>
             <h4
-              className="text-base md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl font-playfair-display text-stormy-blue/80 font-normal leading-relaxed mb-1"
+              className="text-sm md:text-sm lg:text-base xl:text-base 2k:text-base 4k:text-xl text-left text-justify-left tracking-normal font-playfair-display text-stormy-blue/60"
               style={
                 isMobile
                   ? {
-                      lineHeight: "1.3",
+                      lineHeight: "1.5",
                       letterSpacing: "0.01em",
+                      fontWeight: "300",
+                      // fontSize: "0.9rem",
                     }
                   : {
                       lineHeight: "1.5",
-                      letterSpacing: "0.05em",
+                      letterSpacing: "0.01em",
+                      fontWeight: "300",
+                      // fontSize: "0.9rem",
                     }
               }
             >
@@ -302,7 +306,14 @@ export function PropertyDetailsSection({
           </div>
         </CardDescription>
 
-        <div className="text-base font-playfair-display tracking-wide  text-stormy-blue/80 font-normal leading-relaxed">
+        <div
+          className="text-sm md:text-sm lg:text-md xl:text-lg 2k:text-lg 4k:text-xl text-left text-justify-left font-playfair-display text-stormy-blue/60 leading-relaxed mb-1"
+          style={{
+            lineHeight: "1.5",
+            letterSpacing: "0.01em",
+            fontSize: "0.8rem",
+          }}
+        >
           {cardContent.guests} • {cardContent.bedrooms} • {cardContent.beds} •{" "}
           {cardContent.bathrooms}
         </div>
@@ -313,20 +324,20 @@ export function PropertyDetailsSection({
         {/* Property Description - Truncated */}
         <div className="space-y-4 text-sm pb-4 font-light text-stormy-blue/80">
           <p
-            className="4k:text-xl text-left text-stormy-blue/80 font-normal font-playfair-display leading-relaxed"
+            className="text-sm md:text-sm lg:text-base xl:text-base 2k:text-base 4k:text-xl text-left text-justify-left tracking-normal font-playfair-display text-stormy-blue/60"
             style={
               isMobile
                 ? {
                     lineHeight: "1.5",
                     letterSpacing: "0.01em",
-                    fontWeight: "500",
-                    fontSize: "1rem",
+                    fontWeight: "300",
+                    // fontSize: "0.9rem",
                   }
                 : {
-                    lineHeight: "1.4",
-                    letterSpacing: "0.03em",
-                    fontSize: "1rem",
-                    fontWeight: "200",
+                    lineHeight: "1.5",
+                    letterSpacing: "0.01em",
+                    fontWeight: "300",
+                    // fontSize: "0.9rem",
                   }
             }
           >
@@ -396,18 +407,20 @@ export function PropertyDetailsSection({
                   return (
                     <div
                       key={index}
-                      className="flex items-center text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-playfair-display leading-relaxed"
+                      className="flex items-center text-sm 2k:text-sm 4k:text-xl text-left text-stormy-blue/80 font-playfair-display leading-relaxed"
                       style={
                         isMobile
                           ? {
                               lineHeight: "1.5",
-                              letterSpacing: "0.002em",
-                              fontWeight: "100",
+                              letterSpacing: "0.01em",
+                              fontWeight: "300",
+                              // fontSize: "0.9rem",
                             }
                           : {
-                              lineHeight: "1.3",
+                              lineHeight: "1.5",
                               letterSpacing: "0.01em",
-                              fontWeight: "100",
+                              fontWeight: "300",
+                              // fontSize: "0.9rem",
                             }
                       }
                     >
