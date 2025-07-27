@@ -69,7 +69,7 @@ export function AvailabilityBookingSection({
         </div>
         <div className="flex flex-col justify-center pt-0 md:pt-0">
           <p
-            className="text-base md:text-xs lg:text-sm xl:text-base 2k:text-base text-center 4k:text-xl font-playfair-display text-stormy-blue/80 font-normal leading-relaxed mb-1"
+            className="text-sm md:text-sm lg:text-sm xl:text-base 2k:text-base text-center 4k:text-xl font-playfair-display text-stormy-blue/80 font-normal leading-relaxed mx-4 my-4"
             style={
               isMobile
                 ? {
