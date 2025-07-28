@@ -43,7 +43,7 @@ export function AboutSection() {
           )}
         >
           {/* Luxury gradient overlay */}
-          <div className="absolute inset-0  from-black/30 via-black/40 to-black/60 flex items-center justify-center p-8">
+          <div className="absolute inset-0  from-black/30 via-black/40 to-black/60 flex items-center justify-center p-4">
             <div className="text-center text-stormy-blue/80 max-w-5xl mx-auto space-y-8">
               {/* Elegant header */}
               <div
@@ -84,60 +84,82 @@ export function AboutSection() {
               {/* Luxury content */}
               <div
                 className={cn(
-                  "space-y-8 transition-all duration-1000 ease-out delay-500 font-body",
+                  "space-y-4 2k:space-y-4 transition-all duration-1000 ease-out delay-500 font-body",
                   isVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"
                 )}
               >
                 <p
-                  className="text-stormy-blue/60 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-extralight px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
+                  className="text-justify-center text-stormy-blue/80 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-extralight px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
                   style={
                     isMobile
                       ? {
-                          lineHeight: "1.5",
-                          letterSpacing: "0.03em",
-                          fontSize: "1rem",
-                          fontWeight: "300",
+                          lineHeight: "1.6",
+                          letterSpacing: "0.01em",
+                          fontSize: "1.1rem",
+                          fontWeight: "400",
                         }
                       : {
-                          lineHeight: "1.3",
+                          lineHeight: "1.6",
                           letterSpacing: "0.05em",
-                          textIndent: "2rem",
-                          fontSize: "1rem",
-                          fontWeight: "300",
+                          fontSize: "1.4rem",
+                          fontWeight: "400",
                         }
                   }
                 >
                   {" "}
                   Rooted in the Japanese word{" "}
-                  <span className="text-stormy-blue/80 font-lg text-lg md:text-lg lg:text-lg xl:text-lg 2k:text-lg 4k:text-xl">
+                  <span
+                    className="text-stormy-blue font-lg text-lg md:text-lg lg:text-lg xl:text-lg 2k:text-lg 4k:text-xl"
+                    style={{ fontStyle: "italic" }}
+                  >
                     kirei
                   </span>{" "}
-                  <span className="text-stormy-blue/80">(綺麗)</span>, meaning
-                  both “beautiful” and “neat”, our spaces embody quiet elegance,
-                  intentional design, and hotel-grade comfort. Whether you're
-                  traveling for work or seeking a temporary home in Metro
-                  Manila, our spaces are designed to meet you where you are and
-                  elevate your experience.
+                  <span className="text-justify text-stormy-blue/80">
+                    (綺麗)
+                  </span>
+                  , meaning both “beautiful” and “neat”
                 </p>
-
                 <p
-                  className=" text-stormy-blue/60 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
+                  className="text-left text-stormy-blue/80 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-extralight px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
                   style={
                     isMobile
                       ? {
-                          lineHeight: "1.5",
-                          letterSpacing: "0.03em",
-                          fontSize: "1rem",
-                          fontWeight: "300",
+                          lineHeight: "1.6",
+                          letterSpacing: "0.01em",
+                          fontSize: "0.9rem",
+                          fontWeight: "400",
                         }
                       : {
-                          lineHeight: "1.3",
+                          lineHeight: "1.6",
                           letterSpacing: "0.05em",
-                          textIndent: "2rem",
                           fontSize: "1rem",
-                          fontWeight: "300",
+                          fontWeight: "400",
+                        }
+                  }
+                >
+                  Our spaces embody quiet elegance, intentional design, and
+                  hotel-grade comfort. <br /> Whether you're traveling for work
+                  or seeking a temporary home in Metro Manila, our spaces are
+                  designed to meet you where you are and elevate your
+                  experience.
+                </p>
+                <p
+                  className="text-right text-stormy-blue/80 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
+                  style={
+                    isMobile
+                      ? {
+                          lineHeight: "1.6",
+                          letterSpacing: "0.01em",
+                          fontSize: "0.9rem",
+                          fontWeight: "400",
+                        }
+                      : {
+                          lineHeight: "1.6",
+                          letterSpacing: "0.05em",
+                          fontSize: "1rem",
+                          fontWeight: "400",
                         }
                   }
                 >
@@ -147,6 +169,27 @@ export function AboutSection() {
                   mindful moments. From seamless check-ins to soft linens and
                   cozy corners, everything is designed to help you unwind,
                   reconnect, and feel at home.
+                </p>
+                <p
+                  className="text-justify-center text-stormy-blue/80 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
+                  style={
+                    isMobile
+                      ? {
+                          lineHeight: "1.6",
+                          letterSpacing: "0.01em",
+                          fontSize: "0.9rem",
+                          fontWeight: "400",
+                        }
+                      : {
+                          lineHeight: "1.6",
+                          letterSpacing: "0.05em",
+                          fontSize: "1rem",
+                          fontWeight: "400",
+                        }
+                  }
+                >
+                  Kirei House is just steps away from shops, restaurants, and
+                  offices in the vibrant Eastwood community.
                 </p>
               </div>
 
