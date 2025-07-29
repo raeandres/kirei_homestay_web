@@ -109,17 +109,23 @@ export function AboutSection() {
                   }
                 >
                   {" "}
-                  Rooted in the Japanese word{" "}
-                  <span
-                    className="text-stormy-blue font-lg text-lg md:text-lg lg:text-lg xl:text-lg 2k:text-lg 4k:text-xl"
-                    style={{ fontStyle: "italic" }}
-                  >
-                    kirei
-                  </span>{" "}
-                  <span className="text-justify text-stormy-blue/80">
-                    (綺麗)
+                  <span className="text-stormy-blue">
+                    Rooted in the Japanese word{" "}
+                    <span
+                      className="text-stormy-blue font-playfair-display text-xl md:text-2xl lg:text-2xl xl:text-2xl 2k:text-2xl 4k:text-3xl"
+                      style={{
+                        fontStyle: "italic",
+                        display: "inline",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      kirei{" "}
+                    </span>
+                    <span className="text-justify text-stormy-blue/80 text-xl md:text-xl lg:text-xl xl:text-2xl 2k:text-2xl 4k:text-3xl">
+                      (綺麗),
+                    </span>{" "}
                   </span>
-                  , meaning both “beautiful” and “neat”
+                  meaning both “beautiful” and “neat”
                 </p>
                 <p
                   className="text-left text-stormy-blue/80 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-extralight px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
@@ -140,13 +146,13 @@ export function AboutSection() {
                   }
                 >
                   Our spaces embody quiet elegance, intentional design, and
-                  hotel-grade comfort. <br /> Whether you're traveling for work
-                  or seeking a temporary home in Metro Manila, our spaces are
+                  hotel-grade comfort. Whether you're traveling for work or
+                  seeking a temporary home in Metro Manila, our spaces are
                   designed to meet you where you are and elevate your
                   experience.
                 </p>
                 <p
-                  className="text-right text-stormy-blue/80 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
+                  className="text-left text-stormy-blue/80 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
                   style={
                     isMobile
                       ? {
