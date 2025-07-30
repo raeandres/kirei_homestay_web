@@ -109,24 +109,28 @@ export function AboutSection() {
                   }
                 >
                   {" "}
-                  <span className="text-stormy-blue">
+                  <span
+                    className="text-stormy-blue text-lg"
+                    style={{
+                      display: "inline",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
                     Rooted in the Japanese word{" "}
-                    <span
-                      className="text-stormy-blue font-playfair-display text-xl md:text-2xl lg:text-2xl xl:text-2xl 2k:text-2xl 4k:text-3xl"
-                      style={{
-                        fontStyle: "italic",
-                        display: "inline",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
+                    <span className="text-stormy-blue font-playfair-display text-xl md:text-2xl lg:text-2xl xl:text-2xl 2k:text-2xl 4k:text-3xl">
                       kirei{" "}
+                      <span className="text-justify text-stormy-blue/80 text-xl md:text-xl lg:text-xl xl:text-2xl 2k:text-2xl 4k:text-3xl">
+                        (綺麗),
+                      </span>{" "}
                     </span>
-                    <span className="text-justify text-stormy-blue/80 text-xl md:text-xl lg:text-xl xl:text-2xl 2k:text-2xl 4k:text-3xl">
-                      (綺麗),
-                    </span>{" "}
                   </span>
-                  meaning both “beautiful” and “neat”
                 </p>
+                <span
+                  className="text-stormy-blue/80 font-playfair-display text-lg"
+                  style={{ display: "inline", whiteSpace: "nowrap" }}
+                >
+                  meaning both “beautiful” and “neat”
+                </span>
                 <p
                   className="text-left text-stormy-blue/80 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-extralight px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
                   style={
