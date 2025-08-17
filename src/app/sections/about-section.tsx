@@ -181,7 +181,7 @@ export function AboutSection() {
                   reconnect, and feel at home.
                 </p>
                 <p
-                  className="text-justify-center text-stormy-blue/80 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
+                  className="text-left text-stormy-blue/80 text-base md:text-lg lg:text-xl leading-relaxed tracking-wide font-light px-4 sm:px-0 max-w-4xl mx-auto font-playfair-display"
                   style={
                     isMobile
                       ? {
