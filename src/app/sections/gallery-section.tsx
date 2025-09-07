@@ -49,16 +49,16 @@ import {
   handleContactFormSubmit,
 } from "@/lib/contact-form";
 import { useToast } from "@/hooks/use-toast";
-import { PropertyDescriptionSheet } from "@/app/sections/components/property-description-component";
-import { FullScreenImageSheet } from "@/app/sections/components/full-screen-image-sheet-component";
-import { GridViewSheet } from "@/app/sections/components/grid-view-sheet-component";
-import { ContactHostModal } from "@/app/sections/components/contact-host-modal-component";
-import { MapSection } from "@/app/sections/components/property-location/property-location-map-component";
+import { PropertyDescriptionSheet } from "@/app/components/property-description-component";
+import { FullScreenImageSheet } from "@/app/components/full-screen-image-sheet-component";
+import { GridViewSheet } from "@/app/components/grid-view-sheet-component";
+import { ContactHostModal } from "@/app/components/contact-host-modal-component";
+import { MapSection } from "@/app/components/property-location/property-location-map-component";
 import { AvailabilityBookingSection } from "@/app/sections/availability-booking-section";
-import { PropertyDetailsSection } from "@/app/sections/components/property-details-component";
-import { AmenitiesCard } from "@/app/sections/components/amenities-card-component";
-import { AddressSection } from "@/app/sections/components/property-location/property-location-address-component";
-import { NearbyPlacesSection } from "@/app/sections/components/property-location/property-location-nearby-places-component";
+import { PropertyDetailsSection } from "@/app/components/property-details-component";
+import { AmenitiesCard } from "@/app/components/amenities-card-component";
+import { AddressSection } from "@/app/components/property-location/property-location-address-component";
+import { NearbyPlacesSection } from "@/app/components/property-location/property-location-nearby-places-component";
 import { Footer } from "@/app/layout/footer";
 
 // Amenity interface for the card

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/app/ui/sheet";
 import { cn } from "@/lib/utils";
-import { Footer } from "../../layout/footer";
+import { Footer } from "../layout/footer";
 
 interface GalleryImage {
   src: string;

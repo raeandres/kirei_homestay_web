@@ -42,7 +42,7 @@ import {
   Wind,
 } from "lucide-react";
 import { MapSection } from "./property-location/property-location-map-component";
-import { Footer } from "../../layout/footer";
+import { Footer } from "../layout/footer";
 
 interface AmenityCategory {
   title: string;
