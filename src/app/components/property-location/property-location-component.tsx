@@ -1,9 +1,9 @@
 "use client";
 
-import { MapSection } from "./map-section";
-import { AddressSection } from "./address-section";
-import { NearbyPlacesSection } from "./nearby-places-section";
-import { SocialMediaLinksSection } from "./social-media-links-section";
+import { MapSection } from "./property-location-map-component";
+import { AddressSection } from "./property-location-address-component";
+import { NearbyPlacesSection } from "./property-location-nearby-places-component";
+import { SocialMediaLinksSection } from "./property-location-social-media-links-component";
 
 interface NearbyPlace {
   name: string;

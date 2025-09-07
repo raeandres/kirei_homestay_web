@@ -9,33 +9,15 @@ import {
   ContactFormData,
   createContactFormHandler,
 } from "@/lib/contact-form";
-import { PropertyLocation } from "@/app/sections/components/property-location/property-location";
-import { ContactHostForm } from "@/app/sections/components/contact-host-form";
+import { PropertyLocation } from "@/app/components/property-location/property-location-component";
+import { ContactHostForm } from "@/app/components/contact-host-form-component";
 import { useDevice } from "@/hooks/use-device";
-
-const nearbyPlaces = [
-  { name: "Eastwood City", distance: "0.1 km" },
-  { name: "Bonifacio Global City", distance: "6 km" },
-  { name: "Ortigas Center", distance: "3.8 km" },
-  { name: "Makati", distance: "7 km" },
-  { name: "Airport", distance: "12 km" },
-];
-
-const socialMediaLinks = [
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/profile.php?id=61558711286570",
-    icon: Facebook,
-  },
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/kireihouse.ph",
-    icon: Instagram,
-  },
-  { name: "WhatsApp", href: "https://wa.me/639175069965", icon: MessageSquare },
-];
+import { ContactsCollection } from "../data/local/contacts-collection";
+import { PlacesCollection } from "../data/local/places-collection";
 
 export function ContactSection() {
+  const nearbyPlaces = PlacesCollection.nearbyPlaces;
+  const socialMediaLinks = ContactsCollection.socialMediaLinks;
   const { toast } = useToast();
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),

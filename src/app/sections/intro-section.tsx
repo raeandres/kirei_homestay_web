@@ -1,6 +1,6 @@
 "use client";
 
-import { SimpleBookingComponent } from "./components/simple-booking-component";
+import { SimpleBookingComponent } from "../components/simple-booking-component";
 
 interface IntroSectionProps {
   occupiedDates?: Date[];

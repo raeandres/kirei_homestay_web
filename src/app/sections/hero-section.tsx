@@ -14,136 +14,23 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useDevice } from "@/hooks/use-device";
+import { ImageCollection } from "@/app/data/local/image-collection";
+import { ContactsCollection } from "../data/local/contacts-collection";
 
-const landscapeImages = [
-  // Kirei 1
-  {
-    src: "/hero/kirei_1/landscape/converted_0000.webp",
-    alt: "Modern living room",
-    hint: "modern interior",
-  },
-  {
-    src: "/hero/kirei_1/landscape/converted_0001.webp",
-    alt: "Cozy bedroom",
-    hint: "bedroom aesthetic",
-  },
-  {
-    src: "/hero/kirei_1/landscape/converted_0002.webp",
-    alt: "Bright dining area",
-    hint: "dining space",
-  },
-  {
-    src: "/hero/kirei_1/landscape/converted_0003.webp",
-    alt: "Bright dining area",
-    hint: "dining space",
-  },
-  {
-    src: "/hero/kirei_1/landscape/converted_0004.webp",
-    alt: "Comfortable modern living area with city view",
-    hint: "living room city",
-  },
 
-  // Kirei 2
-  {
-    src: "/hero/kirei_2/landscape/converted_0000.webp",
-    alt: "Modern kitchen with coffee machine and oven",
-    hint: "modern kitchen",
-  },
-  {
-    src: "/hero/kirei_2/landscape/converted_0001.webp",
-    alt: "Bright modern bedroom with city view and desk",
-    hint: "bedroom city view",
-  },
-  {
-    src: "/hero/kirei_2/landscape/converted_0002.webp",
-    alt: "Bright dining area with wooden furniture and cherry blossom centerpiece",
-    hint: "dining area",
-  },
-  {
-    src: "/hero/kirei_2/landscape/converted_0003.webp",
-    alt: "Bright dining area with wooden furniture and cherry blossom centerpiece",
-    hint: "dining area",
-  },
-  {
-    src: "/hero/kirei_2/landscape/converted_0004.webp",
-    alt: "Bright dining area with wooden furniture and cherry blossom centerpiece",
-    hint: "dining area",
-  },
-];
-
-const portraitImages = [
-  // Kirei 1
-  {
-    src: "/hero/kirei_1/portrait/converted_0000.webp",
-    alt: "Kirei Homestay entryway (portrait)",
-    hint: "entryway portrait",
-  },
-  {
-    src: "/hero/kirei_1/portrait/converted_0001.webp",
-    alt: "Bedroom detail (portrait)",
-    hint: "bedroom detail portrait",
-  },
-  {
-    src: "/hero/kirei_1/portrait/converted_0002.webp",
-    alt: "Living area accent (portrait)",
-    hint: "living accent portrait",
-  },
-  {
-    src: "/hero/kirei_1/portrait/converted_0003.webp",
-    alt: "Kitchenette view (portrait)",
-    hint: "kitchenette portrait",
-  },
-  {
-    src: "/hero/kirei_1/portrait/converted_0004.webp",
-    alt: "Kitchenette view (portrait)",
-    hint: "kitchenette portrait",
-  },
-  // Kirei 2
-  {
-    src: "/hero/kirei_2/portrait/converted_0000.webp",
-    alt: "Kitchenette view (portrait)",
-    hint: "kitchenette portrait",
-  },
-  {
-    src: "/hero/kirei_2/portrait/converted_0001.webp",
-    alt: "Kitchenette view (portrait)",
-    hint: "kitchenette portrait",
-  },
-  {
-    src: "/hero/kirei_2/portrait/converted_0002.webp",
-    alt: "Kitchenette view (portrait)",
-    hint: "kitchenette portrait",
-  },
-  {
-    src: "/hero/kirei_2/portrait/converted_0003.webp",
-    alt: "Kitchenette view (portrait)",
-    hint: "kitchenette portrait",
-  },
-  {
-    src: "/hero/kirei_2/portrait/converted_0004.webp",
-    alt: "Kitchenette view (portrait)",
-    hint: "kitchenette portrait",
-  },
-];
-
-const platformLinks = [
-  { name: "Airbnb", href: "https://www.airbnb.com", icon: Home },
-  { name: "Booking.com", href: "https://www.booking.com", icon: Briefcase },
-  { name: "Agoda", href: "https://www.agoda.com", icon: HotelIcon },
-];
 
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [imagesToDisplay, setImagesToDisplay] = useState(landscapeImages); // Default to landscape
+  const [imagesToDisplay, setImagesToDisplay] = useState(ImageCollection.landscapeImages); // Default to landscape
 
   const { isMobile } = useDevice();
 
   useEffect(() => {
     // Update images based on device type
     if (isMobile) {
-      setImagesToDisplay(portraitImages);
+      setImagesToDisplay(ImageCollection.portraitImages);
     } else {
-      setImagesToDisplay(landscapeImages);
+      setImagesToDisplay(ImageCollection.landscapeImages);
     }
   }, [isMobile]);
 

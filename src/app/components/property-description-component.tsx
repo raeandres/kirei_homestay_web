@@ -10,7 +10,7 @@ import {
 import { useDevice } from "@/hooks/use-device";
 import { X } from "lucide-react";
 
-import { Footer } from "../../layout/footer";
+import { Footer } from "../layout/footer";
 
 interface GalleryContent {
   teaserDescription1: string;
