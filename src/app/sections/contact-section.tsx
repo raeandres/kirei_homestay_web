@@ -9,8 +9,8 @@ import {
   ContactFormData,
   createContactFormHandler,
 } from "@/lib/contact-form";
-import { PropertyLocation } from "@/app/sections/components/property-location/property-location";
-import { ContactHostForm } from "@/app/sections/components/contact-host-form";
+import { PropertyLocation } from "@/app/sections/components/property-location/property-location-component";
+import { ContactHostForm } from "@/app/sections/components/contact-host-form-component";
 import { useDevice } from "@/hooks/use-device";
 
 const nearbyPlaces = [

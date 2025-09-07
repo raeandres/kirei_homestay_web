@@ -41,7 +41,7 @@ import {
   Wifi,
   Wind,
 } from "lucide-react";
-import { MapSection } from "./property-location/map-section";
+import { MapSection } from "./property-location/property-location-map-component";
 import { Footer } from "../../layout/footer";
 
 interface AmenityCategory {
