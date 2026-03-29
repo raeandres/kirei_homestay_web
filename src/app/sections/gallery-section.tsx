@@ -1,28 +1,47 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { type DayPickerProps } from "react-day-picker";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/app/ui/button";
-import { Calendar } from "@/app/ui/calendar";
 import { Card, CardContent, CardDescription } from "@/app/ui/card";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/app/ui/sheet";
 
 import { RatingStars } from "@/app/ui/rating-stars";
+import { ChevronLeft, ChevronRight, Grid3X3 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import {
-  ChevronLeft,
-  ChevronRight,
-  Home,
-  Briefcase,
-  Grid3X3,
-  MessageSquare,
+  BathIcon,
+  BatteryCharging,
+  BedDouble,
+  BedDoubleIcon,
+  Blocks,
+  BookOpen,
+  Building2,
+  Coffee,
+  Dumbbell,
+  Microwave,
+  ParkingCircle,
+  PawPrintIcon,
+  Refrigerator,
+  ShieldCheck,
+  Shirt,
+  ShowerHeadIcon,
+  Thermometer,
+  Toilet,
+  Tv,
+  Users,
+  Utensils,
+  WashingMachine,
+  WavesLadder,
+  Wifi,
+  Wind,
 } from "lucide-react";
 import { getBookedDates } from "@/app/actions/get-booked-dates";
 import { cn } from "@/lib/utils";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useDevice } from "@/hooks/use-device";
 import { useCurrency } from "@/lib/currency";
 import {
   contactFormSchema,
@@ -30,11 +49,102 @@ import {
   handleContactFormSubmit,
 } from "@/lib/contact-form";
 import { useToast } from "@/hooks/use-toast";
-import { PropertyDescriptionSheet } from "@/app/sections/components/property-description-sheet";
-import { FullScreenImageSheet } from "@/app/sections/components/full-screen-image-sheet";
-import { GridViewSheet } from "@/app/sections/components/grid-view-sheet";
-import { ContactHostModal } from "@/app/sections/components/contact-host-modal";
-import { MapSection } from "@/app/sections/components/property-location/map-section";
+import { PropertyDescriptionSheet } from "@/app/components/property-description-component";
+import { FullScreenImageSheet } from "@/app/components/full-screen-image-sheet-component";
+import { GridViewSheet } from "@/app/components/grid-view-sheet-component";
+import { ContactHostModal } from "@/app/components/contact-host-modal-component";
+import { MapSection } from "@/app/components/property-location/property-location-map-component";
+import { AvailabilityBookingSection } from "@/app/sections/availability-booking-section";
+import { PropertyDetailsSection } from "@/app/components/property-details-component";
+import { AmenitiesCard } from "@/app/components/amenities-card-component";
+import { Footer } from "@/app/layout/footer";
+import { GalleryCollection } from "../data/local/gallery-collection";
+
+// Amenity interface for the card
+interface Amenity {
+  name: string;
+  icon: LucideIcon;
+}
+
+// Function to map amenity names to icons
+const getAmenityIcon = (amenityName: string): LucideIcon => {
+  const name = amenityName.toLowerCase().trim();
+
+  // Map common amenity names to icons
+  if (name.includes("pet") || name.includes("dog") || name.includes("cat"))
+    return PawPrintIcon;
+  if (name.includes("gym") || name.includes("fitness")) return Dumbbell;
+  if (name.includes("pool") || name.includes("swimming")) return WavesLadder;
+  if (name.includes("playground") || name.includes("kids")) return Blocks;
+  if (name.includes("sauna") || name.includes("spa")) return BathIcon;
+  if (name.includes("view") || name.includes("city")) return Building2;
+  if (name.includes("bed") && name.includes("king")) return BedDoubleIcon;
+  if (name.includes("bed") || name.includes("futon")) return BedDouble;
+  if (
+    name.includes("air conditioning") ||
+    name.includes("ac") ||
+    name.includes("cooling")
+  )
+    return Thermometer;
+  if (name.includes("game") || name.includes("board")) return Users;
+  if (name.includes("tv") || name.includes("television")) return Tv;
+  if (name.includes("book") || name.includes("reading")) return BookOpen;
+  if (
+    name.includes("smoke") ||
+    name.includes("alarm") ||
+    name.includes("safety")
+  )
+    return ShieldCheck;
+  if (name.includes("refrigerator") || name.includes("fridge"))
+    return Refrigerator;
+  if (name.includes("microwave")) return Microwave;
+  if (name.includes("coffee")) return Coffee;
+  if (
+    name.includes("dishes") ||
+    name.includes("utensils") ||
+    name.includes("silverware")
+  )
+    return Utensils;
+  if (
+    name.includes("cooking") ||
+    name.includes("pots") ||
+    name.includes("pans")
+  )
+    return Utensils;
+  if (name.includes("hot water") || name.includes("shower"))
+    return ShowerHeadIcon;
+  if (name.includes("bidet") || name.includes("toilet")) return Toilet;
+  if (name.includes("hair dryer") || name.includes("dryer")) return Wind;
+  if (name.includes("towel")) return Shirt;
+  if (name.includes("wifi") || name.includes("internet")) return Wifi;
+  if (name.includes("workspace") || name.includes("desk")) return BookOpen;
+  if (name.includes("washing machine") || name.includes("laundry"))
+    return WashingMachine;
+  if (
+    name.includes("charging") ||
+    name.includes("socket") ||
+    name.includes("power")
+  )
+    return BatteryCharging;
+  if (name.includes("iron") || name.includes("hangers")) return Shirt;
+  if (name.includes("parking")) return ParkingCircle;
+  if (name.includes("elevator")) return Users;
+
+  // Default icon for unmatched amenities
+  return ShieldCheck;
+};
+
+// Function to convert string amenities to Amenity objects
+const mapStringAmenitiesToAmenities = (
+  stringAmenities: string[]
+): Amenity[] => {
+  return stringAmenities
+    .filter((amenity) => amenity.trim() !== "")
+    .map((amenity) => ({
+      name: amenity.trim().replace(/^[•\-\s]+/, ""), // Remove bullet points and leading spaces/dashes
+      icon: getAmenityIcon(amenity),
+    }));
+};
 
 interface GalleryContent {
   teaserDescription1: string;
@@ -70,18 +180,14 @@ interface GalleryImage {
   hint: string;
 }
 
-interface GalleryCategory {
-  name: string;
-  coverImage: GalleryImage;
-  images: GalleryImage[];
-  bookingLinks: {
-    airbnb: string;
-    booking: string;
-  };
-  icsUrl: string;
+interface CalendarSource {
+  platform: string;
+  url: string;
 }
+
 interface GalleryCategory {
   name: string;
+  unitType: string;
   coverImage: GalleryImage;
   galleryContent: GalleryContent;
   cardContent: CardContent;
@@ -90,320 +196,18 @@ interface GalleryCategory {
     airbnb: string;
     booking: string;
   };
-  icsUrl: string;
+  icsUrls: CalendarSource[];
   activeMapUrl: string;
 }
 
-const galleryItems: GalleryCategory[] = [
-  {
-    name: "Kirei",
-    coverImage: {
-      src: "/gallery/kirei_1/converted_0007.webp",
-      alt: "Kirei",
-      hint: "Minimalist studio bedroom suite",
-    },
-    cardContent: {
-      location: "Eastwood LeGrand 3, Quezon City",
-      guests: "5 guests",
-      bedrooms: "1 bedroom",
-      beds: "2 beds",
-      bathrooms: "1 bathroom",
-      basePriceSGD: 122,
-      reviews: "5 reviews",
-      stars: 5,
-    },
-    galleryContent: {
-      teaserDescription1:
-        "Designed for clarity and comfort, Kirei House offers a true home away from home. This minimalist studio is designed to give you a peaceful space where you can rest, work, or relax without any distractions.\n\n Whether you’re traveling for business, a quick getaway, or just need a quiet spot to recharge, this space offers everything you need for a hassle-free stay. Kirei House is not just another Airbnb. It’s your space elevated.",
-      teaserDescription2: "",
-      propertyDetailsTitle: "Kirei",
-      propertyDescription:
-        "Designed for clarity and comfort, Kirei House offers a true home away from home. This minimalist studio is designed to give you a peaceful space where you can rest, work, or relax without any distractions.\n\nWhether you’re traveling for business, a quick getaway, or just need a quiet spot to recharge, this space offers everything you need for a hassle-free stay. Kirei House is not just another Airbnb. It’s your space elevated.",
-      spaceDescription: "",
-      guestsAmenities: [
-        " • A comfortable queen bed with fresh linens for a good night’s sleep. We also have full-size futon bed available upon request.",
-        " • Simple, clutter-free furnishings to help you unwind.",
-        " • A dedicated work desk with fast, reliable WiFi for productivity.",
-        " •  Netflix and other streaming platforms so you can kick back after a busy day.",
-        " • Fully functional kitchen with Nespresso and Smartoven.",
-        " •  Clean, well-maintained bathroom with essential toiletries provided.",
-      ],
-      guestsPreferenceList: [
-        "✔️ Clean, quiet, and well-maintained",
-        "✔️ Seamless check-in with responsive host",
-        "✔️ Ideal for solo travelers, couples, and WFH stays,",
-        "✔️ Tastefully designed.",
-      ],
-      guestsPreferenceFooterNote:
-        "We got everything you need and nothing you don’t.",
-      guestsAccessSubtitle: "",
-      guestsAccessList: [
-        " • Parking Basement 3",
-        " • Pay parking inside the condominium",
-        " • P350/night 1 slot only (kindly confirm in advance)",
-        " • Pool Access 6th Floor",
-        " • Free for 4 guests, additional fee of P200 for succeeding guests. Pay at Admin Office or at the guard on duty",
-        " • Gym 6th Floor",
-        " • Day Care Center and Outdoor Playground 6th Floor",
-        " • Garden 6th Floor",
-      ],
-      amenityFeesDescription: "",
-      amenityFeeItems: [],
-      importantNotesList: [
-        " • Strictly imposing CLAY GO policy.",
-        " • Check in 2PM - 10PM",
-        " • Check out 11AM",
-        " • Quiet time 11PM - 8AM",
-        " • NO SMOKING AND ILLEGAL DRUGS AT ALL TIMES",
-        " • NO ADDITIONAL GUESTS",
-        " • NO UNRULY HOUSE PARTIES",
-      ],
-      otherNotesDescription:
-        "Eastwood City is within walking distance to shopping malls, convenience stores, groceries, restaurants, and entertainment such as bowling alley, billiards, dog parks, fitness gyms, food bazaars, movie theater, nightlife, and many more.",
-    },
-    images: [
-      {
-        src: "/gallery/kirei_1/converted_0000.webp",
-        alt: "Living Room - View 1",
-        hint: "Kirei 1 - living 1",
-      },
-      {
-        src: "/gallery/kirei_1/converted_0001.webp",
-        alt: "Living Room - View 1",
-        hint: "Kirei 1 - living 1",
-      },
 
-      {
-        src: "/gallery/kirei_1/converted_0002.webp",
-        alt: "Living Room - View 2",
-        hint: "Kirei 1 - living 2",
-      },
-      {
-        src: "/gallery/kirei_1/converted_0003.webp",
-        alt: "Living Room - View 2",
-        hint: "Kirei 1 - living 2",
-      },
-      {
-        src: "/gallery/kirei_1/converted_0004.webp",
-        alt: "Living Room - View 6",
-        hint: "Kirei 1 - living 6",
-      },
-      {
-        src: "/gallery/kirei_1/converted_0005.webp",
-        alt: "Kitchen 1 - View 1",
-        hint: "Kirei 1 - kitchen 5",
-      },
-      {
-        src: "/gallery/kirei_1/converted_0006.webp",
-        alt: "Kitchen Room - View 4",
-        hint: "Kirei 1 - Kitchen view 4",
-      },
-      {
-        src: "/gallery/kirei_1/converted_0007.webp",
-        alt: "Kitchen Room - View 4",
-        hint: "Kirei 1 - Kitchen view 4",
-      },
-      {
-        src: "/gallery/kirei_1/converted_0008.webp",
-        alt: "Kitchen Room - View 1",
-        hint: "Kirei 1 - Food view 1",
-      },
-      {
-        src: "/gallery/kirei_1/converted_0009.webp",
-        alt: "Kitchen Room - View 2",
-        hint: "Kirei 1 - Food view 1",
-      },
-      {
-        src: "/gallery/kirei_1/converted_0010.webp",
-        alt: "Kitchen Room - View 3",
-        hint: "Kirei 1 - Food view 1",
-      },
-      {
-        src: "/gallery/kirei_1/converted_0011.webp",
-        alt: "Kitchen Room - View 3",
-        hint: "Kirei 1 - Food view 1",
-      },
-      {
-        src: "/gallery/kirei_1/converted_amenities_0000.webp",
-        alt: "Kitchen Room - View 4",
-        hint: "Kirei 1 - Food view 1",
-      },
-      {
-        src: "/gallery/kirei_1/converted_amenities_0001.webp",
-        alt: "Kitchen Room - View 5",
-        hint: "Kirei 1 - Food view 1",
-      },
-      {
-        src: "/gallery/kirei_1/converted_amenities_0002.webp",
-        alt: "Gym Room 2 - View 2",
-        hint: "Kirei 1 - Amenities 2",
-      },
-    ],
-    activeMapUrl:
-      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d438.8887546439741!2d121.08111150085881!3d14.608037443965378!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b81d13b04c0d%3A0x7bb0ce56deb5b6fe!2sEastwood%20LeGrand%203!5e0!3m2!1sen!2ssg!4v1751795054321!5m2!1sen!2ssg",
-    bookingLinks: {
-      airbnb: "https://www.airbnb.com/rooms/1030897971821606234",
-      booking:
-        "https://www.booking.com/hotel/ph/cozy-home-in-eastwood-pet-friendly-fast-wifi.html",
-    },
-    icsUrl:
-      "https://www.airbnb.com.sg/calendar/ical/1030897971821606234.ics?s=1b728ed92d212d0e42783ed473c0bb0f",
-  },
-  {
-    name: "Kirei-ito",
-    coverImage: {
-      src: "/gallery/kirei_2/converted_0002.webp",
-      alt: "Kirei-ito",
-      hint: "Minimalist 1 bedroom suite",
-    },
-    cardContent: {
-      location: "Eastwood Global Plaza, Quezon City",
-      guests: "5 guests",
-      bedrooms: "1 bedroom",
-      beds: "2 beds",
-      bathrooms: "1 bathroom",
-      basePriceSGD: 228,
-      reviews: "5 reviews",
-      stars: 5,
-    },
-    galleryContent: {
-      teaserDescription1:
-        "Right in the heart of Eastwood City is Kirei House - Ito, a serene Muji-inspired space high above the city. Relax in the elevated lounge, work by the window, or unwind in the cozy bedroom with sweeping skyline views. Every detail is curated for calm and comfort. A perfect retreat for mindful travelers seeking beauty in simplicity.",
-      teaserDescription2:
-        "Our Muji-inspired home in Eastwood Global Plaza Luxury Residence is thoughtfully designed for comfort, calm, and quiet luxury. Guests enjoy full access to premium building amenities like the infinity pool (best enjoyed from 7PM - 10PM for city lights), fitness pool and jacuzzi, gym, sauna and spa, day care center and outdoor playground for kids, sun deck lounge, and hammock garden.",
-      propertyDetailsTitle: "Kirei-ito",
-      propertyDescription:
-        "Right in the heart of Eastwood City is Kirei House - Ito, a serene Muji-inspired space high above the city. Relax in the elevated lounge, work by the window, or unwind in the cozy bedroom with sweeping skyline views. Every detail is curated for calm and comfort. A perfect retreat for mindful travelers seeking beauty in simplicity.",
-      spaceDescription:
-        "Our Muji-inspired home in Eastwood Global Plaza Luxury Residence is thoughtfully designed for comfort, calm, and quiet luxury. Guests enjoy full access to premium building amenities like the infinity pool (best enjoyed from 7PM - 10PM for city lights), fitness pool and jacuzzi, gym, sauna and spa, day care center and outdoor playground for kids, sun deck lounge, and hammock garden.",
-      guestsAmenities: [
-        " • Smart Entry: MGS ELITE PRO Smart Lock for seamless check-in.",
-        ' • Entertainment: 55" TCL Google TV with Netflix, HBO Max, Disney+, Amazon Prime, and cable.',
-        " • Internet: 300 Mbps Fiber WiFi, ideal for remote work and streaming.",
-        " • Comfort: Centralized AC with ceiling fan, spacious king bed, full-size futon bed, ultra-comfy sofa, and a daybed for reading or relaxing.",
-        " • Workspace: Dedicated desk for working.",
-        " • Fun & Cozy Touches: Board games, card games, and plushies for pets.",
-        " • Kitchen: Fully equipped with cookware, tableware, teaware, Condura Inverter Fridge, SAMSUNG 4-in-1 Smart Oven (air fryer, microwave, oven, toaster), B Coffee Neo machine (with 4 complimentary pods), KYOWA rice cooker, and electric kettle.",
-        " • Bathroom Essentials: Shower heater, hairdryer, towels, dental kit, and complete toiletries.",
-        " • Laundry: TCL front-load washer and dryer with complimentary laundry capsules.",
-        " • Closet: Includes hangers, steamer/iron and ironing bed.",
-      ],
-      guestsPreferenceList: [
-        "✔️ Clean, quiet, and well-maintained",
-        "✔️ Seamless check-in with responsive host",
-        "✔️ Ideal for travelers, families, couples, business trips and WFH stays",
-        "✔️ Tastefully designed. We got everything you need and nothing you don’t.",
-      ],
-      guestsPreferenceFooterNote:
-        "Book your stay and see why Kirei House - Ito is one of Eastwood’s most-loved homes.",
-      guestsAccessSubtitle:
-        "Kirei House - Ito offers access to premium amenities designed for relaxation, wellness, and leisure:",
-      guestsAccessList: [
-        " • Infinity Pool",
-        " • Fitness Pool & Jacuzzi",
-        " • Fully Equipped Gym",
-        " • Indoor Sauna & Spa",
-        " • Day Care Center & Outdoor Playground",
-        " • Hammock Garden & Sun Deck Lounge.",
-      ],
-      amenityFeesDescription:
-        "Eastwood Global Plaza facilities require a usage fee per person, per day to be paid at the Admin Office.",
-      amenityFeeItems: [
-        " • Swimming Pools & Gym P500",
-        " • Swimming Pools & Day Care Center P500",
-        " • Sauna P500",
-      ],
-      importantNotesList: [
-        " • Registered guests need to pay P250 registration fee as mandated by PMO.",
-        " • Unregistered guests are not allowed.",
-        " • CLAYGO (Clean As You Go) is strictly observed.",
-        " • Check-in is from 3PM to 10PM; check-out is at 12:00 PM.",
-        " • Quiet hours are from 10:00 PM to 8:00 AM.",
-        " • Smoking and illegal substances are strictly prohibited.",
-        " • No additional guests beyond your booking are allowed.",
-        " • No loud or unruly parties. This is a peaceful space meant for rest and relaxation.,",
-        "Please refer to the House Rules for the complete guidelines.",
-      ],
-      otherNotesDescription:
-        "Eastwood City is within walking distance to shopping malls, convenience stores, groceries, restaurants, and entertainment such as bowling alley, billiards, dog parks, fitness gyms, food bazaars, movie theater, nightlife, and many more.",
-    },
-    images: [
-      // Living Room
-      {
-        src: "/gallery/kirei_2/converted_0000.webp",
-        alt: "Living Room - Kirei 2",
-        hint: "Kirei 2 - living 1",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0001.webp",
-        alt: "Bedroom",
-        hint: "minimalist bedroom",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0002.webp",
-        alt: "Living Room - View 2",
-        hint: "Kirei 2 - living 2",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0003.webp",
-        alt: "Living Room - View 3",
-        hint: "Kirei 2 - living 3",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0004.webp",
-        alt: "Living Room - View 3",
-        hint: "Kirei 2 - living 4",
-      },
-      // Bedroom
-      {
-        src: "/gallery/kirei_2/converted_0005.webp",
-        alt: "Bed Room - View 1",
-        hint: "Kirei 2 - Bed 1",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0006.webp",
-        alt: "Bed Room - View 2",
-        hint: "Kirei 2 - Bed 2",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0007.webp",
-        alt: "Bed Room - View 3",
-        hint: "Kirei 2 - Bed 3",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0008.webp",
-        alt: "Bed Room - View 4",
-        hint: "Kirei 2 - Bed 4",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0009.webp",
-        alt: "Bed Room - View 5",
-        hint: "Kirei 2 - Bed 5",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0010.webp",
-        alt: "Bed Room - View 6",
-        hint: "Kirei 2 - Bed 6",
-      },
-      {
-        src: "/gallery/kirei_2/converted_0011.webp",
-        alt: "Bed Room - View 7",
-        hint: "Kirei 2 - Bed 7",
-      },
-    ],
-    activeMapUrl:
-      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d816.8502546510437!2d121.0808228177933!3d14.608080028428878!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b94bae284457%3A0x556240a3da88002a!2sEastwood%20Global%20Plaza%20Luxury%20Residence%2C%20Palm%20Tree%20Avenue%2C%20Bagumbayan%20Quezon%20City%201800!5e0!3m2!1sen!2ssg!4v1751794979901!5m2!1sen!2ssg",
-    bookingLinks: {
-      airbnb: "https://www.airbnb.com/rooms/1364997919482714933",
-      booking:
-        "https://www.booking.com/hotel/ph/king-suite-eastwood-global-plaza-high-floor-quezon-city.html",
-    },
-    icsUrl:
-      "https://www.airbnb.com.sg/calendar/ical/1364997919482714933.ics?s=663892ccaa5dabea43e13966feabc6e1",
-  },
-];
+interface GallerySectionProps {
+  availableRooms?: string[] | undefined;
+}
 
-export function GallerySection() {
+export function GallerySection({ availableRooms }: GallerySectionProps) {
+  const galleryItems = GalleryCollection.galleryItems;
+
   const [isFullScreenViewOpen, setIsFullScreenViewOpen] = useState(false);
   const [isGridViewOpen, setIsGridViewOpen] = useState(false);
   const [isFullScreenImageOpen, setIsFullScreenImageOpen] = useState(false);
@@ -417,11 +221,16 @@ export function GallerySection() {
     airbnb: string;
     booking: string;
   } | null>(null);
-  const [activeIcsUrl, setActiveIcsUrl] = useState<string | null>(null);
+  const [activeIcsUrls, setActiveIcsUrls] = useState<CalendarSource[] | null>(
+    null
+  );
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
   // Property description state
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+
+  // Amenities sheet state
+  const [isAmenitiesExpanded, setIsAmenitiesExpanded] = useState(false);
 
   // Contact modal state
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -469,7 +278,16 @@ export function GallerySection() {
   >([]);
   const [isLoadingCalendar, setIsLoadingCalendar] = useState(true);
 
-  const isMobile = useIsMobile();
+  const { isMobile } = useDevice();
+
+  // Filter gallery items based on available rooms
+  // availableRooms is undefined initially, then becomes an array after search
+  const hasSearchBeenPerformed = availableRooms !== undefined;
+  const filteredGalleryItems = hasSearchBeenPerformed
+    ? availableRooms.length > 0
+      ? galleryItems.filter((item) => availableRooms.includes(item.unitType))
+      : [] // Show no rooms if search was performed but no rooms available
+    : galleryItems; // Show all rooms if no search has been performed
 
   // Effect to initialize currency on component mount
   useEffect(() => {
@@ -477,11 +295,11 @@ export function GallerySection() {
   }, [initializeCurrency]);
 
   const openFullScreenView = (categoryIndex: number) => {
-    const category = galleryItems[categoryIndex];
+    const category = filteredGalleryItems[categoryIndex];
     setActiveGalleryImages(category.images);
     setActiveGalleryCategoryName(category.name);
     setActiveBookingLinks(category.bookingLinks);
-    setActiveIcsUrl(category.icsUrl);
+    setActiveIcsUrls(category.icsUrls);
     setCurrentImageIndex(0);
     setIsFullScreenViewOpen(true);
   };
@@ -492,7 +310,7 @@ export function GallerySection() {
     setActiveGalleryImages(null);
     setActiveGalleryCategoryName(null);
     setActiveBookingLinks(null);
-    setActiveIcsUrl(null);
+    setActiveIcsUrls(null);
   };
 
   const openGridView = () => {
@@ -583,32 +401,65 @@ export function GallerySection() {
     }
   };
 
-  // Effect to fetch and process ICS data when the modal is opened
+  // Effect to fetch and process ICS data from multiple calendar sources when the modal is opened
   useEffect(() => {
-    if (!activeIcsUrl) {
+    if (!activeIcsUrls || activeIcsUrls.length === 0) {
       return;
     }
 
-    const fetchBookedDates = async () => {
+    const fetchBookedDatesFromAllSources = async () => {
       setIsLoadingCalendar(true);
 
-      const bookedDateStrings = await getBookedDates(activeIcsUrl);
+      try {
+        // Fetch booked dates from all calendar sources in parallel
+        const allBookedDatesPromises = activeIcsUrls.map(async (source) => {
+          try {
+            console.log(`Fetching calendar data from ${source.platform}...`);
+            const bookedDateStrings = await getBookedDates(source.url);
+            return bookedDateStrings;
+          } catch (error) {
+            console.error(
+              `Failed to fetch calendar from ${source.platform}:`,
+              error
+            );
+            return []; // Return empty array if this source fails
+          }
+        });
 
-      const dateRanges = bookedDateStrings.map((range) => ({
-        from: new Date(range.from),
-        to: new Date(range.to),
-      }));
+        // Wait for all calendar sources to complete
+        const allBookedDatesArrays = await Promise.all(allBookedDatesPromises);
 
-      // Also disable past dates for a better user experience
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
+        // Combine all booked dates from all sources
+        const combinedBookedDates = allBookedDatesArrays.flat();
 
-      setDisabledDates([{ before: today }, ...dateRanges]);
-      setIsLoadingCalendar(false);
+        // Convert to date ranges
+        const dateRanges = combinedBookedDates.map((range) => ({
+          from: new Date(range.from),
+          to: new Date(range.to),
+        }));
+
+        // Also disable past dates for a better user experience
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        setDisabledDates([{ before: today }, ...dateRanges]);
+
+        console.log(
+          `Combined ${combinedBookedDates.length} booked date ranges from ${activeIcsUrls.length} calendar sources`
+        );
+      } catch (error) {
+        console.error("Error fetching calendar data:", error);
+        // Fallback: just disable past dates
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        setDisabledDates([{ before: today }]);
+      } finally {
+        setIsLoadingCalendar(false);
+      }
     };
 
-    fetchBookedDates();
-  }, [activeIcsUrl]);
+    fetchBookedDatesFromAllSources();
+  }, [activeIcsUrls]);
 
   // Effect for slide show timer
   useEffect(() => {
@@ -656,22 +507,57 @@ export function GallerySection() {
     : null;
 
   return (
-    <section id="gallery" className="py-0 md:py-24 bg-secondary/30">
-      <div className="container max-w-6xl mx-auto px-4">
-        <h2
-          className={
-            isMobile
-              ? "text-lg md:text-xl text-left  font-headline mb-8"
-              : "text-lg md:text-xl text-center text-justify-center  font-headline mb-8"
-          }
+    <section
+      id="gallery"
+      className="py-0 md:py-0 pb-8 md:pb-8 mt-8 bg-background"
+    >
+      <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
+        {/* <h2
+          className="text-2xl md:text-lg lg:text-xl 2k:text-4xl 4k:text-7xl text-stormy-blue/80 font-playfair-display"
+          style={{
+            letterSpacing: "0.01em",
+            fontWeight: "500",
+          }}
         >
-          EXPLORE
+          Rooms
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {galleryItems.map((item, index) => (
+        <div className="border-t border-gray-200 my-6" /> */}
+
+        {/* Show availability filter message - when search found rooms */}
+        {hasSearchBeenPerformed &&
+          availableRooms &&
+          availableRooms.length > 0 && (
+            <div className="text-center mb-8 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <p className="text-green-800 font-playfair-display font-medium">
+                Found {filteredGalleryItems.length} available room
+                {filteredGalleryItems.length !== 1 ? "s" : ""} for your selected
+                dates
+              </p>
+              {/* <p className="text-green-600 text-sm mt-1">
+                Available: {availableRooms.join(", ")}
+              </p> */}
+            </div>
+          )}
+
+        {/* Show no rooms available message - when search was performed but no rooms found */}
+        {hasSearchBeenPerformed &&
+          availableRooms &&
+          availableRooms.length === 0 && (
+            <div className="text-center mb-8 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-800 font-playfair-display font-medium">
+                No rooms available for your selected dates
+              </p>
+              <p className="text-red-600 font-playfair-display text-sm mt-1">
+                Please try different dates using the search form above
+              </p>
+            </div>
+          )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 2k:grid-cols-2 4k:grid-cols-2 gap-6 md:gap-8 2k:gap-12 4k:gap-16">
+          {filteredGalleryItems.map((item, index) => (
             <Card
-              key={item.name}
-              className="group overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              key={item.unitType}
+              className="group overflow-hidden duration-300 rounded-none"
             >
               <button
                 type="button"
@@ -679,7 +565,14 @@ export function GallerySection() {
                 className="block w-full p-0 border-0 text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                 aria-label={`View images of ${item.name}`}
               >
-                <div className="relative w-full aspect-[3/2] overflow-hidden">
+                <div
+                  className={cn(
+                    "relative w-full overflow-hidden",
+                    isMobile
+                      ? "aspect-[3/2]"
+                      : "aspect-[3/3] 2k:aspect-[4/3] 4k:aspect-[5/3]"
+                  )}
+                >
                   <Image
                     src={item.coverImage.src}
                     alt={item.coverImage.alt}
@@ -690,8 +583,8 @@ export function GallerySection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 p-3 md:p-4">
-                    <h3 className="text-lg md:text-xl font-normal text-white">
-                      {item.name}
+                    <h3 className="text-lg md:text-xl font-playfair-display text-white">
+                      {item.unitType}
                     </h3>
                   </div>
                 </div>
@@ -699,11 +592,26 @@ export function GallerySection() {
 
               <CardContent className="p-4">
                 <div className="space-y-2">
-                  <CardDescription className="text-sm text-muted-foreground">
+                  <CardDescription
+                    className="text-sm md:text-sm lg:text-md xl:text-md 2k:text-lg 4k:text-xl text-left text-justify-left tracking-normal font-playfair-display text-stormy-blue/60"
+                    style={{
+                      lineHeight: "1.5",
+                      letterSpacing: "0.01em",
+                      fontWeight: "300",
+                      // fontSize: "0.9rem",
+                    }}
+                  >
                     {item.cardContent.location}
                   </CardDescription>
 
-                  <div className="text-sm  text-black">
+                  <div
+                    className="text-sm md:text-sm lg:text-md xl:text-lg 2k:text-lg 4k:text-xl text-left text-justify-left font-playfair-display text-stormy-blue/60"
+                    style={{
+                      lineHeight: "1.5",
+                      letterSpacing: "0.01em",
+                      fontSize: "0.8rem",
+                    }}
+                  >
                     {item.cardContent.guests} • {item.cardContent.bedrooms} •{" "}
                     {item.cardContent.beds} • {item.cardContent.bathrooms}{" "}
                   </div>
@@ -728,7 +636,7 @@ export function GallerySection() {
         <SheetContent
           side="bottom"
           className={cn(
-            "overflow-y-auto p-0",
+            "overflow-y-auto p-0 mx-0 md:mx-4 lg:mx-24 xl:mx-32 rounded-t-lg ",
             isMobile ? "h-[95dvh] pb-safe pt-safe-top" : "h-[95vh]",
             // Style the default close button
             "[&>button]:absolute [&>button]:z-[60]  [&>button]:bg-transparent [&>button]:border [&>button]:border-transparent [&>button]:shadow-lg",
@@ -738,320 +646,192 @@ export function GallerySection() {
           )}
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <SheetHeader className="sr-only">
-            <SheetTitle>
-              {activeGalleryCategoryName
-                ? `${activeGalleryCategoryName} Gallery`
-                : "Gallery"}
-            </SheetTitle>
-          </SheetHeader>
-          {activeGalleryCategoryName &&
-            activeGalleryImages &&
-            currentImageInFullScreen &&
-            activeBookingLinks && (
-              <div className="relative w-full h-full bg-background">
-                <div
-                  className={cn(
-                    "relative w-full cursor-grab active:cursor-grabbing overflow-hidden rounded-t-lg",
-                    isMobile ? "h-[50vh]" : "h-[65vh]"
-                  )}
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <h2 className="sr-only" id="fullscreen-gallery-title">
-                    Image gallery: {activeGalleryCategoryName} - Image{" "}
-                    {currentImageIndex + 1} of {activeGalleryImages.length} -{" "}
-                    {currentImageInFullScreen.alt}
-                  </h2>
-
-                  {activeGalleryImages.map((image, index) => (
-                    <div
-                      key={image.src}
-                      className={cn(
-                        "absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out",
-                        index === currentImageIndex
-                          ? "opacity-100 z-[1]"
-                          : "opacity-0 z-0 pointer-events-none"
-                      )}
-                    >
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        data-ai-hint={image.hint}
-                        fill
-                        className={isMobile ? "object-contain" : "object-cover"} // object-cover = fit the image to screen; object-contain = preservers the image ratio
-                        sizes="100vw"
-                        priority={index === 0}
-                      />
-                    </div>
-                  ))}
-
+          <div className="relative">
+            <SheetHeader className="sr-only md:mx-20">
+              <SheetTitle>
+                {activeGalleryCategoryName
+                  ? `${activeGalleryCategoryName} Gallery`
+                  : "Gallery"}
+              </SheetTitle>
+            </SheetHeader>
+            {activeGalleryCategoryName &&
+              activeGalleryImages &&
+              currentImageInFullScreen &&
+              activeBookingLinks && (
+                <div className="relative w-full h-full bg-background">
                   <div
                     className={cn(
-                      "absolute left-1/2 -translate-x-1/2 z-[1] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-center",
-                      isMobile ? "top-3 mt-safe-top" : "top-3"
+                      "relative w-full cursor-grab active:cursor-grabbing overflow-hidden object-cover",
+                      isMobile ? "h-[50vh]" : "h-[65vh]"
                     )}
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseLeave}
                   >
-                    <h3
-                      className="text-lg md:text-xl font-normal"
-                      title={activeGalleryCategoryName}
-                    >
-                      {activeGalleryCategoryName}
-                    </h3>
-                    <p className="text-xs sm:text-sm">
-                      ({currentImageIndex + 1} / {activeGalleryImages.length})
-                    </p>
-                  </div>
+                    <h2 className="sr-only" id="fullscreen-gallery-title">
+                      Image gallery: {activeGalleryCategoryName} - Image{" "}
+                      {currentImageIndex + 1} of {activeGalleryImages.length} -{" "}
+                      {currentImageInFullScreen.alt}
+                    </h2>
 
-                  <Button
-                    variant="ghost"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      showPrevImage();
-                    }}
-                    aria-label="Previous image"
-                    className="absolute left-1 top-1/2 -translate-y-1/2 sm:left-2 md:left-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
-                  >
-                    <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
-                  </Button>
-
-                  <Button
-                    variant="ghost"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      showNextImage();
-                    }}
-                    aria-label="Next image"
-                    className="absolute right-1 top-1/2 -translate-y-1/2 sm:right-2 md:right-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
-                  >
-                    <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
-                  </Button>
-
-                  <Button
-                    variant="ghost"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openGridView();
-                    }}
-                    aria-label="View all images in grid"
-                    className="absolute bottom-3 right-3 z-[1] px-3 py-2 rounded-full bg-white/30 text-black hover:bg-white/50 focus-visible:ring-0 focus-visible:ring-offset-0 flex items-center gap-2"
-                  >
-                    <Grid3X3 className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <span className="text-xs sm:text-sm font-medium">
-                      View all photos
-                    </span>
-                  </Button>
-                </div>
-
-                {/* Two Section Layout */}
-                <div className="gallery-details" />
-                <div className="p-6 md:p-28">
-                  <div className="grid md:grid-cols-2 gap-8 items-start">
-                    {/* Left Section - Property Details */}
-                    <div className="space-y-4">
-                      <div className="space-y-3">
-                        <CardDescription className="text-sm text-muted-foreground">
-                          <h3 className="text-xl md:text-2xl font-normal mb-4">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.name
-                            }
-                          </h3>
-                          <div className="text-sm font-medium text-muted-foreground">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.cardContent.location
-                            }
-                          </div>
-                        </CardDescription>
-
-                        <div className="text-sm font-medium text-muted-foreground">
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.guests
-                          }{" "}
-                          •{" "}
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.bedrooms
-                          }{" "}
-                          •{" "}
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.beds
-                          }{" "}
-                          •{" "}
-                          {
-                            galleryItems.find(
-                              (item) => item.name === activeGalleryCategoryName
-                            )?.cardContent.bathrooms
-                          }
-                        </div>
-
-                        <div className="flex font-medium items-center gap-2">
-                          <RatingStars
-                            rating={
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.cardContent.stars || 5
-                            }
-                            className="scale-75"
-                          />
-                          <span className="text-sm text-muted-foreground">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.cardContent.reviews
-                            }
-                          </span>
-                        </div>
-
-                        {/* Divider */}
-                        <div className="border-t border-gray-200 my-6" />
-
-                        {/* Property Description - Truncated */}
-                        <div className="space-y-4 text-sm pb-4 text-muted-foreground">
-                          <p className="section: teaser-description1 leading-relaxed">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.galleryContent.teaserDescription1
-                            }
-                          </p>
-
-                          <p className="section: teaser-description2 leading-relaxed">
-                            {
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.galleryContent.teaserDescription2
-                            }
-                          </p>
-
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => setIsDescriptionExpanded(true)}
-                            className="mt-4"
-                          >
-                            Show more
-                          </Button>
-                        </div>
-                      </div>
-                      {/* Divider */}
-                      <div className="border-t border-gray-200 my-6" />
-                      <div className="id gallery-map-section">
-                        {/* Maps section */}
-                        <h2 className="text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4">
-                          LOCATION
-                        </h2>
-                        <div className="id gallery-map ">
-                          <MapSection
-                            mapEmbedUrl={
-                              galleryItems.find(
-                                (item) =>
-                                  item.name === activeGalleryCategoryName
-                              )?.activeMapUrl || ""
-                            }
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right Section - Availability & Booking */}
-                    <div className="space-y-4">
-                      <h2
-                        className={
-                          isMobile
-                            ? "text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4"
-                            : "text-sm md:text-md flex font-normal md:font-normal justify-center font-headline mb-4"
-                        }
+                    {activeGalleryImages.map((image, index) => (
+                      <div
+                        key={image.src}
+                        className={cn(
+                          "absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out",
+                          index === currentImageIndex
+                            ? "opacity-100 z-[1]"
+                            : "opacity-0 z-0 pointer-events-none"
+                        )}
                       >
-                        AVAILABILITY
-                      </h2>
+                        <Image
+                          src={image.src}
+                          alt={image.alt}
+                          data-ai-hint={image.hint}
+                          fill
+                          className={
+                            isMobile
+                              ? "absolute h-96 object-cover max-h-96 "
+                              : "object-cover"
+                          } // object-cover = fit the image to screen; object-contain = preservers the image ratio
+                          sizes="100vw"
+                          priority={index === 0}
+                        />
+                      </div>
+                    ))}
 
-                      <div className="space-y-6">
-                        <div className="flex justify-center">
-                          <Calendar
-                            mode="single"
-                            selected={date}
-                            // onSelect={setDate}
-                            className="rounded-md border"
-                            disabled={isLoadingCalendar ? true : disabledDates}
-                            footer={
-                              isLoadingCalendar ? (
-                                <p className="text-center text-sm text-muted-foreground p-2">
-                                  Loading calendar...
-                                </p>
-                              ) : (
-                                ""
-                              )
-                            }
-                          />
-                        </div>
-                        <div className="flex flex-col justify-center space-y-4 pt-0 md:pt-0">
-                          <p className="text-sm text-left px-10 md:text-left pb-2 font-normal">
-                            Check our availability and book your stay on your
-                            favorite platform.
-                          </p>
-                          <Button asChild className="w-full" size="lg">
-                            <Link
-                              href={activeBookingLinks.airbnb}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <Home className="mr-2 h-5 w-5" />
-                              Book on Airbnb
-                            </Link>
-                          </Button>
-                          <Button
-                            asChild
-                            className="w-full"
-                            size="lg"
-                            variant="secondary"
-                          >
-                            <Link
-                              href={activeBookingLinks.booking}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <Briefcase className="mr-2 h-5 w-5" />
-                              Book on Booking.com
-                            </Link>
-                          </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        showPrevImage();
+                      }}
+                      aria-label="Previous image"
+                      className="absolute left-1 top-1/2 -translate-y-1/2 sm:left-2 md:left-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
+                    >
+                      <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
+                    </Button>
 
-                          {/* Contact Host Button */}
-                          <Button
-                            onClick={() => setIsContactModalOpen(true)}
-                            className="w-full"
-                            size="lg"
-                            variant="outline"
-                          >
-                            <MessageSquare className="mr-2 h-5 w-5" />
-                            Contact Host
-                          </Button>
-                        </div>
+                    <Button
+                      variant="ghost"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        showNextImage();
+                      }}
+                      aria-label="Next image"
+                      className="absolute right-1 top-1/2 -translate-y-1/2 sm:right-2 md:right-4 z-[1] p-1.5 sm:p-2 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
+                    >
+                      <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
+                    </Button>
+
+                    <Button
+                      variant="ghost"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openGridView();
+                      }}
+                      aria-label="View all images in grid"
+                      className="absolute bottom-3 right-3 z-[1] px-3 py-2 rounded-full bg-white/30 text-black hover:bg-white/50 focus-visible:ring-0 focus-visible:ring-offset-0 flex items-center gap-2"
+                    >
+                      <Grid3X3 className="h-4 w-4 sm:h-5 sm:w-5" />
+                      <span className="text-xs sm:text-sm font-medium">
+                        View all photos
+                      </span>
+                    </Button>
+                  </div>
+
+                  {/* Two Section Layout */}
+                  <div className="id gallery-details" />
+                  <div className="mt-6 md:mt-28">
+                    <div className="grid md:grid-cols-2 gap-1 items-baseline">
+                      {/* Property Details Section - Right on desktop, Left on mobile */}
+                      <div className="order-1 md:order-2 px-4 md:px-10">
+                        {(() => {
+                          const activeItem = galleryItems.find(
+                            (item) => item.name === activeGalleryCategoryName
+                          );
+                          return activeItem ? (
+                            <PropertyDetailsSection
+                              name={activeItem.name}
+                              unitType={activeItem.unitType}
+                              cardContent={activeItem.cardContent}
+                              galleryContent={activeItem.galleryContent}
+                              activeMapUrl={activeItem.activeMapUrl}
+                              onShowMoreClick={() =>
+                                setIsDescriptionExpanded(true)
+                              }
+                              onShowAmenitiesClick={() =>
+                                setIsAmenitiesExpanded(true)
+                              }
+                            />
+                          ) : null;
+                        })()}
+                      </div>
+
+                      {/* Availability & Booking Section - Left on desktop, Right on mobile */}
+                      <div className="order-1 md:order-2 sticky top-4 z-10 px-4 md:px-10">
+                        <AvailabilityBookingSection
+                          isMobile={isMobile}
+                          date={date}
+                          isLoadingCalendar={isLoadingCalendar}
+                          disabledDates={disabledDates}
+                          activeBookingLinks={activeBookingLinks}
+                          onContactHostClick={() => setIsContactModalOpen(true)}
+                        />
+
+                        <div className="border-t border-gray-200 my-6" />
+                        {(() => {
+                          const activeItem = galleryItems.find(
+                            (item) => item.name === activeGalleryCategoryName
+                          );
+                          return activeItem ? (
+                            <div className="id gallery-map-section mb-20 md:mb-16">
+                              <h4
+                                className="text-2xl md:text-2xl xl:text-3xl 2k:text-2xl 4k:text-7xl text-stormy-blue/60 font-playfair-display mb-4 font-light"
+                                style={
+                                  isMobile
+                                    ? {
+                                        lineHeight: "1",
+                                        letterSpacing: "0.01em",
+                                      }
+                                    : {
+                                        lineHeight: "1.3",
+                                        letterSpacing: "0.01em",
+                                      }
+                                }
+                              >
+                                Find us
+                              </h4>
+                              <div className="id gallery-map ">
+                                <MapSection
+                                  mapEmbedUrl={activeItem.activeMapUrl}
+                                />
+                              </div>
+                              <div className="space-y-6 pt-4">
+                                {/* Address Section */}
+                                {/* <AddressSection
+                                address={activeItem.cardContent.location}
+                              /> */}
+
+                                {/* Nearby Places Section */}
+                                {/* <NearbyPlacesSection
+                                nearbyPlaces={nearbyPlaces}
+                              /> */}
+                              </div>
+                            </div>
+                          ) : null;
+                        })()}
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+          </div>
+          <Footer />
         </SheetContent>
       </Sheet>
 
@@ -1091,6 +871,34 @@ export function GallerySection() {
               ?.galleryContent!
           }
         />
+      )}
+
+      {/* Amenities Card Sheet */}
+      {activeGalleryCategoryName && (
+        <Sheet open={isAmenitiesExpanded} onOpenChange={setIsAmenitiesExpanded}>
+          <SheetContent
+            side="bottom"
+            className="h-[80vh] overflow-y-auto md:mx-64 rounded-t-lg"
+          >
+            <div className="p-6">
+              <SheetHeader>
+                <SheetTitle className="text-lg font-medium mb-4 ">
+                  What this place offers
+                </SheetTitle>
+              </SheetHeader>
+
+              <AmenitiesCard
+                amenities={mapStringAmenitiesToAmenities(
+                  galleryItems.find(
+                    (item) => item.name === activeGalleryCategoryName
+                  )?.galleryContent.guestsAmenities || []
+                )}
+                isMobileView={isMobile}
+                previewCount={50} // Show all amenities in the sheet
+              />
+            </div>
+          </SheetContent>
+        </Sheet>
       )}
 
       {/* Contact Host Modal */}

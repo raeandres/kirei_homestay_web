@@ -22,11 +22,11 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Montserrat:wght@100;400;500;700&family=Zen+Old+Mincho:wght@400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Hina+Mincho:wght@400&family=Montserrat:wght@100;200;300;400;500;600;700&family=Zen+Old+Mincho:wght@400;700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">
+      <body className="antialiased text-luxury scroll-smooth bg-luxury-gradient-subtle">
         {children}
         <Toaster />
       </body>

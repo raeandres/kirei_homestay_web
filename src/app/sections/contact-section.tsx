@@ -9,32 +9,15 @@ import {
   ContactFormData,
   createContactFormHandler,
 } from "@/lib/contact-form";
-import { PropertyLocation } from "@/app/sections/components/property-location/property-location";
-import { ContactHostForm } from "@/app/sections/components/contact-host-form";
-
-const nearbyPlaces = [
-  { name: "Eastwood City", distance: "0.1 km" },
-  { name: "Bonifacio Global City", distance: "6 km" },
-  { name: "Ortigas Center", distance: "3.8 km" },
-  { name: "Makati", distance: "7 km" },
-  { name: "Airport", distance: "12 km" },
-];
-
-const socialMediaLinks = [
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/profile.php?id=61558711286570",
-    icon: Facebook,
-  },
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/kireihouse.ph",
-    icon: Instagram,
-  },
-  { name: "WhatsApp", href: "https://wa.me/639175069965", icon: MessageSquare },
-];
+import { PropertyLocation } from "@/app/components/property-location/property-location-component";
+import { ContactHostForm } from "@/app/components/contact-host-form-component";
+import { useDevice } from "@/hooks/use-device";
+import { ContactsCollection } from "../data/local/contacts-collection";
+import { PlacesCollection } from "../data/local/places-collection";
 
 export function ContactSection() {
+  const nearbyPlaces = PlacesCollection.nearbyPlaces;
+  const socialMediaLinks = ContactsCollection.socialMediaLinks;
   const { toast } = useToast();
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -49,20 +32,60 @@ export function ContactSection() {
   // Use the externalized contact form handler
   const onSubmit = createContactFormHandler(toast, () => form.reset());
 
+  const { isMobile } = useDevice();
+
   return (
-    <section id="contact" className="py-8 md:py-24 bg-background">
-      <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-lg md:text-xl text-left px-4 font-headline mb-2">
-          LOCATE US
+    <section
+      id="contact"
+      className="my-0 md:my-0 mb-8 md:mb-8 mt-8 bg-background"
+    >
+      <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto px-4 2k:px-16 4k:px-24">
+        <h2
+          className="text-2xl md:text-lg lg:text-xl 2k:text-4xl 4k:text-7xl text-stormy-blue/80 font-playfair-display"
+          style={
+            isMobile
+              ? {
+                  lineHeight: "1.5",
+                  letterSpacing: "0.01em",
+                  fontWeight: "300",
+                  // fontSize: "0.9rem",
+                }
+              : {
+                  lineHeight: "1.5",
+                  letterSpacing: "0.01em",
+                  fontWeight: "300",
+                  // fontSize: "0.9rem",
+                }
+          }
+        >
+          Locate Us
         </h2>
-        <p className="text-sm px-4 text-left mb-4">
+        <h3
+          className="text-sm md:text-sm lg:text-base xl:text-base 2k:text-base 4k:text-xl text-left text-justify-left tracking-normal font-playfair-display text-stormy-blue/60"
+          style={
+            isMobile
+              ? {
+                  lineHeight: "1.5",
+                  letterSpacing: "0.01em",
+                  fontWeight: "300",
+                  // fontSize: "0.9rem",
+                }
+              : {
+                  lineHeight: "1.5",
+                  letterSpacing: "0.01em",
+                  fontWeight: "300",
+                  // fontSize: "0.9rem",
+                }
+          }
+        >
           Find us and explore the neighborhood
-        </p>
-        <div className="container max-w-6xl mx-auto px-4 overflow-x-hidden">
+        </h3>
+        <div className="border-t border-gray-200 my-6" />
+        <div className="container max-w-6xl 2k:max-w-full 4k:max-w-full mx-auto overflow-x-hidden">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Column: Property Location & Get in touch */}
             <PropertyLocation
-              mapEmbedUrl="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d5199.74430346861!2d121.08133734244423!3d14.6075846246003!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ssg!4v1749335816648!5m2!1sen!2ssg"
+              mapEmbedUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.2719348889746!2d121.07763483908126!3d14.60976159571077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b81d78e5cc63%3A0xbd6fcecf7127264c!2sEastwood%20City!5e1!3m2!1sen!2sph!4v1752381686394!5m2!1sen!2sph"
               address="Palm Tree Avenue, Eastwood City, Libis, Quezon City 1800"
               nearbyPlaces={nearbyPlaces}
               socialMediaLinks={socialMediaLinks}

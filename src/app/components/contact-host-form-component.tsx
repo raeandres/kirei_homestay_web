@@ -1,0 +1,203 @@
+"use client";
+
+import { UseFormReturn } from "react-hook-form";
+import { useState, useEffect } from "react";
+import { Button } from "@/app/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/app/ui/form";
+import { Input } from "@/app/ui/input";
+import { Textarea } from "@/app/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/app/ui/card";
+import { ContactFormData } from "@/lib/contact-form";
+
+interface ContactHostFormProps {
+  form: UseFormReturn<ContactFormData>;
+  onSubmit: (data: ContactFormData) => Promise<void>;
+  title?: string;
+  subtitle?: string;
+  footerText?: string;
+}
+
+export function ContactHostForm({
+  form,
+  onSubmit,
+  title = "Interested to know more?",
+  subtitle = "Let us know what you think.",
+  footerText = "We typically respond to inquiries within an hour.",
+}: ContactHostFormProps) {
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  // Don't render form until hydrated to prevent Chrome autofill hydration issues
+  if (!isHydrated) {
+    return (
+      <div className="space-y-6">
+        <Card className="shadow-xl h-full">
+          <CardHeader>
+            <CardTitle className="text-lg md:text-lg lg:text-lg tracking-tight font-stormy-blue/60 font-normal text-muted-foreground">
+              {title}
+              <p className="text-xs md:text-sm lg:text-sm tracking-tighter font-stormy-blue/60 font-normal text-muted-foreground">
+                {subtitle}
+              </p>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="space-y-4">
+              <div className="h-20 bg-gray-100 rounded-md animate-pulse"></div>
+              <div className="h-20 bg-gray-100 rounded-md animate-pulse"></div>
+              <div className="h-20 bg-gray-100 rounded-md animate-pulse"></div>
+              <div className="h-32 bg-gray-100 rounded-md animate-pulse"></div>
+              <div className="h-10 bg-gray-100 rounded-md animate-pulse"></div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <Card className="h-relative rounded-none">
+        <CardHeader>
+          <CardTitle className="text-2xl md:text-lg lg:text-xl 2k:text-2xl 4k:text-2xl text-stormy-blue/60 font-playfair-display">
+            {title}
+            <p className="text-lg md:text-sm lg:text-sm 2k:text-lg 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
+              {subtitle}
+            </p>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="pt-0">
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-2"
+              autoComplete="off"
+              noValidate
+            >
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
+                      Your Name
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Your Name"
+                        {...field}
+                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display placeholder:text-stormy-blue/40"
+                        style={{
+                          letterSpacing: "0.01em",
+                          fontWeight: "100",
+                        }}
+                        autoComplete="off"
+                        data-form-type="other"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
+                      Email Address
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        placeholder="your.email@example.com"
+                        {...field}
+                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display placeholder:text-stormy-blue/40"
+                        style={{
+                          letterSpacing: "0.01em",
+                          fontWeight: "100",
+                        }}
+                        autoComplete="off"
+                        data-form-type="other"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
+                      Phone Number{" "}
+                      <span className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
+                        (Optional)
+                      </span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="tel"
+                        placeholder="(555) 123-4567"
+                        {...field}
+                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display placeholder:text-stormy-blue/40"
+                        style={{
+                          letterSpacing: "0.01em",
+                          fontWeight: "100",
+                        }}
+                        autoComplete="off"
+                        data-form-type="other"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="message"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display">
+                      Your Message
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="I'm interested in booking your property and have a few questions..."
+                        className="text-sm md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-stormy-blue/60 font-playfair-display placeholder:text-stormy-blue/40"
+                        {...field}
+                        autoComplete="off"
+                        data-form-type="other"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button
+                type="submit"
+                className="w-full text-lg md:text-sm lg:text-sm 2k:text-lg 4k:text-lg bg-stormy-blue tracking-tighter font-playfair-display hover:text-white text-white font-medium rounded-none"
+                disabled={form.formState.isSubmitting}
+              >
+                {form.formState.isSubmitting ? "Sending..." : "Message us"}
+              </Button>
+            </form>
+          </Form>
+          <p className="mt-6 text-base md:text-sm lg:text-sm 2k:text-base 4k:text-lg tracking-tighter text-center font-playfair-display text-stormy-blue/60">
+            {footerText}
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

@@ -1,0 +1,413 @@
+"use client";
+
+import { Button } from "@/app/ui/button";
+import { CardDescription, Card, CardContent } from "@/app/ui/card";
+import { useDevice } from "@/hooks/use-device";
+
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/app/ui/sheet";
+import { ScrollArea } from "@/app/ui/scroll-area";
+import type { LucideIcon } from "lucide-react";
+import {
+  BathIcon,
+  BatteryCharging,
+  BedDouble,
+  BedDoubleIcon,
+  Blocks,
+  BookOpen,
+  Building2,
+  Check,
+  Coffee,
+  Dumbbell,
+  Microwave,
+  ParkingCircle,
+  PawPrintIcon,
+  Refrigerator,
+  ShieldCheck,
+  Shirt,
+  ShowerHeadIcon,
+  Thermometer,
+  Toilet,
+  Tv,
+  Users,
+  Utensils,
+  WashingMachine,
+  WavesLadder,
+  Wifi,
+  Wind,
+} from "lucide-react";
+import { MapSection } from "./property-location/property-location-map-component";
+import { Footer } from "../layout/footer";
+import { AmenitiesCollection } from "../data/local/amenities-collection";
+
+
+// Amenity interface for the card
+interface Amenity {
+  name: string;
+  icon: LucideIcon;
+}
+
+// Function to map amenity names to icons
+const getAmenityIcon = (amenityName: string): LucideIcon => {
+  const name = amenityName.toLowerCase().trim();
+
+  // Map common amenity names to icons
+  if (name.includes("pet") || name.includes("dog") || name.includes("cat"))
+    return Check;
+  if (name.includes("gym") || name.includes("fitness")) return Check;
+  if (name.includes("pool") || name.includes("swimming")) return Check;
+  if (name.includes("playground") || name.includes("kids")) return Check;
+  if (name.includes("sauna") || name.includes("spa")) return Check;
+  if (name.includes("view") || name.includes("city")) return Check;
+  if (name.includes("bed") && name.includes("king")) return Check;
+  if (name.includes("bed") || name.includes("futon")) return Check;
+  if (
+    name.includes("air conditioning") ||
+    name.includes("ac") ||
+    name.includes("cooling")
+  )
+    return Check;
+  if (name.includes("game") || name.includes("board")) return Check;
+  if (name.includes("tv") || name.includes("television")) return Check;
+  if (name.includes("book") || name.includes("reading")) return Check;
+  if (
+    name.includes("smoke") ||
+    name.includes("alarm") ||
+    name.includes("safety")
+  )
+    return ShieldCheck;
+  if (name.includes("refrigerator") || name.includes("fridge"))
+    return Refrigerator;
+  if (name.includes("microwave")) return Check;
+  if (name.includes("coffee")) return Check;
+  if (
+    name.includes("dishes") ||
+    name.includes("utensils") ||
+    name.includes("silverware")
+  )
+    return Utensils;
+  if (
+    name.includes("cooking") ||
+    name.includes("pots") ||
+    name.includes("pans")
+  )
+    return Utensils;
+  if (name.includes("hot water") || name.includes("shower"))
+    return ShowerHeadIcon;
+  if (name.includes("bidet") || name.includes("toilet")) return Check;
+  if (name.includes("hair dryer") || name.includes("dryer")) return Check;
+  if (name.includes("towel")) return Shirt;
+  if (name.includes("wifi") || name.includes("internet")) return Check;
+  if (name.includes("workspace") || name.includes("desk")) return Check;
+  if (name.includes("washing machine") || name.includes("laundry"))
+    return WashingMachine;
+  if (
+    name.includes("charging") ||
+    name.includes("socket") ||
+    name.includes("power")
+  )
+    return BatteryCharging;
+  if (name.includes("iron") || name.includes("hangers")) return Check;
+  if (name.includes("parking")) return Check;
+  if (name.includes("elevator")) return Check;
+
+  // Default icon for unmatched amenities
+  return Check;
+};
+
+// Function to convert string amenities to Amenity objects
+const mapStringAmenitiesToAmenities = (
+  stringAmenities: string[]
+): Amenity[] => {
+  return stringAmenities
+    .filter((amenity) => amenity.trim() !== "")
+    .map((amenity) => ({
+      name: amenity.trim().replace(/^[•\-\s]+/, ""), // Remove bullet points and leading spaces/dashes
+      icon: getAmenityIcon(amenity),
+    }));
+};
+
+interface CardContent {
+  location: string;
+  guests: string;
+  bedrooms: string;
+  beds: string;
+  bathrooms: string;
+  basePriceSGD: number;
+  reviews: string;
+  stars: number;
+}
+
+interface GalleryContent {
+  teaserDescription1: string;
+  teaserDescription2: string;
+  propertyDetailsTitle: string;
+  propertyDescription: string;
+  spaceDescription: string;
+  guestsPreferenceList: string[];
+  guestsPreferenceFooterNote: string;
+  guestsAmenities: string[];
+  guestsAccessSubtitle: string;
+  guestsAccessList: string[];
+  importantNotesList: string[];
+  otherNotesDescription: string;
+  amenityFeesDescription: string;
+  amenityFeeItems: string[];
+}
+
+interface PropertyDetailsSectionProps {
+  name: string;
+  unitType: string;
+  cardContent: CardContent;
+  galleryContent: GalleryContent;
+  activeMapUrl: string;
+  onShowMoreClick: () => void;
+  onShowAmenitiesClick?: () => void;
+}
+
+export function PropertyDetailsSection({
+  name,
+  unitType,
+  cardContent,
+  galleryContent,
+  activeMapUrl,
+  onShowMoreClick,
+  onShowAmenitiesClick,
+}: PropertyDetailsSectionProps) {
+  const { isMobile } = useDevice();
+
+  const amenityCategories = AmenitiesCollection.amenityCategories;
+  // Convert string amenities to Amenity objects with icons
+  const amenitiesWithIcons = mapStringAmenitiesToAmenities(
+    galleryContent.guestsAmenities
+  );
+  const previewAmenities = amenitiesWithIcons.slice(0, 5);
+
+  return (
+    <div className="id property-details-section space-y-8">
+      <div className="id property-details-info">
+        <CardDescription>
+          <h3 className="text-2xl md:text-2xl xl:text-3xl 2k:text-4xl 4k:text-7xl font-playfair-display mb-2">
+            {name}
+          </h3>
+          <div>
+            <h4
+              className="text-sm md:text-sm lg:text-base xl:text-base 2k:text-base 4k:text-xl text-left text-justify-left tracking-normal font-playfair-display text-stormy-blue/60"
+              style={
+                isMobile
+                  ? {
+                      lineHeight: "1.5",
+                      letterSpacing: "0.01em",
+                      fontWeight: "300",
+                      // fontSize: "0.9rem",
+                    }
+                  : {
+                      lineHeight: "1.5",
+                      letterSpacing: "0.01em",
+                      fontWeight: "300",
+                      // fontSize: "0.9rem",
+                    }
+              }
+            >
+              {cardContent.location}
+            </h4>
+          </div>
+        </CardDescription>
+
+        <div
+          className="text-sm md:text-sm lg:text-md xl:text-lg 2k:text-lg 4k:text-xl text-left text-justify-left font-playfair-display text-stormy-blue/60 leading-relaxed mb-1"
+          style={{
+            lineHeight: "1.5",
+            letterSpacing: "0.01em",
+            fontSize: "0.8rem",
+          }}
+        >
+          {cardContent.guests} • {cardContent.bedrooms} • {cardContent.beds} •{" "}
+          {cardContent.bathrooms}
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-gray-200 my-6" />
+
+        {/* Property Description - Truncated */}
+        <div className="space-y-4 text-sm pb-4 font-light text-stormy-blue/80">
+          <p
+            className="text-sm md:text-sm lg:text-base xl:text-base 2k:text-base 4k:text-xl text-left text-justify-left tracking-normal font-playfair-display text-stormy-blue/60"
+            style={
+              isMobile
+                ? {
+                    lineHeight: "1.5",
+                    letterSpacing: "0.01em",
+                    fontWeight: "300",
+                    // fontSize: "0.9rem",
+                  }
+                : {
+                    lineHeight: "1.5",
+                    letterSpacing: "0.01em",
+                    fontWeight: "300",
+                    // fontSize: "0.9rem",
+                  }
+            }
+          >
+            {galleryContent.teaserDescription1}
+          </p>
+
+          {/* <p
+            className="text-sm md:text-xs lg:text-sm xl:text-base 2k:text-base 4k:text-xl text-left text-stormy-blue/80 font-body font-normal leading-relaxed"
+            style={
+              isMobile
+                ? {
+                    lineHeight: "1.5",
+                    letterSpacing: "0.03em",
+                    textIndent: "2rem",
+                  }
+                : {
+                    lineHeight: "1.3",
+                    letterSpacing: "0.01em",
+                    textIndent: "2rem",
+                    fontSize: "0.9rem",
+                  }
+            }
+          >
+            {galleryContent.teaserDescription2}
+          </p> */}
+
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={onShowMoreClick}
+            className="mt-4 font-playfair-display text-stormy-blue/80 rounded-none"
+          >
+            Show more
+          </Button>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="border-t border-gray-200 my-6" />
+
+      {/* Amenities Teaser */}
+      {amenitiesWithIcons.length > 0 && (
+        <div className="id amenities-teaser-section">
+          <h4
+            className="text-2xl md:text-2xl xl:text-3xl 2k:text-2xl 4k:text-7xl text-stormy-blue/60 font-playfair-display mb-4 font-light"
+            style={
+              isMobile
+                ? {
+                    lineHeight: "1",
+                    letterSpacing: "0.01em",
+                  }
+                : {
+                    lineHeight: "1.3",
+                    letterSpacing: "0.01em",
+                  }
+            }
+          >
+            In-unit feature & amenities
+          </h4>
+
+          {/* Amenities Preview Box */}
+          <Card className=" border border-gray-200 mb-6 md:mb-6">
+            <CardContent className="p-4">
+              <div className="grid grid-cols-1 gap-2">
+                {previewAmenities.map((amenity, index) => {
+                  const AmenityIconComponent = amenity.icon;
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-center text-sm 2k:text-sm 4k:text-xl text-left text-stormy-blue/80 font-playfair-display leading-relaxed"
+                      style={
+                        isMobile
+                          ? {
+                              lineHeight: "1.5",
+                              letterSpacing: "0.01em",
+                              fontWeight: "300",
+                              // fontSize: "0.9rem",
+                            }
+                          : {
+                              lineHeight: "1.5",
+                              letterSpacing: "0.01em",
+                              fontWeight: "300",
+                              // fontSize: "0.9rem",
+                            }
+                      }
+                    >
+                      <AmenityIconComponent className="mr-3 h-4 w-4 text-slate-400 flex-shrink-0" />
+                      <span>{amenity.name}</span>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Show More Sheet */}
+              {amenitiesWithIcons.length > 5 && (
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <button className="mt-4 text-sm font-medium text-foreground underline hover:no-underline cursor-pointer font-playfair-display">
+                      Show all {amenitiesWithIcons.length} amenities
+                    </button>
+                  </SheetTrigger>
+                  <SheetContent
+                    side="bottom"
+                    className="h-[85vh] overflow-y-auto md:mx-4 rounded-t-lg"
+                  >
+                    <div className="p-6">
+                      <SheetHeader>
+                        <SheetTitle className="sm:text-lg md:text-lg lg:text-lg mb-6 text-stormy-blue/60 font-playfair-display">
+                          What this place offers
+                        </SheetTitle>
+                      </SheetHeader>
+
+                      <ScrollArea className="max-h-[500vh] pr-4">
+                        <div className="space-y-6">
+                          {amenityCategories.map((category) => (
+                            <div key={category.title} className="space-y-3">
+                              <h4 className="text-base font-semibold text-foreground border-b border-gray-200 pb-2 font-playfair-display">
+                                {category.title}
+                              </h4>
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
+                                {category.amenities.map((amenity) => {
+                                  const AmenityIconComponent = amenity.icon;
+                                  return (
+                                    <div
+                                      key={amenity.name}
+                                      className="flex items-center text-sm md:text-base lg:text-lg 2k:text-lg 4k:text-lg tracking-tighter text-stormy-blue/80 font-playfair-display min-h-[28px] p-2 rounded-none hover:bg-muted/50 transition-colors duration-200 ease-in-out"
+                                    >
+                                      <AmenityIconComponent className="mr-3 h-4 w-4 text-slate-400 flex-shrink-0" />
+                                      <span className="leading-tight">
+                                        {amenity.name}
+                                      </span>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </ScrollArea>
+                    </div>
+                  </SheetContent>
+                </Sheet>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Maps section */}
+      {/* <div className="id gallery-map-section">
+        <h2 className="text-sm md:text-md flex font-normal md:font-normal justify-left font-headline mb-4">
+          LOCATION
+        </h2>
+        <div className="id gallery-map ">
+          <MapSection mapEmbedUrl={activeMapUrl} />
+        </div>
+      </div> */}
+    </div>
+  );
+}
