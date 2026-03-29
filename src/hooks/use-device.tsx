@@ -1,4 +1,11 @@
-import * as React from "react";
+/**
+ * Device hook - Backward compatible wrapper
+ * Original implementation preserved for compatibility
+ * New projects should use hooks/index.ts useDevice
+ */
+
+import * as React from 'react';
+import { useDevice as useNewDevice } from './index';
 
 export type DeviceType = 'mobile' | 'tablet' | 'desktop';
 
@@ -13,6 +20,7 @@ interface DeviceInfo {
 const MOBILE_BREAKPOINT = 768;
 const TABLET_BREAKPOINT = 1024;
 
+// Legacy implementation kept for compatibility
 export function useDevice(): DeviceInfo {
   const [deviceInfo, setDeviceInfo] = React.useState<DeviceInfo>({
     isMobile: false,
@@ -29,7 +37,7 @@ export function useDevice(): DeviceInfo {
     const updateDeviceInfo = () => {
       const width = window.innerWidth;
       const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      
+
       let deviceType: DeviceType;
       let isMobile = false;
       let isTablet = false;

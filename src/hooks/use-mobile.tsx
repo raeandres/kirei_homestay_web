@@ -1,4 +1,8 @@
-import * as React from "react";
+/**
+ * Mobile hook - Backward compatible wrapper
+ */
+
+import * as React from 'react';
 
 const MOBILE_BREAKPOINT = 768;
 
@@ -17,7 +21,7 @@ export function useIsMobile() {
 
       // Additional check for tablet devices that might report incorrect viewport
       const isTouchDevice =
-        "ontouchstart" in window || navigator.maxTouchPoints > 0;
+        'ontouchstart' in window || navigator.maxTouchPoints > 0;
       const isLikelyTablet = width >= 768 && width <= 1024 && isTouchDevice;
 
       // For tablets, we'll treat them as desktop to avoid hydration issues
@@ -35,8 +39,8 @@ export function useIsMobile() {
       setTimeout(checkIsMobile, 100);
     };
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("orientationchange", handleResize);
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
 
     // Also use matchMedia as backup
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
@@ -44,12 +48,12 @@ export function useIsMobile() {
       setTimeout(checkIsMobile, 100);
     };
 
-    mql.addEventListener("change", handleMediaChange);
+    mql.addEventListener('change', handleMediaChange);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("orientationchange", handleResize);
-      mql.removeEventListener("change", handleMediaChange);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+      mql.removeEventListener('change', handleMediaChange);
     };
   }, []);
 
